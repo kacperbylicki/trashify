@@ -22,6 +22,7 @@ module.exports = {
     'prettier',
     '@typescript-eslint/eslint-plugin',
     'sort-imports-es6-autofix',
+    'hexagonal-architecture',
   ],
   ignorePatterns: [
     '.eslintrc.js', 'node_modules', 'dist', 'data'
@@ -34,7 +35,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn',
     'import/prefer-default-export': 0,
     'no-throw-literal': 0,
-    'prefer-const': 0,
+    'prefer-const': 'warn',
     'no-console': 'warn',
     'no-prototype-builtins': 0,
     'prefer-rest-params': 'off',
@@ -49,4 +50,12 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ["src/**/*.ts"],
+      rules: {
+        "hexagonal-architecture/enforce": ["error"],
+      },
+    },
+  ]
 };

@@ -1146,7 +1146,7 @@
     semver "^7.3.7"
     tsutils "^3.21.0"
 
-"@typescript-eslint/utils@5.51.0":
+"@typescript-eslint/utils@5.51.0", "@typescript-eslint/utils@^5.36.1":
   version "5.51.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.51.0.tgz#074f4fabd5b12afe9c8aa6fdee881c050f8b4d47"
   integrity sha512-76qs+5KWcaatmwtwsDJvBk4H76RJQBFe+Gext0EfJdC3Vd2kpY2Pf//OHHzHp84Ciw0/rYoGTDnIAr3uWhhJYw==
@@ -2281,6 +2281,14 @@ eslint-module-utils@^2.7.4:
   integrity sha512-j4GT+rqzCoRKHwURX7pddtIPGySnX9Si/cgMI5ztrcqOPtk5dDEeZ34CQVPphnqkJytlc97Vuk05Um2mJ3gEQA==
   dependencies:
     debug "^3.2.7"
+
+eslint-plugin-hexagonal-architecture@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-hexagonal-architecture/-/eslint-plugin-hexagonal-architecture-1.0.3.tgz#d5644e5ca47060722e625559207f12e918f5f4e1"
+  integrity sha512-Im3JkmK0MAw92puUZVhvXmR14SoS04NjgF5R6+rzM7eKGUPoePWoTaxZ0hILGGaJVfccllF7Z2APlaoErznz5A==
+  dependencies:
+    "@typescript-eslint/utils" "^5.36.1"
+    eslint-module-utils "^2.7.4"
 
 eslint-plugin-import@^2.27.5:
   version "2.27.5"
