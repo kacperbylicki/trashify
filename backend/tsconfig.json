@@ -15,8 +15,6 @@
     "incremental": true,
     "strict": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strictBindCallApply": false,
