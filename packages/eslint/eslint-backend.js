@@ -2,7 +2,6 @@ module.exports = {
   env: {
     es2021: true,
     node: true,
-    jest: true,
   },
   root: true,
   extends: [
@@ -15,18 +14,30 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 13,
     sourceType: 'module',
-    project: './tsconfig.json',
-    tsconfigRootDir: __dirname,
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts'],
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.ts'],
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+      typescript: {
+        alwaysTryTypes: true,
+        project: ['./tsconfig.json'],
+        tsconfigRootDir: __dirname,
+      },
+    },
   },
   plugins: [
     'prettier',
     '@typescript-eslint/eslint-plugin',
     'sort-imports-es6-autofix',
-    'hexagonal-architecture',
+    // 'hexagonal-architecture', temporarily disabled
   ],
-  ignorePatterns: [
-    '.eslintrc.js', 'node_modules', 'dist', 'data'
-   ],
+  ignorePatterns: ['.eslintrc.js', 'node_modules', 'dist', 'data'],
   rules: {
     'prettier/prettier': 'error',
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -52,10 +63,19 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["src/**/*.ts"],
+      env: {
+        jest: true,
+      },
+      files: ['**/__tests__/**/*.[jt]s', '**/?(*.)+(spec|test).[jt]s'],
+      extends: ['plugin:jest/recommended'],
       rules: {
-        "hexagonal-architecture/enforce": ["error"],
+        // 'hexagonal-architecture/enforce': ['error'], temporarily disabled
+        'import/no-extraneous-dependencies': [
+          'off',
+          { devDependencies: ['**/?(*.)+(spec|test).[jt]s'] },
+        ],
       },
     },
-  ]
+  ],
+  ignorePatterns: ['**/*.js', 'node_modules', '.turbo', 'dist', 'coverage'],
 };
