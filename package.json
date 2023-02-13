@@ -30,32 +30,6 @@
     "turbo": "latest",
     "typescript": "^4.9.5"
   },
-  "turbo": {
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "dist/**"
-        ]
-      },
-      "test": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "coverage/**"
-        ]
-      },
-      "lint": {
-        "outputs": []
-      },
-      "dev": {
-        "cache": false
-      }
-    }
-  },
   "engines": {
     "node": ">=18.14.0"
   },
