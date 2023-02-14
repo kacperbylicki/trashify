@@ -1,15 +1,9 @@
 module.exports = {
+  root: true,
   env: {
     es2021: true,
     node: true,
   },
-  root: true,
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:security/recommended',
-    'plugin:prettier/recommended',
-    'prettier',
-  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 13,
@@ -31,13 +25,14 @@ module.exports = {
       },
     },
   },
-  plugins: [
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:security/recommended',
+    'plugin:prettier/recommended',
     'prettier',
-    '@typescript-eslint/eslint-plugin',
-    'sort-imports-es6-autofix',
-    // 'hexagonal-architecture', temporarily disabled
+    'turbo',
   ],
-  ignorePatterns: ['.eslintrc.js', 'node_modules', 'dist', 'data'],
+  plugins: ['prettier', '@typescript-eslint/eslint-plugin', 'sort-imports-es6-autofix'],
   rules: {
     'prettier/prettier': 'error',
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -49,7 +44,6 @@ module.exports = {
     'prefer-const': 'warn',
     'no-console': 'warn',
     'no-prototype-builtins': 0,
-    'prefer-rest-params': 'off',
     'security/detect-object-injection': 0,
     '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_', args: 'none' }],
     'sort-imports-es6-autofix/sort-imports-es6': [
@@ -69,7 +63,6 @@ module.exports = {
       files: ['**/__tests__/**/*.[jt]s', '**/?(*.)+(spec|test).[jt]s'],
       extends: ['plugin:jest/recommended'],
       rules: {
-        // 'hexagonal-architecture/enforce': ['error'], temporarily disabled
         'import/no-extraneous-dependencies': [
           'off',
           { devDependencies: ['**/?(*.)+(spec|test).[jt]s'] },
@@ -77,5 +70,5 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['**/*.js', 'node_modules', '.turbo', 'dist', 'coverage'],
+  ignorePatterns: ['**/*.js', 'node_modules', '.turbo', 'dist', 'coverage', 'data'],
 };

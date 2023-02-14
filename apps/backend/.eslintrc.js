@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['../../packages/eslint/eslint-backend'],
+  extends: ['backend-linter'],
   parserOptions: {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
