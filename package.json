@@ -1,10 +1,43 @@
 {
-  "devDependencies": {
-    "cz-conventional-changelog": "^3.3.0"
+  "name": "trashify",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "yarn@1.22.19",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "ci": "turbo e2e:test",
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint --parallel --no-cache",
+    "lint-fix": "turbo run lint-fix --parallel --no-cache",
+    "lint-staged": "lint-staged",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "commit": "git-cz"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@commitlint/types": "^17.4.0",
+    "commitizen": "^4.3.0",
+    "eslint": "^8.34.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.1",
+    "prettier": "^2.8.4",
+    "turbo": "^1.7.4",
+    "typescript": "^4.9.5"
+  },
+  "engines": {
+    "node": ">=18.14.0"
+  },
+  "lint-staged": {
+    "apps/**/*.{js,ts,jsx,tsx}": [
+      "eslint --quiet --fix --",
+      "prettier --write"
+    ]
   }
 }

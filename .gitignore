@@ -1,25 +1,49 @@
-# compiled output
-backend/lib
-backend/node_modules
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Logs
-backend/logs
-backend/*.log
-backend/npm-debug.log*
-backend/pnpm-debug.log*
-backend/yarn-debug.log*
-backend/yarn-error.log*
-backend/lerna-debug.log*
+# dependencies
+node_modules
 
-# env files
-backend/.env
+# testing
+coverage
+.nyc_output
 
-# OS
-backend/.DS_Store
+# nest
+dist
 
-# Tests
-backend/coverage
-backend/.nyc_output
+# misc
+.DS_Store
+*.pem
+
+# debug
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables file
+.env
+.env.test
+.env.production
+
+# turbo
+.turbo
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# yarn integrity file
+.yarn-integrity
+
+# optional eslint cache
+.eslintcache
+
+# logs
+logs
+*.log
+yarn-debug.log*
+yarn-error.log*
 
 # IDEs and editors
 /.idea
@@ -31,16 +55,8 @@ backend/.nyc_output
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-# terraform
-infrastructure/*.tfvars
-
-.DS_Store
-
-node_modules
