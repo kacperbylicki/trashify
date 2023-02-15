@@ -1,0 +1,35 @@
+services:
+  mongodb:
+    container_name: trashify-mongodb
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+    volumes:
+      - trashify-mongodb:/data/db
+    ports:
+      - ${MONGODB_PORT:-27017}:${MONGODB_PORT:-27017}
+    networks:
+      - trashify-network
+    restart: unless-stopped
+
+  backend:
+    container_name: trashify-backend
+    build:
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
+      target: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - ${PORT:-3000}:${PORT:-3000}
+      - ${DEBUGGER_PORT:-9229}:${DEBUGGER_PORT:-9229}
+    networks:
+      - trashify-network
+    restart: unless-stopped
+
+volumes:
+  trashify-mongodb:
+
+networks:
+  trashify-network:
