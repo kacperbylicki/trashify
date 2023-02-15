@@ -9,7 +9,7 @@ services:
     ports:
       - ${MONGODB_PORT:-27017}:${MONGODB_PORT:-27017}
     networks:
-      - webnet
+      - trashify-network
     restart: unless-stopped
 
   backend:
@@ -25,11 +25,11 @@ services:
       - ${PORT:-3000}:${PORT:-3000}
       - ${DEBUGGER_PORT:-9229}:${DEBUGGER_PORT:-9229}
     networks:
-      - webnet
+      - trashify-network
     restart: unless-stopped
 
 volumes:
   trashify-mongodb:
 
 networks:
-  webnet:
+  trashify-network:
