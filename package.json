@@ -2,6 +2,7 @@
   "name": "trashify",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "yarn@1.22.19",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -38,6 +39,5 @@
       "eslint --quiet --fix --",
       "prettier --write"
     ]
-  },
-  "packageManager": "yarn@1.22.19"
+  }
 }
