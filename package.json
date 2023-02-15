@@ -2,7 +2,7 @@
   "name": "trashify",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "yarn@1.19.0",
   "workspaces": [
     "apps/*",
     "packages/*"
