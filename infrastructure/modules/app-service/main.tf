@@ -71,8 +71,8 @@ resource "azurerm_linux_web_app" "application" {
       docker_image     = "${azurerm_container_registry.container-registry.name}.azurecr.io/${var.application_name}/${var.application_name}"
       docker_image_tag = "latest"
     }
-    always_on                 = false
-    ftps_state                = "FtpsOnly"
+    always_on  = false
+    ftps_state = "FtpsOnly"
   }
 
   identity {
@@ -90,9 +90,9 @@ resource "azurerm_linux_web_app" "application" {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = var.azure_application_insights_instrumentation_key
 
     # These are app specific environment variables
-    "DB_NAME"                         = var.azure_cosmosdb_mongodb_database
-    "DB_URI"                          = var.azure_cosmosdb_mongodb_uri
-    "DB_ACCOUNTS_COLLECTION_NAME"       = var.azure_cosmosdb_mongodb_database_accounts_collection
+    "DB_NAME"                     = var.azure_cosmosdb_mongodb_database
+    "DB_URI"                      = var.azure_cosmosdb_mongodb_uri
+    "DB_ACCOUNTS_COLLECTION_NAME" = var.azure_cosmosdb_mongodb_database_accounts_collection
   }
 }
 

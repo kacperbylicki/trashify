@@ -49,6 +49,6 @@ resource "azurerm_key_vault_secret" "cosmosdb_mongodb_uri" {
   value        = var.cosmosdb_mongodb_uri
   key_vault_id = azurerm_key_vault.application.id
 
-  depends_on = [ azurerm_key_vault_access_policy.client ]
+  depends_on = [azurerm_key_vault_access_policy.client]
 }
 

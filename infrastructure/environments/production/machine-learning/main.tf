@@ -40,9 +40,9 @@ resource "azurerm_resource_group" "main" {
 }
 
 module "cognitive-services-custom-vision" {
-  source           = "../../../modules/cognitive-services/custom-vision"
-  resource_group   = azurerm_resource_group.main.name
-  instance_name    = "${var.application_name}-custom-vision-trash"
-  environment      = var.environment
-  location         = var.location
+  source         = "../../../modules/cognitive-services/custom-vision"
+  resource_group = azurerm_resource_group.main.name
+  instance_name  = "${var.application_name}-custom-vision-trash"
+  environment    = var.environment
+  location       = var.location
 }
