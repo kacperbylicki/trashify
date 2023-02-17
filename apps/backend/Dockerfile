@@ -53,8 +53,7 @@ ARG BUILDPLATFORM
 
 RUN apk update
 WORKDIR /app
-COPY --chown=node:node --from=sourcer /app/ .
-WORKDIR /app/apps/backend/
-RUN yarn --production
+COPY --chown=node:node --from=sourcer /app/node_modules/ ./node_modules/
+COPY --chown=node:node --from=sourcer /app/apps/backend/dist/ ./dist/
 USER node
-CMD ["node", "dist/main"]
+CMD ["node", "dist/main.js"]
