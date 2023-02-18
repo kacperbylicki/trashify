@@ -1,0 +1,51 @@
+name: 'production-ml-infrastructure-deployment'
+
+on:
+  # set temporarily to allow manual trigger only
+  workflow_dispatch:
+    paths:
+      - "infrastructure/environments/production/machine-learning/**"
+      - ".github/workflows/production-ml-infrastructure-deployment.yml"
+  
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    name: 'build-and-deploy'
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      TF_VAR_terraform_storage_account: ${{ secrets.TERRAFORM_AZURE_STORAGE_ACCOUNT }}
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Fetches the code from the repository to the environment where the workflow is running.
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Installs and sets up Terraform with the necessary dependencies and authentication using the provided API token.
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      # Initializes the Terraform workspace and downloads the required providers and modules.
+      - name: Terraform Init
+        run: terraform init
+
+      # Creates an execution plan of the changes to be made in the infrastructure.
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      # Applies the execution plan and makes the necessary changes to the infrastructure, while auto-approving the changes without requiring any manual intervention.
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
