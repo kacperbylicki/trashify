@@ -9,7 +9,7 @@ on:
       - ".github/workflows/staging-backend-pull-request-tests.yml"
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
