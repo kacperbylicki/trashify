@@ -40,12 +40,15 @@ jobs:
 
       # Initializes the Terraform workspace and downloads the required providers and modules.
       - name: Terraform Init
+        working-directory: ./infrastructure/environments/staging/application
         run: terraform init
 
       # Creates an execution plan of the changes to be made in the infrastructure.
       - name: Terraform Plan
+        working-directory: ./infrastructure/environments/staging/application
         run: terraform plan -input=false
 
       # Applies the execution plan and makes the necessary changes to the infrastructure, while auto-approving the changes without requiring any manual intervention.
       - name: Terraform Apply
+        working-directory: ./infrastructure/environments/staging/application
         run: terraform apply -auto-approve -input=false
