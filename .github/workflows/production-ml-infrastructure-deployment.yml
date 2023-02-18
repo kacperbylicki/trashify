@@ -1,14 +1,12 @@
 name: 'production-ml-infrastructure-deployment'
 
 on:
-  push:
-    branches:
-      - main
+  # set temporarily to allow manual trigger only
+  workflow_dispatch:
     paths:
       - "infrastructure/environments/production/machine-learning/**"
       - ".github/workflows/production-ml-infrastructure-deployment.yml"
-  # set temporarily to allow manual trigger only
-  workflow_dispatch:
+  
 
 permissions:
   contents: read

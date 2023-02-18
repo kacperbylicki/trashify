@@ -1,14 +1,12 @@
 name: 'production-app-infrastructure-deployment'
 
 on:
-  push:
-    branches:
-      - main
+  # set temporarily to allow manual trigger only
+  workflow_dispatch:
     paths:
       - "infrastructure/environments/production/application/**"
       - ".github/workflows/production-app-infrastructure-deployment.yml"
-  # set temporarily to allow manual trigger only
-  workflow_dispatch:
+  
 
 permissions:
   contents: read
