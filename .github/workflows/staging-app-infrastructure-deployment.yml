@@ -7,7 +7,6 @@ on:
     paths:
       - "infrastructure/environments/staging/application/**"
       - ".github/workflows/staging-app-infrastructure-deployment.yml"
-  pull_request:
   workflow_dispatch:
 
 permissions:
