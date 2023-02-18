@@ -43,6 +43,17 @@ jobs:
         working-directory: ./infrastructure/environments/staging/application
         run: terraform init
 
+      # Checks that Terraform config files are properly formatted in the specified directory, with the option to continue to the next step even if errors occur.
+      - name: Terraform Format
+        working-directory: ./infrastructure/environments/staging/application
+        run: terraform fmt -check
+        continue-on-error: true
+
+      # Ensures Terraform config files in the specified directory are free of syntax errors, with the job failing if errors are found.
+      - name: Terraform Validate
+        working-directory: ./infrastructure/environments/staging/application
+        run: terraform validate 
+
       # Creates an execution plan of the changes to be made in the infrastructure.
       - name: Terraform Plan
         working-directory: ./infrastructure/environments/staging/application
