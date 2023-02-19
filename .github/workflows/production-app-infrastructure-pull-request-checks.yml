@@ -1,31 +1,19 @@
-name: 'production-app-infrastructure-deployment'
+name: 'production-app-infrastructure-pull-request-checks'
 
 on:
-  # set temporarily to allow manual trigger only
-  workflow_dispatch:
+  pull_request:
+    branches: 
+      - main
     paths:
       - "infrastructure/environments/production/application/**"
-      - ".github/workflows/production-app-infrastructure-deployment.yml"
-  
-permissions:
-  contents: read
+      - ".github/workflows/production-app-infrastructure-pull-request-checks.yml"
 
 jobs:
-  build-and-deploy:
-    name: 'build-and-deploy'
+  pull-request-checks:
+    name: 'pull-request-checks'
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       TF_VAR_terraform_storage_account: ${{ secrets.TERRAFORM_AZURE_STORAGE_ACCOUNT }}
     runs-on: ubuntu-latest
-    environment: production
-
-    defaults:
-      run:
-        shell: bash
 
     steps:
       # Fetches the code from the repository to the environment where the workflow is running.
@@ -43,12 +31,13 @@ jobs:
         working-directory: ./infrastructure/environments/production/application
         run: terraform init
 
-      # Creates an execution plan of the changes to be made in the infrastructure.
-      - name: Terraform Plan
+      # Checks that Terraform config files are properly formatted in the specified directory, with the option to continue to the next step even if errors occur.
+      - name: Terraform Format
         working-directory: ./infrastructure/environments/production/application
-        run: terraform plan -input=false
+        run: terraform fmt -check
+        continue-on-error: true
 
-      # Applies the execution plan and makes the necessary changes to the infrastructure, while auto-approving the changes without requiring any manual intervention.
-      - name: Terraform Apply
+      # Ensures Terraform config files in the specified directory are free of syntax errors, with the job failing if errors are found.
+      - name: Terraform Validate
         working-directory: ./infrastructure/environments/production/application
-        run: terraform apply -auto-approve -input=false
+        run: terraform validate

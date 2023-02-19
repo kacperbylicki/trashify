@@ -1,4 +1,4 @@
-name: 'production-backend-pull-request-tests'
+name: 'production-backend-pull-request-checks'
 
 on:
   pull_request:
@@ -6,10 +6,10 @@ on:
       - main
     paths:
       - "apps/backend/**"
-      - ".github/workflows/production-backend-pull-request-tests.yml"
+      - ".github/workflows/production-backend-pull-request-checks.yml"
 
 jobs:
-  build-and-test:
+  pull-request-checks:
     runs-on: ubuntu-latest
 
     steps:

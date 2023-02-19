@@ -1,4 +1,4 @@
-name: 'staging-backend-pull-request-tests'
+name: 'staging-backend-pull-request-checks'
 
 on:
   pull_request:
@@ -6,10 +6,10 @@ on:
       - staging
     paths:
       - "apps/backend/**"
-      - ".github/workflows/staging-backend-pull-request-tests.yml"
+      - ".github/workflows/staging-backend-pull-request-checks.yml"
 
 jobs:
-  build-and-test:
+  pull-request-checks:
     runs-on: ubuntu-latest
 
     steps:
