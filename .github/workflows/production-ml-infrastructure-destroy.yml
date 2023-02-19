@@ -42,4 +42,4 @@ jobs:
       # Destroys Terraform created resources
       - name: Terraform Destroy
         id: destroy
-        run: terraform destroy --auto-approve
+        run: terraform destroy -auto-approve
