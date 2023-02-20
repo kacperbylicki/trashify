@@ -8,6 +8,10 @@ on:
       - "infrastructure/environments/production/machine-learning/**"
       - ".github/workflows/production-ml-infrastructure-pull-request-checks.yml"
 
+defaults:
+  run:
+    working-directory: ./infrastructure/environments/production/machine-learning
+
 jobs:
   pull-request-checks:
     name: 'pull-request-checks'
@@ -32,16 +36,16 @@ jobs:
 
       # Initializes the Terraform workspace and downloads the required providers and modules.
       - name: Terraform Init
-        working-directory: ./infrastructure/environments/production/machine-learning
+        id: init
         run: terraform init
 
       # Checks that Terraform config files are properly formatted in the specified directory, with the option to continue to the next step even if errors occur.
       - name: Terraform Format
-        working-directory: ./infrastructure/environments/production/machine-learning
+        id: format
         run: terraform fmt -check
         continue-on-error: true
 
       # Ensures Terraform config files in the specified directory are free of syntax errors, with the job failing if errors are found.
       - name: Terraform Validate
-        working-directory: ./infrastructure/environments/production/machine-learning
+        id: validate
         run: terraform validate
