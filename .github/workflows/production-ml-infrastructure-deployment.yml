@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "infrastructure/environments/production/machine-learning/**"
+      - "infrastructure/modules/**"
       - ".github/workflows/production-ml-infrastructure-deployment.yml"
   
 permissions:
