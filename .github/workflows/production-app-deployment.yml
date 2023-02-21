@@ -39,7 +39,7 @@ jobs:
         context: .
         push: true
         tags: crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify/backend:${{ github.sha }}
-        file: ./Dockerfile
+        file: Dockerfile
 
   deploy:
     name: "deploy"
