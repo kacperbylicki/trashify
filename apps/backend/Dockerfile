@@ -57,4 +57,4 @@ COPY --chown=node:node --from=sourcer /app/node_modules/ ./node_modules/
 COPY --chown=node:node --from=sourcer /app/apps/backend/dist/ ./dist/
 USER node
 CMD ["node", "dist/main.js"]
-EXPOSE 8080
+EXPOSE 3000

@@ -49,5 +49,5 @@ variable "azure_cosmosdb_mongodb_database_accounts_collection" {
 variable "port" {
   type        = string
   description = "Port of the application"
-  default     = "8080"
+  default     = "3000"
 }
