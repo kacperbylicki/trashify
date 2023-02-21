@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "infrastructure/environments/production/application/**"
+      - "infrastructure/modules/**"
       - ".github/workflows/production-app-infrastructure-pull-request-checks.yml"
 
 jobs:
