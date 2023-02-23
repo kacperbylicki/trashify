@@ -50,6 +50,10 @@ module "application" {
 
   vault_id = module.key-vault.vault_id
 
+  azure_storage_account_name  = module.storage-blob.azurerm_storage_account_name
+  azure_storage_blob_endpoint = module.storage-blob.azurerm_storage_blob_endpoint
+  azure_storage_account_key   = "@Microsoft.KeyVault(SecretUri=${module.key-vault.vault_uri}secrets/storage-account-key)"
+
   azure_cosmosdb_mongodb_database = module.cosmosdb-mongodb.azure_cosmosdb_mongodb_database
   azure_cosmosdb_mongodb_uri      = "@Microsoft.KeyVault(SecretUri=${module.key-vault.vault_uri}secrets/cosmosdb-mongodb-uri)"
 }
@@ -74,6 +78,14 @@ module "key-vault" {
 
 module "cosmosdb-mongodb" {
   source           = "../../../modules/cosmosdb-mongodb"
+  resource_group   = azurerm_resource_group.main.name
+  application_name = var.application_name
+  environment      = var.environment
+  location         = var.location
+}
+
+module "storage-blob" {
+  source           = "../../../modules/storage-blob"
   resource_group   = azurerm_resource_group.main.name
   application_name = var.application_name
   environment      = var.environment

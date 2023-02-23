@@ -92,6 +92,10 @@ resource "azurerm_linux_web_app" "application" {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = var.azure_application_insights_instrumentation_key
 
     # These are app specific environment variables
+    "STORAGE_ACCOUNT_NAME"  = var.azure_storage_account_name
+    "STORAGE_BLOB_ENDPOINT" = var.azure_storage_blob_endpoint
+    "STORAGE_ACCOUNT_KEY"   = var.azure_storage_account_key
+    
     "DB_NAME"                     = var.azure_cosmosdb_mongodb_database
     "DB_URI"                      = var.azure_cosmosdb_mongodb_uri
     "DB_ACCOUNTS_COLLECTION_NAME" = var.azure_cosmosdb_mongodb_database_accounts_collection

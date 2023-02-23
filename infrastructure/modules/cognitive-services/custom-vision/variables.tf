@@ -17,7 +17,6 @@ variable "instance_kind" {
 variable "environment" {
   type        = string
   description = "The environment (staging, production)"
-  default     = "staging"
 }
 
 variable "location" {
