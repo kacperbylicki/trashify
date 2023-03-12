@@ -1,0 +1,48 @@
+\documentclass[12pt, oneside, a4paper]{book}
+\usepackage[
+    a4paper, 
+    total={6in, 8in}, 
+    margin=2.5cm, 
+    includehead,
+]{geometry}
+\usepackage[T1]{polski}
+\usepackage{mathptmx}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\linespread{1.5}
+
+\newcommand{\upar}{\parindent 1.25cm}
+
+\newcommand{\university}{Wyższa Szkoła Bankowa w Poznaniu}
+\newcommand{\department}{Wydział Informatyki}
+\newcommand{\topic}{Trashify–rozpoznawanie pojemników na odpady za pomocą algorytmów uczenia maszynowego}
+
+\begin{document}
+\pagestyle{fancy}
+\fancyfoot[C]{\thepage}
+\begin{titlepage}
+    \begin{center}
+
+        \includegraphics[width=1\textwidth]{wsb-logo.png}
+
+        \MakeUppercase{\department}
+        % \includegraphics[]{}
+
+        \vspace*{1cm}
+
+        \textbf{\topic}
+
+        PROJEKT DYPLOMOWY
+
+        \vspace*{1.5cm}
+        \textbf{Jakub Barczewski,\\ Kacper Bylicki,\\ Marek Gerszendorf}
+
+        \vfill
+        Poznań 2023
+
+    \end{center}
+\end{titlepage}
+
+\end{document}

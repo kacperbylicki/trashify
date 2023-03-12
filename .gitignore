@@ -1,6 +1,13 @@
 # dependencies
 node_modules
 
+#LaTeX
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+
 # testing
 coverage
 .nyc_output
