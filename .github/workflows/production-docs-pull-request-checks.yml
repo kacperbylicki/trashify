@@ -23,5 +23,6 @@ jobs:
           root_file: |
             ./docs/eng-degree-docs/work-schedule/work-schedule.tex
             ./docs/eng-degree-docs/eng-degree/eng-degree.tex
+            ./docs/commands.tex
 
 
