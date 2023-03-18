@@ -1,0 +1,12 @@
+\contentsline {chapter}{\numberline {1}\MakeUppercase {dane partnerów}}{2}{}%
+\contentsline {section}{\numberline {A1}Dane Promotora}{2}{}%
+\contentsline {section}{\numberline {A2}Dane członków Zespołu projektu}{2}{}%
+\contentsline {chapter}{\numberline {2}\MakeUppercase {Założenia projektu}}{3}{}%
+\contentsline {section}{\numberline {B1}Opis Projektu}{3}{}%
+\contentsline {chapter}{\numberline {3}Realizacja}{4}{}%
+\contentsline {section}{\numberline {C1}Opracowanie projektu}{4}{}%
+\contentsline {section}{\numberline {C2}Zadania w projekcie}{4}{}%
+\contentsline {section}{\numberline {C3}Efekty realizacji projektu}{4}{}%
+\contentsline {section}{\numberline {C4}Użyteczność projektu}{4}{}%
+\contentsline {section}{\numberline {C5}Autoewaluacja zespołu projektowego}{4}{}%
+\contentsline {section}{\numberline {C6}Wykorzystane materiały i bibliografia związana z realizacją projektu}{4}{}%

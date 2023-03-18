@@ -1,0 +1,60 @@
+\documentclass[a4paper, landscape]{article}
+\usepackage[
+    a4paper, 
+    total={8in, 6in},
+    margin=2.5cm
+]{geometry}
+\usepackage[T1]{polski}
+\usepackage{import}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[table, dvipsnames]{xcolor}
+\import{../}{commands.tex}
+
+\begin{document}
+
+\setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{1.5cm}
+\renewcommand{\arraystretch}{1}
+
+\pagestyle{fancy}
+
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{\uniimage}
+\fancyfoot[R]{Projekt dyplomowy pt.: \topic \\ Poznań 2023}
+
+\vspace*{1cm}
+
+\textbf{\topic}
+
+\begin{center}
+
+\rowcolors{2}{blue!70!blue!40}{blue!30!blue!20}
+\begin{tabular}{ |p{4cm}|p{4.5cm}|p{5cm}|  }
+    \hline
+    OKRES REALIZACJI & PLANOWANE ZADANIE & OSOBY ODPOWIEDZIALNE \\ \hline
+     Marzec & Przygotowanie repozytorium na platformie Github & \authorsni \\ \hline
+     Marzec-Październik & Konfiguracja infrastruktury chmurowej na platformie Microsoft Azure & Kacper Bylicki \\ \hline
+     Kwiecień & Przygotowanie decyzji architektonicznych & \authorsni \\ \hline
+     Kwiecień-Październik & Trenowanie modelu uczenia maszynowego & Kacper Bylicki, Jakub Barczewski \\ \hline
+     Kwiecień-Czerwiec & Przygotowanie pierwszej wersji aplikacji serwerowej & Jakub Barczewski, Kacper Bylicki, pomocniczo Marek Gerszendorf \\ \hline
+     Maj-Lipiec & Przygotowanie pierwszej wersji aplikacji mobilnej & Marek Gerszendorf, Kacper Bylicki, pomocniczo Jakub Barczewski \\ \hline
+     Czerwiec-Listopad & Kontynuacja prac nad aplikacją serwerową & Jakub Barczewski, Kacper Bylicki, pomocniczo Marek Gerszendorf \\ \hline
+     Lipiec-Listopad & Kontynuacja prac nad aplikacją mobilną & Marek Gerszendorf, Kacper Bylicki, pomocniczo Jakub Barczewski \\ \hline
+     Listopad-Grudzień & Finalizacja prac nad aplikacją serwerową & Jakub Barczewski, Kacper Bylicki, pomocniczo Marek Gerszendorf \\ \hline
+     Listopad-Grudzień & Finalizacja prac nad aplikacją mobilną & Marek Gerszendorf, Kacper Bylicki, pomocniczo Jakub Barczewski \\ \hline
+    \end{tabular}
+\end{center}
+
+\newpage
+
+\parindent 0cm
+\color{BlueViolet}
+\MakeUppercase{Podpisy partnerów}
+
+\color{black}
+\authors \\
+Data: 24.03.2023
+
+\end{document}
