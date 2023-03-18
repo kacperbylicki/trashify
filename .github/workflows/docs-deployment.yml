@@ -1,4 +1,9 @@
-name: 'docs-deployment'
+- name: Docs compilation check
+  uses: xu-cheng/latex-action@v2
+  with:
+    root_file: |
+      ./docs/eng-degree-docs/work-schedule/work-schedule.tex
+      ./docs/eng-degree-docs/eng-degree/eng-degree.tex
 
 on:
   push:
