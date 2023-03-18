@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Docs compilation check
         uses: xu-cheng/latex-action@v2
+        run: echo "Hello World!"
         with:
           root_file: |
             ./docs/eng-degree-docs/work-schedule/work-schedule.tex
