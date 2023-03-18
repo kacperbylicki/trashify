@@ -1,0 +1,11 @@
+name: 'docs-deployment'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/backend/**"
+      - "docs/adrs/**"
+      - "docs/frontend/**"
+      - "docs/eng-degree/**"
