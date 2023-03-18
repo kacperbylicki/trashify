@@ -11,7 +11,7 @@ on:
       - "docs/frontend/**"
       
 jobs:
-  check-latex-compilation:
+  pull-request-checks:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
