@@ -18,15 +18,12 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v3
       - name: Docs compilation check
-        uses: xu-cheng/latex-action@v2
-        container:
-          image: ubuntu:latest
-          options: --entrypoint /bin/sh
-          command: -c 'echo "Hello World!"'
+      - uses: xu-cheng/texlive-action/full@v1
         with:
-          root_file: |
-            ./docs/eng-degree-docs/work-schedule/work-schedule.tex
-            ./docs/eng-degree-docs/eng-degree/eng-degree.tex
-            ./docs/commands.tex
+          run: |
+            ls
+            mkdir docs
+            mv work-schedule.text ./docs
+            mv eng-degree.tex ./docs
 
 
