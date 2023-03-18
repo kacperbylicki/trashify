@@ -21,7 +21,9 @@ jobs:
         uses: xu-cheng/texlive-action/full@v1
         with:
           run: |
-            pdflatex ./docs/eng-degree/eng-degree/eng-degree.tex
-            pdflatex ./docs/work-schedule/work-schedule.tex
+            cd docs/eng-degree-docs/eng-degree
+            pdflatex  eng-degree.tex
+            cd ../work-schedule
+            pdflatex  work-schedule.tex
 
 
