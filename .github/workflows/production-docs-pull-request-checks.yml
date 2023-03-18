@@ -1,0 +1,27 @@
+name: 'production-docs-pull-request-checks'
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "docs/adrs/**"
+      - "docs/backend/**"
+      - "docs/eng-degree-docs/**"
+      - "docs/frontend/**"
+      - ".github/workflows/production-docs-pull-request-checks.yml"
+      
+jobs:
+  pull-request-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+      - name: Docs compilation check
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: |
+            ./docs/eng-degree-docs/work-schedule/work-schedule.tex
+            ./docs/eng-degree-docs/eng-degree/eng-degree.tex
+
+
