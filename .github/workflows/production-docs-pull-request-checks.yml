@@ -20,11 +20,10 @@ jobs:
       - name: Engineering Degree compilation check
         uses: xu-cheng/texlive-action/full@v1
         with:
-          run: |
-            cd docs/eng-degree-docs/eng-degree
-            pdflatex  eng-degree.tex
+          working-directory: docs/eng-degree-docs/eng-degree
+          run: pdflatex eng-degree.tex
       - name: Work Schedule compilation check
         uses: xu-cheng/texlive-action/full@v1
-        working-directory: ./docs/eng-degree-docs/work-schedule
-        run: pdflatex  work-schedule.tex
-
+        with:
+          working-directory: docs/eng-degree-docs/work-schedule
+          run: pdflatex work-schedule.tex
