@@ -19,11 +19,11 @@ jobs:
         uses: actions/checkout@v3
       - name: Engineering Degree compilation check
         uses: xu-cheng/texlive-action/full@v1
+        working-directory: docs/eng-degree-docs/eng-degree
         with:
-          working-directory: docs/eng-degree-docs/eng-degree
           run: pdflatex eng-degree.tex
       - name: Work Schedule compilation check
         uses: xu-cheng/texlive-action/full@v1
+        working-directory: docs/eng-degree-docs/work-schedule
         with:
-          working-directory: docs/eng-degree-docs/work-schedule
           run: pdflatex work-schedule.tex
