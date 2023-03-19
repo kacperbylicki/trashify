@@ -27,7 +27,7 @@ jobs:
         uses: xu-cheng/texlive-action/full@v1
         with:
           run: |
-            cd ../work-schedule
+            cd docs/eng-degree-docs/work-schedule
             pdflatex  work-schedule.tex
 
 
