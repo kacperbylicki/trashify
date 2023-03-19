@@ -1,0 +1,150 @@
+\documentclass[12pt, oneside, a4paper]{book}
+\usepackage[
+    a4paper, 
+    total={6in, 8in}, 
+    top=2cm,
+    left=3cm,
+    right=2.5cm,
+    bottom=1.25cm,
+    includeheadfoot
+]{geometry}
+\usepackage[T1]{polski}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{mathptmx}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{import}
+\usepackage{titlesec}
+
+\import{../}{commands.tex}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead[C]{\uniimage}
+    \fancyfoot[C]{\thepage}
+}
+
+% Wymogi edycyjne: https://moodle2.e-wsb.pl/pluginfile.php/7505508/mod_resource/content/2/Wymogi%20edycyjne_praca%20dyplomowa.pdf
+
+\renewcommand\thesection{\Alph{chapter}\arabic{section}}
+
+\linespread{1.5}
+
+\begin{document}
+
+% Header & footer settings :)
+\pagestyle{plain}
+
+\titleformat
+    {\chapter} %/{〈command 〉}
+    [block] %/[〈shape〉]
+    {\bfseries\large} %/ {〈format〉}
+    {} %/ {〈label 〉}
+    {0.5ex} %/ {〈sep〉}
+    {
+        \centering
+    } %/ {〈before-code〉}
+    {
+        \vspace{-0.5ex}%
+    } %/ {〈after-code〉}
+
+\titleformat{\section}[hang]{\normalfont\bfseries}{\thesection.}{0.5em}{}
+
+\begin{titlepage}
+    \begin{center}
+
+        \uniimage
+
+        \MakeUppercase{\department}
+
+        \vspace{5cm}
+
+        \begin{Large} \textbf{\topic} \end{Large}
+
+        \vspace{5cm}
+
+        PROJEKT DYPLOMOWY
+
+        \vfill
+        Poznań 2023
+
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\chapter{\MakeUppercase{dane partnerów}}
+
+\section{Dane Promotora}
+
+\begin{tabular}{ |p{5cm}|p{7cm}|}
+    \hline
+    Imię i nazwisko & Izabela Janicka-Lipska \\
+    \hline
+    Stopień / Tytuł naukowy & dr. inż. \\
+    \hline
+    Data i podpis &  \\ \hline
+\end{tabular}
+
+\section{Dane członków Zespołu projektu}
+
+\begin{tabular}{ |p{5cm}|p{7cm}|}
+    \hline
+    Imię i nazwisko & Marek Gerszendorf \\
+    \hline
+    Kierunek studiów & Informatyka\\
+    \hline
+    Tryb studiów & Niestacjonarne\\
+    \hline
+    Data i podpis & \\ \hline
+\end{tabular}
+
+\bigskip
+\noindent
+\begin{tabular}{ |p{5cm}|p{7cm}|}
+    \hline
+    Imię i nazwisko & Jakub Barczewski\\
+    \hline
+    Kierunek studiów & Informatyka\\
+    \hline
+    Tryb studiów & Niestacjonarne\\
+    \hline
+    Data i podpis & \\ \hline
+\end{tabular}
+
+\bigskip
+\noindent
+\begin{tabular}{ |p{5cm}|p{7cm}|}
+    \hline
+    Imię i nazwisko & Kacper Bylicki\\
+    \hline
+    Kierunek studiów & Informatyka\\
+    \hline
+    Tryb studiów & Niestacjonarne\\
+    \hline
+    Data i podpis & \\ \hline
+\end{tabular}
+
+\chapter{\MakeUppercase{Założenia projektu}}
+
+\section{Opis Projektu}
+
+\chapter{Realizacja}
+
+\section{Opracowanie projektu}
+
+\section{Zadania w projekcie}
+
+\section{Efekty realizacji projektu}
+
+\section{Użyteczność projektu}
+
+\section{Autoewaluacja zespołu projektowego}
+
+\section{Wykorzystane materiały i bibliografia związana z realizacją projektu}
+
+Załączniki - mają być generowane automatycznie, do ogarnięcia :)
+
+\end{document}
