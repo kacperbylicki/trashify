@@ -39,10 +39,20 @@ resource "azurerm_resource_group" "main" {
   }
 }
 
-module "cognitive-services-custom-vision" {
+module "cognitive-services-custom-vision-prediction" {
   source         = "../../../modules/cognitive-services/custom-vision"
   resource_group = azurerm_resource_group.main.name
-  instance_name  = "${var.application_name}-custom-vision-trash"
+  instance_name  = "${var.application_name}-custom-vision-prediction"
   environment    = var.environment
   location       = var.location
+  instance_kind  = "CustomVision.Prediction"
+}
+
+module "cognitive-services-custom-vision-training" {
+  source         = "../../../modules/cognitive-services/custom-vision"
+  resource_group = azurerm_resource_group.main.name
+  instance_name  = "${var.application_name}-custom-vision-training"
+  environment    = var.environment
+  location       = var.location
+  instance_kind  = "CustomVision.Training"
 }
