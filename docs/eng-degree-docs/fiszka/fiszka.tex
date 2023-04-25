@@ -46,8 +46,26 @@
         \vspace{0ex}%
     } %/ {〈after-code〉}
 
-\titleformat{\section}[hang]{\normalfont\bfseries}{\thesection.}{0.5em}{}
-\titleformat{\subsection}[hang]{\normalfont\bfseries}{\thesubsection.}{0.5em}{}
+\titleformat{\section}[hang]{
+    \normalfont
+    \bfseries
+}{\thesection.}{0.5em}{}
+
+\titleformat{\subsection}[hang]{
+    \normalfont
+    \bfseries
+}{\thesubsection.}{0.5em}{}
+
+\titleformat{\chapter}[hang]
+  {
+    \normalfont
+    \bfseries
+    \large
+    \centering
+    \MakeUppercase
+}{}{10pt}{}
+
+\titlespacing{\chapter}{5pt}{20pt}{20pt}[5pt]
 
 {{\chapter
     {\MakeUppercase{\underline{\LARGE{Fiszka projektu dyplomowego}}}}
@@ -67,8 +85,8 @@
 \end{tabular}
 
 {\let\clearpage\relax
-\chapter{\MakeUppercase{Dane partnerów}}
-    }
+    \chapter{\MakeUppercase{Dane partnerów}}
+}
 
 \section{Dane Promotora}
 
