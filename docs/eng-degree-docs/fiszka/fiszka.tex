@@ -6,6 +6,7 @@
     left=3cm,
     right=2.5cm,
     bottom=1.25cm,
+    headheight=1.5cm,
     includeheadfoot
 ]{geometry}
 \usepackage[T1]{polski}
@@ -45,9 +46,12 @@
         \vspace{0ex}%
     } %/ {〈after-code〉}
 
-% \titleformat{\section}[hang]{\normalfont\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\section}[hang]{\normalfont\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}[hang]{\normalfont\bfseries}{\thesubsection.}{0.5em}{}
 
-{{\chapter{\MakeUppercase{\underline{\LARGE{Fiszka projektu dyplomowego}}}}}}
+{{\chapter
+    {\MakeUppercase{\underline{\LARGE{Fiszka projektu dyplomowego}}}}
+}}
 
 \noindent
 \textbf{\LARGE{Organizator}}
@@ -63,7 +67,8 @@
 \end{tabular}
 
 {\let\clearpage\relax
-\chapter{\MakeUppercase{Dane partnerów}} }
+\chapter{\MakeUppercase{Dane partnerów}}
+    }
 
 \section{Dane Promotora}
 
@@ -79,15 +84,13 @@
 
 \pagestyle{plain}
 
-\clearpage
-
 \section{Dane członków zespołu projektu}
 
 \membersTable
 
-% {\let\clearpage\relax
+{\let\clearpage\relax
     \chapter{Założenia projektu}
-    % }
+    }
 
 \section{Opis projektu}
 
