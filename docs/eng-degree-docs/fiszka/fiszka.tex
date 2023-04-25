@@ -1,0 +1,138 @@
+\documentclass[12pt,oneside]{book}
+\usepackage[
+    a4paper, 
+    total={6in, 8in}, 
+    top=2cm,
+    left=3cm,
+    right=2.5cm,
+    bottom=1.25cm,
+    includeheadfoot
+]{geometry}
+\usepackage[T1]{polski}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{mathptmx}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{import}
+\usepackage{titlesec}
+
+\import{../}{commands.tex}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead[C]{\uniimage}
+    \fancyfoot[C]{\thepage}
+}
+
+\renewcommand\thesection{\Alph{chapter}\arabic{section}}
+
+\linespread{1.5}
+
+\begin{document}
+
+\titleformat
+    {\chapter} %/{〈command 〉}
+    [block] %/[〈shape〉]
+    {\bfseries\large} %/ {〈format〉}
+    {} %/ {〈label 〉}
+    {0ex} %/ {〈sep〉}
+    {
+        \centering
+    } %/ {〈before-code〉}
+    {
+        \vspace{0ex}%
+    } %/ {〈after-code〉}
+
+% \titleformat{\section}[hang]{\normalfont\bfseries}{\thesection.}{0.5em}{}
+
+{{\chapter{\MakeUppercase{\underline{\LARGE{Fiszka projektu dyplomowego}}}}}}
+
+\noindent
+\textbf{\LARGE{Organizator}}
+\bigskip
+
+\noindent
+\begin{tabular}{ |p{5cm}|p{9cm}|}
+    \hline
+    Nazwa instytucji & \MakeUppercase{Wyższa Szkoła Bankowa w Poznaniu} \textbf{Wydział Finansów i Bankowości} \\
+    \hline
+    Adres & ul. Powstańców Wielkopolskich 5, 61-895 Poznań \\
+    \hline
+\end{tabular}
+
+{\let\clearpage\relax
+\chapter{\MakeUppercase{Dane partnerów}} }
+
+\section{Dane Promotora}
+
+\begin{tabular}{ |p{5cm}|p{9cm}|}
+    \hline
+    Imię i nazwisko & Izabela Janicka-Lipska \\
+    \hline
+    Stopień / Tytuł naukowy & dr. inż. \\
+    \hline
+    Data i podpis &  \\ \hline
+\end{tabular}
+
+
+\pagestyle{plain}
+
+\clearpage
+
+\section{Dane członków zespołu projektu}
+
+\membersTable
+
+% {\let\clearpage\relax
+    \chapter{Założenia projektu}
+    % }
+
+\section{Opis projektu}
+
+\subsection{Uzasadnienie wyboru tematu}
+
+Po pierwsze, problem utylizacji odpadów stał się w ostatnich latach jednym z największych wyzwań dla społeczeństwa i środowiska naturalnego. Śmieci są produkowane w ogromnych ilościach, a nieprawidłowe postępowanie z nimi prowadzi do skażenia powietrza, wody i gleby. W związku z tym, istnieje potrzeba opracowania rozwiązań, które pomogą w zarządzaniu odpadami w sposób bardziej skuteczny i zrównoważony.
+
+Po drugie, rozwój technologii uczenia maszynowego pozwala na stworzenie aplikacji mobilnej, która może rozpoznawać pojemniki na odpady na podstawie zdjęć, co ułatwi proces segregacji odpadów dla użytkowników. Taka aplikacja może również zwiększyć świadomość społeczną w zakresie utylizacji odpadów i przyczynić się do zmniejszenia ilości odpadów zalegających na składowiskach.
+
+
+Po trzecie, temat ten jest aktualny i ważny, a jednocześnie daje wiele możliwości na zastosowanie różnych technologii i algorytmów uczenia maszynowego. Przy realizacji projektu można wykorzystać m.in. sieci neuronowe, algorytmy głębokiego uczenia, przetwarzanie obrazów oraz uczenie maszynowe w chmurze.
+
+Podsumowując, projekt "Trashify - rozpoznawanie pojemników na odpady za pomocą algorytmów uczenia maszynowego" jest uzasadniony ze względu na aktualność i ważność tematu, możliwość wykorzystania najnowszych technologii oraz potencjalne korzyści dla społeczeństwa i środowiska naturalnego.
+
+\subsection{Problem badawczy}
+Jakie algorytmy uczenia maszynowego najlepiej nadają się do rozpoznawania pojemników na odpady na podstawie zdjęć i jakie cechy obrazów odpowiadają za skuteczność procesu rozpoznawania?
+
+W ramach tego problemu badawczego można skoncentrować się na kilku podproblemach, m.in.:
+
+    Analiza dostępnych zbiorów danych: jakie zbiory danych są dostępne do treningu i testowania modelu rozpoznawania pojemników na odpady, jak są one zdefiniowane i jakie informacje zawierają?
+
+    Wybór odpowiednich algorytmów uczenia maszynowego: na podstawie analizy zbiorów danych, jakie algorytmy uczenia maszynowego będą najlepiej nadawały się do rozpoznawania pojemników na odpady na podstawie zdjęć?
+
+    Przygotowanie zbiorów danych: jakie techniki należy zastosować, aby zbioru danych były odpowiednio przygotowane do treningu modelu? Czy konieczne jest zastosowanie technik augmentacji danych?
+
+    Implementacja i trening modelu: jakie techniki należy zastosować w procesie trenowania modelu, aby uzyskać jak najlepsze wyniki?
+
+    Ocena skuteczności modelu: jakie metryki należy zastosować, aby dokładnie ocenić skuteczność modelu w rozpoznawaniu pojemników na odpady?
+
+    Analiza cech obrazów: na podstawie analizy modelu, jakie cechy obrazów odpowiadają za skuteczność procesu rozpoznawania pojemników na odpady?
+
+\subsection{Cel główny i cele szczegółowe projektu}
+
+Głównym celem projektu "Trashify - rozpoznawanie pojemników na odpady za pomocą algorytmów uczenia maszynowego" jest stworzenie aplikacji mobilnej, która będzie pomagać użytkownikom w identyfikacji pojemników na odpady danego typu. Aplikacja ta ma na celu wspomaganie procesu utylizacji odpadów w odpowiedzialny i racjonalny sposób poprzez ułatwienie segregacji odpadów i zapobieganie ich niewłaściwemu składowaniu.
+
+Aplikacja Trashify będzie działała w następujący sposób: użytkownik zrobi zdjęcie pojemnika na odpady, a następnie za pomocą algorytmów uczenia maszynowego aplikacja będzie rozpoznawać rodzaj odpadów, które należy do niego wrzucić. Aplikacja będzie również wyświetlała mapę, na której użytkownik będzie mógł znaleźć najbliższy pojemnik na odpady danego typu. Dzięki temu, użytkownik będzie miał łatwy dostęp do informacji na temat właściwej utylizacji odpadów, co pozwoli na zmniejszenie ilości odpadów zalegających na składowiskach oraz zwiększenie świadomości ekologicznej w społeczeństwie.
+
+Projekt ten ma również na celu wykorzystanie najnowszych technologii z zakresu uczenia maszynowego i przetwarzania obrazów. Przygotowanie modelu rozpoznawania pojemników na odpady wymaga zastosowania specjalistycznych algorytmów uczenia maszynowego, takich jak sieci neuronowe lub algorytmy głębokiego uczenia. Przetestowanie tych technologii w praktyce pozwoli na lepsze zrozumienie ich zastosowania w dziedzinie rozpoznawania obrazów.
+
+Wprowadzenie aplikacji Trashify do użytku może przynieść wiele korzyści dla środowiska naturalnego, a także dla ludzi, którzy z niej korzystają. Dzięki temu, aplikacja ta może przyczynić się do zwiększenia efektywności i skuteczności procesu utylizacji odpadów oraz propagowania idei ekologicznej w społeczeństwie.
+
+\section{Ryzyko związane z realizacją projektu}
+
+{\let\clearpage\relax\chapter{Zadania planowane w ramach projektu}}
+
+\section{Zadania w projekcie}
+
+\end{document}
