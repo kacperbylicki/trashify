@@ -4,7 +4,7 @@
     total={6in, 8in}, 
     top=2cm,
     left=3cm,
-    right=2.5cm,
+    right=3cm,
     bottom=1.25cm,
     headheight=1.5cm,
     includeheadfoot
@@ -19,6 +19,7 @@
 \usepackage{titlesec}
 \usepackage{multirow}
 \usepackage{longtable}
+\usepackage{tabularray}
 
 \import{../}{commands.tex}
 
@@ -195,11 +196,23 @@ Zakres przestrzenny projektu obejmuje miejsce, w którym aplikacja Trashify będ
 
 \section{Ryzyko związane z realizacją projektu}
 
+{\Huge\textbf{Tymczasowe}}
+
+Technologiczne ryzyko - związane z wykorzystaniem nowych technologii, które mogą nie działać zgodnie z oczekiwaniami, bądź w trakcie projektowania i implementacji systemu, mogą pojawić się trudności techniczne.
+
+Ryzyko biznesowe - związane z opóźnieniami w harmonogramie, niskimi dochodami lub brakiem akceptacji produktu przez klientów, co może prowadzić do niepowodzenia projektu.
+
+Ryzyko projektowe - związane z niedostatecznymi planami, wyboru niewłaściwej metodyki lub zła interpretacją wymagań.
+
+Ryzyko jakościowe - związane z niedostatecznymi testami, błędami w kodzie, które mogą prowadzić do awarii systemu, co może prowadzić do utraty zaufania klientów.
+
+Ryzyko bezpieczeństwa - związane z atakami cybernetycznymi na system, które mogą prowadzić do utraty danych lub przestojów w działaniu systemu.
+
 {\let\clearpage\relax\chapter{Zadania planowane w ramach projektu}}
 
 \section{Zadania w projekcie}
 
-\begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
+\begin{longtable}{ | p{0.3\textwidth}| p{0.4\textwidth}| p{0.2\textwidth}| }
     \hline
     Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania & Osoby zaangażowane w realizację zadania \\
     \objective
@@ -207,16 +220,20 @@ Zakres przestrzenny projektu obejmuje miejsce, w którym aplikacja Trashify będ
         {Zadanie 1: Przygotować dane treningowe}
         {Zadanie 2: Dobrać algorytmy uczenia maszynowego}
         {Zadanie 3: Przeprowadzić testy i poprawki}
+    \multicolumn{3}{|l|}{}\\
+    \multicolumn{3}{|l|}{}\\
     \objective
         {Cel 2: Przygotować aplikację serwerową sterującą algorytmami uczenia maszynowego}
         {Zadanie 1: Stworzyć diagram architektury aplikacji}
         {Zadanie 2: Zaimplementować aplikację na bazie diagramu}
         {Zadanie 3: Przeprowadzić testy i poprawki}
+    \multicolumn{3}{|l|}{}\\
     \objective
         {Cel 3: Przygotować aplikację mobilną}
         {Zadanie 1: Stworzyć diagram architektury aplikacji}
         {Zadanie 2: Zaimplementować aplikację na bazie diagramu}
         {Zadanie 3: Przeprowadzić testy i poprawki}
+    \multicolumn{3}{|l|}{}\\
     \objective
         {Cel 4: Pójść na piwo}
         {Zadanie 1: Pójść na piwo}
