@@ -19,7 +19,6 @@
 \usepackage{titlesec}
 \usepackage{multirow}
 \usepackage{longtable}
-\usepackage{tabularray}
 
 \import{../}{commands.tex}
 
@@ -217,28 +216,39 @@ Ryzyko bezpieczeństwa - związane z atakami cybernetycznymi na system, które m
     Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania & Osoby zaangażowane w realizację zadania \\
     \objective
         {Cel 1: Przygotować modele uczenia maszynowego}
-        {Zadanie 1: Przygotować dane treningowe}
-        {Zadanie 2: Dobrać algorytmy uczenia maszynowego}
-        {Zadanie 3: Przeprowadzić testy i poprawki}
+        {Zadanie 1: Zebrać dane kontekstowe}
+        {Zadanie 2: Przygotować dane treningowe}
+        {Zadanie 3: Dobrać algorytmy uczenia maszynowego}
+        {Zadanie 4: Zaimplementować algorytmy uczenia maszynowego}
+        {Zadanie 5: Przeprowadzić testy i poprawki}
     \multicolumn{3}{|l|}{}\\
-    \multicolumn{3}{|l|}{}\\
+    \hline
+\end{longtable}
+
+\newpage
+
+\begin{longtable}{ | p{0.3\textwidth}| p{0.4\textwidth}| p{0.2\textwidth}| }
     \objective
         {Cel 2: Przygotować aplikację serwerową sterującą algorytmami uczenia maszynowego}
         {Zadanie 1: Stworzyć diagram architektury aplikacji}
-        {Zadanie 2: Zaimplementować aplikację na bazie diagramu}
-        {Zadanie 3: Przeprowadzić testy i poprawki}
+        {Zadanie 2: Zaimplementować kanały komunikacji między aplikacją a algorytmami uczenia maszynowego}
+        {Zadanie 3: Zaimplementować kanały komunikacji między aplikacją a aplikacją mobilną}
+        {Zadanie 4: Przeprowadzić testy i poprawki}
+        {Zadanie 5: Dokonać optymalizacji aplikacji}
     \multicolumn{3}{|l|}{}\\
+    \hline
+\end{longtable}
+
+\newpage
+
+\begin{longtable}{ | p{0.3\textwidth}| p{0.4\textwidth}| p{0.2\textwidth}| }
     \objective
         {Cel 3: Przygotować aplikację mobilną}
         {Zadanie 1: Stworzyć diagram architektury aplikacji}
-        {Zadanie 2: Zaimplementować aplikację na bazie diagramu}
-        {Zadanie 3: Przeprowadzić testy i poprawki}
-    \multicolumn{3}{|l|}{}\\
-    \objective
-        {Cel 4: Pójść na piwo}
-        {Zadanie 1: Pójść na piwo}
-        {Zadanie 2: Przeżyć kaca}
-        {Zadanie 3: Przeprowadzić testy i poprawki}
+        {Zadanie 2: Zaprojektować warstwę wizualną na bazie diagramu}
+        {Zadanie 3: Stworzyć prototyp aplikacji}
+        {Zadanie 4: Zaimplementować kanały komunikacji między aplikacją a aplikacją serwerową}
+        {Zadanie 5: Przeprowadzić testy i poprawki}
 \end{longtable}
 
 \end{document}
