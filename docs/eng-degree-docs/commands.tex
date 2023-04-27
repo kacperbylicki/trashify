@@ -44,33 +44,46 @@
     \end{tabular}
 }
 
-\newcommand{\objective}[6]{
+\newcommand{\task}[5]{
+    \multirow{4}{\linewidth}{#1}
+        &1. {#2}\\
+        && 2. {#3}\\
+        && 3. {#4}\\
+        &&  {#5}\\
+}
+
+\newcommand{\objective}[9]{
     \hline
     \multirow[t]{9}
         {\linewidth}{#1}
-    &\multirow{3}{\linewidth}{#2}
-        &1.\\
+    &\multirow{4}{\linewidth}{#2}
+        &1. {#7}\\
         && 2. \\
         && 3. \\
+        &&  \\
     \cline{2-3}
-    &\multirow{3}{\linewidth}{#3}
-        & 1. \\
+    &\multirow{4}{\linewidth}{#3}
+        & 1. {#7}\\
         && 2. \\
         && 3. \\
+        &&  \\
     \cline{2-3}
-    &\multirow{3}{\linewidth}{#4}
-        & 1. \\
+    &\multirow{4}{\linewidth}{#4}
+        & 1. {#7}\\
         && 2. \\
         && 3. \\
+        &&  \\
     \cline{2-3}
-    &\multirow{3}{\linewidth}{#5}
-        & 1. \\
+    &\multirow{4}{\linewidth}{#5}
+        & 1. {#7}\\
         && 2. \\
         && 3. \\
+        &&  \\
     \cline{2-3}
-    &\multirow{3}{\linewidth}{#6}
-        & 1. \\
+    &\multirow{4}{\linewidth}{#6}
+        & 1. {#7}\\
         && 2. \\
         && 3. \\
+        &&  \\
     \cline{1-3}
 }
