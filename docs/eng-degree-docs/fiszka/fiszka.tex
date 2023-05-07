@@ -19,6 +19,7 @@
 \usepackage{titlesec}
 \usepackage{multirow}
 \usepackage{longtable}
+\usepackage{enumitem}
 
 \import{../}{commands.tex}
 
@@ -96,7 +97,7 @@
     \hline
     Imię i nazwisko & Izabela Janicka-Lipska \\
     \hline
-    Stopień / Tytuł naukowy & dr. inż. \\
+    Stopień / Tytuł naukowy & dr inż. \\
     \hline
     Data i podpis &  \\ \hline
 \end{tabular}
@@ -118,37 +119,39 @@
 
 Problem utylizacji odpadów stał się w ostatnich latach jednym z największych wyzwań dla społeczeństwa i środowiska naturalnego. Śmieci są produkowane w ogromnych ilościach, a nieprawidłowe postępowanie z nimi prowadzi do skażenia powietrza, wody i gleby. W związku z tym, istnieje potrzeba opracowania rozwiązań, które ułatwią zarządzanie odpadami w sposób bardziej skuteczny i zrównoważony.
 
-Dzięki rozwojowi technologii uczenia maszynowego, pojawiła się możliwość stworzenia aplikacji mobilnej, która rozpoznawać będzie pojemniki na odpady na podstawie zdjęć oraz oznaczać je na mapie, co ułatwi lokalizacji pojemników na dany typ odpadów, co ułatwi proces własciwego utylizowania śmieci dla użytkowników. Taka aplikacja może również zwiększyć świadomość społeczną w zakresie utylizacji odpadów i przyczynić się do zmniejszenia ilości odpadów zalegających na składowiskach.
+\textbf{Dzięki rozwojowi technologii uczenia maszynowego, pojawiła się możliwość stworzenia aplikacji mobilnej, która rozpoznawać będzie pojemniki na odpady na podstawie zdjęć oraz oznaczać je na mapie, co ułatwi lokalizację pojemników na dany typ odpadów, co ułatwi proces własciwego utylizowania śmieci dla użytkowników}. Taka aplikacja może również zwiększyć świadomość społeczną w zakresie utylizacji odpadów i przyczynić się do zmniejszenia ilości odpadów zalegających na składowiskach.
 
 
-Temat ten jest aktualny i ważny, a jednocześnie daje wiele możliwości na zastosowanie różnych technologii i algorytmów uczenia maszynowego. Przy realizacji projektu można wykorzystać m.in. sieci neuronowe, algorytmy głębokiego uczenia, przetwarzanie obrazów oraz uczenie maszynowe w chmurze oraz usługi geolokalizacyjne.
+Temat ten jest aktualny i ważny, a jednocześnie daje wiele możliwości na zastosowanie różnych technologii i algorytmów uczenia maszynowego. Przy realizacji projektu można wykorzystać m.in. sieci neuronowe, algorytmy uczenia głębokiego, przetwarzanie obrazów oraz uczenie maszynowe w chmurze oraz usługi geolokalizacyjne.
 
-Podsumowując, projekt "Trashify - rozpoznawanie pojemników na odpady za pomocą algorytmów uczenia maszynowego" jest uzasadniony ze względu na aktualność i ważność tematu, możliwość wykorzystania najnowszych technologii oraz potencjalne korzyści dla społeczeństwa i środowiska naturalnego.
+Podsumowując, projekt \topic  jest uzasadniony ze względu na aktualność i ważność tematu, możliwość wykorzystania najnowszych technologii oraz potencjalne korzyści dla społeczeństwa i środowiska naturalnego.
 
 \subsection{Problem badawczy}
-Jakie algorytmy uczenia maszynowego najlepiej nadają się do rozpoznawania pojemników na odpady na podstawie zdjęć i jakie cechy obrazów odpowiadają za skuteczność procesu rozpoznawania?
+Algorytmy uczenia maszynowego najlepiej nadające się do rozpoznawania pojemników na odpady na podstawie zdjęć i cechy obrazów odpowiadające za skuteczność procesu rozpoznawania
+
+
 
 W ramach tego problemu badawczego można skoncentrować się na kilku podproblemach, m.in.:
 
-    Analiza dostępnych zbiorów danych: jakie zbiory danych są dostępne do treningu i testowania modelu rozpoznawania pojemników na odpady, jak są one zdefiniowane i jakie informacje zawierają?
+    -- Analiza dostępnych zbiorów danych: znalezienie zbiorów danych do treningu i testowania modelu rozpoznawania pojemników na odpady, określenie jak są one zdefiniowane oraz jakie informacje zawierają
 
-    Wybór odpowiednich algorytmów uczenia maszynowego: na podstawie analizy zbiorów danych, jakie algorytmy uczenia maszynowego będą najlepiej nadawały się do rozpoznawania pojemników na odpady na podstawie zdjęć?
+    -- Wybór odpowiednich algorytmów uczenia maszynowego: na podstawie analizy zbiorów danych, określenie algorytmów uczenia maszynowego, które najlepiej będą się nadawały do rozpoznawania pojemników na odpady na podstawie zdjęć
 
-    Przygotowanie zbiorów danych: jakie techniki należy zastosować, aby zbioru danych były odpowiednio przygotowane do treningu modelu? Czy konieczne jest zastosowanie technik augmentacji danych?
+    -- Przygotowanie zbiorów danych: zastosowanie technik przetwarzania obrazów, aby zbiory danych były odpowiednio przygotowane do treningu modelu oraz potencjalne użycie technik augmentacji danych
 
-    Implementacja i trening modelu: jakie techniki należy zastosować w procesie trenowania modelu, aby uzyskać jak najlepsze wyniki?
+    -- Implementacja i trening modelu: wyłonić najlepsze techniki trenowania modelu bazowanego na obrazach
 
-    Ocena skuteczności modelu: jakie metryki należy zastosować, aby dokładnie ocenić skuteczność modelu w rozpoznawaniu pojemników na odpady?
+    -- Ocena skuteczności modelu: określenie metryk, które pozwolą dokładnie ocenić skuteczność modelu w rozpoznawaniu pojemników na odpady
 
-    Analiza cech obrazów: na podstawie analizy modelu, jakie cechy obrazów odpowiadają za skuteczność procesu rozpoznawania pojemników na odpady?
+    -- Analiza cech obrazów: na podstawie analizy modelu, zlokalizować cechy obrazów odpowiadające za skuteczność procesu rozpoznawania pojemników na odpady
 
 \subsection{Cel główny i cele szczegółowe projektu}
 
-Celem nadrzędnym jest stworzenie aplikacji mobilnej, która będzie pomagać użytkownikom w identyfikacji oraz lokalizowania pojemników na odpady danego typu. Aplikacja ta ma na celu wspomaganie procesu utylizacji odpadów w odpowiedzialny i racjonalny sposób poprzez ułatwienie segregacji odpadów oraz zapobieganie ich niewłaściwemu składowaniu.
+Celem nadrzędnym jest stworzenie aplikacji mobilnej, która będzie pomagać użytkownikom w identyfikacji oraz lokalizowaniu pojemników na odpady danego typu. Aplikacja ta będzie miała na celu wspomaganie procesu utylizacji odpadów w odpowiedzialny i racjonalny sposób poprzez ułatwienie segregacji odpadów oraz zapobieganie ich niewłaściwemu składowaniu.
 
 Cele podrzędne:
 
-    Analiza dostępnych zbiorów danych: analiza zbiorów danych dostępnych w internecie, które mogą posłużyć do treningu i testowania modelu rozpoznawania pojemników na odpady.
+    Analiza dostępnych zbiorów danych: analiza zbiorów danych dostępnych w Internecie, które mogą posłużyć do treningu i testowania modelu rozpoznawania pojemników na odpady.
 
     Wybór odpowiednich algorytmów uczenia maszynowego: wybór algorytmów uczenia maszynowego, które będą najlepiej nadawały się do rozpoznawania pojemników na odpady na podstawie zdjęć.
 
@@ -164,52 +167,55 @@ Cele podrzędne:
 
 \subsection{Zakres podmiotowy, przedmiotowy, czasowy i przestrzenny}
 
-Zakres podmiotowy projektu "Trashify - rozpoznawanie pojemników na odpady za pomocą algorytmów uczenia maszynowego" obejmuje badanie i opracowanie aplikacji mobilnej oraz algorytmów uczenia maszynowego, które umożliwią rozpoznawanie pojemników na odpady. Podmiotem badania jest zatem aplikacja mobilna Trashify oraz modele uczenia maszynowego, które będą umożliwiać rozpoznawanie pojemników na odpady.
+-- Zakres podmiotowy projektu \topic  obejmuje badanie i opracowanie aplikacji mobilnej oraz algorytmów uczenia maszynowego, które umożliwią rozpoznawanie pojemników na odpady. Podmiotem badania jest zatem aplikacja mobilna Trashify oraz modele uczenia maszynowego, które będą umożliwiać rozpoznawanie pojemników na odpady.
 
-Zakres przedmiotowy obejmuje badanie możliwości rozpoznawania różnych typów pojemników na odpady (np. pojemnik na papier, szkło, plastik, odpady organiczne itp.) oraz opracowanie algorytmów uczenia maszynowego, które umożliwią ich poprawną identyfikację. W ramach projektu będzie również opracowana aplikacja mobilna, która będzie integrować te algorytmy oraz udostępniać użytkownikom informacje o pojemnikach na odpady oraz umożliwiać im łatwe i szybkie ich zlokalizowanie.
+-- Zakres przedmiotowy obejmuje badanie możliwości rozpoznawania różnych typów pojemników na odpady (np. pojemnik na papier, szkło, plastik, odpady organiczne itp.) oraz opracowanie algorytmów uczenia maszynowego, które umożliwią ich poprawną identyfikację. W ramach projektu będzie również opracowana aplikacja mobilna, która będzie integrować te algorytmy oraz udostępniać użytkownikom informacje o pojemnikach na odpady oraz umożliwiać im łatwe i szybkie ich zlokalizowanie.
 
-Zakres czasowy projektu obejmuje okres od rozpoczęcia prac badawczych nad algorytmami rozpoznawania pojemników na odpady aż do momentu udostępnienia aplikacji Trashify użytkownikom. Czas ten może być zależny od różnych czynników, takich jak dostępność danych treningowych, stopień skomplikowania algorytmów, ilość testów i poprawek, które będą wymagane w trakcie pracy nad aplikacją.
+-- Zakres czasowy projektu obejmuje okres od 01.04.2023 aż do 01.12.2023.
 
-Zakres przestrzenny projektu obejmuje miejsce, w którym aplikacja Trashify będzie wykorzystywana, czyli przede wszystkim kraje, w których istnieją odpowiednie pojemniki na odpady. Projekt nie ogranicza się jednak do konkretnego obszaru geograficznego, ponieważ algorytmy uczenia maszynowego, które zostaną opracowane w ramach projektu, będą mogły być wykorzystywane w innych aplikacjach i systemach, gdzie wymagane jest rozpoznawanie obrazów.
+-- Zakres przestrzenny projektu obejmuje miejsce, w którym aplikacja Trashify będzie wykorzystywana, czyli przede wszystkim Polska. Projekt ogranicza się do konkretnego obszaru geograficznego, ponieważ algorytmy uczenia maszynowego, które zostaną opracowane w ramach projektu, będą skupiały się na pojemnikach na odpady spotykanych w Polsce. W ramach projektu nie będzie prowadzona analiza pojemników spotykanych w innych krajach.
 
 \subsection{Metody i techniki badawcze}
 
 \begin{enumerate}
     \item Metoda analizy i konstrukcji logicznej
     
-    Analiza składników systemu informacyjnego Trashify na składniki cząstkowe (np. interfejs użytkownika, algorytmy uczenia maszynowego, baza danych itp.).
+    \begin{enumerate}[label=--]
+        \item Analiza składników systemu informacyjnego Trashify na składniki cząstkowe (np. interfejs użytkownika, algorytmy uczenia maszynowego, baza danych itp.)
+        \item Indywidualna analiza każdego z tych składników.
+        Synteza wyników analizy w celu stworzenia spójnego i logicznego systemu informacyjnego
+    \end{enumerate}
 
-    Indywidualna analiza każdego z tych składników.
-    Synteza wyników analizy w celu stworzenia spójnego i logicznego systemu informacyjnego.
     \item Metoda statystyczna
     
-    Badanie preferencji użytkowników w zakresie korzystania z aplikacji mobilnej Trashify na ograniczonej próbie.
+    \begin{enumerate}[label=--]
+        \item Badanie preferencji użytkowników w zakresie korzystania z aplikacji mobilnej Trashify na ograniczonej próbie.
+        \item Pozyskanie informacji o średniej ilości odpadów segregowanych przez użytkowników korzystających z aplikacji.
+        \item Analiza zależności pomiędzy poszczególnymi cechami użytkowników a ich zachowaniem w kontekście segregacji odpadów.
+    \end{enumerate}
 
-    Pozyskanie informacji o średniej ilości odpadów segregowanych przez użytkowników korzystających z aplikacji.
-
-    Analiza zależności pomiędzy poszczególnymi cechami użytkowników a ich zachowaniem w kontekście segregacji odpadów.    
     \item Metoda symulacji komputerowej
     
-    Wykorzystanie algorytmów uczenia maszynowego do stworzenia modelu przewidującego ilość i rodzaj odpadów, jakie zostaną wyprodukowane w danym miejscu w przyszłości.
-    
-    Przeprowadzenie symulacji na tym modelu, aby zbadać wpływ różnych czynników (np. zmiany stylu życia mieszkańców, nowych przepisów regulujących sortowanie odpadów) na ilość i rodzaj produkowanych odpadów.
+    \begin{enumerate}[label=--]
+        \item Wykorzystanie algorytmów uczenia maszynowego do stworzenia modelu przewidującego ilość i rodzaj odpadów, jakie zostaną wyprodukowane w danym miejscu w przyszłości.
+        \item Przeprowadzenie symulacji na tym modelu, aby zbadać wpływ różnych czynników (np. zmiany stylu życia mieszkańców, nowych przepisów regulujących sortowanie odpadów) na ilość i rodzaj produkowanych odpadów.
+    \end{enumerate}
 
     \item Metoda heurystyczna
     
-    Analiza problemów i wyzwań związanych z korzystaniem z aplikacji Trashify i sortowaniem odpadów przez użytkowników.
+       
+    \begin{enumerate}[label=--]
+        \item Analiza problemów i wyzwań związanych z korzystaniem z aplikacji Trashify i sortowaniem odpadów przez użytkowników.
+        \item Odkrywanie nowych rozwiązań i podejść do tych problemów.
+        \item Badanie opinii użytkowników i na ich podstawie wprowadzanie ulepszeń w aplikacji.
+    \end{enumerate}
 
-    Odkrywanie nowych rozwiązań i podejść do tych problemów.
-    
-    Badanie opinii użytkowników i na ich podstawie wprowadzanie ulepszeń w aplikacji.
 \end{enumerate}
 
 \section{Ryzyko związane z realizacją projektu}
 
-{\Huge\textbf{Tymczasowe}}
 
 Technologiczne ryzyko - związane z wykorzystaniem nowych technologii, które mogą nie działać zgodnie z oczekiwaniami, bądź w trakcie projektowania i implementacji systemu, mogą pojawić się trudności techniczne.
-
-Ryzyko biznesowe - związane z opóźnieniami w harmonogramie, niskimi dochodami lub brakiem akceptacji produktu przez klientów, co może prowadzić do niepowodzenia projektu.
 
 Ryzyko projektowe - związane z niedostatecznymi planami, wyboru niewłaściwej metodyki lub zła interpretacją wymagań.
 
@@ -217,25 +223,26 @@ Ryzyko jakościowe - związane z niedostatecznymi testami, błędami w kodzie, k
 
 Ryzyko bezpieczeństwa - związane z atakami cybernetycznymi na system, które mogą prowadzić do utraty danych lub przestojów w działaniu systemu.
 
+\newpage
+
 {\let\clearpage\relax\chapter{Zadania planowane w ramach projektu}}
 
 \section{Zadania w projekcie}
-
 
 \begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
     \hline
     Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania & Osoby zaangażowane w realizację zadania \\
     \hline
     \multirow[t]{9}{\linewidth}{Cel 1: Przygotować modele uczenia maszynowego}
-    &\task{Zadanie 1: Zebrać dane kontekstowe}{Kacper Bylicki}{}{}{}
+    &\task{Zadanie 1: Zebranie danych kontekstowych}{1. Kacper Bylicki}{}{}{}
     \cline{2-3}
-    &\task{Zadanie 2: Przygotować dane treningowe}{Kacper Bylicki}{}{}{}
+    &\task{Zadanie 2: Przygotowanie danych treningowych}{1. Kacper Bylicki}{}{}{}
     \cline{2-3}
-    &\task{Zadanie 3: Dobrać algorytmy uczenia maszynowego}{Kacper Bylicki}{}{}{}
+    &\task{Zadanie 3: Dobranie algorytmów uczenia maszynowego}{1. Kacper Bylicki}{}{}{}
     \cline{2-3}
-    &\task{Zadanie 4: Zaimplementować algorytmy uczenia maszynowego}{Kacper Bylicki}{Jakub Barczewski}{}{}
+    &\task{Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego}{1. Kacper Bylicki}{2. Jakub Barczewski}{}{}
     \cline{2-3}
-    &\task{Zadanie 5: Przeprowadzić testy i poprawki}{Kacper Bylicki}{}{}{}
+    &\task{Zadanie 5: Przeprowadzenie testów i poprawek}{1. Kacper Bylicki}{}{}{}
     \hline
     \multicolumn{3}{|l|}{}\\
     \hline
@@ -247,16 +254,16 @@ Ryzyko bezpieczeństwa - związane z atakami cybernetycznymi na system, które m
     \hline
     Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania & Osoby zaangażowane w realizację zadania \\
     \hline
-    \multirow[t]{9}{\linewidth}{Cel 2: Przygotować aplikację serwerową sterującą algorytmami uczenia maszynowego}
-    &\task{Zadanie 1: Stworzyć diagram architektury aplikacji}{Jakub Barczewski}{Kacper Bylicki}{}{}
+    \multirow[t]{9}{\linewidth}{Cel 2: Przygotowanie aplikacji serwerowej sterującą algorytmami uczenia maszynowego}
+    &\task{Zadanie 1: Stworzenie diagramu architektury aplikacji}{1. Jakub Barczewski}{2. Kacper Bylicki}{}{}
     \cline{2-3}
-    &\task{Zadanie 2: Zaimplementować kanały komunikacji między aplikacją a algorytmami uczenia maszynowego}{Jakub Barczewski}{Kacper Bylicki}{}{}
+    &\task{Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją, a algorytmami uczenia maszynowego}{1. Jakub Barczewski}{2. Kacper Bylicki}{}{}
     \cline{2-3}
-    &\task{Zadanie 3: Zaimplementować kanały komunikacji między aplikacją a aplikacją mobilną}{Jakub Barczewski}{}{}{}
+    &\task{Zadanie 3: Zaimplementowanie kanały komunikacji między aplikacją, a aplikacją mobilną}{1. Jakub Barczewski}{}{}{}
     \cline{2-3}
-    &\task{Zadanie 4: Przeprowadzić testy i poprawki}{Jakub Barczewski}{Kacper Bylicki}{Marek Gerszendorf}{}
+    &\task{Zadanie 4: Przeprowadzenie testów i poprawek}{1. Jakub Barczewski}{2. Kacper Bylicki}{3. Marek Gerszendorf}{}
     \cline{2-3}
-    &\task{Zadanie 5: Dokonać optymalizacji aplikacji}{Jakub Barczewski}{}{}{}
+    &\task{Zadanie 5: Dokonanie optymalizacji aplikacji}{1. Jakub Barczewski}{}{}{}
     \hline
     \multicolumn{3}{|l|}{}\\
     \hline
@@ -268,16 +275,16 @@ Ryzyko bezpieczeństwa - związane z atakami cybernetycznymi na system, które m
     \hline
     Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania & Osoby zaangażowane w realizację zadania \\
     \hline
-    \multirow[t]{9}{\linewidth}{Cel 3: Przygotować aplikację mobilną}
-    &\task{Zadanie 1: Stworzyć diagram architektury aplikacji}{Marek Gerszendorf}{}{}{}
+    \multirow[t]{9}{\linewidth}{Cel 3: Przygotowanie aplikacji mobilnej}
+    &\task{Zadanie 1: Stworzenie diagramu architektury aplikacji}{1. Marek Gerszendorf}{}{}{}
     \cline{2-3}
-    &\task{Zadanie 2: Zaprojektować warstwę wizualną na bazie diagramu}{Marek Gerszendorf}{Kacper Bylicki}{Jakub Barczewski}{}
+    &\task{Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
     \cline{2-3}
-    &\task{Zadanie 3: Stworzyć prototyp aplikacji}{Marek Gerszendorf}{}{}{}
+    &\task{Zadanie 3: Stworzenie prototypu aplikacji}{1. Marek Gerszendorf}{}{}{}
     \cline{2-3}
-    &\task{Zadanie 4: Zaimplementować kanały komunikacji między aplikacją a aplikacją serwerową}{Marek Gerszendorf}{Kacper Bylicki}{Jakub Barczewski}{}
+    &\task{Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją, a aplikacją serwerową}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
     \cline{2-3}
-    &\task{Zadanie 5: Przeprowadzić testy i poprawki}{Marek Gerszendorf}{}{}{}
+    &\task{Zadanie 5: Przeprowadznie testów i poprawek}{1. Marek Gerszendorf}{}{}{}
     \hline
     \multicolumn{3}{|l|}{}\\
     \hline
