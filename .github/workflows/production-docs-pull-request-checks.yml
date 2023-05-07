@@ -29,5 +29,10 @@ jobs:
           run: |
             cd docs/eng-degree-docs/work-schedule
             pdflatex  work-schedule.tex
-
+              - name: Work Schedule compilation check
+        uses: xu-cheng/texlive-action/full@v1
+        with:
+          run: |
+            cd docs/eng-degree-docs/fiszka
+            pdflatex  fiszka.tex
 
