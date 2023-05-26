@@ -131,31 +131,34 @@ Podsumowując, projekt \topic jest uzasadniony ze względu na aktualność i wa�
 
 \subsection{Problem badawczy}
 
-\textbf{Poprawić styl}
-\textbf{Dodać enumerate}
-
-Algorytmy uczenia maszynowego najlepiej nadające się do rozpoznawania pojemników na odpady na podstawie zdjęć i cechy obrazów odpowiadające za skuteczność procesu rozpoznawania.
+Problemem badawczym jest określenie algorytmów uczenia maszynowego najlepiej nadających się do rozpoznawania pojemników na odpady na podstawie zdjęć oraz określenie cech obrazów odpowiadających za skuteczność modelu.
 
 W ramach tego problemu badawczego można skoncentrować się na kilku podproblemach, m.in.:
-
-    -- analiza dostępnych zbiorów danych: znalezienie zbiorów danych do treningu i testowania modelu rozpoznawania pojemników na odpady, określenie jak są one zdefiniowane oraz jakie informacje zawierają;
-
-    -- wybór odpowiednich algorytmów uczenia maszynowego: na podstawie analizy zbiorów danych, określenie algorytmów uczenia maszynowego, które najlepiej będą się nadawały do rozpoznawania pojemników na odpady na podstawie zdjęć;
-
-    -- przygotowanie zbiorów danych: zastosowanie technik przetwarzania obrazów, aby zbiory danych były odpowiednio przygotowane do treningu modelu oraz potencjalne użycie technik augmentacji danych;
-
-    -- implementacja i trening modelu: wyłonienie najlepszej techniki trenowania modelu bazowanego na obrazach;
-
-    -- ocena skuteczności modelu: określenie metryk, które pozwolą dokładnie ocenić skuteczność modelu w rozpoznawaniu pojemników na odpady;
-
-    -- analiza cech obrazów: na podstawie analizy modelu, zlokalizowanie cech obrazów odpowiadających za skuteczność procesu rozpoznawania pojemników na odpady;
+\begin{enumerate}[label=--]
+    \item analiza dostępnych zbiorów danych: 
+    \begin{enumerate}[label=--]
+        \item znalezienie zbiorów danych do treningu i testowania modelu rozpoznawania pojemników na odpady;
+        \item określenie jak są one zdefiniowane oraz jakie informacje zawierają. 
+    \end{enumerate}
+    \item wybór odpowiednich algorytmów uczenia maszynowego: 
+    \begin{enumerate}[label=--]
+        \item określenie algorytmów uczenia maszynowego, które najlepiej nadają się do rozpoznawania pojemników na odpady na podstawie zdjęć.
+    \end{enumerate}
+    \item przygotowanie zbiorów danych:
+    \begin{enumerate}[label=--]
+        \item zastosowanie technik przetwarzania obrazów;
+        \item potencjalne użycie technik augmentacji danych.
+    \end{enumerate}
+    \item implementacja i trening modelu: wyłonienie najlepszej techniki trenowania modelu bazowanego na obrazach;
+    \item ocena skuteczności modelu: określenie metryk, które pozwolą dokładnie ocenić skuteczność modelu w rozpoznawaniu pojemników na odpady;
+    \item analiza cech obrazów: na podstawie analizy modelu, zlokalizowanie cech obrazów odpowiadających za skuteczność procesu rozpoznawania pojemników na odpady;
+\end{enumerate}
 
 \subsection{Cel główny i cele szczegółowe projektu}
 
 Celem nadrzędnym jest stworzenie aplikacji mobilnej, która będzie pomagać użytkownikom w identyfikacji oraz lokalizowaniu pojemników na odpady danego typu. Aplikacja ta będzie miała na celu wspomaganie procesu utylizacji odpadów w odpowiedzialny i racjonalny sposób poprzez ułatwienie segregacji odpadów oraz zapobieganie ich niewłaściwemu składowaniu.
 
 Cele podrzędne:
-
 \begin{enumerate}[label=--]
     \item analiza dostępnych zbiorów danych: analiza zbiorów danych dostępnych w Internecie, które mogą posłużyć do treningu i testowania modelu rozpoznawania pojemników na odpady;
     \item wybór odpowiednich algorytmów uczenia maszynowego: wybór algorytmów uczenia maszynowego, które będą najlepiej nadawały się do rozpoznawania pojemników na odpady na podstawie zdjęć;
@@ -177,40 +180,30 @@ Cele podrzędne:
 \end{enumerate}
 
 \subsection{Metody i techniki badawcze}
-
 \begin{enumerate}
     \item Metoda analizy i konstrukcji logicznej:
-    
     \begin{enumerate}[label=--]
         \item analiza składników systemu informacyjnego Trashify na składniki cząstkowe (np. interfejs użytkownika, algorytmy uczenia maszynowego, baza danych itp.);
         \item indywidualna analiza każdego z tych składników,
         synteza wyników analizy w celu stworzenia spójnego i logicznego systemu informacyjnego.
     \end{enumerate}
-
     \item Metoda statystyczna:
-    
     \begin{enumerate}[label=--]
         \item badanie preferencji użytkowników w zakresie korzystania z aplikacji mobilnej Trashify na ograniczonej próbie;
         \item pozyskanie informacji o średniej ilości odpadów segregowanych przez użytkowników korzystających z aplikacji;
         \item analiza zależności pomiędzy poszczególnymi cechami użytkowników a ich zachowaniem w kontekście segregacji odpadów.
     \end{enumerate}
-
     \item Metoda symulacji komputerowej:
-    
     \begin{enumerate}[label=--]
         \item wykorzystanie algorytmów uczenia maszynowego do stworzenia modelu rozpoznającego typ pojemnika na odpady;
         \item przeprowadzenie symulacji na tym modelu, aby zbadać wpływ różnych czynników trafność jego predykcji (np. rozdzielczość zdjęcia, kąt pod jakim zostało ono wykonane, oświetlenie itp.).
     \end{enumerate}
-
     \item Metoda heurystyczna:
-    
-       
     \begin{enumerate}[label=--]
         \item analiza problemów i wyzwań związanych z korzystaniem z aplikacji Trashify i sortowaniem odpadów przez użytkowników;
         \item odkrywanie nowych rozwiązań i podejść do tych problemów;
         \item badanie opinii użytkowników i na ich podstawie wprowadzanie ulepszeń w aplikacji.
     \end{enumerate}
-
 \end{enumerate}
 
 \section{Ryzyko związane z realizacją projektu}
@@ -222,12 +215,9 @@ Cele podrzędne:
     \item Ryzyko bezpieczeństwa -- związane z atakami cybernetycznymi na system, które mogą prowadzić do utraty danych lub przestojów w działaniu systemu.
 \end{enumerate}
 
-\newpage
-
 {\let\clearpage\relax\chapter{Zadania planowane w ramach projektu}}
 
 \section{Zadania w projekcie}
-
 
 \begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
     \hline
@@ -244,11 +234,7 @@ Cele podrzędne:
     \cline{2-3}
     &\task{Zadanie 5: Przeprowadzenie testów i poprawek}{1. Kacper Bylicki}{}{}{}
     \hline
-    \multicolumn{3}{|l|}{}\\
-    \hline
 \end{longtable}
-
-\newpage
 
 \begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
     \hline
