@@ -71,10 +71,9 @@ resource "azurerm_linux_web_app" "application" {
       docker_image     = "${azurerm_container_registry.container-registry.name}.azurecr.io/${var.application_name}/${var.application_name}"
       docker_image_tag = "latest"
     }
-    always_on       = false
-    ftps_state      = "FtpsOnly"
-    http20Enabled   = true
-    http20ProxyFlag = 1
+    always_on     = false
+    ftps_state    = "FtpsOnly"
+    http2_enabled = true
   }
 
   identity {
