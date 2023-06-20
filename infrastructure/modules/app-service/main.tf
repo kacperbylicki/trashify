@@ -71,8 +71,9 @@ resource "azurerm_linux_web_app" "application" {
       docker_image     = "${azurerm_container_registry.container-registry.name}.azurecr.io/${var.application_name}/${var.application_name}"
       docker_image_tag = "latest"
     }
-    always_on  = false
-    ftps_state = "FtpsOnly"
+    always_on     = false
+    ftps_state    = "FtpsOnly"
+    http2_enabled = true
   }
 
   identity {
@@ -95,7 +96,7 @@ resource "azurerm_linux_web_app" "application" {
     "STORAGE_ACCOUNT_NAME"  = var.azure_storage_account_name
     "STORAGE_BLOB_ENDPOINT" = var.azure_storage_blob_endpoint
     "STORAGE_ACCOUNT_KEY"   = var.azure_storage_account_key
-    
+
     "DB_NAME"                     = var.azure_cosmosdb_mongodb_database
     "DB_URI"                      = var.azure_cosmosdb_mongodb_uri
     "DB_ACCOUNTS_COLLECTION_NAME" = var.azure_cosmosdb_mongodb_database_accounts_collection
