@@ -72,7 +72,7 @@ resource "azurerm_linux_web_app" "application" {
       docker_image_tag = "latest"
     }
     always_on     = false
-    ftps_state    = "FtpsOnly"
+    ftps_state    = "Disabled"
     http2_enabled = true
   }
 
@@ -97,9 +97,20 @@ resource "azurerm_linux_web_app" "application" {
     "STORAGE_BLOB_ENDPOINT" = var.azure_storage_blob_endpoint
     "STORAGE_ACCOUNT_KEY"   = var.azure_storage_account_key
 
-    "DB_NAME"                     = var.azure_cosmosdb_mongodb_database
-    "DB_URI"                      = var.azure_cosmosdb_mongodb_uri
-    "DB_ACCOUNTS_COLLECTION_NAME" = var.azure_cosmosdb_mongodb_database_accounts_collection
+    "MONGODB_ACCOUNTS_DATABASE" = var.azure_cosmosdb_mongodb_accounts_database
+    "MONGODB_ACCOUNTS_URI"      = var.azure_cosmosdb_mongodb_accounts_uri
+
+    "JWT_ALGORITHM"            = var.jwt_algorithm
+    "JWT_ACCESS_TOKEN_SECRET"  = var.jwt_access_token_secret
+    "JWT_ACCESS_TOKEN_TTL"     = var.jwt_access_token_ttl
+    "JWT_REFRESH_TOKEN_SECRET" = var.jwt_refresh_token_secret
+    "JWT_REFRESH_TOKEN_TTL"    = var.jwt_refresh_token_ttl
+
+    "API_GATEWAY_HOST" = var.api_gateway_host
+    "API_GATEWAY_PORT" = var.port
+
+    "ACCOUNTS_SERVICE_HOST" = var.accounts_service_host
+    "ACCOUNTS_SERVICE_PORT" = var.port
   }
 }
 
