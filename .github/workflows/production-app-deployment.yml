@@ -38,6 +38,9 @@ jobs:
         push: true
         tags: crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify/backend:${{ github.sha }}
         file: ./apps/backend/Dockerfile
+      env:
+        API_GATEWAY_HOST: ${{ secrets.API_GATEWAY_HOST }}
+        ACCOUNTS_SERVICE_HOST: ${{ secrets.ACCOUNTS_SERVICE_HOST }}
 
   deploy:
     name: "deploy"

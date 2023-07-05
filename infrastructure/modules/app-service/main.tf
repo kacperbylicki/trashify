@@ -106,10 +106,8 @@ resource "azurerm_linux_web_app" "application" {
     "JWT_REFRESH_TOKEN_SECRET" = var.jwt_refresh_token_secret
     "JWT_REFRESH_TOKEN_TTL"    = var.jwt_refresh_token_ttl
 
-    "API_GATEWAY_HOST" = var.api_gateway_host
     "API_GATEWAY_PORT" = var.port
 
-    "ACCOUNTS_SERVICE_HOST" = var.accounts_service_host
     "ACCOUNTS_SERVICE_PORT" = var.port
   }
 }
