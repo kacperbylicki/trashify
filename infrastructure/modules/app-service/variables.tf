@@ -52,6 +52,7 @@ variable "azure_cosmosdb_mongodb_accounts_database" {
 variable "azure_cosmosdb_mongodb_accounts_uri" {
   type        = string
   description = "The Cosmos DB with MongoDB API database URI"
+  default     = ""
 }
 
 variable "jwt_algorithm" {
@@ -63,6 +64,7 @@ variable "jwt_algorithm" {
 variable "jwt_access_token_secret" {
   type        = string
   description = "The secret used to sign the JWT access token"
+  default     = ""
 }
 
 variable "jwt_access_token_ttl" {
@@ -74,6 +76,7 @@ variable "jwt_access_token_ttl" {
 variable "jwt_refresh_token_secret" {
   type        = string
   description = "The secret used to sign the JWT refresh token"
+  default     = ""
 }
 
 variable "jwt_refresh_token_ttl" {
