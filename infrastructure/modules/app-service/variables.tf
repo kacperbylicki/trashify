@@ -91,9 +91,11 @@ variable "port" {
 variable "api_gateway_host" {
   type        = string
   description = "The host of the API Gateway"
+  default     = ""
 }
 
 variable "accounts_service_host" {
   type        = string
   description = "The host of the Accounts Service"
+  default     = ""
 }
