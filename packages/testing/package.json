@@ -1,0 +1,21 @@
+{
+    "name": "@trashify/testing",
+    "version": "0.0.0",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc"
+    },
+    "devDependencies": {
+        "@trashify/tsconfig": "*"
+    },
+    "dependencies": {
+        "@nestjs/common": "^9.4.0",
+        "@nestjs/mongoose": "^9.2.2",
+        "mongodb-memory-server": "^8.12.2"
+    },
+    "peerDependencies": {
+        "@nestjs/common": ">= 9.4.0",
+        "@nestjs/mongoose": ">= 9.2.2",
+        "mongodb-memory-server": ">= 8.12.2"
+    }
+}

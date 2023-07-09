@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Backend",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "noEmit": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "sourceMap": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
