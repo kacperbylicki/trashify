@@ -1,9 +1,0 @@
-{
-  "extends": "@trashify/tsconfig/packages.json",
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "dist"
-  },
-  "include": ["src"],
-  "exclude": ["dist"]
-}
