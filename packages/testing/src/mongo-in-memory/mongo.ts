@@ -3,7 +3,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import { MongooseModule, MongooseModuleOptions } from '@nestjs/mongoose';
 
 export class MongooseTestModule {
-  private mongod: MongoMemoryServer | undefined;
+  private mongod?: MongoMemoryServer;
 
   public forRoot(options: MongooseModuleOptions = {}): DynamicModule {
     return MongooseModule.forRootAsync({
