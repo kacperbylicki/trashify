@@ -8,6 +8,7 @@ node_modules
 *.log
 *.synctex.gz
 *.pdf
+*.toc
 
 # testing
 coverage
@@ -50,6 +51,7 @@ logs
 *.log
 yarn-debug.log*
 yarn-error.log*
+.yarn
 
 # terraform
 .terraform

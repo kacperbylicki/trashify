@@ -1,0 +1,288 @@
+\documentclass[12pt,twoside]{book}
+\usepackage[
+    a4paper, 
+    total={6in, 8in}, 
+    top=2cm,
+    left=3cm,
+    right=3cm,
+    bottom=1.25cm,
+    headheight=1.5cm,
+    includeheadfoot
+]{geometry}
+\usepackage{ragged2e}
+\usepackage[T1]{polski}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{mathptmx}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage{import}
+\usepackage{titlesec}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{enumitem}
+
+\import{../}{commands.tex}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead[C]{\uniimage}
+    \fancyfoot[LE,RO]{\thepage}
+}
+
+\renewcommand\thesection{\Alph{chapter}\arabic{section}}
+
+\linespread{1.5}
+
+\begin{document}
+
+\titleformat
+    {\chapter} %/{〈command 〉}
+    [block] %/[〈shape〉]
+    {\bfseries\large} %/ {〈format〉}
+    {} %/ {〈label 〉}
+    {0ex} %/ {〈sep〉}
+    {
+        \centering
+    } %/ {〈before-code〉}
+    {
+        \vspace{0ex}%
+    } %/ {〈after-code〉}
+
+\titleformat{\section}[hang]{
+    \normalfont
+    \bfseries
+}{\thesection.}{0.5em}{}
+
+\titleformat{\subsection}[hang]{
+    \normalfont
+    \bfseries
+}{\thesubsection.}{0.5em}{}
+
+\titleformat{\chapter}[hang]
+  {
+    \normalfont
+    \bfseries
+    \large
+    \centering
+    \MakeUppercase
+}{}{10pt}{}
+
+\titlespacing{\chapter}{5pt}{20pt}{20pt}[5pt]
+
+{{\chapter
+    {\MakeUppercase{\underline{\LARGE{Fiszka projektu dyplomowego}}}}
+}}
+
+\noindent
+\textbf{\large{Organizator}}
+\bigskip
+
+\noindent
+\begin{tabular}{ |p{5cm}|p{9cm}|}
+    \hline
+    Nazwa instytucji & 
+        \textbf{\MakeUppercase{Uniwersytet WSB Merito Poznań}} \phantom{text} Wydział Finansów i Bankowości
+     \\
+    \hline
+    Adres & ul. Powstańców Wielkopolskich 5, 61-895 Poznań \\
+    \hline
+\end{tabular}
+
+{\let\clearpage\relax
+    \chapter{\MakeUppercase{Dane partnerów}}
+}
+
+\section{Dane Promotora}
+
+\begin{tabular}{ |p{5cm}|p{9cm}|}
+    \hline
+    Imię i nazwisko & Izabela Janicka-Lipska \\
+    \hline
+    Stopień / Tytuł naukowy & dr inż \\
+    \hline
+    Data i podpis &  \\ \hline
+\end{tabular}
+
+
+\pagestyle{plain}
+
+\section{Dane członków zespołu projektu}
+
+\membersTable
+
+{\let\clearpage\relax
+    \chapter{Założenia projektu}
+    }
+
+\section{Opis projektu}
+
+\subsection{Uzasadnienie wyboru tematu}
+
+Problem utylizacji odpadów stał się w ostatnich latach jednym z największych wyzwań dla społeczeństwa i środowiska naturalnego. Śmieci są produkowane w ogromnych ilościach, a nieprawidłowe postępowanie z nimi prowadzi do skażenia powietrza, wody i gleby. W związku z tym, istnieje potrzeba opracowania rozwiązań, które ułatwią zarządzanie odpadami w sposób bardziej skuteczny i zrównoważony.
+
+Dzięki rozwojowi technologii uczenia maszynowego, pojawiła się możliwość stworzenia aplikacji mobilnej, która rozpoznawać będzie pojemniki na odpady na podstawie zdjęć oraz oznaczać je na mapie. Ułatwi ona lokalizowanie pojemników na dany typ odpadów oraz proces właściwego utylizowania śmieci dla użytkowników. Taka aplikacja może również zwiększyć świadomość społeczną w zakresie utylizacji odpadów i przyczynić się do zmniejszenia ilości odpadów zalegających na składowiskach.
+
+
+Temat ten jest aktualny i ważny, a jednocześnie daje wiele możliwości na zastosowanie różnych technologii i algorytmów uczenia maszynowego. Przy realizacji projektu można wykorzystać m.in. sieci neuronowe, algorytmy uczenia głębokiego, przetwarzanie obrazów, uczenie maszynowe w chmurze oraz usługi geolokalizacyjne.
+
+Podsumowując, projekt \topic jest uzasadniony ze względu na aktualność i ważność tematu, możliwość wykorzystania najnowszych technologii oraz potencjalne korzyści dla społeczeństwa i środowiska naturalnego.
+
+\subsection{Problem badawczy}
+
+Problemem badawczym jest określenie algorytmów uczenia maszynowego najlepiej nadających się do rozpoznawania pojemników na odpady na podstawie zdjęć oraz określenie cech obrazów odpowiadających za skuteczność modelu.
+
+W ramach tego problemu badawczego można skoncentrować się na kilku podproblemach, m.in.:
+\begin{enumerate}[label=--]
+    \item analiza dostępnych zbiorów danych: 
+    \begin{enumerate}[label=--]
+        \item znalezienie zbiorów danych do treningu i testowania modelu rozpoznawania pojemników na odpady;
+        \item określenie jak są one zdefiniowane oraz jakie informacje zawierają. 
+    \end{enumerate}
+    \item wybór odpowiednich algorytmów uczenia maszynowego: 
+    \begin{enumerate}[label=--]
+        \item określenie algorytmów uczenia maszynowego, które najlepiej nadają się do rozpoznawania pojemników na odpady na podstawie zdjęć.
+    \end{enumerate}
+    \item przygotowanie zbiorów danych:
+    \begin{enumerate}[label=--]
+        \item zastosowanie technik przetwarzania obrazów;
+        \item potencjalne użycie technik augmentacji danych.
+    \end{enumerate}
+    \item implementacja i trening modelu: wyłonienie najlepszej techniki trenowania modelu bazowanego na obrazach;
+    \item ocena skuteczności modelu: określenie metryk, które pozwolą dokładnie ocenić skuteczność modelu w rozpoznawaniu pojemników na odpady;
+    \item analiza cech obrazów: na podstawie analizy modelu, zlokalizowanie cech obrazów odpowiadających za skuteczność procesu rozpoznawania pojemników na odpady;
+\end{enumerate}
+
+\subsection{Cel główny i cele szczegółowe projektu}
+
+Celem nadrzędnym jest stworzenie aplikacji mobilnej, która będzie pomagać użytkownikom w identyfikacji oraz lokalizowaniu pojemników na odpady danego typu. Aplikacja ta będzie miała na celu wspomaganie procesu utylizacji odpadów w odpowiedzialny i racjonalny sposób poprzez ułatwienie segregacji odpadów oraz zapobieganie ich niewłaściwemu składowaniu.
+
+Cele podrzędne:
+\begin{enumerate}[label=--]
+    \item analiza dostępnych zbiorów danych: analiza zbiorów danych dostępnych w Internecie, które mogą posłużyć do treningu i testowania modelu rozpoznawania pojemników na odpady;
+    \item wybór odpowiednich algorytmów uczenia maszynowego: wybór algorytmów uczenia maszynowego, które będą najlepiej nadawały się do rozpoznawania pojemników na odpady na podstawie zdjęć;
+    \item przygotowanie zbiorów danych: przygotowanie zbiorów danych do treningu modelu rozpoznawania pojemników na odpady;
+    \item implementacja i trening modelu: implementacja i trening modelu rozpoznawania pojemników na odpady;
+    \item ocena skuteczności modelu: ocena skuteczności modelu rozpoznawania pojemników na odpady;
+    \item analiza cech obrazów: analiza cech obrazów odpowiadających za skuteczność procesu rozpoznawania pojemników na odpady;
+    \item określenie, które cechy obrazów mają największy wpływ na skuteczność procesu rozpoznawania i jak można je wykorzystać do dalszej optymalizacji modelu.
+\end{enumerate}
+
+
+\subsection{Zakres podmiotowy, przedmiotowy, czasowy i przestrzenny}
+
+\begin{enumerate}[label=--]
+    \item Zakres podmiotowy projektu \topic  obejmuje badanie i opracowanie aplikacji mobilnej oraz algorytmów uczenia maszynowego, które umożliwią rozpoznawanie pojemników na odpady. Podmiotem badania jest zatem aplikacja mobilna Trashify oraz modele uczenia maszynowego, które będą umożliwiać rozpoznawanie pojemników na odpady.
+    \item Zakres przedmiotowy obejmuje badanie możliwości rozpoznawania różnych typów pojemników na odpady (np. pojemnik na papier, szkło, plastik, odpady organiczne itp.) oraz opracowanie algorytmów uczenia maszynowego, które umożliwią ich poprawną identyfikację. W ramach projektu będzie również opracowana aplikacja mobilna, która będzie integrować te algorytmy oraz udostępniać użytkownikom informacje o pojemnikach na odpady oraz umożliwiać im łatwe i szybkie ich zlokalizowanie.
+    \item Zakres czasowy projektu obejmuje okres od 01.04.2023 aż do 01.12.2023.
+    \item Zakres przestrzenny projektu obejmuje miejsce, w którym aplikacja Trashify będzie wykorzystywana, czyli przede wszystkim Polska. Projekt ogranicza się do konkretnego obszaru geograficznego, ponieważ algorytmy uczenia maszynowego, które zostaną opracowane w ramach projektu, będą skupiały się na pojemnikach na odpady spotykanych w Polsce. W ramach projektu nie będzie prowadzona analiza pojemników spotykanych w innych krajach.
+\end{enumerate}
+
+\subsection{Metody i techniki badawcze}
+\begin{enumerate}
+    \item Metoda analizy i konstrukcji logicznej:
+    \begin{enumerate}[label=--]
+        \item analiza składników systemu informacyjnego Trashify na składniki cząstkowe (np. interfejs użytkownika, algorytmy uczenia maszynowego, baza danych itp.);
+        \item indywidualna analiza każdego z tych składników,
+        synteza wyników analizy w celu stworzenia spójnego i logicznego systemu informacyjnego.
+    \end{enumerate}
+    \item Metoda statystyczna:
+    \begin{enumerate}[label=--]
+        \item badanie preferencji użytkowników w zakresie korzystania z aplikacji mobilnej Trashify na ograniczonej próbie;
+        \item pozyskanie informacji o średniej ilości odpadów segregowanych przez użytkowników korzystających z aplikacji;
+        \item analiza zależności pomiędzy poszczególnymi cechami użytkowników a ich zachowaniem w kontekście segregacji odpadów.
+    \end{enumerate}
+    \item Metoda symulacji komputerowej:
+    \begin{enumerate}[label=--]
+        \item wykorzystanie algorytmów uczenia maszynowego do stworzenia modelu rozpoznającego typ pojemnika na odpady;
+        \item przeprowadzenie symulacji na tym modelu, aby zbadać wpływ różnych czynników trafność jego predykcji (np. rozdzielczość zdjęcia, kąt pod jakim zostało ono wykonane, oświetlenie itp.).
+    \end{enumerate}
+    \item Metoda heurystyczna:
+    \begin{enumerate}[label=--]
+        \item analiza problemów i wyzwań związanych z korzystaniem z aplikacji Trashify i sortowaniem odpadów przez użytkowników;
+        \item odkrywanie nowych rozwiązań i podejść do tych problemów;
+        \item badanie opinii użytkowników i na ich podstawie wprowadzanie ulepszeń w aplikacji.
+    \end{enumerate}
+\end{enumerate}
+
+\section{Ryzyko związane z realizacją projektu}
+
+\begin{enumerate}[label=--]
+    \item Ryzyko technologiczne -- związane z wykorzystaniem nowych technologii, które mogą nie działać zgodnie z oczekiwaniami, bądź w trakcie projektowania i implementacji systemu, mogą pojawić się trudności techniczne.
+    \item Ryzyko projektowe -- związane z niedostatecznymi planami, wyboru niewłaściwej metodyki lub zła interpretacja wymagań.
+    \item Ryzyko jakościowe -- związane z niedostatecznymi testami, błędami w kodzie, które mogą prowadzić do awarii systemu, co może prowadzić do opóźnień w realizacji projektu.
+    \item Ryzyko bezpieczeństwa -- związane z atakami cybernetycznymi na system, które mogą prowadzić do utraty danych lub przestojów w działaniu systemu.
+\end{enumerate}
+
+{\let\clearpage\relax\chapter{Zadania planowane w ramach projektu}}
+
+\section{Zadania w projekcie}
+
+\begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
+    \hline
+    Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania & Osoby zaangażowane w realizację zadania \\
+    \hline
+    \multirow[t]{9}{\linewidth}{Cel 1: Przygotowanie modeli uczenia maszynowego}
+    &\task{Zadanie 1: Zebranie danych kontekstowych}{1. Kacper Bylicki}{}{}{}
+    \cline{2-3}
+    &\task{Zadanie 2: Przygotowanie danych treningowych}{1. Kacper Bylicki}{2. Jakub Barczewski}{3. Marek Gerszendorf}{}
+    \cline{2-3}
+    &\task{Zadanie 3: Dobranie algorytmów uczenia maszynowego}{1. Kacper Bylicki}{}{}{}
+    \cline{2-3}
+    &\task{Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego}{1. Kacper Bylicki}{2. Jakub Barczewski}{}{}
+    \cline{2-3}
+    &\task{Zadanie 5: Przeprowadzenie testów i poprawek}{1. Kacper Bylicki}{}{}{}
+    \hline
+\end{longtable}
+
+\begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
+    \hline
+    \multirow[t]{9}{\linewidth}{Cel 2: Przygotowanie aplikacji serwerowej sterującej algorytmami uczenia maszynowego}
+    &\task{Zadanie 1: Stworzenie diagramu architektury aplikacji}{1. Jakub Barczewski}{2. Kacper Bylicki}{}{}
+    \cline{2-3}
+    &\task{Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją, a algorytmami uczenia maszynowego}{1. Jakub Barczewski}{2. Kacper Bylicki}{}{}
+    \cline{2-3}
+    &\task{Zadanie 3: Zaimplementowanie kanałów komunikacji między aplikacją a aplikacją mobilną}{1. Jakub Barczewski}{}{}{}
+    \cline{2-3}
+    &\task{Zadanie 4: Przeprowadzenie testów i poprawek}{1. Jakub Barczewski}{2. Kacper Bylicki}{3. Marek Gerszendorf}{}
+    \cline{2-3}
+    &\task{Zadanie 5: Dokonanie optymalizacji aplikacji}{1. Jakub Barczewski}{}{}{}
+    \hline
+\end{longtable}
+
+\newpage
+
+\begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
+    \hline
+    \multirow[t]{9}{\linewidth}{Cel 3: Przygotowanie aplikacji mobilnej}
+    &\task{Zadanie 1: Stworzenie diagramu architektury aplikacji}{1. Marek Gerszendorf}{}{}{}
+    \cline{2-3}
+    &\task{Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
+    \cline{2-3}
+    &\task{Zadanie 3: Stworzenie prototypu aplikacji}{1. Marek Gerszendorf}{}{}{}
+    \cline{2-3}
+    &\task{Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją, a aplikacją serwerową}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
+    \cline{2-3}
+    &\task{Zadanie 5: Przeprowadzenie testów i poprawek}{1. Marek Gerszendorf}{}{}{}
+    \hline
+\end{longtable}
+
+\newpage
+
+\begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
+    \hline
+    \multirow[t]{9}{\linewidth}{Cel 4: Przygotowanie dokumentacji technicznej projektu}
+    &\task{Zadanie 1: Stworzenie diagramu architektury projektu}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
+    \cline{2-3}
+    &\task{Zadanie 2: Rozrysowanie wzorca relacji w bazie danych (diagram ERD)}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
+    \cline{2-3}
+    &\task{Zadanie 3: Przygotowanie diagramu komunikacji aplikacji serwerowej oraz mobilnej}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
+    \cline{2-3}
+    &\task{Zadanie 4: Przygotowanie diagramu sekwencji do procesów aplikacji}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
+    \cline{2-3}
+    &\task{Zadanie 5: Stworzenie instrukcji instalacyjnej oraz developerskiej}{1. Marek Gerszendorf}{2. Kacper Bylicki}{4. Jakub Barczewski}{}
+    \hline
+\end{longtable}
+
+\end{document}
