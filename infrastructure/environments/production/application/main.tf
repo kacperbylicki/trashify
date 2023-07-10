@@ -42,7 +42,7 @@ resource "azurerm_resource_group" "main" {
 module "api-gateway" {
   source           = "../../../modules/app-service"
   resource_group   = azurerm_resource_group.main.name
-  application_name = "trashify-api-gateway"
+  application_name = "${var.application_name}-api-gateway"
   environment      = var.environment
   location         = var.location
 
@@ -61,7 +61,7 @@ module "api-gateway" {
 module "accounts-service" {
   source           = "../../../modules/app-service"
   resource_group   = azurerm_resource_group.main.name
-  application_name = "trashify-accounts-service"
+  application_name = "${var.application_name}-accounts-service"
   environment      = var.environment
   location         = var.location
 

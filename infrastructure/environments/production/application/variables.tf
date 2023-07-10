@@ -24,3 +24,9 @@ variable "location" {
   description = "The Azure region where all resources in this example should be created"
   default     = "westeurope"
 }
+
+variable "application_name" {
+  type        = string
+  description = "The name of the application"
+  default     = "trashify"
+}
