@@ -15,6 +15,7 @@ defaults:
 jobs:
   pull-request-checks:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
     - name: Checkout code
@@ -25,10 +26,13 @@ jobs:
       with:
         node-version: '18.x'
         cache: 'yarn'
-        cache-dependency-path: ./yarn.lock
+        cache-dependency-path: yarn.lock
 
     - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      run: yarn install --silent --frozen-lockfile
+
+    - name: Build packages
+      run: yarn turbo run build
 
     - name: Run tests
-      run: yarn test:ci
+      run: yarn turbo run --scope=@trashify/accounts-service test:ci
