@@ -1,0 +1,30 @@
+{
+  "name": "@trashify/transport",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "proto:mailing": "protoc --plugin=../../node_modules/.bin/protoc-gen-ts_proto -I=./proto --ts_proto_out=src/ ./proto/mailing.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb --experimental_allow_proto3_optional",
+    "proto:all": "npm run proto:mailing"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@grpc/grpc-js": "^1.8.12",
+    "@grpc/proto-loader": "^0.7.5",
+    "@trashify/tsconfig": "*",
+    "@types/express": "^4.17.17",
+    "ts-proto": "^1.152.1"
+  },
+  "dependencies": {
+    "@nestjs/microservices": "^9.3.9",
+    "dayjs": "^1.11.7",
+    "express": "^4.18.2"
+  },
+  "peerDependencies": {
+    "@nestjs/microservices": ">=9.3.9",
+    "dayjs": ">=1.11.7"
+  }
+}
