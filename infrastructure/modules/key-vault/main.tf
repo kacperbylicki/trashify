@@ -52,3 +52,18 @@ resource "azurerm_key_vault_secret" "cosmosdb_mongodb_uri" {
   depends_on = [azurerm_key_vault_access_policy.client]
 }
 
+resource "azurerm_key_vault_secret" "jwt_access_token_secret" {
+  name         = "jwt-access-token-secret"
+  value        = var.jwt_access_token_secret
+  key_vault_id = azurerm_key_vault.application.id
+
+  depends_on = [azurerm_key_vault_access_policy.client]
+}
+
+resource "azurerm_key_vault_secret" "jwt_refresh_token_secret" {
+  name         = "jwt-refresh-token-secret"
+  value        = var.jwt_refresh_token_secret
+  key_vault_id = azurerm_key_vault.application.id
+
+  depends_on = [azurerm_key_vault_access_policy.client]
+}
