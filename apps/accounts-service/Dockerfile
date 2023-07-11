@@ -8,7 +8,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN yarn global add turbo
 COPY . .
-RUN turbo prune --scope=@trashify/account-service --docker
+RUN turbo prune --scope=@trashify/accounts-service --docker
 
 # Installer stage
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS installer
@@ -33,7 +33,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY --from=installer /app/ .
 COPY --from=builder /app/out/full/ .
-RUN yarn turbo run build --scope=@trashify/account-service --include-dependencies --no-deps
+RUN yarn turbo run build --scope=@trashify/accounts-service --include-dependencies --no-deps
 
 # Development stage
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS development
