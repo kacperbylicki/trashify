@@ -1,21 +1,28 @@
-name: 'production-app-infrastructure-destroy'
+name: 'production-infrastructure-deployment'
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "infrastructure/environments/production/application/**"
+      - "infrastructure/modules/**"
+      - ".github/workflows/production-infrastructure-deployment.yml"
   
 permissions:
   contents: read
 
 jobs:
-  destroy:
-    name: 'destroy'
+  build-and-deploy:
+    name: 'build-and-deploy'
     env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       TF_VAR_terraform_storage_account: ${{ secrets.TERRAFORM_AZURE_STORAGE_ACCOUNT }}
-    runs-on: ubuntu-latest        
+    runs-on: ubuntu-latest
     environment: production
 
     defaults:
@@ -33,13 +40,18 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          
+
       # Initializes the Terraform workspace and downloads the required providers and modules.
       - name: Terraform Init
         id: init
         run: terraform init
 
-      # Destroys Terraform created resources
-      - name: Terraform Destroy
-        id: destroy
-        run: terraform destroy -auto-approve
+      # Creates an execution plan of the changes to be made in the infrastructure.
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -input=false
+
+      # Applies the execution plan and makes the necessary changes to the infrastructure, while auto-approving the changes without requiring any manual intervention.
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve -input=false

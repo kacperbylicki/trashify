@@ -1,16 +1,16 @@
-name: 'production-backend-pull-request-checks'
+name: 'production-accounts-microservice-pull-request-checks'
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - "apps/backend/**"
-      - ".github/workflows/production-backend-pull-request-checks.yml"
+      - "apps/accounts-service/**"
+      - ".github/workflows/production-accounts-microservice-pull-request-checks.yml"
 
 defaults:
   run:
-    working-directory: ./apps/backend
+    working-directory: ./apps/accounts-service
 
 jobs:
   pull-request-checks:

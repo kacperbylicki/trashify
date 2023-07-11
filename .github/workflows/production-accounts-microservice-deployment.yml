@@ -1,12 +1,12 @@
-name: 'production-app-deployment'
+name: 'production-accounts-microservice-deployment'
 
 on:
   push:
     branches:
       - main
     paths:
-      - "apps/backend/**"
-      - ".github/workflows/production-app-deployment.yml"
+      - "apps/accounts-service/**"
+      - ".github/workflows/production-accounts-microservice-deployment.yml"
   workflow_dispatch:
 
 jobs:
@@ -36,8 +36,8 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify/backend:${{ github.sha }}
-        file: ./apps/backend/Dockerfile
+        tags: crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify/accounts-service:${{ github.sha }}
+        file: ./apps/accounts-service/Dockerfile
 
   deploy:
     name: "deploy"
@@ -55,4 +55,4 @@ jobs:
         app-name: 'app-trashify-production'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_bc193a63759943578bb8b3d147688faf }}
-        images: 'crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify/backend:${{ github.sha }}'
+        images: 'crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify/accounts-service:${{ github.sha }}'
