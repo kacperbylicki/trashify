@@ -20,7 +20,7 @@ message Email {
     string senderAddress = 3;
     bool disableUserEngagementTracking = 4;
     repeated EmailAddress replyTo = 5;
-    repeated EmailAttachments attachments = 6;
+    repeated EmailAttachment attachments = 6;
     map<string, string> headers = 7;
 }
 
@@ -41,7 +41,7 @@ message EmailAddress {
     optional string displayName = 2;
 }
 
-message EmailAttachments {
+message EmailAttachment {
     string contentInBase64 = 1;
     string contentType = 2; 
     string name = 3;

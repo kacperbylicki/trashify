@@ -18,7 +18,7 @@ export interface Email {
   senderAddress: string;
   disableUserEngagementTracking: boolean;
   replyTo: EmailAddress[];
-  attachments: EmailAttachments[];
+  attachments: EmailAttachment[];
   headers: { [key: string]: string };
 }
 
@@ -44,7 +44,7 @@ export interface EmailAddress {
   displayName?: string | undefined;
 }
 
-export interface EmailAttachments {
+export interface EmailAttachment {
   contentInBase64: string;
   contentType: string;
   name: string;

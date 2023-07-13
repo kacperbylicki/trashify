@@ -6,7 +6,7 @@ import { Module } from '@nestjs/common';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ default: AppConfig }),
+    ConfigModule.forRoot({ default: AppConfig, templates: [AppConfig, AzureConfig] }),
     AzureIdentityProviderModule,
     AzureMailerModule.registerAsync({
       useFactory: () => {
