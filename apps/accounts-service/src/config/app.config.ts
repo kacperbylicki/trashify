@@ -10,7 +10,7 @@ export class AppConfig {
   @IsString()
   protoPath!: string;
 
-  @From('ACCOUNTS_SERVICE_PORT')
+  @From('PORT')
   @IsInt()
   port!: number;
 
