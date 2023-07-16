@@ -1,6 +1,6 @@
-import { AZURE_MAILER_MODULE_OPTIONS_TOKEN } from './configurable-azure-mailer.module';
-import { AzureIdentityProvider } from '../identity';
-import { AzureMailerModuleOptions, Poller } from './types';
+import { AZURE_MAILER_MODULE_OPTIONS_TOKEN } from '../configurable-azure-mailer.module';
+import { AzureIdentityProvider } from '../../identity';
+import { AzureMailerModuleOptions, Poller } from '../types';
 import {
   EmailClient,
   EmailMessage,
@@ -8,8 +8,8 @@ import {
   KnownEmailSendStatus,
 } from '@azure/communication-email';
 import { Inject, Injectable, Logger, Optional } from '@nestjs/common';
-import { PollerNotStartedException, PoolerNoResultException } from './exception';
-import { delay } from '../../common/util';
+import { PollerNoResultException, PollerNotStartedException } from '../exception';
+import { delay } from '../../../common/util';
 
 @Injectable()
 export class AzureMailerService {
@@ -42,7 +42,7 @@ export class AzureMailerService {
   }
 
   async sendEmail(msg: Omit<EmailMessage, 'senderAddress'>): Promise<void> {
-    const poller = await this.startEmailPooler({
+    const poller = await this.startEmailPoller({
       ...msg,
       senderAddress: this.options.defaultFromEmail,
     });
@@ -56,7 +56,7 @@ export class AzureMailerService {
     this.validateResult(result);
   }
 
-  private async startEmailPooler(msg: EmailMessage): Promise<Poller> {
+  private async startEmailPoller(msg: EmailMessage): Promise<Poller> {
     try {
       const poller = await this.emailClient.beginSend(msg);
       return poller;
@@ -69,7 +69,7 @@ export class AzureMailerService {
 
   private validateResult(result: EmailSendResponse | undefined): void {
     if (!result) {
-      throw new PoolerNoResultException();
+      throw new PollerNoResultException();
     }
     if (result.status === KnownEmailSendStatus.Succeeded) {
       this.logger.debug(`Successfully sent the email (operation id: ${result.id})`);
@@ -82,13 +82,13 @@ export class AzureMailerService {
   private async loopWhileNotDone(poller: Poller): Promise<void> {
     while (!poller.isDone()) {
       poller.poll();
-      await delay(this.options.poolerWaitTimeInMs);
+      await delay(this.options.pollerWaitTimeInMs);
     }
   }
 
   private checkAndThrowIfPollerNotStarted(poller: Poller): void {
     if (!poller.getOperationState().isStarted) {
-      throw new PollerNotStartedException('Poller did not start.');
+      throw new PollerNotStartedException();
     }
   }
 }

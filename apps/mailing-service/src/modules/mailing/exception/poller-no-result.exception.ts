@@ -1,6 +1,6 @@
-export class PoolerNoResultException extends Error {
+export class PollerNoResultException extends Error {
   constructor(
-    message = 'No result from pooler.\nPlease check the Azure logs for more information',
+    message = 'No result from poller.\nPlease check the Azure logs for more information',
   ) {
     super(message);
   }

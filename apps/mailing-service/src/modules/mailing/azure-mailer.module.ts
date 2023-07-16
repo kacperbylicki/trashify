@@ -1,5 +1,5 @@
 import { AzureMailerController } from './controllers';
-import { AzureMailerService } from './azure-mailer.service';
+import { AzureMailerService } from './services';
 import { ConfigurableAzureMailerModule } from './configurable-azure-mailer.module';
 import { Module } from '@nestjs/common';
 

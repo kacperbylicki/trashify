@@ -1,4 +1,4 @@
-import { AzureMailerService } from '../azure-mailer.service';
+import { AzureMailerService } from '../services/azure-mailer.service';
 import { GrpcMethod } from '@nestjs/microservices';
 import { Injectable } from '@nestjs/common';
 import {
