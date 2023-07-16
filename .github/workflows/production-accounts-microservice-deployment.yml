@@ -54,7 +54,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'app-trashify-production'
+        app-name: 'trashify-accounts-service-production'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_bc193a63759943578bb8b3d147688faf }}
         images: 'crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify/accounts-service:${{ github.sha }}'
