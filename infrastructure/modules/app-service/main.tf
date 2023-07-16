@@ -8,7 +8,7 @@ terraform {
 }
 
 resource "azurecaf_name" "container_registry" {
-  name          = var.application_name
+  name          = "trashify"
   resource_type = "azurerm_container_registry"
   suffixes      = [var.environment]
 }
@@ -22,7 +22,7 @@ resource "azurerm_container_registry" "container-registry" {
 
   tags = {
     "environment"      = var.environment
-    "application-name" = var.application_name
+    "application-name" = "trashify"
   }
 }
 
