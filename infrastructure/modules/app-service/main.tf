@@ -86,7 +86,8 @@ resource "azurerm_linux_web_app" "application" {
     "DOCKER_REGISTRY_SERVER_USERNAME"     = azurerm_container_registry.container-registry.admin_username
     "DOCKER_REGISTRY_SERVER_PASSWORD"     = azurerm_container_registry.container-registry.admin_password
     "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1500
-    "WEBSITES_PORT"                       = var.accounts_service_port
+    "PORT"                                = var.application_port
+    "WEBSITES_PORT"                       = var.application_port
     "ACCOUNTS_SERVICE_PORT"               = var.accounts_service_port
 
     # Monitoring with Azure Application Insights

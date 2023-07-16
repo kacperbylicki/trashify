@@ -61,6 +61,7 @@ module "accounts-service" {
   jwt_refresh_token_secret = "@Microsoft.KeyVault(SecretUri=${module.key-vault.vault_uri}secrets/jwt_refresh_token_secret)"
 
   accounts_service_host = module.accounts-service.application_url
+  application_port      = 50001
 }
 
 module "application-insights" {
