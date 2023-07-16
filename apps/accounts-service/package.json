@@ -1,5 +1,5 @@
 {
-  "name": "@trashify/account-service",
+  "name": "@trashify/accounts-service",
   "version": "0.0.0",
   "author": "Kacper Bylicki, Marek Gerszendorf & Jakub Barczewski",
   "private": true,
