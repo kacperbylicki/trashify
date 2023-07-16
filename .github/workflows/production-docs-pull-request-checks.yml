@@ -35,4 +35,3 @@ jobs:
           run: |
             cd docs/eng-degree-docs/fiszka
             pdflatex  fiszka.tex
-

@@ -8,7 +8,7 @@ terraform {
 }
 
 resource "azurecaf_name" "container_registry" {
-  name          = var.application_name
+  name          = "trashify"
   resource_type = "azurerm_container_registry"
   suffixes      = [var.environment]
 }
@@ -22,7 +22,7 @@ resource "azurerm_container_registry" "container-registry" {
 
   tags = {
     "environment"      = var.environment
-    "application-name" = var.application_name
+    "application-name" = "trashify"
   }
 }
 
@@ -68,11 +68,11 @@ resource "azurerm_linux_web_app" "application" {
 
   site_config {
     application_stack {
-      docker_image     = "${azurerm_container_registry.container-registry.name}.azurecr.io/${var.application_name}/${var.application_name}"
+      docker_image     = "${azurerm_container_registry.container-registry.name}.azurecr.io/${var.application_name}"
       docker_image_tag = "latest"
     }
     always_on     = false
-    ftps_state    = "FtpsOnly"
+    ftps_state    = "Disabled"
     http2_enabled = true
   }
 
@@ -86,8 +86,8 @@ resource "azurerm_linux_web_app" "application" {
     "DOCKER_REGISTRY_SERVER_USERNAME"     = azurerm_container_registry.container-registry.admin_username
     "DOCKER_REGISTRY_SERVER_PASSWORD"     = azurerm_container_registry.container-registry.admin_password
     "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1500
-    "WEBSITES_PORT"                       = var.port
-    "PORT"                                = var.port
+    "WEBSITES_PORT"                       = var.accounts_service_port
+    "ACCOUNTS_SERVICE_PORT"               = var.accounts_service_port
 
     # Monitoring with Azure Application Insights
     "APPINSIGHTS_INSTRUMENTATIONKEY" = var.azure_application_insights_instrumentation_key
@@ -97,9 +97,14 @@ resource "azurerm_linux_web_app" "application" {
     "STORAGE_BLOB_ENDPOINT" = var.azure_storage_blob_endpoint
     "STORAGE_ACCOUNT_KEY"   = var.azure_storage_account_key
 
-    "DB_NAME"                     = var.azure_cosmosdb_mongodb_database
-    "DB_URI"                      = var.azure_cosmosdb_mongodb_uri
-    "DB_ACCOUNTS_COLLECTION_NAME" = var.azure_cosmosdb_mongodb_database_accounts_collection
+    "MONGODB_ACCOUNTS_DATABASE" = var.azure_cosmosdb_mongodb_accounts_database
+    "MONGODB_ACCOUNTS_URI"      = var.azure_cosmosdb_mongodb_accounts_uri
+
+    "JWT_ALGORITHM"            = var.jwt_algorithm
+    "JWT_ACCESS_TOKEN_SECRET"  = var.jwt_access_token_secret
+    "JWT_ACCESS_TOKEN_TTL"     = var.jwt_access_token_ttl
+    "JWT_REFRESH_TOKEN_SECRET" = var.jwt_refresh_token_secret
+    "JWT_REFRESH_TOKEN_TTL"    = var.jwt_refresh_token_ttl
   }
 }
 

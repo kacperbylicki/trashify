@@ -12,25 +12,39 @@
         "dist/**"
       ]
     },
-    "test": {
+    "test:unit": {
+      "outputs": [
+        "coverage/**"
+      ],
       "dependsOn": [
         "^build"
       ],
+      "inputs": [
+        "test/unit/**/*.ts"
+      ],
+      "outputMode": "full"
+    },
+    "test:integration": {
       "outputs": [
         "coverage/**"
-      ]
-    },
-    "lint": {
-      "outputs": []
-    },
-    "dev": {
-      "cache": false
+      ],
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "test/integration/**/*.ts"
+      ],
+      "outputMode": "full"
     },
     "test:ci": {
       "cache": false
     },
-    "start:dev": {
-      "cache": true
+    "lint": {
+      "outputs": []
+    },
+    "lint:fix": {
+      "cache": false,
+      "outputs": []
     }
   }
 }

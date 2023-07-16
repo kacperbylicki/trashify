@@ -43,25 +43,56 @@ variable "azure_storage_blob_endpoint" {
   description = "The blob endpoint URL of the Azure Storage account"
 }
 
-variable "azure_cosmosdb_mongodb_database" {
+variable "azure_cosmosdb_mongodb_accounts_database" {
   type        = string
   description = "The Cosmos DB with MongoDB API database name"
-  default     = "Trashify"
-}
-
-variable "azure_cosmosdb_mongodb_uri" {
-  type        = string
-  description = "The Cosmos DB with MongoDB API database URI"
-}
-
-variable "azure_cosmosdb_mongodb_database_accounts_collection" {
-  type        = string
-  description = "The Cosmos DB with MongoDB API database accounts collection"
   default     = "Accounts"
 }
 
-variable "port" {
+variable "azure_cosmosdb_mongodb_accounts_uri" {
   type        = string
-  description = "Port of the application"
-  default     = "3000"
+  description = "The Cosmos DB with MongoDB API database URI"
+  default     = ""
+}
+
+variable "jwt_algorithm" {
+  type        = string
+  description = "The algorithm used to sign the JWT"
+  default     = "HS512"
+}
+
+variable "jwt_access_token_secret" {
+  type        = string
+  description = "The secret used to sign the JWT access token"
+  default     = ""
+}
+
+variable "jwt_access_token_ttl" {
+  type        = string
+  description = "The TTL of the JWT access token"
+  default     = "15m"
+}
+
+variable "jwt_refresh_token_secret" {
+  type        = string
+  description = "The secret used to sign the JWT refresh token"
+  default     = ""
+}
+
+variable "jwt_refresh_token_ttl" {
+  type        = string
+  description = "The TTL of the JWT refresh token"
+  default     = "7d"
+}
+
+variable "accounts_service_port" {
+  type        = string
+  description = "Port of the accounts service"
+  default     = "50000"
+}
+
+variable "accounts_service_host" {
+  type        = string
+  description = "The host of the Accounts Service"
+  default     = ""
 }
