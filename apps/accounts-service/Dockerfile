@@ -48,7 +48,7 @@ ENV PROTO_PATH=../../node_modules/@trashify/transport
 RUN apk update
 WORKDIR /app
 COPY --from=sourcer /app/ .
-WORKDIR /app/apps/account-service/
+WORKDIR /app/apps/accounts-service/
 ENTRYPOINT ["yarn", "start:dev"]
 
 # Production stage
@@ -62,7 +62,7 @@ ENV PROTO_PATH=node_modules/@trashify/transport
 RUN apk update
 WORKDIR /app
 COPY --chown=node:node --from=sourcer /app/node_modules/ ./node_modules/
-COPY --chown=node:node --from=sourcer /app/apps/account-service/dist/ ./dist/
+COPY --chown=node:node --from=sourcer /app/apps/accounts-service/dist/ ./dist/
 USER node
 CMD ["node", "dist/main.js"]
 EXPOSE $ACCOUNTS_SERVICE_PORT
