@@ -68,7 +68,7 @@ resource "azurerm_linux_web_app" "application" {
 
   site_config {
     application_stack {
-      docker_image     = "${azurerm_container_registry.container-registry.name}.azurecr.io/${var.application_name}/${var.application_name}"
+      docker_image     = "${azurerm_container_registry.container-registry.name}.azurecr.io/${var.application_name}"
       docker_image_tag = "latest"
     }
     always_on     = false
