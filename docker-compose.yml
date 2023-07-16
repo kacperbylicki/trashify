@@ -1,35 +1,43 @@
+version: '3.8'
+
+networks:
+  internal_services:
+  accounts:
+
 services:
-  mongodb:
-    container_name: trashify-mongodb
+  accounts-mongodb:
+    container_name: trashify-accounts-mongodb
     image: mongo:latest
     environment:
-      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+      MONGO_INITDB_DATABASE: ${MONGODB_ACCOUNTS_DATABASE}
     volumes:
-      - trashify-mongodb:/data/db
-    ports:
-      - ${MONGODB_PORT:-27017}:${MONGODB_PORT:-27017}
-    networks:
-      - trashify-network
+      - trashify-accounts-mongodb:/data/db
+    command: mongod --port ${MONGODB_ACCOUNTS_PORT}
     restart: unless-stopped
+    networks:
+      - accounts
+    ports: 
+      - ${MONGODB_ACCOUNTS_PORT}:${MONGODB_ACCOUNTS_PORT}
+    expose:
+      - ${MONGODB_ACCOUNTS_PORT}
 
-  backend:
-    container_name: trashify-backend
+
+  accounts-service:
+    container_name: trashify-accounts-service
     build:
       context: .
-      dockerfile: ./apps/backend/Dockerfile
+      dockerfile: ./apps/accounts-service/Dockerfile
       target: development
     volumes:
       - ./:/app
       - /app/node_modules
-    ports:
-      - ${PORT:-3000}:${PORT:-3000}
-      - ${DEBUGGER_PORT:-9229}:${DEBUGGER_PORT:-9229}
-    networks:
-      - trashify-network
+    env_file: .env
+    depends_on:
+      - accounts-mongodb
     restart: unless-stopped
+    networks:
+      - internal_services
+      - accounts
 
 volumes:
-  trashify-mongodb:
-
-networks:
-  trashify-network:
+  trashify-accounts-mongodb:

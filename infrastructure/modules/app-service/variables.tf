@@ -88,7 +88,7 @@ variable "jwt_refresh_token_ttl" {
 variable "accounts_service_port" {
   type        = string
   description = "Port of the accounts service"
-  default     = "50000"
+  default     = "50001"
 }
 
 variable "accounts_service_host" {
