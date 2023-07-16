@@ -39,10 +39,10 @@ resource "azurerm_resource_group" "main" {
   }
 }
 
-module "application" {
+module "accounts-service" {
   source           = "../../../modules/app-service"
   resource_group   = azurerm_resource_group.main.name
-  application_name = var.application_name
+  application_name = "${var.application_name}-accounts-service"
   environment      = var.environment
   location         = var.location
 
@@ -54,8 +54,13 @@ module "application" {
   azure_storage_blob_endpoint = module.storage-blob.azurerm_storage_blob_endpoint
   azure_storage_account_key   = "@Microsoft.KeyVault(SecretUri=${module.key-vault.vault_uri}secrets/storage-account-key)"
 
-  azure_cosmosdb_mongodb_database = module.cosmosdb-mongodb.azure_cosmosdb_mongodb_database
-  azure_cosmosdb_mongodb_uri      = "@Microsoft.KeyVault(SecretUri=${module.key-vault.vault_uri}secrets/cosmosdb-mongodb-uri)"
+  azure_cosmosdb_mongodb_accounts_database = module.cosmosdb-mongodb.azure_cosmosdb_mongodb_database
+  azure_cosmosdb_mongodb_accounts_uri      = "@Microsoft.KeyVault(SecretUri=${module.key-vault.vault_uri}secrets/cosmosdb-mongodb-uri)"
+
+  jwt_access_token_secret  = "@Microsoft.KeyVault(SecretUri=${module.key-vault.vault_uri}secrets/jwt_access_token_secret)"
+  jwt_refresh_token_secret = "@Microsoft.KeyVault(SecretUri=${module.key-vault.vault_uri}secrets/jwt_refresh_token_secret)"
+
+  accounts_service_host = module.accounts-service.application_url
 }
 
 module "application-insights" {
@@ -73,7 +78,9 @@ module "key-vault" {
   environment      = var.environment
   location         = var.location
 
-  cosmosdb_mongodb_uri = module.cosmosdb-mongodb.azure_cosmosdb_mongodb_uri
+  cosmosdb_mongodb_uri     = module.cosmosdb-mongodb.azure_cosmosdb_mongodb_uri
+  jwt_access_token_secret  = var.jwt_access_token_secret
+  jwt_refresh_token_secret = var.jwt_refresh_token_secret
 }
 
 module "cosmosdb-mongodb" {
