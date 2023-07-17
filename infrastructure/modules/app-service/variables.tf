@@ -85,6 +85,11 @@ variable "jwt_refresh_token_ttl" {
   default     = "7d"
 }
 
+variable "application_port" {
+  type        = string
+  description = "Port of the application"
+}
+
 variable "accounts_service_port" {
   type        = string
   description = "Port of the accounts service"
