@@ -32,8 +32,8 @@ import { toJSON } from '@unifig/validation-presenter-json';
     },
   });
 
-  app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen();
 })();
