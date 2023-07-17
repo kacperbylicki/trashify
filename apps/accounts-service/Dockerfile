@@ -61,8 +61,7 @@ ENV PROTO_PATH=node_modules/@trashify/transport
 
 RUN apk update
 WORKDIR /app
-COPY --chown=node:node --from=sourcer /app/node_modules/ ./node_modules/
-COPY --chown=node:node --from=sourcer /app/apps/accounts-service/dist/ ./apps/accounts-service/dist/
+COPY --chown=node:node --from=sourcer /app/ .
 
 USER node
 CMD ["node", "apps/accounts-service/dist/main.js"]
