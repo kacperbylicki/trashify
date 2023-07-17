@@ -62,7 +62,8 @@ ENV PROTO_PATH=node_modules/@trashify/transport
 RUN apk update
 WORKDIR /app
 COPY --chown=node:node --from=sourcer /app/node_modules/ ./node_modules/
-COPY --chown=node:node --from=sourcer /app/apps/accounts-service/dist/ ./dist/
+COPY --chown=node:node --from=sourcer /app/apps/accounts-service/dist/ ./apps/accounts-service/dist/
+
 USER node
-CMD ["node", "dist/main.js"]
+CMD ["node", "apps/accounts-service/dist/main.js"]
 EXPOSE $ACCOUNTS_SERVICE_PORT
