@@ -39,7 +39,7 @@ jobs:
         tags: crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify-accounts-service:${{ github.sha }}
         file: ./apps/accounts-service/Dockerfile
       env:
-        ACCOUNTS_SERVICE_HOST: ${{ secrets.ACCOUNTS_SERVICE_HOST }}
+        ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
 
   deploy:
     name: "deploy"
