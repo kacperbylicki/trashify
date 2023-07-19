@@ -89,6 +89,7 @@ resource "azurerm_linux_web_app" "application" {
     "PORT"                                = var.application_port
     "WEBSITES_PORT"                       = var.application_port
     "ACCOUNTS_SERVICE_PORT"               = var.accounts_service_port
+    "ACCOUNTS_SERVICE_URL"                = azurerm_app_service.application.default_site_hostname
 
     # Monitoring with Azure Application Insights
     "APPINSIGHTS_INSTRUMENTATIONKEY" = var.azure_application_insights_instrumentation_key
