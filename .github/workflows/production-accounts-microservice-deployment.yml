@@ -36,7 +36,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_59bcc498a3474f9da508ebe4069eeed2 }}/crtrashifyproduction/trashify-accounts-service:${{ github.sha }}
+        tags: crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_59bcc498a3474f9da508ebe4069eeed2 }}/trashify-accounts-service:${{ github.sha }}
         file: ./apps/accounts-service/Dockerfile
       env:
         ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
@@ -57,4 +57,4 @@ jobs:
         app-name: 'app-trashify-accounts-service-production'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_751af0fdf22a4ad8b2f9b296ed9f6ac4 }}
-        images: 'crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_59bcc498a3474f9da508ebe4069eeed2 }}/crtrashifyproduction/trashify-accounts-service:${{ github.sha }}'
+        images: 'crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_59bcc498a3474f9da508ebe4069eeed2 }}/trashify-accounts-service:${{ github.sha }}'
