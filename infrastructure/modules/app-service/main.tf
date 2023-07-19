@@ -65,7 +65,6 @@ resource "azurerm_linux_web_app" "application" {
     "environment"      = var.environment
     "application-name" = var.application_name
   }
-
   site_config {
     application_stack {
       docker_image     = "${azurerm_container_registry.container-registry.name}.azurecr.io/${var.application_name}"
@@ -89,7 +88,7 @@ resource "azurerm_linux_web_app" "application" {
     "PORT"                                = var.application_port
     "WEBSITES_PORT"                       = var.application_port
     "ACCOUNTS_SERVICE_PORT"               = var.accounts_service_port
-    "ACCOUNTS_SERVICE_URL"                = var.accounts_service_host
+    "ACCOUNTS_SERVICE_URL"                = "https://app-trashify-accounts-service-production.azurewebsites.net/"
 
     # Monitoring with Azure Application Insights
     "APPINSIGHTS_INSTRUMENTATIONKEY" = var.azure_application_insights_instrumentation_key
