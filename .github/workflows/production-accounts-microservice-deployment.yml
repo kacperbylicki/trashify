@@ -29,14 +29,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://crtrashifyproduction.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_7e5026bda3e1462b8f7a482cae11650a }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_59bcc498a3474f9da508ebe4069eeed2 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_50018a37ed75496da003f100926f11a2 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify-accounts-service:${{ github.sha }}
+        tags: crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_59bcc498a3474f9da508ebe4069eeed2 }}/crtrashifyproduction/trashify-accounts-service:${{ github.sha }}
         file: ./apps/accounts-service/Dockerfile
       env:
         ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
@@ -56,5 +56,5 @@ jobs:
       with:
         app-name: 'app-trashify-accounts-service-production'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_bc193a63759943578bb8b3d147688faf }}
-        images: 'crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e4613b71f48e43d0ad04f9ffde97d246 }}/trashify-accounts-service:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_751af0fdf22a4ad8b2f9b296ed9f6ac4 }}
+        images: 'crtrashifyproduction.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_59bcc498a3474f9da508ebe4069eeed2 }}/crtrashifyproduction/trashify-accounts-service:${{ github.sha }}'
