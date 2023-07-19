@@ -1,5 +1,5 @@
 import { From } from '@unifig/core';
-import { IsInt, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class AppConfig {
   @From('NODE_ENV')
@@ -10,11 +10,7 @@ export class AppConfig {
   @IsString()
   protoPath!: string;
 
-  @From('PORT')
-  @IsInt()
-  port!: number;
-
-  @From('ACCOUNTS_SERVICE_HOST')
+  @From('ACCOUNTS_SERVICE_URL')
   @IsString()
-  host!: string;
+  serviceUrl!: string;
 }
