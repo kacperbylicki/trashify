@@ -21,19 +21,19 @@ import { toJSON } from '@unifig/validation-presenter-json';
 
   const { AppModule } = await import('./app.module');
 
-  const { host, port, protoPath } = Config.getValues(AppConfig);
+  const { serviceUrl, protoPath } = Config.getValues(AppConfig);
 
   const app: INestMicroservice = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.GRPC,
     options: {
-      url: `${host}:${port}`,
+      url: serviceUrl,
       package: accountProtobufPackage,
       protoPath: `${protoPath}/proto/account.proto`,
     },
   });
 
-  app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen();
 })();
