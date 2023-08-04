@@ -1,8 +1,12 @@
-import { IsRecord } from '../../../common/validators/is-record.validator';
+import { IsRecord } from '../../../common/decorators/is-record.decorator';
 
 export class EmailHeadersDto {
+  /**
+   * # Not to be used
+   * This is just a way of expressing a Record for Class Validator :)
+   */
   @IsRecord()
-  el!: string;
+  anyElement!: string;
 
   [key: string]: string;
 }

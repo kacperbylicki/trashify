@@ -9,10 +9,10 @@ export class EmailContentDto implements EmailContent {
   @ValidateIf((o) => o.plainText === undefined)
   @IsNotEmpty()
   @IsString()
-  html?: string | undefined;
+  html?: string;
 
   @ValidateIf((o) => o.html === undefined)
   @IsNotEmpty()
   @IsString()
-  plainText?: string | undefined;
+  plainText?: string;
 }

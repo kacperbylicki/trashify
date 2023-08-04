@@ -5,9 +5,9 @@
  * @returns [return value of fn | null, error | null]
  */
 //eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function catcher<T extends () => any>(
+export async function catcher<T extends () => Promise<Awaited<ReturnType<T>>>>(
   method: T,
-): Promise<[Awaited<ReturnType<ReturnType<T>>> | null, Error | null]> {
+): Promise<[Awaited<ReturnType<T>> | null, Error | null]> {
   try {
     //eslint-disable-next-line security/detect-object-injection
     const res = await method();

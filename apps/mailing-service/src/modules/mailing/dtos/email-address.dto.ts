@@ -8,5 +8,5 @@ export class EmailAddressDto implements EmailAddress {
 
   @IsOptional()
   @IsString()
-  displayName?: string | undefined;
+  displayName?: string;
 }
