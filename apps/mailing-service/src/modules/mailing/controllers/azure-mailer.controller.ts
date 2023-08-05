@@ -14,39 +14,46 @@ export class AzureMailerController implements MailingServiceController {
 
   @GrpcMethod(MAILING_SERVICE_NAME, 'SendEmail')
   async sendEmail(request: SendEmailRequestDto): Promise<SendEmailResponse> {
-    const payload = {
-      recipients: {
-        to: request.email.recipients.to,
-        cc: request.email.recipients.cc,
-        bcc: request.email.recipients.bcc,
-      },
-      senderAddress: request.email.senderAddress,
-      disableUserEngagementTracking: request.email.disableUserEngagementTracking,
-      replyTo: request.email.replyTo,
-      attachments: request.email.attachments,
-      headers: request.email.headers,
-    };
+    try {
+      const payload = {
+        recipients: {
+          to: request.email.recipients.to,
+          cc: request.email.recipients.cc,
+          bcc: request.email.recipients.bcc,
+        },
+        senderAddress: request.email.senderAddress,
+        disableUserEngagementTracking: request.email.disableUserEngagementTracking,
+        replyTo: request.email.replyTo,
+        attachments: request.email.attachments,
+        headers: request.email.headers,
+      };
 
-    if (request.email.content.html) {
-      await this.azureMailerService.sendEmail({
-        content: {
-          subject: request.email.content.subject,
-          html: request.email.content.html,
-        },
-        ...payload,
-      });
-    } else if (request.email.content.plainText) {
-      await this.azureMailerService.sendEmail({
-        content: {
-          subject: request.email.content.subject,
-          plainText: request.email.content.plainText,
-        },
-        ...payload,
-      });
+      if (request.email.content.html) {
+        await this.azureMailerService.sendEmail({
+          content: {
+            subject: request.email.content.subject,
+            html: request.email.content.html,
+          },
+          ...payload,
+        });
+      } else if (request.email.content.plainText) {
+        await this.azureMailerService.sendEmail({
+          content: {
+            subject: request.email.content.subject,
+            plainText: request.email.content.plainText,
+          },
+          ...payload,
+        });
+      }
+
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      return {
+        // TODO: Update protobuf to return an optional error object
+        ok: false,
+      };
     }
-
-    return {
-      ok: true,
-    };
   }
 }
