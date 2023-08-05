@@ -10,8 +10,14 @@ message SendEmailRequest {
     Email email = 1;
 }
 
+message MailingError {
+    optional int32 statusCode = 1;
+    optional string message = 2;
+}
+
 message SendEmailResponse {
     bool ok = 1;
+    optional MailingError mailingError = 2;
 }
 
 message Email {

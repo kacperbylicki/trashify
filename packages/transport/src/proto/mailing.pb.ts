@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { Observable } from "rxjs";
 
 export const mailingProtobufPackage = 'mailing';
 
@@ -8,8 +8,14 @@ export interface SendEmailRequest {
   email: Email | undefined;
 }
 
+export interface MailingError {
+  statusCode?: number | undefined;
+  message?: string | undefined;
+}
+
 export interface SendEmailResponse {
   ok: boolean;
+  mailingError?: MailingError | undefined;
 }
 
 export interface Email {
@@ -50,7 +56,7 @@ export interface EmailAttachment {
   name: string;
 }
 
-export const MAILING_PACKAGE_NAME = 'mailing';
+export const MAILING_PACKAGE_NAME = "mailing";
 
 export abstract class MailingServiceClient {
   abstract sendEmail(
@@ -79,4 +85,4 @@ export function MailingServiceControllerMethods() {
   };
 }
 
-export const MAILING_SERVICE_NAME = 'MailingService';
+export const MAILING_SERVICE_NAME = "MailingService";

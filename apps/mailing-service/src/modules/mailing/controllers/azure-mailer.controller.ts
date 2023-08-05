@@ -1,16 +1,24 @@
 import { AzureMailerService } from '../services/azure-mailer.service';
 import { GrpcMethod } from '@nestjs/microservices';
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable, Logger, Optional } from '@nestjs/common';
 import {
   MAILING_SERVICE_NAME,
   MailingServiceController,
   SendEmailResponse,
 } from '@trashify/transport';
 import { SendEmailRequestDto } from '../dtos';
+import { isMailerExceptionTypeGuard } from '../../../common/type-guards/is-mailer-exception.type-guard';
 
 @Injectable()
 export class AzureMailerController implements MailingServiceController {
-  constructor(private readonly azureMailerService: AzureMailerService) {}
+  constructor(
+    private readonly azureMailerService: AzureMailerService,
+    @Optional() private readonly logger: Logger,
+  ) {
+    if (!logger) {
+      this.logger = new Logger(AzureMailerController.name);
+    }
+  }
 
   @GrpcMethod(MAILING_SERVICE_NAME, 'SendEmail')
   async sendEmail(request: SendEmailRequestDto): Promise<SendEmailResponse> {
@@ -50,10 +58,49 @@ export class AzureMailerController implements MailingServiceController {
         ok: true,
       };
     } catch (error) {
+      return this.handleMailerException(error);
+    }
+  }
+
+  private handleMailerException(exception: unknown): SendEmailResponse {
+    if (isMailerExceptionTypeGuard(exception)) {
+      this.logger.error(exception.message, exception.details);
       return {
-        // TODO: Update protobuf to return an optional error object
         ok: false,
+        mailingError: {
+          message: exception.message,
+          statusCode: Number.isSafeInteger(Number(exception.code))
+            ? Number(exception.code)
+            : undefined,
+        },
       };
     }
+    if (exception instanceof Error) {
+      this.logger.error(exception.message, exception.stack);
+      return {
+        ok: false,
+        mailingError: {
+          message: exception.message,
+          statusCode: undefined,
+        },
+      };
+    }
+
+    if (exception instanceof TypeError) {
+      this.logger.error(exception.message, exception.stack);
+      return {
+        ok: false,
+        mailingError: {
+          message: exception.message,
+          statusCode: HttpStatus.BAD_REQUEST,
+        },
+      };
+    }
+
+    this.logger.error(exception);
+
+    return {
+      ok: false,
+    };
   }
 }
