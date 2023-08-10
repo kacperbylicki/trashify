@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "proto:mailing": "protoc --plugin=../../node_modules/.bin/protoc-gen-ts_proto -I=./proto --ts_proto_out=src/ ./proto/mailing.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb --experimental_allow_proto3_optional",
     "proto:account": "protoc --plugin=../../node_modules/.bin/protoc-gen-ts_proto -I=./proto --ts_proto_out=src/ ./proto/account.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
-    "proto:all": "npm run proto:account"
+    "proto:all": "npm run proto:mailing && npm run proto:account"
   },
   "publishConfig": {
     "access": "public"
@@ -15,7 +16,8 @@
     "@grpc/grpc-js": "^1.8.12",
     "@grpc/proto-loader": "^0.7.5",
     "@trashify/tsconfig": "*",
-    "@types/express": "^4.17.17"
+    "@types/express": "^4.17.17",
+    "ts-proto": "^1.152.1"
   },
   "dependencies": {
     "@nestjs/microservices": "^9.3.9",
