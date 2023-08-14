@@ -1,0 +1,38 @@
+name: 'production-mailing-microservice-pull-request-checks'
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "apps/api-gateway/**"
+      - ".github/workflows/production-mailing-microservice-pull-request-checks.yml"
+
+defaults:
+  run:
+    working-directory: ./apps/api-gateway
+
+jobs:
+  pull-request-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        cache: 'yarn'
+        cache-dependency-path: yarn.lock
+
+    - name: Install dependencies
+      run: yarn install --silent --frozen-lockfile
+
+    - name: Build packages
+      run: yarn turbo run build
+
+    - name: Run tests
+      run: yarn turbo run --scope=@trashify/api-gateway test:ci
