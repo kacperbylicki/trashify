@@ -2,7 +2,8 @@ version: '3.8'
 
 networks:
   internal_services:
-  accounts:
+  accounts:  
+  api_gateway:
 
 services:
   accounts-mongodb:
@@ -21,7 +22,6 @@ services:
     expose:
       - ${MONGODB_ACCOUNTS_PORT}
 
-
   accounts-service:
     container_name: trashify-accounts-service
     build:
@@ -39,5 +39,39 @@ services:
       - internal_services
       - accounts
 
+  api-gateway-cache:
+    container_name: trashify-api-gateway-cache
+    image: redis:latest
+    ports:
+      - ${API_GATEWAY_REDIS_CACHE_PORT:-6379}:${API_GATEWAY_REDIS_CACHE_PORT:-6379}
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${API_GATEWAY_REDIS_CACHE_PASSWORD:-3HOiHBc6CQiTN0c}
+    restart: unless-stopped
+    volumes: 
+      - api-gateway-cache:/data
+      - api-gateway-cache-conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - api_gateway
+
+  api-gateway:
+    container_name: trashify-api-gateway
+    build:
+      context: .
+      dockerfile: ./apps/api-gateway/Dockerfile
+      target: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file: .env
+    ports:
+      - ${API_GATEWAY_PORT:-50000}:${API_GATEWAY_PORT:-50000}
+      - ${API_GATEWAY_DEBUGGER_PORT:-9229}:${API_GATEWAY_DEBUGGER_PORT:-9229}
+    restart: unless-stopped
+    networks:
+      - api_gateway
+      - internal_services
+      - accounts
+
 volumes:
   trashify-accounts-mongodb:
+  api-gateway-cache:
+  api-gateway-cache-conf:

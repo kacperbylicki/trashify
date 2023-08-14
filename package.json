@@ -42,5 +42,9 @@
       "eslint --quiet --fix --",
       "prettier --write"
     ]
+  },
+  "volta": {
+    "node": "18.17.1",
+    "yarn": "4.0.0-rc.48"
   }
 }
