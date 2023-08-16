@@ -1,45 +1,28 @@
-import { AZURE_MAILER_MODULE_OPTIONS_TOKEN } from '../../src/modules/mailing/configurable-azure-mailer.module';
-import { AzureMailerService } from '../../src/modules';
-import { EmailClient, KnownEmailSendStatus } from '@azure/communication-email';
+import { AvailableMailers, AzureMailerService } from '../../src/modules';
+import { KnownEmailSendStatus } from '@azure/communication-email';
 import { Logger } from '@nestjs/common';
 import { PollerNotStartedException } from '../../src/modules/mailing/exception';
-import { Test } from '@nestjs/testing';
 import { catcher } from '../../src/common/util/catcher';
-import { createMock } from '@golevelup/ts-jest';
-
-jest.mock('@azure/communication-email');
 
 describe('AzureMailerService', () => {
-  let azureMailerService: AzureMailerService;
-  let logger: Logger;
-  let emailClient: EmailClient;
+  const logger = {
+    error: jest.fn(),
+    debug: jest.fn(),
+  };
+  const emailClient = {
+    beginSend: jest.fn(),
+  };
 
-  beforeAll(async () => {
-    const moduleFixture = await Test.createTestingModule({
-      providers: [
-        AzureMailerService,
-        {
-          provide: AZURE_MAILER_MODULE_OPTIONS_TOKEN,
-          useValue: {
-            connectionString: 'lalala',
-          },
-        },
-      ],
-    })
-      .overrideProvider(Logger)
-      .useClass(createMock<Logger>())
-      .compile();
-
-    azureMailerService = moduleFixture.get(AzureMailerService);
-
-    //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    emailClient = azureMailerService.emailClient;
-
-    //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    logger = azureMailerService.logger;
-  });
+  const azureMailerService = new AzureMailerService(
+    {
+      connectionString: 'lala',
+      defaultFromEmail: 'test@test.com',
+      type: AvailableMailers.AZURE,
+      clientOptions: {},
+    },
+    emailClient as any,
+    logger as unknown as Logger,
+  );
 
   it('should be defined smoke test', () => {
     expect(azureMailerService).toBeDefined();
@@ -49,10 +32,7 @@ describe('AzureMailerService', () => {
     describe('given issues with starting the poller', () => {
       it('should log & throw the error', async () => {
         // given
-
-        jest.spyOn(emailClient, 'beginSend').mockRejectedValueOnce(new Error('Not beep boop'));
-
-        jest.spyOn(logger, 'error').mockImplementationOnce(() => ({}));
+        emailClient.beginSend.mockRejectedValueOnce(new Error('Not beep boop'));
 
         // when
 
@@ -72,7 +52,7 @@ describe('AzureMailerService', () => {
       it('should throw PollerNotStartedException', async () => {
         // given
 
-        jest.spyOn(emailClient, 'beginSend').mockResolvedValueOnce({
+        emailClient.beginSend.mockResolvedValueOnce({
           getOperationState: () => ({
             isStarted: false,
             error: new Error(''),
@@ -80,8 +60,7 @@ describe('AzureMailerService', () => {
             isCompleted: true,
             result: { id: '1', status: KnownEmailSendStatus.Failed },
           }),
-          //eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any);
+        });
 
         // when
 
@@ -101,7 +80,7 @@ describe('AzureMailerService', () => {
         // given
         const expectedError = new Error('Something is not yes');
 
-        jest.spyOn(emailClient, 'beginSend').mockResolvedValueOnce({
+        emailClient.beginSend.mockResolvedValueOnce({
           getOperationState: () => ({
             isStarted: true,
             error: new Error(''),
@@ -111,10 +90,7 @@ describe('AzureMailerService', () => {
           }),
           isDone: () => true,
           getResult: () => ({ id: '1', status: KnownEmailSendStatus.Failed, error: expectedError }),
-          //eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any);
-
-        jest.spyOn(logger, 'error');
+        });
 
         // when
 
@@ -132,7 +108,7 @@ describe('AzureMailerService', () => {
       it('should log results with debug', async () => {
         // given
 
-        jest.spyOn(emailClient, 'beginSend').mockResolvedValueOnce({
+        emailClient.beginSend.mockResolvedValueOnce({
           getOperationState: () => ({
             isStarted: true,
             error: new Error(''),
@@ -147,8 +123,6 @@ describe('AzureMailerService', () => {
           }),
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any);
-
-        jest.spyOn(logger, 'debug');
 
         // when
 

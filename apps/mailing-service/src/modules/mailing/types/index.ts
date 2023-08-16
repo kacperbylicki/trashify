@@ -1,2 +1,2 @@
-export * from './azure-mailer-module.options';
+export * from './mailer-module.options';
 export * from './poller.type';

@@ -39,5 +39,21 @@ services:
       - internal_services
       - accounts
 
+  mailer:
+    container_name: trashify-mailer
+    build:
+      context: .
+      dockerfile: ./apps/mailing-service/Dockerfile
+      target: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file: .env
+    ports:
+      - ${MAILING_SERVICE_PORT}:${MAILING_SERVICE_PORT}
+    restart: unless-stopped
+    networks:
+      - internal_services
+
 volumes:
   trashify-accounts-mongodb:

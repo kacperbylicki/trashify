@@ -1,4 +1,4 @@
-import { AppConfig, AzureConfig } from '@/config';
+import { AppConfig, MailerConfig } from '@/config';
 import { Config } from '@unifig/core';
 import { EnvConfigAdapter } from '@unifig/adapter-env';
 import { HttpExceptionFilter, mailingProtobufPackage } from '@trashify/transport';
@@ -7,9 +7,9 @@ import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 import { toJSON } from '@unifig/validation-presenter-json';
 
-async (): Promise<void> => {
+(async (): Promise<void> => {
   const validationError = await Config.register({
-    templates: [AppConfig, AzureConfig],
+    templates: [AppConfig, MailerConfig],
     adapter: new EnvConfigAdapter(),
   });
 
@@ -36,4 +36,4 @@ async (): Promise<void> => {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   await app.listen();
-};
+})();

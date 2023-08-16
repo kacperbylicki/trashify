@@ -1,1 +1,1 @@
-export * from './azure-mailer.service';
+export * from './azure-mailer/azure-mailer.service';

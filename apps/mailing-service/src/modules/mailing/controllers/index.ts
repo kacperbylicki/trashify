@@ -1,1 +1,1 @@
-export * from './azure-mailer.controller';
+export * from './mailer.controller';
