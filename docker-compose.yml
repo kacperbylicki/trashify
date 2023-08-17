@@ -21,7 +21,6 @@ services:
     expose:
       - ${MONGODB_ACCOUNTS_PORT}
 
-
   accounts-service:
     container_name: trashify-accounts-service
     build:

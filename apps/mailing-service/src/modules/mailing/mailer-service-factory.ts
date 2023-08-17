@@ -8,7 +8,7 @@ import { SESv2Client } from '@aws-sdk/client-sesv2';
 
 export class MailerServiceFactory {
   public constructor(
-    private readonly mailerClientFactory: unknown,
+    private readonly mailerClient: unknown,
     private readonly mailerConfig: MailerModuleOptions,
     private readonly logger?: Logger,
   ) {}
@@ -17,12 +17,12 @@ export class MailerServiceFactory {
     if (this.mailerConfig.type === AvailableMailers.AZURE) {
       return new AzureMailerService(
         this.mailerConfig as AzureMailerOptions,
-        this.mailerClientFactory as EmailClient,
+        this.mailerClient as EmailClient,
         this.logger,
       );
     }
     if (this.mailerConfig.type === AvailableMailers.SES) {
-      return new AwsSESMailerService(this.mailerClientFactory as SESv2Client);
+      return new AwsSESMailerService(this.mailerClient as SESv2Client);
     }
 
     throw new Error();

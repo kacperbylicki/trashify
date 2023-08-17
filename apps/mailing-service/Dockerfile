@@ -40,7 +40,7 @@ FROM --platform=$BUILDPLATFORM node:lts-alpine AS development
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-ENV PROTO_PATH=../../../../../node_modules/@trashify/transport
+ENV PROTO_PATH=../../node_modules/@trashify/transport
 ENV NODE_ENV=development
 
 RUN apk update
