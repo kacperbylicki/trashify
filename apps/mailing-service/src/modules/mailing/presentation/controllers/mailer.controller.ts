@@ -5,10 +5,10 @@ import {
   MailingServiceController,
   SendEmailResponse,
 } from '@trashify/transport';
-import { MailerService } from '../services/mailer-service';
-import { SendEmailRequestDto } from '../dtos';
-import { isMailerExceptionTypeGuard } from '../../../common/type-guards/is-mailer-exception.type-guard';
-import { symbols } from '../symbols';
+import { MailerService } from '../../application/services/mailer-service';
+import { SendEmailRequestDto } from '../../application/dtos';
+import { isMailerExceptionTypeGuard } from '../../../../common/type-guards/is-mailer-exception.type-guard';
+import { symbols } from '../../symbols';
 
 @Injectable()
 export class MailerController implements MailingServiceController {

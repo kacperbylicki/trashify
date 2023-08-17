@@ -1,4 +1,4 @@
-import { AzureMailerOptions, Poller } from '../../types';
+import { AzureMailerOptions, Poller } from '../../../types';
 import { Email } from '@trashify/transport';
 import {
   EmailClient,
@@ -8,9 +8,9 @@ import {
   KnownEmailSendStatus,
 } from '@azure/communication-email';
 import { Logger } from '@nestjs/common';
-import { MailerService } from '../mailer-service';
+import { MailerService } from '../../../application';
 import { PollerNoResultException, PollerNotStartedException } from '../../exception';
-import { delay } from '../../../../common/util';
+import { delay } from '../../../../../common/util';
 
 export class AzureMailerService implements MailerService {
   private readonly logger: Logger;

@@ -1,5 +1,5 @@
-import { AzureIdentityProvider } from '../../../identity';
-import { AzureMailerOptions } from '../../types';
+import { AzureIdentityProvider } from '../../../../identity';
+import { AzureMailerOptions } from '../../../types';
 import { EmailClient } from '@azure/communication-email';
 
 export class AzureMailerClientFactory {

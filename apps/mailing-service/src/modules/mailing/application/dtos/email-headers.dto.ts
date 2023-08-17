@@ -1,4 +1,4 @@
-import { IsRecord } from '../../../common/decorators/is-record.decorator';
+import { IsRecord } from '../../../../common/decorators/is-record.decorator';
 
 export class EmailHeadersDto {
   /**

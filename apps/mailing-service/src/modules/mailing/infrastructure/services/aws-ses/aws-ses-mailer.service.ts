@@ -1,5 +1,5 @@
 import { Email, EmailAddress } from '@trashify/transport';
-import { MailerService } from '../mailer-service';
+import { MailerService } from '../../../application';
 import { SESv2Client, SendEmailCommand, SendEmailRequest } from '@aws-sdk/client-sesv2';
 
 export class AwsSESMailerService implements MailerService {

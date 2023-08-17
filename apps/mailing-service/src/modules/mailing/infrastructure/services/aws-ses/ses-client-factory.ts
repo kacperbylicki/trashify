@@ -1,5 +1,5 @@
-import { AwsSESOptions } from '../../types';
-import { FactoryLike } from '../../../../common/types/factory-like';
+import { AwsSESOptions } from '../../../types';
+import { FactoryLike } from '../../../../../common/types/factory-like';
 import { Injectable } from '@nestjs/common';
 import { SESv2Client } from '@aws-sdk/client-sesv2';
 

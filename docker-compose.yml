@@ -39,7 +39,6 @@ services:
       - internal_services
       - accounts
 
-
   mailer:
     container_name: trashify-mailer
     build:
@@ -74,6 +73,19 @@ services:
       - api_gateway
       - internal_services
       - accounts
+
+  api-gateway-cache:
+    container_name: trashify-api-gateway-cache
+    image: redis:latest
+    ports:
+      - ${API_GATEWAY_REDIS_CACHE_PORT:-6379}:${API_GATEWAY_REDIS_CACHE_PORT:-6379}
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${API_GATEWAY_REDIS_CACHE_PASSWORD:-3HOiHBc6CQiTN0c}
+    restart: unless-stopped
+    volumes: 
+      - api-gateway-cache:/data
+      - api-gateway-cache-conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - api_gateway
 
 volumes:
   trashify-accounts-mongodb:

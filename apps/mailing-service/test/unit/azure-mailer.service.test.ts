@@ -1,7 +1,8 @@
-import { AvailableMailers, AzureMailerService } from '../../src/modules';
+import { AvailableMailers } from '../../src/modules';
+import { AzureMailerService } from '../../src/modules/mailing/infrastructure';
 import { KnownEmailSendStatus } from '@azure/communication-email';
 import { Logger } from '@nestjs/common';
-import { PollerNotStartedException } from '../../src/modules/mailing/exception';
+import { PollerNotStartedException } from '../../src/modules/mailing/infrastructure/exception';
 import { catcher } from '../../src/common/util/catcher';
 
 describe('AzureMailerService', () => {
@@ -31,15 +32,10 @@ describe('AzureMailerService', () => {
   describe('sendEmail', () => {
     describe('given issues with starting the poller', () => {
       it('should log & throw the error', async () => {
-        // given
         emailClient.beginSend.mockRejectedValueOnce(new Error('Not beep boop'));
-
-        // when
 
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
         const res = await catcher(() => azureMailerService.sendEmail({} as any));
-
-        // then
 
         const expectedError = new Error('Not beep boop');
 
@@ -50,8 +46,6 @@ describe('AzureMailerService', () => {
 
     describe('given poller has not started', () => {
       it('should throw PollerNotStartedException', async () => {
-        // given
-
         emailClient.beginSend.mockResolvedValueOnce({
           getOperationState: () => ({
             isStarted: false,
@@ -62,12 +56,8 @@ describe('AzureMailerService', () => {
           }),
         });
 
-        // when
-
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
         const res = await catcher(() => azureMailerService.sendEmail({} as any));
-
-        // then
 
         const expectedError = new PollerNotStartedException();
 
@@ -77,7 +67,6 @@ describe('AzureMailerService', () => {
 
     describe('given invalid result', () => {
       it('should log & throw error', async () => {
-        // given
         const expectedError = new Error('Something is not yes');
 
         emailClient.beginSend.mockResolvedValueOnce({
@@ -92,12 +81,8 @@ describe('AzureMailerService', () => {
           getResult: () => ({ id: '1', status: KnownEmailSendStatus.Failed, error: expectedError }),
         });
 
-        // when
-
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
         const res = await catcher(() => azureMailerService.sendEmail({} as any));
-
-        // then
 
         expect(res[1]).toEqual(expectedError);
         expect(logger.error).toHaveBeenCalledWith(expectedError);
@@ -106,8 +91,6 @@ describe('AzureMailerService', () => {
 
     describe('given everything went smoothly', () => {
       it('should log results with debug', async () => {
-        // given
-
         emailClient.beginSend.mockResolvedValueOnce({
           getOperationState: () => ({
             isStarted: true,
@@ -124,12 +107,8 @@ describe('AzureMailerService', () => {
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any);
 
-        // when
-
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
         const res = await catcher(() => azureMailerService.sendEmail({} as any));
-
-        // then
 
         expect(res[1]).toBeNull();
         expect(res[0]).toBeUndefined();
