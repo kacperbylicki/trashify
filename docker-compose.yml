@@ -2,7 +2,8 @@ version: '3.8'
 
 networks:
   internal_services:
-  accounts:
+  accounts:  
+  api_gateway:
 
 services:
   accounts-mongodb:
@@ -38,6 +39,7 @@ services:
       - internal_services
       - accounts
 
+
   mailer:
     container_name: trashify-mailer
     build:
@@ -54,5 +56,27 @@ services:
     networks:
       - internal_services
 
+  api-gateway:
+    container_name: trashify-api-gateway
+    build:
+      context: .
+      dockerfile: ./apps/api-gateway/Dockerfile
+      target: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file: .env
+    ports:
+      - ${API_GATEWAY_PORT:-50000}:${API_GATEWAY_PORT:-50000}
+      - ${API_GATEWAY_DEBUGGER_PORT:-9229}:${API_GATEWAY_DEBUGGER_PORT:-9229}
+    restart: unless-stopped
+    networks:
+      - api_gateway
+      - internal_services
+      - accounts
+
 volumes:
   trashify-accounts-mongodb:
+  api-gateway-cache:
+  api-gateway-cache-conf:
+
