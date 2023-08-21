@@ -2,7 +2,6 @@ export type MailerModuleOptions = AwsSESOptions;
 
 export enum AvailableMailers {
   SES = 'SES',
-  AZURE = 'AZURE',
 }
 
 export type AwsSESOptions = {
