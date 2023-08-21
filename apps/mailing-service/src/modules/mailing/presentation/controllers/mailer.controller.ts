@@ -7,7 +7,6 @@ import {
 } from '@trashify/transport';
 import { MailerService } from '../../application/services/mailer-service';
 import { SendEmailRequestDto } from '../../application/dtos';
-import { isMailerExceptionTypeGuard } from '../../../../common/type-guards/is-mailer-exception.type-guard';
 import { symbols } from '../../symbols';
 
 @Injectable()
@@ -36,18 +35,6 @@ export class MailerController implements MailingServiceController {
   }
 
   private handleMailerException(exception: unknown): SendEmailResponse {
-    if (isMailerExceptionTypeGuard(exception)) {
-      this.logger.error(exception.message, exception.details);
-      return {
-        ok: false,
-        mailingError: {
-          message: exception.message,
-          statusCode: Number.isSafeInteger(Number(exception.code))
-            ? Number(exception.code)
-            : undefined,
-        },
-      };
-    }
     if (exception instanceof Error) {
       this.logger.error(exception.message, exception.stack);
       return {

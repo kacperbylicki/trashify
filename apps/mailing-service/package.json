@@ -21,11 +21,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-sesv2": "^3.391.0",
-    "@azure/communication-common": "^2.2.1",
-    "@azure/communication-email": "^1.0.0",
-    "@azure/communication-identity": "^1.2.0",
-    "@azure/communication-sms": "^1.0.0",
-    "@azure/identity": "^3.2.2",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/microservices": "^9.3.9",

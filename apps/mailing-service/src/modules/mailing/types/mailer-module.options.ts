@@ -1,6 +1,4 @@
-import { EmailClientOptions } from '@azure/communication-email';
-
-export type MailerModuleOptions = AwsSESOptions | AzureMailerOptions;
+export type MailerModuleOptions = AwsSESOptions;
 
 export enum AvailableMailers {
   SES = 'SES',
@@ -12,12 +10,4 @@ export type AwsSESOptions = {
   region: string;
   accessKeyId: string;
   secretAccessKey: string;
-};
-
-export type AzureMailerOptions = {
-  type: AvailableMailers.AZURE;
-  connectionString: string;
-  defaultFromEmail: string;
-  pollerWaitTimeInMs?: number;
-  clientOptions?: EmailClientOptions;
 };
