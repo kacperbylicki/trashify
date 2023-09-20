@@ -85,6 +85,7 @@
     \end{center}
 \end{titlepage}
 
+\setcounter{tocdepth}{3}
 \tableofcontents
 
 \chapter{\MakeUppercase{dane partnerów}}
@@ -231,55 +232,84 @@ poszczególnych elementów pracy, takich jak:
 \begin{itemize}
     \item Język programowania wykorzystany do projektowania aplikacji;
     \item Framework;
-    \item Testy jednostkowe i integracyjne - bla bla, dodam;
-    \item Testy e2e - bla bla, dodam;
-    \item Baza danych - bla bla, dodam;
-    \item Query Buildery bądź dedykowane ORMy. // Info o tym dlaczego są stosowane
+    \item Testy jednostkowe i integracyjne % - bla bla, dodam;
+    \item Testy e2e %- bla bla, dodam;
+    \item Baza danych %- bla bla, dodam;
+    \item Query Buildery bądź dedykowane ORMy. % Info o tym dlaczego są stosowane
 \end{itemize}
 
-Język programowania wykorzystany do projektowania aplikacji. \\
-Z uwagi na znajomość tego języka wśród członków zespołu wybraliśmy język JavaScript.
-Aplikacja serwerowa uruchamiana jest w środowisku Node.js, które bazowane jest na
+\paragraph{Język programowania wykorzystany do projektowania aplikacji\\}
+
+Z uwagi na znajomość tego języka wśród członków zespołu wybraliśmy język JavaScript
+po stronie aplikacji serwerowej oraz Swift do stworzenia aplikacji mobilnej na
+systemy IOS.
+
+Aplikacja serwerowa uruchamiana jest w środowisku uruchomieniowym Node.js, które bazowane jest na
 silniku V8 stworzonym przez firmę Google LLC.
 
-Framework służy jako zestaw dopasowanych narzędzi przy projektowaniu aplikacji.
+\paragraph{Dobór frameworka}
+\subparagraph{Czym jest framework?\\}
+
+Framework jest zestawem dopasowanych narzędzi do projektowania aplikacji.
 W przestrzeni środowiska Node.js na przestrzeni lat pojawiło się ich wiele, bardziej i
 mniej znanych. Przypatrzyliśmy się trzem najbardziej popularnym i na bieżąco wspieranym
 rozwiązaniom.
 
-Express - jeden z pierwszych frameworków dla środowiska Node.js, powstały w roku 2010.
+\textbf{Express} - jeden z pierwszych frameworków dla środowiska Node.js, powstały w roku 2010.
 Jest on dojrzałym, niezwykle lubianym przez społeczność rozwiązaniem, oferującym
-minimalistyczne api, bezstronne względem wzorców projektowych. Posiada bogaty ekosystem
-wtyczek tworzonych i wspiranych przez społeczność. Jest on pobierany średnio 13 milionów
-razy w tygodniu, co czyni go liderem w popularności.
+minimalistyczny interfejs, bezstronny względem wzorców projektowych. Posiada bogaty ekosystem
+oprogramowań pośredniczących tworzonych i wspieranych przez społeczność.
+Jest on pobierany średnio 13 milionów razy w tygodniu, co czyni go liderem w popularności.
 
-Fastify - framework zainspirowany Express oraz Hapi. Tak jak w przypadku Expressa,
+\textbf{Fastify} - framework zainspirowany Express oraz Hapi. Tak jak w przypadku Expressa,
 jest on minimalistyczny, jednakże wprowadza kilka usprawnień oraz rozszerzeń do
 konceptów w nim prezentowanych. Głównym wzorcem tego frameworka jest bogaty system
-wtyczek, które zaimplementowane są na podstawie skierowanego grafu acyklicznego.
-Każda ścieżka żądania HTTP, dekoratory, haki (//TODO: Znaleźć tłumaczenie hooks) są
-traktowane jako pluginy. Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo
-aplikacji.
+wtyczek, które zaimplementowane są na podstawie skierowanego grafu acyklicznego (Rysunek~\ref{fig:ADG}). %TODO: Add refDrawing command or smthn
+Każda ścieżka żądania HTTP, dekoratory, haki są traktowane jako wtyczki.
+Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo aplikacji.
 
-NestJS - To framework opiniowany i jako taki wymusza na użytkowniku stosowanie określonych wzorców. 
-Wykorzystuje progresywny JavaScript, jest zbudowany i w pełni obsługuje TypeScript oraz łączy elementy OOP, FP i FRP.
-W przypadku aplikacji internetowych Nest używa Express jako sterownika HTTP, 
-z opcjonalną konfiguracją Fastify. Zapewnia abstrakcję nad frameworkami, 
-ale jednocześnie udostępnia ich interfejsy API bezpośrednio programistom, zapewniając uncję wolności. 
-Jest dostarczany z dedykowanym interfejsem terminalowym, którego można użyć do uruchomienia projektu, 
-utworzenia nowego z zainstalowanymi wszystkimi zależnościami, generowania zasobów HTTP, 
-kontrolerów, usług, dtos i innych.
-
+% Fix numbering
 \begin{figure}[h]
+    \caption{Reprezentacja skierowanego grafu acyklicznego}
     \includegraphics[width=6cm]{../ADG.png}
     \centering
+    \label{fig:ADG}
 \end{figure}
 
-// TODO: Dodać przypis
+\textbf{NestJS} - To framework opiniowany i jako taki wymusza na użytkowniku stosowanie określonych wzorców.
+Wykorzystuje progresywny JavaScript, jest zbudowany i w pełni obsługuje TypeScript oraz łączy elementy
+programowania obiektowego, programowania funkcyjnego i reaktywnego programowania funkcyjnego.
+W przypadku aplikacji internetowych Nest używa Express jako sterownika HTTP,
+z opcjonalną konfiguracją Fastify. Zapewnia abstrakcję nad frameworkami,
+ale jednocześnie udostępnia ich interfejsy API bezpośrednio programistom, zapewniając uncję wolności.
+Jest dostarczany z dedykowanym interfejsem terminalowym, którego można użyć do uruchomienia projektu,
+utworzenia nowego z zainstalowanymi wszystkimi zależnościami, generowania zasobów HTTP,
+kontrolerów, usług, obiektów transferu danych i innych.
 
- Teoria - warum, co, gdzie, z kim?
+\subparagraph{Decyzja\\}
 
- Narzędzia - decyzja, dlaczego?
+Zespół projektowy zdecydował się na wykorzystanie frameworka NestJS z wykorzystaniem
+Fastify jako sterownik HTTP z uwagi na jego znacząco lepszą prędkość.
+
+Plusy oraz minusy takiej decyzji są następujące:
+
+\begin{itemize}
+    \item gotowa do wykorzystania architektura aplikacji;
+    \item olbrzymia społeczność, od której można czerpać wiedzę na temat rozwiązań 
+    oraz korzystać z gotowych rozwiązań popularnych problemów;
+    \item mniejsza ilość kodu bazowego do napisania;
+    \item prostsza separacja logiki biznesowej;
+    \item ułatwione testowanie jednostkowe oraz integracyjne za pomocą wstrzykiwaniu
+    zależności oraz wbudowanym narzędziom testowym;
+    \item problematyczna implementacja rozwiązań nieprzewidzianych przez twórców
+    frameworka;
+    \item niski poziom kontroli nad cyklem życia żądań HTTP oraz samej architektury;
+    \item komunikaty błędów mogą niewiele mówić programiście, co utrudnia proces debuggowania.
+\end{itemize}
+
+% Teoria - warum, co, gdzie, z kim?
+
+% Narzędzia - decyzja, dlaczego?
 
 \subsubsection{Aplikacja mobilna}
 
