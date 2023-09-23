@@ -51,5 +51,5 @@ import { toJSON } from '@unifig/validation-presenter-json';
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('/docs', app, swaggerDocument);
 
-  await app.listen(Config.getValues(AppConfig).port, Config.getValues(AppConfig).host);
+  await app.listen(Config.getValues(AppConfig).port);
 })();

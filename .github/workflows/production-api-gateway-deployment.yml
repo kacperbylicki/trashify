@@ -1,12 +1,12 @@
-name: 'production-accounts-microservice-deployment'
+name: 'production-api-gateway-deployment'
 
 on:
   push:
     branches:
       - main
     paths:
-      - "apps/accounts-service/**"
-      - ".github/workflows/production-accounts-microservice-deployment.yml"
+      - "apps/api-gateway/**"
+      - ".github/workflows/production-api-gateway-deployment.yml"
   workflow_dispatch:
 
 jobs:
@@ -36,10 +36,10 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-accounts-service:${{ github.sha }}
-        file: ./apps/accounts-service/Dockerfile
+        tags: crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-api-gateway:${{ github.sha }}
+        file: ./apps/api-gateway/Dockerfile
       env:
-        ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
+        API_GATEWAY_PORT: ${{ secrets.API_GATEWAY_PORT }}
 
   deploy:
     name: "deploy"
@@ -54,7 +54,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'app-trashify-accounts-service-production'
+        app-name: 'app-trashify-api-gateway-production'
         slot-name: 'production'
-        publish-profile: ${{ secrets.ACCOUNTS_SERVICE_PUBLISH_PROFILE }}
-        images: 'crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-accounts-service:${{ github.sha }}'
+        publish-profile: ${{ secrets.API_GATEWAY_PUBLISH_PROFILE }}
+        images: 'crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-api-gateway:${{ github.sha }}'
