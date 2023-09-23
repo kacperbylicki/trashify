@@ -26,21 +26,25 @@ variable "azure_application_insights_instrumentation_key" {
 variable "vault_id" {
   type        = string
   description = "The Azure Key Vault ID"
+  default     = ""
 }
 
 variable "azure_storage_account_name" {
   type        = string
   description = "The name of the Azure Storage account"
+  default     = ""
 }
 
 variable "azure_storage_account_key" {
   type        = string
   description = "The access key of the Azure Storage account"
+  default     = ""
 }
 
 variable "azure_storage_blob_endpoint" {
   type        = string
   description = "The blob endpoint URL of the Azure Storage account"
+  default     = ""
 }
 
 variable "azure_cosmosdb_mongodb_accounts_database" {
@@ -90,14 +94,39 @@ variable "application_port" {
   description = "Port of the application"
 }
 
-variable "accounts_service_port" {
-  type        = string
-  description = "Port of the accounts service"
-  default     = "50001"
-}
-
 variable "accounts_service_host" {
   type        = string
   description = "The host of the Accounts Service"
   default     = ""
+}
+
+variable "mailing_service_host" {
+  type        = string
+  description = "The host of the Mailing Service"
+  default     = ""
+}
+
+variable "docker_registry_name" {
+  type        = string
+  description = "The name of the container registry"
+}
+
+variable "docker_registry_server_url" {
+  type        = string
+  description = "The login server of the container registry"
+}
+
+variable "docker_registry_server_username" {
+  type        = string
+  description = "The admin username of the container registry"
+}
+
+variable "docker_registry_server_password" {
+  type        = string
+  description = "The admin password of the container registry"
+}
+
+variable "service_plan_application_id" {
+  type        = string
+  description = "The ID of the service plan"
 }

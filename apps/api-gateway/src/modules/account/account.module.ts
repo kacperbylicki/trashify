@@ -20,12 +20,12 @@ import { join } from 'path';
         imports: [ConfigModule.forFeature(AppConfig)],
         inject: [getConfigContainerToken(AppConfig)],
         useFactory: async (): Promise<ClientProvider> => {
-          const { accountServicePort, protoPath } = Config.getValues(AppConfig);
+          const { accountServiceUrl, protoPath } = Config.getValues(AppConfig);
 
           return {
             transport: Transport.GRPC,
             options: {
-              url: `trashify-accounts-service:${accountServicePort}`,
+              url: accountServiceUrl,
               package: ACCOUNT_PACKAGE_NAME,
               protoPath: join(__dirname, `${protoPath}/proto/account.proto`),
             },
