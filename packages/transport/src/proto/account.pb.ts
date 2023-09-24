@@ -107,48 +107,31 @@ export interface LogoutResponse {
 export const ACCOUNT_PACKAGE_NAME = 'account';
 
 export abstract class AccountServiceClient {
-  abstract getAccount(
-    request: GetAccountRequest,
-  ): Observable<GetAccountResponse>;
+  abstract getAccount(request: GetAccountRequest): Observable<GetAccountResponse>;
   abstract register(request: RegisterRequest): Observable<RegisterResponse>;
   abstract login(request: LoginRequest): Observable<LoginResponse>;
-  abstract validateJwt(
-    request: ValidateJwtRequest,
-  ): Observable<ValidateJwtResponse>;
+  abstract validateJwt(request: ValidateJwtRequest): Observable<ValidateJwtResponse>;
   abstract validateRefreshJwt(
     request: ValidateRefreshJwtRequest,
   ): Observable<ValidateRefreshJwtResponse>;
-  abstract refreshToken(
-    request: RefreshTokenRequest,
-  ): Observable<RefreshTokenResponse>;
+  abstract refreshToken(request: RefreshTokenRequest): Observable<RefreshTokenResponse>;
   abstract logout(request: LogoutRequest): Observable<LogoutResponse>;
 }
 
 export interface AccountServiceController {
   getAccount(
     request: GetAccountRequest,
-  ):
-    | Promise<GetAccountResponse>
-    | Observable<GetAccountResponse>
-    | GetAccountResponse;
+  ): Promise<GetAccountResponse> | Observable<GetAccountResponse> | GetAccountResponse;
 
   register(
     request: RegisterRequest,
-  ):
-    | Promise<RegisterResponse>
-    | Observable<RegisterResponse>
-    | RegisterResponse;
+  ): Promise<RegisterResponse> | Observable<RegisterResponse> | RegisterResponse;
 
-  login(
-    request: LoginRequest,
-  ): Promise<LoginResponse> | Observable<LoginResponse> | LoginResponse;
+  login(request: LoginRequest): Promise<LoginResponse> | Observable<LoginResponse> | LoginResponse;
 
   validateJwt(
     request: ValidateJwtRequest,
-  ):
-    | Promise<ValidateJwtResponse>
-    | Observable<ValidateJwtResponse>
-    | ValidateJwtResponse;
+  ): Promise<ValidateJwtResponse> | Observable<ValidateJwtResponse> | ValidateJwtResponse;
 
   validateRefreshJwt(
     request: ValidateRefreshJwtRequest,
@@ -159,10 +142,7 @@ export interface AccountServiceController {
 
   refreshToken(
     request: RefreshTokenRequest,
-  ):
-    | Promise<RefreshTokenResponse>
-    | Observable<RefreshTokenResponse>
-    | RefreshTokenResponse;
+  ): Promise<RefreshTokenResponse> | Observable<RefreshTokenResponse> | RefreshTokenResponse;
 
   logout(
     request: LogoutRequest,
@@ -181,27 +161,13 @@ export function AccountServiceControllerMethods() {
       'logout',
     ];
     for (const method of grpcMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcMethod('AccountService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcMethod('AccountService', method)(constructor.prototype[method], method, descriptor);
     }
     const grpcStreamMethods: string[] = [];
     for (const method of grpcStreamMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcStreamMethod('AccountService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcStreamMethod('AccountService', method)(constructor.prototype[method], method, descriptor);
     }
   };
 }
