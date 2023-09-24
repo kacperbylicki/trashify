@@ -8,6 +8,9 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
+    "@trashify/accounts-service",
+    "@trashify/api-gateway",
+    "@trashify/mailing-service",
     "@trashify/testing"
   ]
 }
