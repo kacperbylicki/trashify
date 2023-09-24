@@ -40,11 +40,20 @@
       "cache": false
     },
     "lint": {
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": []
     },
     "lint:fix": {
+      "dependsOn": [
+        "^build"
+      ],
       "cache": false,
       "outputs": []
+    },
+    "clean": {
+      "cache": false
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@trashify/mailing-service",
   "version": "0.0.0",
-  "author": "Kacper Bylicki & Jakub Barczewski",
+  "author": "Kacper Bylicki & Marek Gerszendorf & Jakub Barczewski",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

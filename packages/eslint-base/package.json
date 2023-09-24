@@ -1,6 +1,8 @@
 {
     "name": "eslint-config-base",
     "version": "0.0.0",
+    "author": "Kacper Bylicki & Marek Gerszendorf & Jakub Barczewski",
+    "private": true,
     "main": "index.js",
     "dependencies": {
         "@typescript-eslint/eslint-plugin": "^5.51.0",
