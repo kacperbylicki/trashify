@@ -171,3 +171,5 @@ export function AccountServiceControllerMethods() {
     }
   };
 }
+
+export const ACCOUNT_SERVICE_NAME = 'AccountService';
