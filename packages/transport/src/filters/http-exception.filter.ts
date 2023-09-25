@@ -30,3 +30,5 @@ export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
     });
   }
 }
+
+export class TestChangesetClass {}

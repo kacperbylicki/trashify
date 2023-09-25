@@ -1,6 +1,7 @@
 {
   "name": "trashify",
   "version": "0.0.0",
+  "author": "Kacper Bylicki & Marek Gerszendorf & Jakub Barczewski",
   "private": true,
   "packageManager": "yarn@1.22.19",
   "workspaces": [
@@ -15,12 +16,17 @@
     "proto:all": "turbo run proto:all",
     "proto:account": "turbo run proto:account",
     "build": "turbo run build",
+    "clean": "turbo run clean",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint --parallel --no-cache",
     "lint:fix": "turbo run lint:fix --parallel --no-cache",
     "lint:staged": "lint-staged",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "publish-packages": "turbo run build lint && changeset version && changeset publish"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.26.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",

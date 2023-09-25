@@ -7,46 +7,6 @@ terraform {
   }
 }
 
-resource "azurecaf_name" "container_registry" {
-  name          = "trashify"
-  resource_type = "azurerm_container_registry"
-  suffixes      = [var.environment]
-}
-
-resource "azurerm_container_registry" "container-registry" {
-  name                = azurecaf_name.container_registry.result
-  resource_group_name = var.resource_group
-  location            = var.location
-  admin_enabled       = true
-  sku                 = "Basic"
-
-  tags = {
-    "environment"      = var.environment
-    "application-name" = "trashify"
-  }
-}
-
-resource "azurecaf_name" "app_service_plan" {
-  name          = var.application_name
-  resource_type = "azurerm_app_service_plan"
-  suffixes      = [var.environment]
-}
-
-# This creates the plan that the service use
-resource "azurerm_service_plan" "application" {
-  name                = azurecaf_name.app_service_plan.result
-  resource_group_name = var.resource_group
-  location            = var.location
-
-  sku_name = "F1"
-  os_type  = "Linux"
-
-  tags = {
-    "environment"      = var.environment
-    "application-name" = var.application_name
-  }
-}
-
 resource "azurecaf_name" "app_service" {
   name          = var.application_name
   resource_type = "azurerm_app_service"
@@ -58,7 +18,7 @@ resource "azurerm_linux_web_app" "application" {
   name                = azurecaf_name.app_service.result
   resource_group_name = var.resource_group
   location            = var.location
-  service_plan_id     = azurerm_service_plan.application.id
+  service_plan_id     = var.service_plan_application_id
   https_only          = true
 
   tags = {
@@ -67,7 +27,7 @@ resource "azurerm_linux_web_app" "application" {
   }
   site_config {
     application_stack {
-      docker_image     = "${azurerm_container_registry.container-registry.name}.azurecr.io/${var.application_name}"
+      docker_image     = "${var.docker_registry_name}.azurecr.io/${var.application_name}"
       docker_image_tag = "latest"
     }
     always_on     = false
@@ -81,17 +41,18 @@ resource "azurerm_linux_web_app" "application" {
 
   app_settings = {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
-    "DOCKER_REGISTRY_SERVER_URL"          = "https://${azurerm_container_registry.container-registry.name}.azurecr.io"
-    "DOCKER_REGISTRY_SERVER_USERNAME"     = azurerm_container_registry.container-registry.admin_username
-    "DOCKER_REGISTRY_SERVER_PASSWORD"     = azurerm_container_registry.container-registry.admin_password
+    "DOCKER_REGISTRY_SERVER_URL"          = var.docker_registry_server_url
+    "DOCKER_REGISTRY_SERVER_USERNAME"     = var.docker_registry_server_username
+    "DOCKER_REGISTRY_SERVER_PASSWORD"     = var.docker_registry_server_password
     "WEBSITES_CONTAINER_START_TIME_LIMIT" = 1500
     "PORT"                                = var.application_port
     "WEBSITES_PORT"                       = var.application_port
-    "ACCOUNTS_SERVICE_PORT"               = var.accounts_service_port
-    "ACCOUNTS_SERVICE_URL"                = "https://app-trashify-accounts-service-production.azurewebsites.net/"
+    "ACCOUNTS_SERVICE_URL"                = var.accounts_service_host
+    "MAILING_SERVICE_URL"                 = var.mailing_service_host
 
     # Monitoring with Azure Application Insights
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = var.azure_application_insights_instrumentation_key
+    "APPINSIGHTS_INSTRUMENTATIONKEY"           = var.azure_application_insights_instrumentation_key
+    ApplicationInsightsAgent_EXTENSION_VERSION = "~3"
 
     # These are app specific environment variables
     "STORAGE_ACCOUNT_NAME"  = var.azure_storage_account_name

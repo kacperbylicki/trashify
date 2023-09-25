@@ -1,12 +1,22 @@
 {
     "name": "@trashify/testing",
-    "version": "0.0.0",
+    "version": "0.0.1",
+    "author": "Kacper Bylicki & Marek Gerszendorf & Jakub Barczewski",
+    "private": true,
     "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/**"
+    ],
     "scripts": {
-        "build": "tsc"
+        "build": "tsup src/index.ts --format cjs,esm --dts",
+        "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
     },
     "devDependencies": {
-        "@trashify/tsconfig": "*"
+        "@trashify/tsconfig": "*",
+        "tsup": "^7.2.0",
+        "@swc/core": "^1.3.88"
     },
     "dependencies": {
         "@nestjs/common": "^9.4.0",

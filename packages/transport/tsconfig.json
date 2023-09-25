@@ -2,7 +2,8 @@
   "extends": "@trashify/tsconfig/packages.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "dist"
+    "outDir": "dist",
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
   "include": ["src"],
   "exclude": ["dist"]

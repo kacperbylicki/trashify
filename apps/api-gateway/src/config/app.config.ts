@@ -10,31 +10,28 @@ export class AppConfig {
   @IsString()
   protoPath!: string;
 
-  @From('API_GATEWAY_PORT')
+  @From('PORT')
   @IsInt()
   port!: number;
 
-  @From('API_GATEWAY_HOST')
+  // TODO: Uncomment this when redis service is running
+  // @From('API_GATEWAY_REDIS_CACHE_HOST')
+  // @IsString()
+  // apiGatewayCacheHost!: string;
+
+  // @From('API_GATEWAY_REDIS_CACHE_PORT')
+  // @IsInt()
+  // apiGatewayCachePort!: number;
+
+  // @From('API_GATEWAY_REDIS_CACHE_PASSWORD')
+  // @IsString()
+  // apiGatewayCachePassword!: string;
+
+  // @From('API_GATEWAY_REDIS_CACHE_TTL')
+  // @IsInt()
+  // apiGatewayCacheTTL!: number;
+
+  @From('ACCOUNTS_SERVICE_URL')
   @IsString()
-  host!: string;
-
-  @From('API_GATEWAY_REDIS_CACHE_HOST')
-  @IsString()
-  apiGatewayCacheHost!: string;
-
-  @From('API_GATEWAY_REDIS_CACHE_PORT')
-  @IsInt()
-  apiGatewayCachePort!: number;
-
-  @From('API_GATEWAY_REDIS_CACHE_PASSWORD')
-  @IsString()
-  apiGatewayCachePassword!: string;
-
-  @From('API_GATEWAY_REDIS_CACHE_TTL')
-  @IsInt()
-  apiGatewayCacheTTL!: number;
-
-  @From('ACCOUNTS_SERVICE_PORT')
-  @IsInt()
-  accountServicePort!: number;
+  accountServiceUrl!: string;
 }
