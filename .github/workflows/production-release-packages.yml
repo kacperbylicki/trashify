@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "packages/transport/**"
+      - "packages/testing/**"
       - ".github/workflows/production-release-packages.yml"
   workflow_dispatch:
     
