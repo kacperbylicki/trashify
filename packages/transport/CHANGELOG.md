@@ -4,7 +4,11 @@
 
 ### Major Changes
 
+<<<<<<< Updated upstream
 - c40757a: Remove test release code
+=======
+- Regenerate changesets
+>>>>>>> Stashed changes
 
 ## 1.0.0
 
