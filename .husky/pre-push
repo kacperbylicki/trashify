@@ -2,10 +2,9 @@
 
 . "$(dirname -- "$0")/_/husky.sh"
 
-branch_name=$(git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3)
-
-if [ "$branch_name" != "HEAD:changeset-release/main" ]; then
-  yarn test:ci
+if [ "$CI_RELEASE" = "true" ]; then
+  echo "Skipping tests due to CI release"
+  exit 0
 else
-  echo "Skipping tests for branch $branch_name"
+  yarn test:ci
 fi
