@@ -23,8 +23,7 @@
     "lint:staged": "lint-staged",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "commit": "git-cz",
-    "publish-packages": "turbo run build lint && changeset version && changeset publish",
-    "update-changeset": "changeset version"
+    "publish-packages": "turbo run build lint && changeset version && changeset publish"
   },
   "dependencies": {
     "@changesets/cli": "^2.26.2"
