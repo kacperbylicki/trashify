@@ -1,5 +1,11 @@
 # @trashify/testing
 
+## 2.0.1
+
+### Patch Changes
+
+- 217f4af: Initial packages deploy
+
 ## 2.0.0
 
 ### Major Changes
