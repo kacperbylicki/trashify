@@ -40,7 +40,6 @@ FROM --platform=$BUILDPLATFORM node:lts-alpine AS development
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-ENV PROTO_PATH=../../../../../node_modules/@trashify/transport
 ENV NODE_ENV=development
 
 RUN apk update
@@ -57,7 +56,6 @@ ARG BUILDPLATFORM
 ARG API_GATEWAY_PORT=50000
 ENV API_GATEWAY_PORT=$API_GATEWAY_PORT
 ENV NODE_ENV=production
-ENV PROTO_PATH=node_modules/@trashify/transport
 
 RUN apk update
 WORKDIR /app

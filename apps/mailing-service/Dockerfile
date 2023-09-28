@@ -40,7 +40,6 @@ FROM --platform=$BUILDPLATFORM node:lts-alpine AS development
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-ENV PROTO_PATH=../../../../../node_modules/@trashify/transport
 ENV NODE_ENV=development
 
 RUN apk update
@@ -57,7 +56,6 @@ ARG BUILDPLATFORM
 ARG MAILING_SERVICE_PORT=50013
 ENV MAILING_SERVICE_PORT=$MAILING_SERVICE_PORT
 ENV NODE_ENV=production
-ENV PROTO_PATH=node_modules/@trashify/transport
 
 RUN apk update
 WORKDIR /app

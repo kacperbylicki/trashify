@@ -43,7 +43,6 @@ ARG BUILDPLATFORM
 ARG ACCOUNTS_SERVICE_PORT=50001
 ENV ACCOUNTS_SERVICE_PORT=$ACCOUNTS_SERVICE_PORT
 ENV NODE_ENV=development
-ENV PROTO_PATH=../../node_modules/@trashify/transport
 
 RUN apk update
 WORKDIR /app
@@ -57,7 +56,6 @@ ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
 ENV NODE_ENV=production
-ENV PROTO_PATH=node_modules/@trashify/transport
 
 RUN apk update
 WORKDIR /app

@@ -21,14 +21,14 @@ import { toJSON } from '@unifig/validation-presenter-json';
 
   const { AppModule } = await import('./app.module');
 
-  const { serviceUrl, protoPath } = Config.getValues(AppConfig);
+  const { serviceUrl } = Config.getValues(AppConfig);
 
   const app: INestMicroservice = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.GRPC,
     options: {
       url: serviceUrl,
       package: accountProtobufPackage,
-      protoPath: `${protoPath}/proto/account.proto`,
+      protoPath: `./proto/account.proto`,
     },
   });
 

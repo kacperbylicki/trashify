@@ -10,7 +10,6 @@ import { Config } from '@unifig/core';
 import { ConfigModule, getConfigContainerToken } from '@unifig/nest';
 import { JwtService } from './services';
 import { Module } from '@nestjs/common';
-import { join } from 'path';
 
 @Module({
   imports: [
@@ -20,14 +19,14 @@ import { join } from 'path';
         imports: [ConfigModule.forFeature(AppConfig)],
         inject: [getConfigContainerToken(AppConfig)],
         useFactory: async (): Promise<ClientProvider> => {
-          const { accountServiceUrl, protoPath } = Config.getValues(AppConfig);
+          const { accountServiceUrl } = Config.getValues(AppConfig);
 
           return {
             transport: Transport.GRPC,
             options: {
               url: accountServiceUrl,
               package: ACCOUNT_PACKAGE_NAME,
-              protoPath: join(__dirname, `${protoPath}/proto/account.proto`),
+              protoPath: './proto/account.proto',
             },
           };
         },

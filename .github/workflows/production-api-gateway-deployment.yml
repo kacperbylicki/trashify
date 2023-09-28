@@ -40,7 +40,6 @@ jobs:
         file: ./apps/api-gateway/Dockerfile
       env:
         NODE_ENV: production
-        PROTO_PATH: ${{ secrets.PROTO_PATH }}
         ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
         MAILING_SERVICE_URL: ${{ secrets.MAILING_SERVICE_URL }}
 

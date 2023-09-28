@@ -21,14 +21,14 @@ async (): Promise<void> => {
 
   const { AppModule } = await import('./app.module');
 
-  const { serviceUrl, protoPath } = Config.getValues(AppConfig);
+  const { serviceUrl } = Config.getValues(AppConfig);
 
   const app: INestMicroservice = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.GRPC,
     options: {
       url: serviceUrl,
       package: mailingProtobufPackage,
-      protoPath: `${protoPath}/proto/mailing.proto`,
+      protoPath: `./proto/mailing.proto`,
     },
   });
 
