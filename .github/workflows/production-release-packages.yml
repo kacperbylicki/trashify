@@ -34,11 +34,11 @@ jobs:
     - name: Creating .npmrc
       run: |
         cat << EOF > "$HOME/.npmrc"
-          @trashify:registry=https://npm.pkg.github.com/
-          //npm.pkg.github.com/:_authToken=$NPM_GITHUB_TOKEN
+          @trashify:registry=https://registry.npmjs.org/
+          //registry.npmjs.org/:_authToken=$NPM_TOKEN
         EOF
       env:
-        NPM_GITHUB_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     - name: Create Release Pull Request or Publish to npm
       id: changesets
@@ -49,4 +49,5 @@ jobs:
         title: 'chore: release package(s)'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         CI_RELEASE: true
