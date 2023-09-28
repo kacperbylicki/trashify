@@ -31,7 +31,7 @@
     "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-fastify": "^9.3.9",
     "@nestjs/terminus": "^9.2.1",
-    "@trashify/transport": "*",
+    "@trashify/transport": "^1.0.0",
     "@unifig/adapter-env": "^0.13.0",
     "@unifig/core": "^0.13.0",
     "@unifig/nest": "^0.13.0",
