@@ -40,7 +40,6 @@ jobs:
         file: ./apps/mailing-service/Dockerfile
       env:
         NODE_ENV: production
-        PROTO_PATH: ${{ secrets.PROTO_PATH }}
         MAILING_SERVICE_URL: ${{ secrets.MAILING_SERVICE_URL }}
 
   deploy:
