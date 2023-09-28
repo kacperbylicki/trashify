@@ -10,6 +10,7 @@
   "ignore": [
     "@trashify/accounts-service",
     "@trashify/api-gateway",
-    "@trashify/mailing-service"
+    "@trashify/mailing-service",
+    "@trashify/testing"
   ]
 }
