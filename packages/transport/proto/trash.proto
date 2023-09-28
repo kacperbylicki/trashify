@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package trash;
+
+service TrashService {
+    rpc GetAllTrash(GetAllTrashRequest) returns (GetAllTrashResponse);
+    rpc GetTrashByTags(GetTrashByTagsRequest) returns (GetTrashByTagsResponse);
+    rpc GetTrashInDistance(GetTrashInDistanceRequest) returns (GetTrashInDistanceResponse);
+}
+
+message Trash {
+    string id = 1;
+    float latitude = 2;
+    float longitude = 3;
+    repeated string tags = 4;
+}
+
+message GetAllTrashRequest {}
+
+message GetAllTrashResponse {
+    bool ok = 1;
+    repeated Trash trash = 2;
+}
+
+message GetTrashByTagsResponse {
+    bool ok = 1;
+    repeated Trash trash = 2;
+}
+
+message GetTrashByTagsRequest {
+    repeated string tags = 1;
+}
+
+message GetTrashInDistanceRequest {
+    float distance = 1;
+}
+
+message GetTrashInDistanceResponse {
+    bool ok = 1;
+    repeated Trash trash = 3;
+}
+
+
+message GetTrashByRequest {
+    optional float distance = 1;
+    repeated string tags = 2;
+}
+
+message GetTrashByResponse {
+    bool ok = 1;
+    repeated Trash trash = 2;
+}

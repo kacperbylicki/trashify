@@ -6,7 +6,7 @@ export class AppConfig {
   @IsString()
   nodeEnv!: string;
 
-  @From('PORT')
+  @From('API_GATEWAY_PORT')
   @IsInt()
   port!: number;
 
@@ -30,4 +30,8 @@ export class AppConfig {
   @From('ACCOUNTS_SERVICE_URL')
   @IsString()
   accountServiceUrl!: string;
+
+  @From('TRASH_SERVICE_URL')
+  @IsString()
+  trashServiceUrl!: string;
 }

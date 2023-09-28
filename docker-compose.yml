@@ -71,6 +71,22 @@ services:
       - internal_services
       - accounts
 
+  trash-service:
+    container_name: trashify-trash-service
+    build:
+      context: .
+      dockerfile: ./apps/trash-service/Dockerfile
+      target: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file: .env
+    ports:
+      - ${TRASH_SERVICE_PORT:-50044}:${TRASH_SERVICE_PORT:-50044}
+    restart: unless-stopped
+    networks:
+      - internal_services
+
 volumes:
   trashify-accounts-mongodb:
   api-gateway-cache:

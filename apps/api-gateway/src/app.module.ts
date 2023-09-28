@@ -2,6 +2,7 @@ import { AccountModule, HealthModule } from '@/modules';
 import { AppConfig } from '@/config';
 import { ConfigModule } from '@unifig/nest';
 import { Module } from '@nestjs/common';
+import { TrashModule } from './modules/trash';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { Module } from '@nestjs/common';
     //   },
     //   isGlobal: true,
     // }),
+    TrashModule,
     AccountModule,
     HealthModule,
   ],
