@@ -1,6 +1,6 @@
 {
     "name": "@trashify/testing",
-    "version": "2.0.1",
+    "version": "0.0.1",
     "author": "Kacper Bylicki & Marek Gerszendorf & Jakub Barczewski",
     "private": true,
     "main": "dist/index.js",
@@ -10,7 +10,7 @@
         "dist/**"
     ],
     "scripts": {
-        "build": "tsup src/index.ts --format cjs,esm --dts",
+        "build": "tsup-node src/index.ts --format cjs,esm --dts",
         "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
     },
     "devDependencies": {
