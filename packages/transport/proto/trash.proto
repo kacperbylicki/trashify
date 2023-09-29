@@ -9,21 +9,20 @@ service TrashService {
 }
 
 message Trash {
-    string id = 1;
-    float latitude = 2;
-    float longitude = 3;
+    string uuid = 1;
+    repeated float location = 2;
     repeated string tags = 4;
 }
 
 message GetAllTrashRequest {}
 
 message GetAllTrashResponse {
-    bool ok = 1;
+    int32 status = 1;
     repeated Trash trash = 2;
 }
 
 message GetTrashByTagsResponse {
-    bool ok = 1;
+    int32 status = 1;
     repeated Trash trash = 2;
 }
 
@@ -32,21 +31,13 @@ message GetTrashByTagsRequest {
 }
 
 message GetTrashInDistanceRequest {
-    float distance = 1;
+    optional float minDistance = 1;
+    optional float maxDistance = 2;
+    float latitude = 3;
+    float longitude = 4;
 }
 
 message GetTrashInDistanceResponse {
-    bool ok = 1;
+    int32 status = 1;
     repeated Trash trash = 3;
-}
-
-
-message GetTrashByRequest {
-    optional float distance = 1;
-    repeated string tags = 2;
-}
-
-message GetTrashByResponse {
-    bool ok = 1;
-    repeated Trash trash = 2;
 }

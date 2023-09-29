@@ -5,21 +5,21 @@ import { Observable } from 'rxjs';
 export const trashProtobufPackage = 'trash';
 
 export interface Trash {
-  id: string;
-  latitude: number;
-  longitude: number;
+  uuid: string;
+  location: number[];
   tags: string[];
 }
 
-export interface GetAllTrashRequest {}
+export interface GetAllTrashRequest {
+}
 
 export interface GetAllTrashResponse {
-  ok: boolean;
+  status: number;
   trash: Trash[];
 }
 
 export interface GetTrashByTagsResponse {
-  ok: boolean;
+  status: number;
   trash: Trash[];
 }
 
@@ -28,41 +28,25 @@ export interface GetTrashByTagsRequest {
 }
 
 export interface GetTrashInDistanceRequest {
-  distance: number;
+  minDistance?: number;
+  maxDistance?: number;
+  latitude: number;
+  longitude: number;
 }
 
 export interface GetTrashInDistanceResponse {
-  ok: boolean;
-  trash: Trash[];
-}
-
-export interface GetTrashByRequest {
-  distance?: number | undefined;
-  tags: string[];
-}
-
-export interface GetTrashByResponse {
-  ok: boolean;
+  status: number;
   trash: Trash[];
 }
 
 export const TRASH_PACKAGE_NAME = 'trash';
 
 export abstract class TrashServiceClient {
-  abstract getAllTrash(
-    request: GetAllTrashRequest,
-  ): GetAllTrashResponse | Promise<GetAllTrashResponse> | Observable<GetAllTrashResponse>;
+  abstract getAllTrash(request: GetAllTrashRequest): Observable<GetAllTrashResponse>;
 
-  abstract getTrashByTags(
-    request: GetTrashByTagsRequest,
-  ): GetTrashByTagsResponse | Promise<GetTrashByTagsResponse> | Observable<GetTrashByTagsResponse>;
+  abstract getTrashByTags(request: GetTrashByTagsRequest): Observable<GetTrashByTagsResponse>;
 
-  abstract getTrashInDistance(
-    request: GetTrashInDistanceRequest,
-  ):
-    | GetTrashInDistanceResponse
-    | Promise<GetTrashInDistanceResponse>
-    | Observable<GetTrashInDistanceResponse>;
+  abstract getTrashInDistance(request: GetTrashInDistanceRequest): Observable<GetTrashInDistanceResponse>;
 }
 
 export interface TrashServiceController {

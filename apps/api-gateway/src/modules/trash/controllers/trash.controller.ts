@@ -1,15 +1,15 @@
-import { ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Param, UseGuards, UseInterceptors } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import {
-  GetAllTrashRequest,
-  GetAllTrashResponse,
-  GetTrashByTagsRequest,
-  GetTrashByTagsResponse,
-  GetTrashInDistanceResponse,
-  TrashServiceClient,
-} from '@trashify/transport';
+  GetAllTrashResponseDto,
+  GetTrashByTagsRequestDto,
+  GetTrashByTagsResponseDto,
+  GetTrashInDistanceQueryParamsDto,
+  GetTrashInDistanceResponseDto,
+} from './dtos';
 import { HttpStatusInterceptor, JwtAuthGuard, TimeoutInterceptor } from '../../../common';
 import { Observable } from 'rxjs';
+import { TrashServiceClient } from '@trashify/transport';
 
 @Controller('trash')
 @ApiTags('TrashController')
@@ -18,22 +18,43 @@ export class TrashController {
   public constructor(private readonly client: TrashServiceClient) {}
 
   @UseGuards(JwtAuthGuard)
+  @ApiOkResponse({
+    type: GetAllTrashResponseDto,
+  })
   @Get()
-  async getAll(request: GetAllTrashRequest): Promise<Observable<GetAllTrashResponse>> {
-    return await this.client.getAllTrash(request);
+  async getAll(): Promise<Observable<GetAllTrashResponseDto>> {
+    return this.client.getAllTrash({});
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiBody({
+    type: GetTrashByTagsRequestDto,
+  })
+  @ApiOkResponse({
+    type: GetTrashByTagsResponseDto,
+  })
   @Get('tags')
-  async getByTags(request: GetTrashByTagsRequest): Promise<GetTrashByTagsResponse> {
-    return await this.client.getTrashByTags(request);
+  async getByTags(
+    @Body() request: GetTrashByTagsRequestDto,
+  ): Promise<Observable<GetTrashByTagsResponseDto>> {
+    return this.client.getTrashByTags(request);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('distance/:distance')
-  async getByDistance(@Param('distance') distance: number): Promise<GetTrashInDistanceResponse> {
-    return await this.client.getTrashInDistance({
-      distance,
+  @ApiOkResponse({
+    type: GetTrashInDistanceResponseDto,
+  })
+  @Get('distance')
+  async getByDistance(
+    @Query() queryParams: GetTrashInDistanceQueryParamsDto,
+  ): Promise<Observable<GetTrashInDistanceResponseDto>> {
+    const { latitude, longitude, maxDistance, minDistance } = queryParams;
+
+    return this.client.getTrashInDistance({
+      latitude,
+      longitude,
+      maxDistance,
+      minDistance,
     });
   }
 }

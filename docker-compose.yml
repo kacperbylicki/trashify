@@ -3,6 +3,7 @@ version: '3.8'
 networks:
   internal_services:
   accounts:
+  trash:
   api_gateway:
 
 services:
@@ -71,6 +72,22 @@ services:
       - internal_services
       - accounts
 
+  trash-mongodb:
+    container_name: trashify-trash-mongodb
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGODB_TRASH_DATABASE}
+    volumes:
+      - trashify-trash-mongodb:/data/db
+    command: mongod --port ${MONGODB_TRASH_PORT}
+    restart: unless-stopped
+    networks:
+      - trash
+    ports: 
+      - ${MONGODB_TRASH_PORT}:${MONGODB_TRASH_PORT}
+    expose:
+      - ${MONGODB_TRASH_PORT}
+
   trash-service:
     container_name: trashify-trash-service
     build:
@@ -86,8 +103,10 @@ services:
     restart: unless-stopped
     networks:
       - internal_services
+      - trash
 
 volumes:
   trashify-accounts-mongodb:
+  trashify-trash-mongodb:
   api-gateway-cache:
   api-gateway-cache-conf:

@@ -1,12 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, HttpStatus } from '@nestjs/common';
 import {
   GetAllTrashResponse,
-  GetTrashByTagsRequest,
   GetTrashByTagsResponse,
   GetTrashInDistanceResponse,
   TRASH_SERVICE_NAME,
   TrashServiceController,
 } from '@trashify/transport';
+import { GetTrashByTagsRequestDto, GetTrashInDistanceRequestDto } from '../dtos';
 import { GrpcMethod } from '@nestjs/microservices';
 import { TrashService } from '../services';
 import { grpcMethods } from '../enums/grpc-methods.enum';
@@ -16,28 +16,42 @@ export class TrashController implements TrashServiceController {
   constructor(private readonly trashService: TrashService) {}
 
   @GrpcMethod(TRASH_SERVICE_NAME, grpcMethods.getAllTrash)
-  getAllTrash(): GetAllTrashResponse {
+  public async getAllTrash(): Promise<GetAllTrashResponse> {
+    const result = await this.trashService.getAll();
+
     return {
-      ok: true,
-      trash: this.trashService.getAll(),
+      status: HttpStatus.OK,
+      trash: result,
     };
   }
 
   @GrpcMethod(TRASH_SERVICE_NAME, grpcMethods.getTrashByTags)
-  getTrashByTags(request: GetTrashByTagsRequest): GetTrashByTagsResponse {
+  public async getTrashByTags(request: GetTrashByTagsRequestDto): Promise<GetTrashByTagsResponse> {
     const { tags } = request;
 
+    const result = await this.trashService.getByTags({ tags });
+
     return {
-      ok: true,
-      trash: this.trashService.getByTags({ tags }),
+      status: HttpStatus.OK,
+      trash: result,
     };
   }
 
   @GrpcMethod(TRASH_SERVICE_NAME, grpcMethods.getTrashInDistance)
-  getTrashInDistance(): GetTrashInDistanceResponse {
+  public async getTrashInDistance(
+    payload: GetTrashInDistanceRequestDto,
+  ): Promise<GetTrashInDistanceResponse> {
+    const { latitude, longitude, maxDistance, minDistance } = payload;
+
+    const result = await this.trashService.getInDistance({
+      coordinates: [longitude, latitude],
+      maxDistance,
+      minDistance,
+    });
+
     return {
-      ok: true,
-      trash: this.trashService.getInDistance(),
+      status: HttpStatus.OK,
+      trash: result,
     };
   }
 }

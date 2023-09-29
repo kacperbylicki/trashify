@@ -1,5 +1,6 @@
 import { AppConfig } from '@/config';
 import { Config } from '@unifig/core';
+import { DatabaseConfig } from './config/database.config';
 import { EnvConfigAdapter } from '@unifig/adapter-env';
 import { HttpExceptionFilter, trashProtobufPackage } from '@trashify/transport';
 import { INestMicroservice, ValidationPipe } from '@nestjs/common';
@@ -9,7 +10,7 @@ import { toJSON } from '@unifig/validation-presenter-json';
 
 (async (): Promise<void> => {
   const validationError = await Config.register({
-    templates: [AppConfig],
+    templates: [AppConfig, DatabaseConfig],
     adapter: new EnvConfigAdapter(),
   });
 
