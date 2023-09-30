@@ -32,12 +32,22 @@ jobs:
         username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
         password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
 
+    - name: Creating .npmrc
+      run: |
+        cat << EOF > "$HOME/.npmrc"
+          @trashify:registry=https://registry.npmjs.org/
+          //registry.npmjs.org/:_authToken=$NPM_TOKEN
+        EOF
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
         tags: crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-mailing-service:${{ github.sha }}
         file: ./apps/mailing-service/Dockerfile
+        target: production
       env:
         NODE_ENV: production
         MAILING_SERVICE_URL: ${{ secrets.MAILING_SERVICE_URL }}
