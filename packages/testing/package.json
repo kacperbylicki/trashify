@@ -2,7 +2,6 @@
     "name": "@trashify/testing",
     "version": "1.0.0",
     "author": "Kacper Bylicki & Marek Gerszendorf & Jakub Barczewski",
-    "private": true,
     "license": "ISC",
     "description": "Library used for storing testing dependencies",
     "main": "dist/index.js",
