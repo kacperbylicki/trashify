@@ -5,6 +5,7 @@ import { HttpExceptionFilter, accountProtobufPackage } from '@trashify/transport
 import { INestMicroservice, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
+import { join } from 'path';
 import { toJSON } from '@unifig/validation-presenter-json';
 
 (async (): Promise<void> => {
@@ -28,7 +29,7 @@ import { toJSON } from '@unifig/validation-presenter-json';
     options: {
       url: serviceUrl,
       package: accountProtobufPackage,
-      protoPath: `./proto/account.proto`,
+      protoPath: join(__dirname, `../proto/account.proto`),
     },
   });
 

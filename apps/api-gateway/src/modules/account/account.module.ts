@@ -10,6 +10,7 @@ import { Config } from '@unifig/core';
 import { ConfigModule, getConfigContainerToken } from '@unifig/nest';
 import { JwtService } from './services';
 import { Module } from '@nestjs/common';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { Module } from '@nestjs/common';
             options: {
               url: accountServiceUrl,
               package: ACCOUNT_PACKAGE_NAME,
-              protoPath: './proto/account.proto',
+              protoPath: join(__dirname, `../../../proto/account.proto`),
             },
           };
         },

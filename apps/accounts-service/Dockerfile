@@ -10,8 +10,8 @@ RUN yarn global add turbo
 COPY . .
 RUN turbo prune --scope=@trashify/accounts-service --docker
 
-# Installer stage
-FROM --platform=$BUILDPLATFORM node:lts-alpine AS installer
+# Development Installer stage
+FROM --platform=$BUILDPLATFORM node:lts-alpine AS development-installer
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
@@ -19,9 +19,23 @@ RUN apk update
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY --from=builder /app/out/json/ .
-COPY --from=builder /app/out/yarn.lock ./yarn.lock
+COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
 COPY --from=builder /app/turbo.json ./turbo.json
 RUN yarn install --frozen-lockfile
+
+# Production Installer stage
+FROM --platform=$BUILDPLATFORM node:lts-alpine AS production-installer
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+
+RUN apk update
+RUN apk add --no-cache libc6-compat
+RUN apk add jq
+WORKDIR /app
+COPY --from=builder /app/out/json/apps/accounts-service .
+COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
+COPY --from=builder /app/out/json/.npmrc ./.npmrc
+RUN yarn install --production
 
 # Sourcer stage
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS sourcer
@@ -31,7 +45,7 @@ ARG BUILDPLATFORM
 RUN apk update
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY --from=installer /app/ .
+COPY --from=development-installer /app/ .
 COPY --from=builder /app/out/full/ .
 RUN yarn turbo run build --scope=@trashify/accounts-service --include-dependencies --no-deps
 
@@ -40,8 +54,6 @@ FROM --platform=$BUILDPLATFORM node:lts-alpine AS development
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-ARG ACCOUNTS_SERVICE_PORT=50001
-ENV ACCOUNTS_SERVICE_PORT=$ACCOUNTS_SERVICE_PORT
 ENV NODE_ENV=development
 
 RUN apk update
@@ -59,8 +71,8 @@ ENV NODE_ENV=production
 
 RUN apk update
 WORKDIR /app
-COPY --chown=node:node --from=sourcer /app/ .
-
+COPY --chown=node:node --from=production-installer /app/node_modules/ ./node_modules/
+COPY --chown=node:node --from=sourcer /app/apps/accounts-service/dist ./dist
+COPY --chown=node:node --from=sourcer /app/apps/accounts-service/proto ./proto
 USER node
-CMD ["node", "apps/accounts-service/dist/main.js"]
-EXPOSE $ACCOUNTS_SERVICE_PORT
+CMD ["node", "dist/main.js"]

@@ -2,7 +2,7 @@ version: '3.8'
 
 networks:
   internal_services:
-  accounts:  
+  accounts:
   api_gateway:
 
 services:
@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     networks:
       - accounts
-    ports: 
+    ports:
       - ${MONGODB_ACCOUNTS_PORT}:${MONGODB_ACCOUNTS_PORT}
     expose:
       - ${MONGODB_ACCOUNTS_PORT}
@@ -46,7 +46,7 @@ services:
       - ${API_GATEWAY_REDIS_CACHE_PORT:-6379}:${API_GATEWAY_REDIS_CACHE_PORT:-6379}
     command: redis-server --save 20 1 --loglevel warning --requirepass ${API_GATEWAY_REDIS_CACHE_PASSWORD:-3HOiHBc6CQiTN0c}
     restart: unless-stopped
-    volumes: 
+    volumes:
       - api-gateway-cache:/data
       - api-gateway-cache-conf:/usr/local/etc/redis/redis.conf
     networks:
@@ -63,7 +63,7 @@ services:
       - /app/node_modules
     env_file: .env
     ports:
-      - ${API_GATEWAY_PORT:-50000}:${API_GATEWAY_PORT:-50000}
+      - ${PORT:-50000}:${PORT:-50000}
       - ${API_GATEWAY_DEBUGGER_PORT:-9229}:${API_GATEWAY_DEBUGGER_PORT:-9229}
     restart: unless-stopped
     networks:

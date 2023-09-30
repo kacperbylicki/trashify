@@ -45,11 +45,11 @@ import { toJSON } from '@unifig/validation-presenter-json';
 
   const swaggerConfig = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('The Boring Playgrounds')
+    .setTitle('Trashify')
     .setVersion('1.0')
     .build();
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('/docs', app, swaggerDocument);
 
-  await app.listen(Config.getValues(AppConfig).port);
+  await app.listen(Config.getValues(AppConfig).port, '0.0.0.0');
 })();
