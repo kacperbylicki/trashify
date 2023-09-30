@@ -4,8 +4,8 @@ import { TrashDto } from '../dtos';
 export class TrashMapper {
   public static mapFromRaw(raw: Trash): TrashDto {
     return {
-      location: raw.location.coordinates,
-      tags: raw.tags,
+      location: raw.location,
+      tag: raw.tag,
       uuid: raw.uuid,
     };
   }

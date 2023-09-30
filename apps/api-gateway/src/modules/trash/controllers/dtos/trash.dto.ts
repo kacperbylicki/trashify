@@ -19,14 +19,14 @@ export class TrashDto implements Trash {
     example: [19.493958, 49.882786],
     description: 'Geographical longitude and latitude of the trash container.',
   })
-  location!: number[];
+  location!: [number, number];
 
   @ApiProperty({
     type: String,
     enum: TrashTags,
     enumName: 'TrashTags',
-    example: [TrashTags.batteries, TrashTags.bottleMachine],
+    example: TrashTags.batteries,
     minLength: 1,
   })
-  tags!: TrashTagsEnum[];
+  tag!: TrashTagsEnum;
 }

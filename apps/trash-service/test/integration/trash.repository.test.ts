@@ -1,10 +1,19 @@
+/* eslint-disable jest/no-conditional-expect */
+
+import { Generator, MongooseTestModule } from '@trashify/testing';
 import { Model } from 'mongoose';
 import { MongooseModule, getConnectionToken, getModelToken } from '@nestjs/mongoose';
-import { MongooseTestModule } from '@trashify/testing';
+import {
+  RawTrash,
+  TrashTestFactory,
+} from '../../src/modules/trash/repository/test/factories/trash-test-factory';
+import { RepositoryError } from '../../src/common/exceptions/repository.exception';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Trash, TrashSchema } from '../../src/modules/trash/entities/trash.entity';
+import { TrashDraft } from '../../src/modules/trash/dtos/trash.draft';
 import { TrashRepository } from '../../src/modules/trash/repository/trash.repository';
-import { TrashTestFactory } from '../../src/modules/trash/repository/test/factories/trash-test-factory';
+import { TrashTags } from '../../src/modules/trash/enums/trash-tags.enum';
+import { TrashUpdateDto } from '../../src/modules/trash/dtos';
 
 describe('TrashRepository', () => {
   const mongooseTestModule = new MongooseTestModule();
@@ -41,15 +50,23 @@ describe('TrashRepository', () => {
     await moduleRef.close();
   });
 
+  async function createTestTrash(): Promise<RawTrash[]> {
+    const trash1 = trashTestFactory.create(),
+      trash2 = trashTestFactory.create(),
+      trash3 = trashTestFactory.create(),
+      trash4 = trashTestFactory.create(),
+      trash5 = trashTestFactory.create();
+
+    const trashArray = [trash1, trash2, trash3, trash4, trash5];
+
+    await trashModel.insertMany(trashArray);
+
+    return trashArray;
+  }
+
   describe('findAll', () => {
     it('returns all saved Trash entities', async () => {
-      const trash1 = trashTestFactory.create(),
-        trash2 = trashTestFactory.create(),
-        trash3 = trashTestFactory.create();
-
-      const trashArray = [trash1, trash2, trash3];
-
-      await trashModel.insertMany(trashArray);
+      const trashArray = await createTestTrash();
 
       const result = await trashRepository.findAll();
 
@@ -57,7 +74,121 @@ describe('TrashRepository', () => {
         const lookup = trashArray.find((t) => t.uuid === trash.uuid);
 
         expect(lookup).toBeTruthy();
+
+        expect(trash).toMatchObject(lookup as RawTrash);
       });
+    });
+
+    it('returns an empty array - when no entities exist', async () => {
+      const result = await trashRepository.findAll();
+
+      expect(result).toHaveLength(0);
+    });
+  });
+
+  describe('findByTags', () => {
+    it('returns an empty array - when called with no tags', async () => {
+      await createTestTrash();
+
+      const result = await trashRepository.findByTags({ tags: [] });
+
+      expect(result).toHaveLength(0);
+    });
+
+    it('returns only trash with specified tags', async () => {
+      await createTestTrash();
+
+      const batteriesTrash = trashTestFactory.create({
+          tag: TrashTags.batteries,
+        }),
+        bioTrash = trashTestFactory.create({
+          tag: TrashTags.bio,
+        });
+
+      await trashModel.insertMany([batteriesTrash, bioTrash]);
+
+      const result = await trashRepository.findByTags({
+        tags: [TrashTags.batteries],
+      });
+
+      expect(result).not.toHaveLength(0);
+
+      result.forEach((trash) =>
+        expect(trash.tag === TrashTags.bio || trash.tag === TrashTags.batteries).toBeTruthy(),
+      );
+    });
+  });
+
+  describe('save', () => {
+    it('persists a new Trash - when given TrashDraft', async () => {
+      const trashDraft = new TrashDraft({
+        coordinates: Generator.coordinates({}),
+        tag: TrashTags.batteries,
+      });
+
+      await trashRepository.save({
+        trash: trashDraft,
+      });
+
+      const rawTrash = await trashModel.findOne({
+        location: trashDraft.location,
+        tag: trashDraft.tag,
+      });
+
+      expect(rawTrash).toBeDefined();
+    });
+
+    it('updates existing Trash - when given TrashDto', async () => {
+      const trash = trashTestFactory.create({
+        tag: TrashTags.municipal,
+      });
+
+      await trashModel.create(trash);
+
+      const trashUpdate = new TrashUpdateDto({
+        location: Generator.coordinates({}),
+        tag: TrashTags.mixed,
+        uuid: trash.uuid,
+      });
+
+      await trashRepository.save({ trash: trashUpdate });
+
+      const rawTrash = await trashModel
+        .findOne({
+          uuid: trash.uuid,
+        })
+        .lean();
+
+      expect(rawTrash).toBeDefined();
+
+      expect(rawTrash?.location).toStrictEqual(trashUpdate.location);
+
+      expect(rawTrash?.tag).toEqual(trashUpdate.tag);
+    });
+
+    it('throws an error - when given TrashDto, but does not exist', async () => {
+      expect.assertions(2);
+
+      const trashUpdate = new TrashUpdateDto({
+        location: Generator.coordinates({}),
+        tag: TrashTags.mixed,
+        uuid: Generator.uuid(),
+      });
+
+      try {
+        await trashRepository.save({ trash: trashUpdate });
+      } catch (error) {
+        expect(error).toBeInstanceOf(RepositoryError);
+
+        const repositoryError = error as RepositoryError;
+
+        expect(repositoryError.context).toEqual({
+          entityName: 'Trash',
+          operation: 'save',
+          uuid: trashUpdate.uuid,
+          reason: 'Entity does not exist.',
+        });
+      }
     });
   });
 });

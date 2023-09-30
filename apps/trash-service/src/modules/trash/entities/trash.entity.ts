@@ -1,12 +1,13 @@
 import { ModelDefinition, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { TrashTagsEnum } from '../enums/trash-tags.enum';
 
 @Schema()
 export class Trash {
   @Prop({ type: String, unique: true })
   uuid!: string;
 
-  @Prop({ type: [String], required: true })
-  tags!: string[];
+  @Prop({ type: String, required: true })
+  tag!: TrashTagsEnum;
 
   @Prop({
     type: {
@@ -19,10 +20,7 @@ export class Trash {
       required: true,
     },
   })
-  location!: {
-    type: 'Point';
-    coordinates: [number, number];
-  };
+  location!: [number, number];
 
   @Prop({ type: Number, required: true })
   createdAt!: number;

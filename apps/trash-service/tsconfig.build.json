@@ -2,8 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "src/**/*.test.ts", "test/**/*.ts"]
+  "exclude": ["node_modules", "dist", "src/**/*.test.ts", "test/**/*.ts", "src/**/test/*.ts"]
 }

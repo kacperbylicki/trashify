@@ -6,12 +6,26 @@ service TrashService {
     rpc GetAllTrash(GetAllTrashRequest) returns (GetAllTrashResponse);
     rpc GetTrashByTags(GetTrashByTagsRequest) returns (GetTrashByTagsResponse);
     rpc GetTrashInDistance(GetTrashInDistanceRequest) returns (GetTrashInDistanceResponse);
+    rpc CreateTrash(CreateTrashRequest) returns(CreateTrashResponse);
+    rpc UpdateTrash(UpdateTrashRequest) returns(UpdateTrashResponse);
+    rpc DeleteTrash(DeleteTrashRequest) returns(DeleteTrashResponse);
 }
 
 message Trash {
     string uuid = 1;
     repeated float location = 2;
-    repeated string tags = 4;
+    string tag = 3;
+}
+
+message CreateTrashPayload {
+    repeated float location = 1;
+    string tag = 2;
+}
+
+message UpdateTrashPayload {
+    string uuid = 1;
+    optional string tag = 2;
+    repeated float location = 3;
 }
 
 message GetAllTrashRequest {}
@@ -40,4 +54,28 @@ message GetTrashInDistanceRequest {
 message GetTrashInDistanceResponse {
     int32 status = 1;
     repeated Trash trash = 3;
+}
+
+message CreateTrashRequest {
+    CreateTrashPayload trash = 1;
+}
+
+message CreateTrashResponse {
+    int32 status = 1;
+}
+
+message UpdateTrashRequest {
+    UpdateTrashPayload trash = 1;
+}
+
+message UpdateTrashResponse {
+    int32 status = 1;
+}
+
+message DeleteTrashRequest {
+    string uuid = 1;
+}
+
+message DeleteTrashResponse {
+    int32 status = 1;
 }

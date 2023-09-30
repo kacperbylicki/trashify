@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Trash } from '../entities/trash.entity';
+import { TrashDraft } from '../dtos/trash.draft';
 import { TrashRepository } from '../repository/trash.repository';
 import { TrashTagsEnum } from '../enums/trash-tags.enum';
+import { TrashUpdateDto } from '../dtos';
 
 interface GetByTagsPayload {
   tags: TrashTagsEnum[];
@@ -11,6 +13,14 @@ interface GetInDistancePayload {
   coordinates: [number, number];
   minDistance?: number;
   maxDistance?: number;
+}
+
+interface UpdatePayload {
+  trash: TrashUpdateDto;
+}
+
+interface CreatePayload {
+  trash: TrashDraft;
 }
 
 @Injectable()
@@ -41,5 +51,17 @@ export class TrashService {
     });
 
     return result;
+  }
+
+  public async create(payload: CreatePayload): Promise<Trash> {
+    return await this.trashRepository.save(payload);
+  }
+
+  public async update(payload: UpdatePayload): Promise<Trash> {
+    return await this.trashRepository.save(payload);
+  }
+
+  public async delete(uuid: string): Promise<void> {
+    await this.trashRepository.delete(uuid);
   }
 }
