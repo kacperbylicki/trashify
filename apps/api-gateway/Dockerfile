@@ -10,8 +10,8 @@ RUN yarn global add turbo
 COPY . .
 RUN turbo prune --scope=@trashify/api-gateway --docker
 
-# Installer stage
-FROM --platform=$BUILDPLATFORM node:lts-alpine AS installer
+# Development Installer stage
+FROM --platform=$BUILDPLATFORM node:lts-alpine AS development-installer
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
@@ -19,9 +19,23 @@ RUN apk update
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY --from=builder /app/out/json/ .
-COPY --from=builder /app/out/yarn.lock ./yarn.lock
+COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
 COPY --from=builder /app/turbo.json ./turbo.json
 RUN yarn install --frozen-lockfile
+
+# Production Installer stage
+FROM --platform=$BUILDPLATFORM node:lts-alpine AS production-installer
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+
+RUN apk update
+RUN apk add --no-cache libc6-compat
+RUN apk add jq
+WORKDIR /app
+COPY --from=builder /app/out/json/apps/api-gateway .
+COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
+COPY --from=builder /app/out/json/.npmrc ./.npmrc
+RUN yarn install --production
 
 # Sourcer stage
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS sourcer
@@ -31,7 +45,7 @@ ARG BUILDPLATFORM
 RUN apk update
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY --from=installer /app/ .
+COPY --from=development-installer /app/ .
 COPY --from=builder /app/out/full/ .
 RUN yarn turbo run build --scope=@trashify/api-gateway --include-dependencies --no-deps
 
@@ -40,7 +54,6 @@ FROM --platform=$BUILDPLATFORM node:lts-alpine AS development
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-ENV PROTO_PATH=../../../../../node_modules/@trashify/transport
 ENV NODE_ENV=development
 
 RUN apk update
@@ -54,15 +67,12 @@ FROM --platform=$BUILDPLATFORM node:lts-alpine AS production
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-ARG API_GATEWAY_PORT=50000
-ENV API_GATEWAY_PORT=$API_GATEWAY_PORT
 ENV NODE_ENV=production
-ENV PROTO_PATH=node_modules/@trashify/transport
 
 RUN apk update
 WORKDIR /app
-COPY --chown=node:node --from=sourcer /app/node_modules/ ./node_modules/
-COPY --chown=node:node --from=sourcer /app/apps/api-gateway/dist/ ./dist/
+COPY --chown=node:node --from=production-installer /app/node_modules/ ./node_modules/
+COPY --chown=node:node --from=sourcer /app/apps/api-gateway/dist ./dist
+COPY --chown=node:node --from=sourcer /app/apps/api-gateway/proto ./proto
 USER node
 CMD ["node", "dist/main.js"]
-EXPOSE $API_GATEWAY_PORT
