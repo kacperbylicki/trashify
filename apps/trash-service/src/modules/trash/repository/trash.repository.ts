@@ -19,7 +19,7 @@ export class TrashRepository {
   constructor(@InjectModel('Trash') private readonly trashModel: Model<Trash>) {}
 
   async findAll(): Promise<Trash[]> {
-    return await this.trashModel.find({}).lean();
+    return await this.trashModel.find({});
   }
 
   async findByTags(payload: FindByTagsPayload): Promise<Trash[]> {

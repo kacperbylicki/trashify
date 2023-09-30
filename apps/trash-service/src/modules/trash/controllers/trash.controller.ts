@@ -8,6 +8,7 @@ import {
 } from '@trashify/transport';
 import { GetTrashByTagsRequestDto, GetTrashInDistanceRequestDto } from '../dtos';
 import { GrpcMethod } from '@nestjs/microservices';
+import { TrashMapper } from '../mappers/trash-mapper';
 import { TrashService } from '../services';
 import { grpcMethods } from '../enums/grpc-methods.enum';
 
@@ -19,9 +20,11 @@ export class TrashController implements TrashServiceController {
   public async getAllTrash(): Promise<GetAllTrashResponse> {
     const result = await this.trashService.getAll();
 
+    const mappedResult = TrashMapper.mapFromRawArray(result);
+
     return {
       status: HttpStatus.OK,
-      trash: result,
+      trash: mappedResult,
     };
   }
 
@@ -31,9 +34,11 @@ export class TrashController implements TrashServiceController {
 
     const result = await this.trashService.getByTags({ tags });
 
+    const mappedResult = TrashMapper.mapFromRawArray(result);
+
     return {
       status: HttpStatus.OK,
-      trash: result,
+      trash: mappedResult,
     };
   }
 
@@ -49,9 +54,11 @@ export class TrashController implements TrashServiceController {
       minDistance,
     });
 
+    const mappedResult = TrashMapper.mapFromRawArray(result);
+
     return {
       status: HttpStatus.OK,
-      trash: result,
+      trash: mappedResult,
     };
   }
 }

@@ -7,7 +7,7 @@ export class TrashDto implements Trash {
     type: String,
     format: 'uuid',
   })
-  id!: string;
+  uuid!: string;
 
   @ApiProperty({
     type: Array,
@@ -19,7 +19,7 @@ export class TrashDto implements Trash {
     example: [19.493958, 49.882786],
     description: 'Geographical longitude and latitude of the trash container.',
   })
-  coordinates!: number[];
+  location!: number[];
 
   @ApiProperty({
     type: String,
