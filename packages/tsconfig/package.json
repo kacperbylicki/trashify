@@ -2,5 +2,5 @@
   "name": "@trashify/tsconfig",
   "version": "0.0.0",
   "author": "Kacper Bylicki & Marek Gerszendorf & Jakub Barczewski",
-  "private": true
+  "license": "ISC"
 }
