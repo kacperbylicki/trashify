@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Trash } from '../entities/trash.entity';
 import { TrashDraft } from '../dtos/trash.draft';
+import { TrashDto, TrashUpdateDto } from '../dtos';
 import { TrashRepository } from '../repository/trash.repository';
 import { TrashTagsEnum } from '../enums/trash-tags.enum';
-import { TrashUpdateDto } from '../dtos';
 
 interface GetByTagsPayload {
   tags: TrashTagsEnum[];
@@ -53,11 +53,11 @@ export class TrashService {
     return result;
   }
 
-  public async create(payload: CreatePayload): Promise<Trash> {
+  public async create(payload: CreatePayload): Promise<TrashDto> {
     return await this.trashRepository.save(payload);
   }
 
-  public async update(payload: UpdatePayload): Promise<Trash> {
+  public async update(payload: UpdatePayload): Promise<TrashDto> {
     return await this.trashRepository.save(payload);
   }
 

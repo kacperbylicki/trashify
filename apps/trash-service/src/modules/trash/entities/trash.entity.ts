@@ -20,7 +20,10 @@ export class Trash {
       required: true,
     },
   })
-  location!: [number, number];
+  location!: {
+    type: 'Point';
+    coordinates: [number, number];
+  };
 
   @Prop({ type: Number, required: true })
   createdAt!: number;

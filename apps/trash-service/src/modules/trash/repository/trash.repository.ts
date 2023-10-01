@@ -5,8 +5,8 @@ import { Model } from 'mongoose';
 import { RepositoryError } from '../../../common/exceptions/repository.exception';
 import { Trash } from '../entities/trash.entity';
 import { TrashDraft } from '../dtos/trash.draft';
+import { TrashDto, TrashUpdateDto } from '../dtos';
 import { TrashTagsEnum } from '../enums/trash-tags.enum';
-import { TrashUpdateDto } from '../dtos';
 import { v4 as uuidv4 } from 'uuid';
 
 interface FindByTagsPayload {
@@ -28,7 +28,7 @@ export class TrashRepository {
   constructor(@InjectModel('Trash') private readonly trashModel: Model<Trash>) {}
 
   public async findAll(): Promise<Trash[]> {
-    return await this.trashModel.find({});
+    return await this.trashModel.find({}).lean();
   }
 
   public async findByTags(payload: FindByTagsPayload): Promise<Trash[]> {
@@ -66,7 +66,7 @@ export class TrashRepository {
     return result;
   }
 
-  public async save(payload: SavePayload): Promise<Trash> {
+  public async save(payload: SavePayload): Promise<TrashDto> {
     const { trash } = payload;
 
     if (trash instanceof TrashUpdateDto) {
@@ -100,7 +100,7 @@ export class TrashRepository {
     }
   }
 
-  private async update(trash: TrashUpdateDto): Promise<Trash> {
+  private async update(trash: TrashUpdateDto): Promise<TrashDto> {
     const existingTrash = await this.trashModel
       .findOne({
         uuid: trash.uuid,
@@ -134,6 +134,7 @@ export class TrashRepository {
       return {
         ...existingTrash,
         ...trash,
+        location: trash.location ?? existingTrash.location.coordinates,
       };
     } catch (error) {
       throw new RepositoryError(
@@ -146,7 +147,7 @@ export class TrashRepository {
     }
   }
 
-  private async create(trashDraft: TrashDraft): Promise<Trash> {
+  private async create(trashDraft: TrashDraft): Promise<TrashDto> {
     try {
       const payload = {
         uuid: uuidv4(),
