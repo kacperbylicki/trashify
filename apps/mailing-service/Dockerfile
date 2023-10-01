@@ -34,8 +34,9 @@ RUN apk add jq
 WORKDIR /app
 COPY --from=builder /app/out/json/apps/mailing-service .
 COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
-COPY --from=builder /app/out/json/.npmrc ./.npmrc
+COPY --from=builder /app/.npmrc ./.npmrc
 RUN yarn install --production
+RUN rm -f .npmrc
 
 # Sourcer stage
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS sourcer
