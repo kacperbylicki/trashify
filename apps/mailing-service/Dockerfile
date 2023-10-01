@@ -35,7 +35,7 @@ WORKDIR /app
 COPY --from=builder /app/out/json/apps/mailing-service .
 COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
 RUN echo "@trashify:registry=https://registry.npmjs.org/" > .npmrc && \
-    echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc && \
+    echo "//registry.npmjs.org/:_authToken=$NPM_READ_TOKEN" >> .npmrc && \
     yarn install --production && \
     rm -f .npmrc
 
