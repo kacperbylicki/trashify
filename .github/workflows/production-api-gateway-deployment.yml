@@ -39,11 +39,12 @@ jobs:
         tags: crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-api-gateway:${{ github.sha }}
         file: ./apps/api-gateway/Dockerfile
         target: production
+        build-args: |
+          NPM_READ_TOKEN=${{ secrets.NPM_READ_TOKEN }}
       env:
         NODE_ENV: production
         ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
         MAILING_SERVICE_URL: ${{ secrets.MAILING_SERVICE_URL }}
-        NPM_READ_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
 
   deploy:
     name: "deploy"
