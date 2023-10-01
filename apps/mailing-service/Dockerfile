@@ -34,9 +34,10 @@ RUN apk add jq
 WORKDIR /app
 COPY --from=builder /app/out/json/apps/mailing-service .
 COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
-COPY --from=builder /app/.npmrc ./.npmrc
-RUN yarn install --production
-RUN rm -f .npmrc
+RUN echo "@trashify:registry=https://registry.npmjs.org/ \
+    //registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc && \
+    yarn install --production && \
+    rm -f .npmrc
 
 # Sourcer stage
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS sourcer
