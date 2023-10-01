@@ -14,6 +14,8 @@ jobs:
     name: "build"
     runs-on: ubuntu-latest
     environment: production
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     defaults:
       run:
@@ -31,15 +33,6 @@ jobs:
         registry: https://crtrashifyproduction.azurecr.io/
         username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
         password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
-
-    - name: Creating .npmrc
-      run: |
-        cat << EOF > "$HOME/.npmrc"
-          @trashify:registry=https://registry.npmjs.org/
-          //registry.npmjs.org/:_authToken=$NPM_TOKEN
-        EOF
-      env:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
