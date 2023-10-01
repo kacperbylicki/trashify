@@ -43,7 +43,7 @@ jobs:
         NODE_ENV: production
         ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
         MAILING_SERVICE_URL: ${{ secrets.MAILING_SERVICE_URL }}
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NPM_READ_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
 
   deploy:
     name: "deploy"
