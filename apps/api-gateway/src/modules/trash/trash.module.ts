@@ -18,14 +18,14 @@ import { join } from 'path';
         imports: [ConfigModule.forFeature(AppConfig)],
         inject: [getConfigContainerToken(AppConfig)],
         useFactory: async (): Promise<ClientProvider> => {
-          const { protoPath, trashServiceUrl } = Config.getValues(AppConfig);
+          const { trashServiceUrl } = Config.getValues(AppConfig);
 
           return {
             transport: Transport.GRPC,
             options: {
               url: trashServiceUrl,
               package: TRASH_PACKAGE_NAME,
-              protoPath: join(__dirname, `${protoPath}/proto/trash.proto`),
+              protoPath: join(__dirname, `../../../proto/trash.proto`),
             },
           };
         },
