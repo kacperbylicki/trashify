@@ -14,8 +14,6 @@ jobs:
     name: "build"
     runs-on: ubuntu-latest
     environment: production
-    env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     defaults:
       run:
@@ -45,6 +43,7 @@ jobs:
         NODE_ENV: production
         ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
         MAILING_SERVICE_URL: ${{ secrets.MAILING_SERVICE_URL }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   deploy:
     name: "deploy"
