@@ -34,8 +34,8 @@ RUN apk add jq
 WORKDIR /app
 COPY --from=builder /app/out/json/apps/accounts-service .
 COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
-RUN echo "@trashify:registry=https://registry.npmjs.org/ \
-    //registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc && \
+RUN echo "@trashify:registry=https://registry.npmjs.org/" > .npmrc && \
+    echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc && \
     yarn install --production && \
     rm -f .npmrc
 
