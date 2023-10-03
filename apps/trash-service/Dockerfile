@@ -68,14 +68,11 @@ ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
 ENV NODE_ENV=production
-ENV PROTO_PATH=node_modules/@trashify/transport
 
 RUN apk update
 WORKDIR /app
 COPY --chown=node:node --from=production-installer /app/node_modules/ ./node_modules/
 COPY --chown=node:node --from=sourcer /app/apps/trash-service/dist ./dist
 COPY --chown=node:node --from=sourcer /app/apps/trash-service/proto ./proto
-
 USER node
-CMD ["node", "apps/trash-service/dist/main.js"]
-EXPOSE $TRASH_SERVICE_PORT
+CMD ["node", "dist/main.js"]

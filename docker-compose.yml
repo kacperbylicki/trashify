@@ -98,8 +98,6 @@ services:
       - ./:/app
       - /app/node_modules
     env_file: .env
-    ports:
-      - ${TRASH_SERVICE_PORT:-50044}:${TRASH_SERVICE_PORT:-50044}
     restart: unless-stopped
     networks:
       - internal_services
