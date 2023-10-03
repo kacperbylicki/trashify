@@ -1,3 +1,3 @@
-export * from "./account-grpc-methods";
-export * from "./mailing-grpc-methods";
-export * from "./trash-grpc-methods";
+export * from "./account-grpc-method";
+export * from "./mailing-grpc-method";
+export * from "./trash-grpc-method";

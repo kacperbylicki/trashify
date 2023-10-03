@@ -9,7 +9,7 @@ import {
   TRASH_SERVICE_NAME,
   TrashServiceController,
   UpdateTrashResponse,
-  trashGrpcMethods,
+  trashGrpcMethod,
 } from '@trashify/transport';
 import { DeleteTrashRequestDto } from '../dtos/delete-trash.dto';
 import { GetTrashByTagsRequestDto, GetTrashInDistanceRequestDto, TrashUpdateDto } from '../dtos';
@@ -23,7 +23,7 @@ import { UpdateTrashRequestDto } from '../dtos/update-trash.dto';
 @Controller()
 export class TrashController implements TrashServiceController {
   public constructor(private readonly trashService: TrashService) {}
-  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.getAllTrash)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethod.getAllTrash)
   public async getAllTrash(): Promise<GetAllTrashResponse> {
     const result = await this.trashService.getAll();
 
@@ -35,7 +35,7 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.getTrashByTags)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethod.getTrashByTags)
   public async getTrashByTags(request: GetTrashByTagsRequestDto): Promise<GetTrashByTagsResponse> {
     const { tags } = request;
 
@@ -49,7 +49,7 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.getTrashInDistance)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethod.getTrashInDistance)
   public async getTrashInDistance(
     payload: GetTrashInDistanceRequestDto,
   ): Promise<GetTrashInDistanceResponse> {
@@ -69,7 +69,7 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.createTrash)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethod.createTrash)
   public async createTrash(request: CreateTrashRequestDto): Promise<CreateTrashResponse> {
     const { trash } = request;
 
@@ -85,7 +85,7 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.updateTrash)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethod.updateTrash)
   public async updateTrash(request: UpdateTrashRequestDto): Promise<UpdateTrashResponse> {
     const { trash } = request;
 
@@ -102,7 +102,7 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.deleteTrash)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethod.deleteTrash)
   public async deleteTrash(request: DeleteTrashRequestDto): Promise<DeleteTrashResponse> {
     const { uuid } = request;
 

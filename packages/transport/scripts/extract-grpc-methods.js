@@ -48,17 +48,17 @@ const { resolve } = require('path');
     if (!pbName) continue;
 
     const payload =
-      `export const ${pbName}GrpcMethods = ${JSON.stringify(grpcMethods, null, 2)} as const;` +
+      `export const ${pbName}GrpcMethod = ${JSON.stringify(grpcMethods, null, 2)} as const;` +
       '\n\n' +
-      `export type ${pbName}GrpcMethodsEnum = keyof typeof ${pbName}GrpcMethods;\n`;
+      `export type ${pbName}GrpcMethodEnum = keyof typeof ${pbName}GrpcMethod;\n`;
 
-    await writeFile(resolve(saveGrpcMethodsPath, `${pbName}-grpc-methods.ts`), payload);
+    await writeFile(resolve(saveGrpcMethodsPath, `${pbName}-grpc-method.ts`), payload);
   }
 
   const indexFilePayload = files.map((filePath) => {
     const pbName = filePath.match(new RegExp(/[A-Z]\w+/, 'gi'))?.[0];
 
-    return `export * from "./${pbName}-grpc-methods";`
+    return `export * from "./${pbName}-grpc-method";`
   }).join('\n');
 
   await writeFile(
