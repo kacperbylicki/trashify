@@ -3,40 +3,33 @@
 import { Generator, MongooseTestModule } from '@trashify/testing';
 import { Model } from 'mongoose';
 import { MongooseModule, getConnectionToken, getModelToken } from '@nestjs/mongoose';
-import {
-  RawTrash,
-  TrashTestFactory,
-} from '../../src/modules/trash/repository/test/factories/trash-test-factory';
+import { RawTrash, TrashTestFactory } from '../factories/trash-test-factory';
 import { RepositoryError } from '../../src/common/exceptions/repository.exception';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Trash, TrashSchema } from '../../src/modules/trash/entities/trash.entity';
 import { TrashDraft } from '../../src/modules/trash/dtos/trash.draft';
+import { TrashRawEntity, TrashSchema } from '../../src/modules/trash/entities/trash.entity';
 import { TrashRepository } from '../../src/modules/trash/repository/trash.repository';
 import { TrashTags } from '../../src/modules/trash/enums/trash-tags.enum';
 import { TrashUpdateDto } from '../../src/modules/trash/dtos';
 
 describe('TrashRepository', () => {
   const mongooseTestModule = new MongooseTestModule();
-
   const trashTestFactory = new TrashTestFactory();
-
   let moduleRef: TestingModule;
-
   let trashRepository: TrashRepository;
-
-  let trashModel: Model<Trash>;
+  let trashModel: Model<TrashRawEntity>;
 
   beforeAll(async () => {
     moduleRef = await Test.createTestingModule({
       imports: [
         mongooseTestModule.forRoot(),
-        MongooseModule.forFeature([{ name: Trash.name, schema: TrashSchema }]),
+        MongooseModule.forFeature([{ name: TrashRawEntity.name, schema: TrashSchema }]),
       ],
       providers: [TrashRepository],
     }).compile();
 
     trashRepository = moduleRef.get(TrashRepository);
-    trashModel = moduleRef.get<Model<Trash>>(getModelToken(Trash.name));
+    trashModel = moduleRef.get<Model<TrashRawEntity>>(getModelToken(TrashRawEntity.name));
   });
 
   beforeEach(async () => {
@@ -122,7 +115,7 @@ describe('TrashRepository', () => {
   describe('save', () => {
     it('persists a new Trash - when given TrashDraft', async () => {
       const trashDraft = new TrashDraft({
-        coordinates: Generator.coordinates({}),
+        geolocation: Generator.coordinates({}),
         tag: TrashTags.batteries,
       });
 
@@ -131,7 +124,7 @@ describe('TrashRepository', () => {
       });
 
       const rawTrash = await trashModel.findOne({
-        location: trashDraft.location,
+        geolocation: trashDraft.geolocation,
         tag: trashDraft.tag,
       });
 
@@ -146,7 +139,7 @@ describe('TrashRepository', () => {
       await trashModel.create(trash);
 
       const trashUpdate = new TrashUpdateDto({
-        location: Generator.coordinates({}),
+        geolocation: Generator.coordinates({}),
         tag: TrashTags.mixed,
         uuid: trash.uuid,
       });
@@ -161,7 +154,7 @@ describe('TrashRepository', () => {
 
       expect(rawTrash).toBeDefined();
 
-      expect(rawTrash?.location).toStrictEqual(trashUpdate.location);
+      expect(rawTrash?.geolocation).toStrictEqual(trashUpdate.geolocation);
 
       expect(rawTrash?.tag).toEqual(trashUpdate.tag);
     });
@@ -170,7 +163,7 @@ describe('TrashRepository', () => {
       expect.assertions(2);
 
       const trashUpdate = new TrashUpdateDto({
-        location: Generator.coordinates({}),
+        geolocation: Generator.coordinates({}),
         tag: TrashTags.mixed,
         uuid: Generator.uuid(),
       });

@@ -1,21 +1,21 @@
 import { Generator } from '@trashify/testing';
-import { Trash } from '../../../entities/trash.entity';
-import { TrashTags, TrashTagsEnum } from '../../../enums/trash-tags.enum';
+import { TrashRawEntity } from '../../src/modules/trash/entities/trash.entity';
+import { TrashTags, TrashTagsEnum } from '../../src/modules/trash/enums/trash-tags.enum';
 
-export type RawTrash = Omit<Trash, 'location'> & {
-  location: {
+export type RawTrash = Omit<TrashRawEntity, 'location'> & {
+  geolocation: {
     type: 'Point';
     coordinates: [number, number];
   };
 };
 
 export class TrashTestFactory {
-  public create(input?: Partial<RawTrash>): RawTrash {
+  public create(input?: Partial<RawTrash>): TrashRawEntity {
     return {
       uuid: Generator.uuid(),
       createdAt: Generator.pastDate().getTime(),
       updatedAt: Generator.pastDate().getTime(),
-      location: {
+      geolocation: {
         type: 'Point',
         coordinates: Generator.coordinates({}),
       },

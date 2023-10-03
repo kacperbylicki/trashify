@@ -9,7 +9,7 @@ export class TrashDto implements Trash {
   uuid!: string;
 
   @GeolocationProperty()
-  location!: [number, number];
+  geolocation!: [number, number];
 
   @TrashTagsProperty()
   tag!: TrashTagsEnum;

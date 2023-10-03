@@ -2,7 +2,7 @@ import { ModelDefinition, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { TrashTagsEnum } from '../enums/trash-tags.enum';
 
 @Schema()
-export class Trash {
+export class TrashRawEntity {
   @Prop({ type: String, unique: true })
   uuid!: string;
 
@@ -20,7 +20,7 @@ export class Trash {
       required: true,
     },
   })
-  location!: {
+  geolocation!: {
     type: 'Point';
     coordinates: [number, number];
   };
@@ -32,9 +32,9 @@ export class Trash {
   updatedAt!: number;
 }
 
-export const TrashSchema = SchemaFactory.createForClass(Trash);
+export const TrashSchema = SchemaFactory.createForClass(TrashRawEntity);
 
 export const TrashModelDefinition: ModelDefinition = {
-  name: 'Trash',
+  name: TrashRawEntity.name,
   schema: TrashSchema,
 };

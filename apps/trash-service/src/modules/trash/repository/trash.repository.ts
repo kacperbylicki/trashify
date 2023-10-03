@@ -3,9 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { RepositoryError } from '../../../common/exceptions/repository.exception';
-import { Trash } from '../entities/trash.entity';
 import { TrashDraft } from '../dtos/trash.draft';
 import { TrashDto, TrashUpdateDto } from '../dtos';
+import { TrashRawEntity } from '../entities/trash.entity';
 import { TrashTagsEnum } from '../enums/trash-tags.enum';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -25,13 +25,15 @@ interface SavePayload {
 
 @Injectable()
 export class TrashRepository {
-  constructor(@InjectModel('Trash') private readonly trashModel: Model<Trash>) {}
+  constructor(
+    @InjectModel(TrashRawEntity.name) private readonly trashModel: Model<TrashRawEntity>,
+  ) {}
 
-  public async findAll(): Promise<Trash[]> {
+  public async findAll(): Promise<TrashRawEntity[]> {
     return await this.trashModel.find({}).lean();
   }
 
-  public async findByTags(payload: FindByTagsPayload): Promise<Trash[]> {
+  public async findByTags(payload: FindByTagsPayload): Promise<TrashRawEntity[]> {
     const { tags } = payload;
 
     const result = await this.trashModel
@@ -45,12 +47,12 @@ export class TrashRepository {
     return result;
   }
 
-  public async findInDistance(payload: FindInDistancePayload): Promise<Trash[]> {
+  public async findInDistance(payload: FindInDistancePayload): Promise<TrashRawEntity[]> {
     const { coordinates, minDistance, maxDistance } = payload;
 
     const result = await this.trashModel
       .find({
-        location: {
+        geolocation: {
           $nearSphere: {
             $geometry: {
               type: 'Point',
@@ -134,7 +136,7 @@ export class TrashRepository {
       return {
         ...existingTrash,
         ...trash,
-        location: trash.location ?? existingTrash.location.coordinates,
+        geolocation: trash.geolocation ?? existingTrash.geolocation.coordinates,
       };
     } catch (error) {
       throw new RepositoryError(
@@ -152,16 +154,16 @@ export class TrashRepository {
       const payload = {
         uuid: uuidv4(),
         createdAt: dayjs().unix(),
-        location: trashDraft.location,
+        geolocation: trashDraft.geolocation,
         tag: trashDraft.tag,
         updatedAt: dayjs().unix(),
       };
 
       await this.trashModel.create({
         ...payload,
-        location: {
+        geolocation: {
           type: 'Point',
-          coordinates: payload.location,
+          coordinates: payload.geolocation,
         },
       });
 

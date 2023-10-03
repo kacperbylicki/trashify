@@ -6,10 +6,6 @@ export class AppConfig {
   @IsString()
   nodeEnv!: string;
 
-  @From('PROTO_PATH')
-  @IsString()
-  protoPath!: string;
-
   @From('TRASH_SERVICE_URL')
   @IsString()
   serviceUrl!: string;

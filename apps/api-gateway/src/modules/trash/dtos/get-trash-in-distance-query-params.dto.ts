@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { GetTrashInDistanceRequest, GetTrashInDistanceResponse, Trash } from '@trashify/transport';
+import { GetTrashInDistanceRequest, GetTrashInDistanceResponse } from '@trashify/transport';
 import { TrashDto } from './trash.dto';
 
 export class GetTrashInDistanceQueryParamsDto implements GetTrashInDistanceRequest {
@@ -46,5 +46,5 @@ export class GetTrashInDistanceResponseDto implements GetTrashInDistanceResponse
   status!: number;
 
   @ApiProperty({ type: () => TrashDto })
-  trash!: Trash[];
+  trash!: TrashDto[];
 }

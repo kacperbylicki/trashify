@@ -9,6 +9,7 @@ import {
   TRASH_SERVICE_NAME,
   TrashServiceController,
   UpdateTrashResponse,
+  trashGrpcMethods,
 } from '@trashify/transport';
 import { DeleteTrashRequestDto } from '../dtos/delete-trash.dto';
 import { GetTrashByTagsRequestDto, GetTrashInDistanceRequestDto, TrashUpdateDto } from '../dtos';
@@ -18,12 +19,11 @@ import { TrashMapper } from '../mappers/trash-mapper';
 import { TrashService } from '../services';
 import { TrashTagsEnum } from '../enums/trash-tags.enum';
 import { UpdateTrashRequestDto } from '../dtos/update-trash.dto';
-import { grpcMethods } from '../enums/grpc-methods.enum';
 
 @Controller()
 export class TrashController implements TrashServiceController {
   public constructor(private readonly trashService: TrashService) {}
-  @GrpcMethod(TRASH_SERVICE_NAME, grpcMethods.getAllTrash)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.getAllTrash)
   public async getAllTrash(): Promise<GetAllTrashResponse> {
     const result = await this.trashService.getAll();
 
@@ -35,7 +35,7 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, grpcMethods.getTrashByTags)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.getTrashByTags)
   public async getTrashByTags(request: GetTrashByTagsRequestDto): Promise<GetTrashByTagsResponse> {
     const { tags } = request;
 
@@ -49,7 +49,7 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, grpcMethods.getTrashInDistance)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.getTrashInDistance)
   public async getTrashInDistance(
     payload: GetTrashInDistanceRequestDto,
   ): Promise<GetTrashInDistanceResponse> {
@@ -69,13 +69,13 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, grpcMethods.createTrash)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.createTrash)
   public async createTrash(request: CreateTrashRequestDto): Promise<CreateTrashResponse> {
     const { trash } = request;
 
     await this.trashService.create({
       trash: new TrashDraft({
-        coordinates: trash.location,
+        geolocation: trash.geolocation,
         tag: trash.tag as TrashTagsEnum,
       }),
     });
@@ -85,13 +85,13 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, grpcMethods.updateTrash)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.updateTrash)
   public async updateTrash(request: UpdateTrashRequestDto): Promise<UpdateTrashResponse> {
     const { trash } = request;
 
     await this.trashService.update({
       trash: new TrashUpdateDto({
-        location: trash.location,
+        geolocation: trash.geolocation,
         tag: trash.tag as TrashTagsEnum,
         uuid: trash.uuid,
       }),
@@ -102,7 +102,7 @@ export class TrashController implements TrashServiceController {
     };
   }
 
-  @GrpcMethod(TRASH_SERVICE_NAME, grpcMethods.deleteTrash)
+  @GrpcMethod(TRASH_SERVICE_NAME, trashGrpcMethods.deleteTrash)
   public async deleteTrash(request: DeleteTrashRequestDto): Promise<DeleteTrashResponse> {
     const { uuid } = request;
 

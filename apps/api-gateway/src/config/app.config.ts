@@ -6,7 +6,7 @@ export class AppConfig {
   @IsString()
   nodeEnv!: string;
 
-  @From('API_GATEWAY_PORT')
+  @From('PORT')
   @IsInt()
   port!: number;
 

@@ -5,7 +5,7 @@ import { TrashTagsProperty } from '../../../common/decorators/openapi/trash-tags
 
 export class CreateTrashPayloadDto implements CreateTrashPayload {
   @GeolocationProperty()
-  location!: [number, number];
+  geolocation!: [number, number];
 
   @TrashTagsProperty()
   tag!: string;
@@ -13,7 +13,7 @@ export class CreateTrashPayloadDto implements CreateTrashPayload {
 
 export class CreateTrashRequestDto implements CreateTrashRequest {
   @ApiProperty({ type: () => CreateTrashPayloadDto })
-  trash!: CreateTrashPayload;
+  trash!: CreateTrashPayloadDto;
 }
 
 export class CreateTrashResponseDto implements CreateTrashResponse {

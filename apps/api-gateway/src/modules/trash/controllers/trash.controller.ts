@@ -72,7 +72,7 @@ export class TrashController {
   })
   @ApiBearerAuth()
   @Get('distance')
-  private async getByDistance(
+  private async getInDistance(
     @Query() queryParams: GetTrashInDistanceQueryParamsDto,
   ): Promise<Observable<GetTrashInDistanceResponseDto>> {
     const { latitude, longitude, maxDistance, minDistance } = queryParams;

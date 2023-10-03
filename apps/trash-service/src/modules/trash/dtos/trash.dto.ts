@@ -2,17 +2,17 @@ import { TrashTagsEnum } from '../enums/trash-tags.enum';
 
 interface TrashDtoState {
   readonly uuid: string;
-  readonly location: [number, number];
+  readonly geolocation: [number, number];
   readonly tag: TrashTagsEnum;
 }
 
 export class TrashDto {
   public readonly uuid!: string;
-  public readonly location!: [number, number];
+  public readonly geolocation!: [number, number];
   public readonly tag!: TrashTagsEnum;
 
   public constructor(state: TrashDtoState) {
-    this.location = state.location;
+    this.geolocation = state.geolocation;
 
     this.tag = state.tag;
 
@@ -22,17 +22,17 @@ export class TrashDto {
 
 interface TrashUpdateState {
   readonly uuid: string;
-  readonly location?: [number, number];
+  readonly geolocation?: [number, number];
   readonly tag?: TrashTagsEnum;
 }
 
 export class TrashUpdateDto {
   public readonly uuid!: string;
-  public readonly location?: [number, number];
+  public readonly geolocation?: [number, number];
   public readonly tag?: TrashTagsEnum;
 
   public constructor(state: TrashUpdateState) {
-    this.location = state.location;
+    this.geolocation = state.geolocation;
 
     this.tag = state.tag;
 

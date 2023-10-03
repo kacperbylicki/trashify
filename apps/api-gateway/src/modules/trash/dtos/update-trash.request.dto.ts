@@ -5,12 +5,12 @@ import { UpdateTrashPayload, UpdateTrashRequest, UpdateTrashResponse } from '@tr
 
 export class UpdateTrashPayloadDto implements Omit<UpdateTrashPayload, 'uuid'> {
   @TrashTagsProperty()
-  tag?: string | undefined;
+  tag?: string;
 
   @GeolocationProperty({
     required: false,
   })
-  location!: [number, number];
+  geolocation!: [number, number];
 }
 
 export class UpdateTrashRequestDto implements UpdateTrashRequest {

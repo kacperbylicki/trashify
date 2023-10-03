@@ -10,8 +10,8 @@ RUN yarn global add turbo
 COPY . .
 RUN turbo prune --scope=@trashify/trash-service --docker
 
-# Installer stage
-FROM --platform=$BUILDPLATFORM node:lts-alpine AS installer
+# Development Installer stage
+FROM --platform=$BUILDPLATFORM node:lts-alpine AS development-installer
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
@@ -23,6 +23,20 @@ COPY --from=builder /app/out/yarn.lock ./yarn.lock
 COPY --from=builder /app/turbo.json ./turbo.json
 RUN yarn install --frozen-lockfile
 
+# Production Installer stage
+FROM --platform=$BUILDPLATFORM node:lts-alpine AS production-installer
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+
+RUN apk update
+RUN apk add --no-cache libc6-compat
+RUN apk add jq
+WORKDIR /app
+COPY --from=builder /app/out/json/apps/trash-service .
+COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
+COPY --from=builder /app/out/json/.npmrc ./.npmrc
+RUN yarn install --production
+
 # Sourcer stage
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS sourcer
 ARG TARGETPLATFORM
@@ -31,7 +45,7 @@ ARG BUILDPLATFORM
 RUN apk update
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY --from=installer /app/ .
+COPY --from=development-installer /app/ .
 COPY --from=builder /app/out/full/ .
 RUN yarn turbo run build --scope=@trashify/trash-service --include-dependencies --no-deps
 
@@ -40,10 +54,7 @@ FROM --platform=$BUILDPLATFORM node:lts-alpine AS development
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-ARG TRASH_SERVICE_PORT=50012
-ENV TRASH_SERVICE_PORT=$TRASH_SERVICE_PORT
 ENV NODE_ENV=development
-ENV PROTO_PATH=../../node_modules/@trashify/transport
 
 RUN apk update
 WORKDIR /app
@@ -61,7 +72,9 @@ ENV PROTO_PATH=node_modules/@trashify/transport
 
 RUN apk update
 WORKDIR /app
-COPY --chown=node:node --from=sourcer /app/ .
+COPY --chown=node:node --from=production-installer /app/node_modules/ ./node_modules/
+COPY --chown=node:node --from=sourcer /app/apps/trash-service/dist ./dist
+COPY --chown=node:node --from=sourcer /app/apps/trash-service/proto ./proto
 
 USER node
 CMD ["node", "apps/trash-service/dist/main.js"]

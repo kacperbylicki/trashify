@@ -16,7 +16,7 @@ export class CreateTrashPayloadDto implements CreateTrashPayload {
   @ArrayMinSize(2)
   @ArrayMaxSize(2)
   @IsNumber({}, { each: true })
-  location!: [number, number];
+  geolocation!: [number, number];
 
   @IsNotEmpty()
   @IsEnum(TrashTags)

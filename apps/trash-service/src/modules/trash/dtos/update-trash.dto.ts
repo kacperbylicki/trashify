@@ -24,7 +24,7 @@ export class UpdateTrashPayloadDto implements UpdateTrashPayload {
   @ArrayMaxSize(2)
   @IsArray()
   @IsNumber({}, { each: true })
-  location!: [number, number];
+  geolocation!: [number, number];
 }
 
 export class UpdateTrashRequestDto implements UpdateTrashRequest {

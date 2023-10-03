@@ -9,7 +9,7 @@ describe('CreateTrashPayloadDto', () => {
   it('throws an error - when given an invalid tag', async () => {
     const testObject = new CreateTrashPayloadDto();
 
-    testObject.location = [5.55, 5.55];
+    testObject.geolocation = [5.55, 5.55];
 
     testObject.tag = 'invalid' as any;
 
@@ -22,54 +22,67 @@ describe('CreateTrashPayloadDto', () => {
     expect(errors[0].constraints?.isEnum).toBeTruthy();
   });
 
-  it('throws an error - given invalid invalid array length', async () => {
-    const testObject1 = new CreateTrashPayloadDto();
+  it('throws an error - given only one array element', async () => {
+    const testObject = new CreateTrashPayloadDto();
 
-    testObject1.location = [5.55] as any;
+    testObject.geolocation = [5.55] as any;
 
-    testObject1.tag = 'batteries';
+    testObject.tag = 'batteries';
 
-    const testObject2 = new CreateTrashPayloadDto();
+    const validationResult = await validate(testObject);
 
-    testObject2.location = [5.55, 5.55, 5.55] as any;
+    expect(validationResult).toMatchObject([
+      {
+        property: 'geolocation',
+        constraints: {
+          arrayMinSize: expect.any(String),
+        },
+      },
+    ]);
+  });
 
-    testObject2.tag = 'batteries';
+  it('throws an error - given more than two array elements', async () => {
+    const testObject = new CreateTrashPayloadDto();
 
+    testObject.geolocation = [5.55, 5.55, 5.55] as any;
+
+    testObject.tag = 'batteries';
+
+    const validationResult = await validate(testObject);
+
+    expect(validationResult).toMatchObject([
+      {
+        property: 'geolocation',
+        constraints: {
+          arrayMaxSize: expect.any(String),
+        },
+      },
+    ]);
+  });
+
+  it('throws an error - given an empty array', async () => {
     const testObject3 = new CreateTrashPayloadDto();
 
-    testObject3.location = [] as any;
+    testObject3.geolocation = [] as any;
 
     testObject3.tag = 'batteries';
 
-    const [validationResult1, validationResult2, validationResult3] = await Promise.all([
-      validate(testObject1),
-      validate(testObject2),
-      validate(testObject3),
+    const validationResult = await validate(testObject3);
+
+    expect(validationResult).toMatchObject([
+      {
+        property: 'geolocation',
+        constraints: {
+          arrayMinSize: expect.any(String),
+        },
+      },
     ]);
-
-    expect(validationResult1).toHaveLength(1);
-
-    expect(validationResult2).toHaveLength(1);
-
-    expect(validationResult3).toHaveLength(1);
-
-    expect(validationResult1[0].property === 'location').toBeTruthy();
-
-    expect(validationResult2[0].property === 'location').toBeTruthy();
-
-    expect(validationResult3[0].property === 'location').toBeTruthy();
-
-    expect(validationResult1[0].constraints?.arrayMinSize).toBeTruthy();
-
-    expect(validationResult2[0].constraints?.arrayMaxSize).toBeTruthy();
-
-    expect(validationResult3[0].constraints?.arrayMinSize).toBeTruthy();
   });
 
   it('throws an error - given invalid array value', async () => {
     const testObject = new CreateTrashPayloadDto();
 
-    testObject.location = [5.55, 'invalid'] as any;
+    testObject.geolocation = [5.55, 'invalid'] as any;
 
     testObject.tag = 'batteries';
 

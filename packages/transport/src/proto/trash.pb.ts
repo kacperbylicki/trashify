@@ -6,19 +6,28 @@ export const trashProtobufPackage = 'trash';
 
 export interface Trash {
   uuid: string;
-  location: [number, number];
-  tag: string;
+  geolocation: [number, number];
+  tag:
+    | 'batteries'
+    | 'bio'
+    | 'bottleMachine'
+    | 'mixed'
+    | 'municipal'
+    | 'paper'
+    | 'petFeces'
+    | 'plastic'
+    | 'toners';
 }
 
 export interface CreateTrashPayload {
-  location: [number, number];
+  geolocation: [number, number];
   tag: string;
 }
 
 export interface UpdateTrashPayload {
   uuid: string;
   tag?: string | undefined;
-  location: [number, number];
+  geolocation: [number, number];
 }
 
 export interface GetAllTrashRequest {}
@@ -118,12 +127,12 @@ export interface TrashServiceController {
 export function TrashServiceControllerMethods() {
   return function (constructor: Function) {
     const grpcMethods: string[] = [
-      "getAllTrash",
-      "getTrashByTags",
-      "getTrashInDistance",
-      "createTrash",
-      "updateTrash",
-      "deleteTrash",
+      'getAllTrash',
+      'getTrashByTags',
+      'getTrashInDistance',
+      'createTrash',
+      'updateTrash',
+      'deleteTrash',
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);

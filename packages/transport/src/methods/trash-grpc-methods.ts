@@ -1,4 +1,4 @@
-export const grpcMethods = {
+export const trashGrpcMethods = {
   getAllTrash: 'getAllTrash',
   getTrashByTags: 'getTrashByTags',
   getTrashInDistance: 'getTrashInDistance',
@@ -6,3 +6,5 @@ export const grpcMethods = {
   updateTrash: 'updateTrash',
   deleteTrash: 'deleteTrash',
 } as const;
+
+export type trashGrpcMethodsEnum = keyof typeof trashGrpcMethods;

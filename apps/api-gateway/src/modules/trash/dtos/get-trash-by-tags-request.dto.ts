@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { GetTrashByTagsRequest, GetTrashByTagsResponse, Trash } from '@trashify/transport';
+import { GetTrashByTagsRequest, GetTrashByTagsResponse } from '@trashify/transport';
 import { TrashDto } from './trash.dto';
 import { TrashTags, TrashTagsEnum } from '../enums/trash-tags.enum';
 
@@ -22,5 +22,5 @@ export class GetTrashByTagsResponseDto implements GetTrashByTagsResponse {
   status!: number;
 
   @ApiProperty({ type: () => TrashDto })
-  trash!: Trash[];
+  trash!: TrashDto[];
 }
