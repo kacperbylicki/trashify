@@ -1,6 +1,6 @@
 /* eslint-disable jest/no-conditional-expect */
 
-import { Generator, MongooseTestModule } from '@trashify/testing';
+import { CoordinatesGenerator, MongooseTestModule, ScalarGenerator } from '@trashify/testing';
 import { Model } from 'mongoose';
 import { MongooseModule, getConnectionToken, getModelToken } from '@nestjs/mongoose';
 import { RawTrash, TrashTestFactory } from '../factories/trash-test-factory';
@@ -115,7 +115,7 @@ describe('TrashRepository', () => {
   describe('save', () => {
     it('persists a new Trash - when given TrashDraft', async () => {
       const trashDraft = new TrashDraft({
-        geolocation: Generator.coordinates({}),
+        geolocation: CoordinatesGenerator.coordinates({}),
         tag: TrashTags.batteries,
       });
 
@@ -139,7 +139,7 @@ describe('TrashRepository', () => {
       await trashModel.create(trash);
 
       const trashUpdate = new TrashUpdateDto({
-        geolocation: Generator.coordinates({}),
+        geolocation: CoordinatesGenerator.coordinates({}),
         tag: TrashTags.mixed,
         uuid: trash.uuid,
       });
@@ -163,9 +163,9 @@ describe('TrashRepository', () => {
       expect.assertions(2);
 
       const trashUpdate = new TrashUpdateDto({
-        geolocation: Generator.coordinates({}),
+        geolocation: CoordinatesGenerator.coordinates({}),
         tag: TrashTags.mixed,
-        uuid: Generator.uuid(),
+        uuid: ScalarGenerator.uuid(),
       });
 
       try {
