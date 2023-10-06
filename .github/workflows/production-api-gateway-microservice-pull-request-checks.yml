@@ -16,6 +16,8 @@ jobs:
   pull-request-checks:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     steps:
     - name: Checkout code

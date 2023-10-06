@@ -74,4 +74,5 @@ terraform.tfstate.backup
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# NPM
 .npmrc

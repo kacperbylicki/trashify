@@ -27,6 +27,8 @@ RUN yarn install --frozen-lockfile
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS production-installer
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
+# Accept NPM token as a build argument
+ARG NPM_READ_TOKEN
 
 RUN apk update
 RUN apk add --no-cache libc6-compat
@@ -34,8 +36,11 @@ RUN apk add jq
 WORKDIR /app
 COPY --from=builder /app/out/json/apps/api-gateway .
 COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
-COPY --from=builder /app/out/json/.npmrc ./.npmrc
-RUN yarn install --production
+# Create .npmrc file with the provided NPM token
+RUN echo "@trashify:registry=https://registry.npmjs.org/" > .npmrc && \
+    echo "//registry.npmjs.org/:_authToken=${NPM_READ_TOKEN}" >> .npmrc && \
+    yarn install --production && \
+    rm -f .npmrc
 
 # Sourcer stage
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS sourcer
