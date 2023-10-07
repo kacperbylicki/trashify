@@ -58,10 +58,10 @@ export class AuthService {
           accountId: decodedAccessToken.uuid,
         },
       };
-    } catch (error) {
+    } catch (error: any) {
       return {
         status: HttpStatus.UNAUTHORIZED,
-        error: [(error as Error)?.message],
+        error: [error?.message],
       };
     }
   }

@@ -18,6 +18,4 @@ export class ResetPasswordResponseDto
 {
   @ApiProperty({ type: Number, example: 200 })
   status!: number;
-  token?: string | undefined;
-  error?: string[] | undefined;
 }

@@ -1,6 +1,5 @@
 import {
   AccountServiceClient,
-  ChangeUsernameResponse,
   GetAccountResponse,
   LoginResponse,
   LogoutResponse,
@@ -32,6 +31,7 @@ import {
   ChangePasswordDto,
   ChangePasswordResponseDto,
   ChangeUsernameDto,
+  ChangeUsernameResponseDto,
   GetAccountResponseDto,
   LoginRequestDto,
   LoginResponseDto,
@@ -51,7 +51,7 @@ import {
   RequestRefreshToken,
   TimeoutInterceptor,
 } from '@/common';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Controller('accounts')
 @ApiTags(AccountController.name)
@@ -120,6 +120,11 @@ export class AccountController {
 
   @UseGuards(JwtAuthGuard)
   @Post('email')
+  @ApiOkResponse({
+    type: ChangeEmailResponseDto,
+    description: 'Email changed.',
+  })
+  @ApiBearerAuth()
   @HttpCode(HttpStatus.OK)
   public async changeEmail(
     @RequestAccountId() accountId: string,
@@ -135,11 +140,16 @@ export class AccountController {
 
   @UseGuards(JwtAuthGuard)
   @Post('username')
+  @ApiOkResponse({
+    type: ChangeUsernameResponseDto,
+    description: 'Account username changed.',
+  })
+  @ApiBearerAuth()
   @HttpCode(HttpStatus.OK)
   public async changeUsername(
     @RequestAccountId() accountId: string,
     @Body() request: ChangeUsernameDto,
-  ): Promise<Observable<ChangeUsernameResponse>> {
+  ): Promise<Observable<ChangeUsernameResponseDto>> {
     return this.client.changeUsername({
       username: request.username,
       uuid: accountId,
@@ -148,17 +158,34 @@ export class AccountController {
 
   @Post('reset-password')
   @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({
+    type: ResetPasswordResponseDto,
+    description: 'Reset password link sent',
+  })
   public async createResetPasswordToken(
     @Body() request: ResetPasswordDto,
   ): Promise<Observable<ResetPasswordResponseDto>> {
     const { email } = request;
 
-    return this.client.createResetPasswordToken({
+    const result = this.client.createResetPasswordToken({
       email,
     });
+
+    return result.pipe(
+      map(() => {
+        return {
+          status: HttpStatus.OK,
+        };
+      }),
+    );
   }
 
   @Post('change-password/:token')
+  @ApiOkResponse({
+    type: ChangePasswordResponseDto,
+    description: 'Password changed.',
+  })
+  @ApiBearerAuth()
   @HttpCode(HttpStatus.OK)
   public async changePassword(
     @Param('token') token: string,
