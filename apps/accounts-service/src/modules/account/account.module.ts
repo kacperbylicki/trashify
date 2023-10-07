@@ -8,6 +8,7 @@ import { ConfigModule, getConfigContainerToken } from '@unifig/nest';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ResetPasswordTokenCacheService } from './cache';
 
 @Module({
   imports: [
@@ -25,6 +26,12 @@ import { MongooseModule } from '@nestjs/mongoose';
     MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
   ],
   controllers: [AccountController],
-  providers: [AccountService, AccountRepository, AuthService, JwtService],
+  providers: [
+    AccountService,
+    AccountRepository,
+    AuthService,
+    JwtService,
+    ResetPasswordTokenCacheService,
+  ],
 })
 export class AccountModule {}

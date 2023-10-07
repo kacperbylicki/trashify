@@ -25,6 +25,49 @@ export interface GetAccountResponse {
   data?: Account | null;
 }
 
+export interface ChangeUsernameRequest {
+  username: string;
+  uuid: string;
+}
+
+export interface CreateResetPasswordTokenRequest {
+  email: string;
+}
+
+export interface CreateResetPasswordTokenResponse {
+  status: number;
+  token?: string | undefined;
+  error: string[];
+}
+
+export interface ChangePasswordRequest {
+  token: string;
+  password: string;
+  repeatedPassword: string;
+}
+
+export interface ChangePasswordResponse {
+  status: number;
+  error: string[];
+}
+
+export interface ChangeUsernameResponse {
+  status: number;
+  username: string;
+  error: string[];
+}
+
+export interface ChangeEmailRequest {
+  email: string;
+  uuid: string;
+}
+
+export interface ChangeEmailResponse {
+  status: number;
+  email: string;
+  error: string[];
+}
+
 /** Register */
 export interface RegisterRequest {
   email: string;
@@ -116,6 +159,12 @@ export abstract class AccountServiceClient {
   ): Observable<ValidateRefreshJwtResponse>;
   abstract refreshToken(request: RefreshTokenRequest): Observable<RefreshTokenResponse>;
   abstract logout(request: LogoutRequest): Observable<LogoutResponse>;
+  abstract changeUsername(request: ChangeUsernameRequest): Observable<ChangeUsernameResponse>;
+  abstract changeEmail(request: ChangeEmailRequest): Observable<ChangeEmailResponse>;
+  abstract createResetPasswordToken(
+    request: CreateResetPasswordTokenRequest,
+  ): Observable<CreateResetPasswordTokenResponse>;
+  abstract changePassword(request: ChangePasswordRequest): Observable<ChangePasswordResponse>;
 }
 
 export interface AccountServiceController {
@@ -147,6 +196,25 @@ export interface AccountServiceController {
   logout(
     request: LogoutRequest,
   ): Promise<LogoutResponse> | Observable<LogoutResponse> | LogoutResponse;
+
+  createResetPasswordToken(
+    request: CreateResetPasswordTokenRequest,
+  ):
+    | Promise<CreateResetPasswordTokenResponse>
+    | Observable<CreateResetPasswordTokenResponse>
+    | CreateResetPasswordTokenResponse;
+
+  changePassword(
+    request: ChangePasswordRequest,
+  ): Promise<ChangePasswordResponse> | Observable<ChangePasswordResponse> | ChangePasswordResponse;
+
+  changeUsername(
+    request: ChangeUsernameRequest,
+  ): Promise<ChangeUsernameResponse> | Observable<ChangeUsernameResponse> | ChangeUsernameResponse;
+
+  changeEmail(
+    request: ChangeEmailRequest,
+  ): Promise<ChangeEmailResponse> | Observable<ChangeEmailResponse> | ChangeEmailResponse;
 }
 
 export function AccountServiceControllerMethods() {
@@ -159,6 +227,10 @@ export function AccountServiceControllerMethods() {
       'validateRefreshJwt',
       'refreshToken',
       'logout',
+      'createResetPasswordToken',
+      'changePassword',
+      'changeUsername',
+      'changeEmail',
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);

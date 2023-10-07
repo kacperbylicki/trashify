@@ -1,5 +1,9 @@
 import {
   ACCOUNT_SERVICE_NAME,
+  ChangeEmailResponse,
+  ChangePasswordResponse,
+  ChangeUsernameResponse,
+  CreateResetPasswordTokenResponse,
   GetAccountResponse,
   LoginResponse,
   LogoutResponse,
@@ -10,8 +14,11 @@ import {
   accountGrpcMethod,
 } from '@trashify/transport';
 import { AccountService, AuthService } from '../services';
-import { Controller } from '@nestjs/common';
 import {
+  ChangeEmailRequestDto,
+  ChangePasswordRequestDto,
+  ChangeUsernameRequestDto,
+  CreateResetPasswordTokenRequestDto,
   GetAccountRequestDto,
   LoginRequestDto,
   LogoutRequestDto,
@@ -20,6 +27,7 @@ import {
   ValidateJwtRequestDto,
   ValidateRefreshJwtRequestDto,
 } from '../dtos';
+import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 
 @Controller()
@@ -62,5 +70,27 @@ export class AccountController {
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.logout)
   logout(payload: LogoutRequestDto): Promise<LogoutResponse> {
     return this.accountService.logout(payload.accountId);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.changeEmail)
+  changeEmail(payload: ChangeEmailRequestDto): Promise<ChangeEmailResponse> {
+    return this.accountService.changeEmail(payload);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.changePassword)
+  changePassword(payload: ChangePasswordRequestDto): Promise<ChangePasswordResponse> {
+    return this.accountService.changePassword(payload);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.createResetPasswordToken)
+  createResetPasswordToken(
+    payload: CreateResetPasswordTokenRequestDto,
+  ): Promise<CreateResetPasswordTokenResponse> {
+    return this.accountService.createResetPasswordToken(payload);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.changeUsername)
+  changeUsername(payload: ChangeUsernameRequestDto): Promise<ChangeUsernameResponse> {
+    return this.accountService.changeUsername(payload);
   }
 }

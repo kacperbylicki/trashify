@@ -58,10 +58,10 @@ export class AuthService {
           accountId: decodedAccessToken.uuid,
         },
       };
-    } catch (error: any) {
+    } catch (error) {
       return {
         status: HttpStatus.UNAUTHORIZED,
-        error: [error?.message],
+        error: [(error as Error)?.message],
       };
     }
   }
@@ -87,5 +87,11 @@ export class AuthService {
         error: [error?.message],
       };
     }
+  }
+
+  public async createResetPasswordToken(): Promise<string> {
+    const token = await this.jwtService.signAsync({});
+
+    return token;
   }
 }
