@@ -208,10 +208,7 @@ export class AccountService {
 
     const token = await this.authService.createResetPasswordToken();
 
-    this.resetPasswordTokenCacheService.set(token, {
-      ttl: dayjs().add(8, 'hours').unix(),
-      value: userExists.uuid,
-    });
+    await this.resetPasswordTokenCacheService.set(token, userExists.uuid);
 
     return {
       token: token,
@@ -223,7 +220,7 @@ export class AccountService {
   public async changePassword(payload: ChangePasswordRequestDto): Promise<ChangePasswordResponse> {
     const { password, repeatedPassword, token } = payload;
 
-    const userId = this.resetPasswordTokenCacheService.get(token);
+    const userId = await this.resetPasswordTokenCacheService.get(token);
 
     if (!userId) {
       return {

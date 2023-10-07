@@ -1,47 +1,24 @@
 import { Injectable } from '@nestjs/common';
-
-type UserUUID = string;
-
-interface CachedValue {
-  ttl: number;
-  value: UserUUID;
-}
+import { ResetPasswordTokenRepository } from '../repositories';
 
 @Injectable()
 export class ResetPasswordTokenCacheService {
-  private readonly tokensCache: Map<string, CachedValue> = new Map();
+  public constructor(private readonly resetPasswordTokenRepository: ResetPasswordTokenRepository) {}
 
-  public get(key: string): string | null {
-    const cache = this.tokensCache.get(key);
+  public async get(key: string): Promise<string | null> {
+    const resetPasswordToken = await this.resetPasswordTokenRepository.findByToken(key);
 
-    if (!cache) {
+    if (!resetPasswordToken) {
       return null;
     }
 
-    if (cache?.ttl <= new Date().getTime()) {
-      return null;
-    }
-
-    return cache.value;
+    return resetPasswordToken.accountUuid;
   }
 
-  public set(key: string, value: CachedValue): void {
-    this.tokensCache.set(key, value);
-  }
-
-  public clear(): void {
-    this.tokensCache.clear();
-  }
-
-  public clearExpired(): void {
-    const currentTime = new Date().getTime();
-
-    const values = this.tokensCache.entries();
-
-    for (const value of values) {
-      const isExpired = value[1].ttl < currentTime;
-
-      isExpired ? this.tokensCache.delete(value[0]) : null;
-    }
+  public async set(key: string, value: string): Promise<void> {
+    await this.resetPasswordTokenRepository.save({
+      token: key,
+      accountUuid: value,
+    });
   }
 }

@@ -1,6 +1,6 @@
-import { Account, AccountSchema } from './entities';
+import { Account, AccountSchema, ResetPasswordToken, ResetPasswordTokenSchema } from './entities';
 import { AccountController } from './controllers';
-import { AccountRepository } from './repositories';
+import { AccountRepository, ResetPasswordTokenRepository } from './repositories';
 import { AccountService, AuthService } from './services';
 import { AuthConfig } from '@/config';
 import { Config } from '@unifig/core';
@@ -9,6 +9,15 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ResetPasswordTokenCacheService } from './cache';
+
+export const accountModuleProviders = [
+  AccountService,
+  AccountRepository,
+  AuthService,
+  JwtService,
+  ResetPasswordTokenCacheService,
+  ResetPasswordTokenRepository,
+];
 
 @Module({
   imports: [
@@ -23,15 +32,15 @@ import { ResetPasswordTokenCacheService } from './cache';
         },
       }),
     }),
-    MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
+    MongooseModule.forFeature([
+      { name: Account.name, schema: AccountSchema },
+      {
+        name: ResetPasswordToken.name,
+        schema: ResetPasswordTokenSchema,
+      },
+    ]),
   ],
   controllers: [AccountController],
-  providers: [
-    AccountService,
-    AccountRepository,
-    AuthService,
-    JwtService,
-    ResetPasswordTokenCacheService,
-  ],
+  providers: accountModuleProviders,
 })
 export class AccountModule {}

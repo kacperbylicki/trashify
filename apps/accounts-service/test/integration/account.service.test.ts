@@ -2,22 +2,24 @@ import argon2 from 'argon2';
 import dayjs from 'dayjs';
 import {
   Account,
+  AccountConstraints,
   AccountRepository,
   AccountSchema,
   AccountService,
-  AuthService,
   LoginRequestDto,
   RefreshTokenRequestDto,
   RegisterRequestDto,
+  ResetPasswordToken,
+  ResetPasswordTokenSchema,
+  accountModuleProviders,
 } from '@/modules';
 import { AuthConfig } from '@/config';
 import { Config, PlainConfigAdapter } from '@unifig/core';
 import { ConfigModule } from '@unifig/nest';
 import { HttpStatus } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { Model } from 'mongoose';
 import { MongooseModule, getConnectionToken, getModelToken } from '@nestjs/mongoose';
-import { MongooseTestModule } from '@trashify/testing';
+import { MongooseTestModule, UserDataGenerator } from '@trashify/testing';
 import { Test, TestingModule } from '@nestjs/testing';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -30,6 +32,7 @@ describe('AccountService', () => {
   let accountRepository: AccountRepository;
 
   let accountModel: Model<Account>;
+  let resetPasswordTokenModel: Model<ResetPasswordToken>;
 
   beforeAll(async () => {
     Config.registerSync({
@@ -46,15 +49,24 @@ describe('AccountService', () => {
     moduleRef = await Test.createTestingModule({
       imports: [
         mongooseTestModule.forRoot(),
-        MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
+        MongooseModule.forFeature([
+          { name: Account.name, schema: AccountSchema },
+          {
+            name: ResetPasswordToken.name,
+            schema: ResetPasswordTokenSchema,
+          },
+        ]),
         ConfigModule.forFeature(AuthConfig),
       ],
-      providers: [AccountService, AuthService, JwtService, AccountRepository],
+      providers: accountModuleProviders,
     }).compile();
 
     accountService = moduleRef.get<AccountService>(AccountService);
     accountRepository = moduleRef.get(AccountRepository);
     accountModel = moduleRef.get<Model<Account>>(getModelToken(Account.name));
+    resetPasswordTokenModel = moduleRef.get<Model<ResetPasswordToken>>(
+      getModelToken(ResetPasswordToken.name),
+    );
   });
 
   beforeEach(async () => {
@@ -386,6 +398,157 @@ describe('AccountService', () => {
 
       // then
       expect(response.status).toEqual(HttpStatus.OK);
+    });
+  });
+
+  describe('changeEmail', () => {
+    it('returns an error - when email is already taken', async () => {
+      const user1 = await accountModel.create({
+        createdAt: dayjs().unix(),
+        updatedAt: dayjs().unix(),
+        uuid: uuidv4(),
+        email: UserDataGenerator.email(),
+        password: UserDataGenerator.password(AccountConstraints.PasswordMinLength),
+        username: UserDataGenerator.username(),
+      });
+
+      const user2 = await accountModel.create({
+        createdAt: dayjs().unix(),
+        updatedAt: dayjs().unix(),
+        uuid: uuidv4(),
+        email: UserDataGenerator.email(),
+        password: UserDataGenerator.password(AccountConstraints.PasswordMinLength),
+        username: UserDataGenerator.username(),
+      });
+
+      const res = await accountService.changeEmail({
+        email: user1.email,
+        uuid: user2.uuid,
+      });
+
+      expect(res.email).toEqual(user1.email);
+      expect(res.error[0]).toEqual('Email already taken.');
+    });
+
+    it('returns an error - when user does not exist', async () => {
+      const user1 = await accountModel.create({
+        createdAt: dayjs().unix(),
+        updatedAt: dayjs().unix(),
+        uuid: uuidv4(),
+        email: UserDataGenerator.email(),
+        password: UserDataGenerator.password(AccountConstraints.PasswordMinLength),
+        username: UserDataGenerator.username(),
+      });
+
+      const res = await accountService.changeEmail({
+        email: user1.email,
+        uuid: UserDataGenerator.uuid(),
+      });
+
+      expect(res.email).toEqual(user1.email);
+      expect(res.error[0]).toEqual('Email already taken.');
+    });
+
+    it('changes user email', async () => {
+      const user = await accountModel.create({
+        createdAt: dayjs().unix(),
+        updatedAt: dayjs().unix(),
+        uuid: uuidv4(),
+        email: UserDataGenerator.email(),
+        password: UserDataGenerator.password(AccountConstraints.PasswordMinLength),
+        username: UserDataGenerator.username(),
+      });
+
+      const newEmail = UserDataGenerator.email();
+
+      const res = await accountService.changeEmail({
+        email: newEmail,
+        uuid: user.uuid,
+      });
+
+      expect(res.status).toEqual(HttpStatus.OK);
+
+      const rawUser = await accountModel.findOne({ uuid: user.uuid });
+
+      expect(rawUser?.email).toEqual(newEmail);
+    });
+  });
+
+  describe('changeUsername', () => {
+    it('return an error - when user does not exist', async () => {
+      const uuid = UserDataGenerator.uuid();
+
+      const res = await accountService.changeUsername({
+        username: UserDataGenerator.username(),
+        uuid,
+      });
+
+      expect(res.status).toEqual(HttpStatus.BAD_REQUEST);
+
+      expect(res.error[0]).toEqual('User not found.');
+    });
+
+    it('updates account username', async () => {
+      const account = await accountModel.create({
+        createdAt: dayjs().unix(),
+        updatedAt: dayjs().unix(),
+        email: UserDataGenerator.email(),
+        password: UserDataGenerator.password(AccountConstraints.PasswordMinLength),
+        username: UserDataGenerator.username(),
+        uuid: UserDataGenerator.uuid(),
+      });
+
+      const newUsername = UserDataGenerator.username();
+
+      const res = await accountService.changeUsername({
+        username: newUsername,
+        uuid: account.uuid,
+      });
+
+      expect(res.status).toEqual(HttpStatus.OK);
+
+      const rawAccount = await accountModel.findOne({
+        uuid: account.uuid,
+      });
+
+      expect(rawAccount?.username).toEqual(newUsername);
+    });
+  });
+
+  describe('createResetPasswordToken', () => {
+    it('returns an error - when user does not exist', async () => {
+      const email = UserDataGenerator.email();
+
+      const result = await accountService.createResetPasswordToken({
+        email,
+      });
+
+      expect(result.status).toEqual(HttpStatus.BAD_REQUEST);
+
+      expect(result.error[0]).toEqual('User does not exist.');
+    });
+
+    it('creates and persists resetPasswordToken', async () => {
+      const account = await accountModel.create({
+        createdAt: dayjs().unix(),
+        updatedAt: dayjs().unix(),
+        email: UserDataGenerator.email(),
+        password: UserDataGenerator.password(AccountConstraints.PasswordMinLength),
+        username: UserDataGenerator.username(),
+        uuid: UserDataGenerator.uuid(),
+      });
+
+      const result = await accountService.createResetPasswordToken({
+        email: account.email,
+      });
+
+      expect(result.status).toEqual(HttpStatus.OK);
+
+      const rawToken = await resetPasswordTokenModel.findOne({
+        accountUuid: account.uuid,
+      });
+
+      expect(rawToken).toBeDefined();
     });
   });
 });
