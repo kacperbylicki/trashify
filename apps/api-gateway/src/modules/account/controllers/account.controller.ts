@@ -1,5 +1,6 @@
 import {
   AccountServiceClient,
+  ChangeUsernameResponse,
   GetAccountResponse,
   LoginResponse,
   LogoutResponse,
@@ -20,11 +21,17 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import {
+  ChangeEmailDto,
+  ChangeEmailResponseDto,
+  ChangePasswordDto,
+  ChangePasswordResponseDto,
+  ChangeUsernameDto,
   GetAccountResponseDto,
   LoginRequestDto,
   LoginResponseDto,
@@ -32,6 +39,8 @@ import {
   RefreshTokenResponseDto,
   RegisterRequestDto,
   RegisterResponseDto,
+  ResetPasswordDto,
+  ResetPasswordResponseDto,
 } from '../dtos';
 import {
   HttpStatusInterceptor,
@@ -107,5 +116,60 @@ export class AccountController {
     @RequestRefreshToken() refreshToken: string,
   ): Promise<Observable<RefreshTokenResponse>> {
     return this.client.refreshToken({ accountId, refreshToken });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('email')
+  @HttpCode(HttpStatus.OK)
+  public async changeEmail(
+    @RequestAccountId() accountId: string,
+    @Body() request: ChangeEmailDto,
+  ): Promise<Observable<ChangeEmailResponseDto>> {
+    const { email } = request;
+
+    return this.client.changeEmail({
+      uuid: accountId,
+      email,
+    });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('username')
+  @HttpCode(HttpStatus.OK)
+  public async changeUsername(
+    @RequestAccountId() accountId: string,
+    @Body() request: ChangeUsernameDto,
+  ): Promise<Observable<ChangeUsernameResponse>> {
+    return this.client.changeUsername({
+      username: request.username,
+      uuid: accountId,
+    });
+  }
+
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
+  public async createResetPasswordToken(
+    @Body() request: ResetPasswordDto,
+  ): Promise<Observable<ResetPasswordResponseDto>> {
+    const { email } = request;
+
+    return this.client.createResetPasswordToken({
+      email,
+    });
+  }
+
+  @Post('change-password/:token')
+  @HttpCode(HttpStatus.OK)
+  public async changePassword(
+    @Param('token') token: string,
+    @Body() request: ChangePasswordDto,
+  ): Promise<Observable<ChangePasswordResponseDto>> {
+    const { password, repeatedPassword } = request;
+
+    return this.client.changePassword({
+      password,
+      repeatedPassword,
+      token,
+    });
   }
 }

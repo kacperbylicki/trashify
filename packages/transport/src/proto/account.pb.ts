@@ -37,7 +37,7 @@ export interface CreateResetPasswordTokenRequest {
 export interface CreateResetPasswordTokenResponse {
   status: number;
   token?: string | undefined;
-  error: string[];
+  error?: string[];
 }
 
 export interface ChangePasswordRequest {
@@ -48,13 +48,13 @@ export interface ChangePasswordRequest {
 
 export interface ChangePasswordResponse {
   status: number;
-  error: string[];
+  error?: string[];
 }
 
 export interface ChangeUsernameResponse {
   status: number;
   username: string;
-  error: string[];
+  error?: string[];
 }
 
 export interface ChangeEmailRequest {
@@ -65,7 +65,7 @@ export interface ChangeEmailRequest {
 export interface ChangeEmailResponse {
   status: number;
   email: string;
-  error: string[];
+  error?: string[];
 }
 
 /** Register */
