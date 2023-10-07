@@ -1,6 +1,5 @@
 import {
   AccountServiceClient,
-  ChangeUsernameResponse,
   GetAccountResponse,
   LoginResponse,
   LogoutResponse,
