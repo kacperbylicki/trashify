@@ -55,7 +55,7 @@ export class AccountService {
     if (!account) {
       return {
         status: HttpStatus.UNAUTHORIZED,
-        error: ['invalid email or password'],
+        error: ['Invalid email or password.'],
       };
     }
 
@@ -64,7 +64,7 @@ export class AccountService {
     if (!isPasswordCorrect) {
       return {
         status: HttpStatus.UNAUTHORIZED,
-        error: ['invalid email or password'],
+        error: ['Invalid email or password.'],
       };
     }
 
@@ -91,14 +91,14 @@ export class AccountService {
     if (emailExists) {
       return {
         status: HttpStatus.UNPROCESSABLE_ENTITY,
-        error: ['cannot process the request'],
+        error: ['Email already taken.'],
       };
     }
 
     if (payload.password !== payload.confirmPassword) {
       return {
         status: HttpStatus.UNPROCESSABLE_ENTITY,
-        error: ['passwords does not match'],
+        error: ['Passwords do not match.'],
       };
     }
 
@@ -121,7 +121,7 @@ export class AccountService {
     if (!account || !request.refreshToken || !account.refreshToken) {
       return {
         status: HttpStatus.UNAUTHORIZED,
-        error: ['invalid refresh token'],
+        error: ['Invalid refresh token.'],
       };
     }
 
@@ -130,7 +130,7 @@ export class AccountService {
     if (!isRefreshTokenMatching) {
       return {
         status: HttpStatus.UNAUTHORIZED,
-        error: ['invalid refresh token'],
+        error: ['Invalid refresh token.'],
       };
     }
 

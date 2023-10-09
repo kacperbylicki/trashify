@@ -195,7 +195,7 @@ describe('AccountService', () => {
       expect(await argon2.verify(account?.password ?? '', payload.password)).toBe(true);
     });
 
-    it(`should return HttpStatus.UNPROCESSABLE_ENTITY with message "cannot process the request" if account already exists`, async () => {
+    it(`should return HttpStatus.UNPROCESSABLE_ENTITY with message "Email already taken.`, async () => {
       // given
       await accountService.register(payload);
 
@@ -204,7 +204,7 @@ describe('AccountService', () => {
 
       // then
       expect(response.status).toEqual(HttpStatus.UNPROCESSABLE_ENTITY);
-      expect(response.error).toEqual(['cannot process the request']);
+      expect(response.error).toEqual(['Email already taken.']);
     });
 
     it('should return HttpStatus.UNPROCESSABLE_ENTITY if passwords do not match', async () => {
@@ -219,7 +219,7 @@ describe('AccountService', () => {
 
       // then
       expect(response.status).toEqual(HttpStatus.UNPROCESSABLE_ENTITY);
-      expect(response.error).toEqual(['passwords does not match']);
+      expect(response.error).toEqual(['Passwords do not match.']);
     });
   });
 
@@ -264,7 +264,7 @@ describe('AccountService', () => {
 
       // then
       expect(response.status).toEqual(HttpStatus.UNAUTHORIZED);
-      expect(response.error).toEqual(['invalid email or password']);
+      expect(response.error).toEqual([`Invalid email or password.`]);
     });
 
     it('should return HttpStatus.UNAUTHORIZED if password is incorrect', async () => {
@@ -279,7 +279,7 @@ describe('AccountService', () => {
 
       // then
       expect(response.status).toEqual(HttpStatus.UNAUTHORIZED);
-      expect(response.error).toEqual(['invalid email or password']);
+      expect(response.error).toEqual(['Invalid email or password.']);
     });
   });
 
@@ -337,7 +337,7 @@ describe('AccountService', () => {
 
       // then
       expect(response.status).toEqual(HttpStatus.UNAUTHORIZED);
-      expect(response.error).toEqual(['invalid refresh token']);
+      expect(response.error).toEqual(['Invalid refresh token.']);
     });
 
     it('should return HttpStatus.UNAUTHORIZED if account ID is incorrect', async () => {
@@ -353,7 +353,7 @@ describe('AccountService', () => {
 
       // then
       expect(response.status).toEqual(HttpStatus.UNAUTHORIZED);
-      expect(response.error).toEqual(['invalid refresh token']);
+      expect(response.error).toEqual(['Invalid refresh token.']);
     });
   });
 
@@ -427,7 +427,7 @@ describe('AccountService', () => {
       });
 
       expect(res.email).toEqual(user1.email);
-      expect(res.error[0]).toEqual('Email already taken.');
+      expect(res?.error ? res.error[0] : null).toEqual('Email already taken.');
     });
 
     it('returns an error - when user does not exist', async () => {
@@ -446,7 +446,7 @@ describe('AccountService', () => {
       });
 
       expect(res.email).toEqual(user1.email);
-      expect(res.error[0]).toEqual('Email already taken.');
+      expect(res?.error ? res.error[0] : null).toEqual('Email already taken.');
     });
 
     it('changes user email', async () => {
@@ -485,7 +485,7 @@ describe('AccountService', () => {
 
       expect(res.status).toEqual(HttpStatus.BAD_REQUEST);
 
-      expect(res.error[0]).toEqual('User not found.');
+      expect(res?.error ? res.error[0] : null).toEqual('User not found.');
     });
 
     it('updates account username', async () => {
@@ -525,7 +525,7 @@ describe('AccountService', () => {
 
       expect(result.status).toEqual(HttpStatus.BAD_REQUEST);
 
-      expect(result.error[0]).toEqual('User does not exist.');
+      expect(result?.error ? result?.error[0] : null).toEqual('User does not exist.');
     });
 
     it('creates and persists resetPasswordToken', async () => {

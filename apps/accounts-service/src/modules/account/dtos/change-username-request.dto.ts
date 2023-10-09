@@ -1,10 +1,12 @@
+import { AccountConstraints } from '../enums';
 import { ChangeUsernameRequest } from '@trashify/transport';
-import { IsNotEmpty, IsString, IsUUID, MinLength } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 
 export class ChangeUsernameRequestDto implements ChangeUsernameRequest {
   @IsString()
   @IsNotEmpty()
-  @MinLength(4)
+  @MinLength(AccountConstraints.UsernameMinLength)
+  @MaxLength(AccountConstraints.UsernameMaxLength)
   username!: string;
 
   @IsNotEmpty()

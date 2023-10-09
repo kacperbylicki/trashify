@@ -174,6 +174,7 @@ export class AccountController {
     return result.pipe(
       map(() => {
         return {
+          // TODO: Add conditional email dispatch, unless there is a better way :)
           status: HttpStatus.OK,
         };
       }),
