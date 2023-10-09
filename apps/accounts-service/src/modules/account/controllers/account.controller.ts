@@ -7,6 +7,7 @@ import {
   RegisterResponse,
   ValidateJwtResponse,
   ValidateRefreshJwtResponse,
+  accountGrpcMethod,
 } from '@trashify/transport';
 import { AccountService, AuthService } from '../services';
 import { Controller } from '@nestjs/common';
@@ -28,37 +29,37 @@ export class AccountController {
     private readonly authService: AuthService,
   ) {}
 
-  @GrpcMethod(ACCOUNT_SERVICE_NAME, 'GetAccount')
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.getAccount)
   getAccount(payload: GetAccountRequestDto): Promise<GetAccountResponse> {
     return this.accountService.getCurrentAccount(payload.accountId);
   }
 
-  @GrpcMethod(ACCOUNT_SERVICE_NAME, 'Login')
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.login)
   login(payload: LoginRequestDto): Promise<LoginResponse> {
     return this.accountService.login(payload);
   }
 
-  @GrpcMethod(ACCOUNT_SERVICE_NAME, 'Register')
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.register)
   register(payload: RegisterRequestDto): Promise<RegisterResponse> {
     return this.accountService.register(payload);
   }
 
-  @GrpcMethod(ACCOUNT_SERVICE_NAME, 'ValidateJwt')
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.validateJwt)
   validateJwt(payload: ValidateJwtRequestDto): Promise<ValidateJwtResponse> {
     return this.authService.validateJwt(payload.accessToken);
   }
 
-  @GrpcMethod(ACCOUNT_SERVICE_NAME, 'ValidateRefreshJwt')
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.validateRefreshJwt)
   validateRefreshJwt(payload: ValidateRefreshJwtRequestDto): Promise<ValidateRefreshJwtResponse> {
     return this.authService.validateRefreshJwt(payload.refreshToken);
   }
 
-  @GrpcMethod(ACCOUNT_SERVICE_NAME, 'RefreshToken')
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.refreshToken)
   refreshToken(payload: RefreshTokenRequestDto): Promise<RefreshTokenResponse> {
     return this.accountService.refreshToken(payload);
   }
 
-  @GrpcMethod(ACCOUNT_SERVICE_NAME, 'Logout')
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.logout)
   logout(payload: LogoutRequestDto): Promise<LogoutResponse> {
     return this.accountService.logout(payload.accountId);
   }

@@ -1,4 +1,4 @@
-import { AccountModule, HealthModule } from '@/modules';
+import { AccountModule, HealthModule, TrashModule } from '@/modules';
 import { AppConfig } from '@/config';
 import { ConfigModule } from '@unifig/nest';
 import { Module } from '@nestjs/common';
@@ -32,6 +32,7 @@ import { Module } from '@nestjs/common';
     //   },
     //   isGlobal: true,
     // }),
+    TrashModule,
     AccountModule,
     HealthModule,
   ],

@@ -16,6 +16,7 @@
     "proto:all": "turbo run proto:all",
     "proto:account": "turbo run proto:account",
     "build": "turbo run build",
+    "refresh": "turbo run build && yarn",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint --parallel --no-cache",
@@ -51,6 +52,6 @@
   },
   "volta": {
     "node": "18.17.1",
-    "yarn": "4.0.0-rc.48"
+    "yarn": "1.22.19"
   }
 }

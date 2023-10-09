@@ -15,7 +15,9 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "proto:mailing": "protoc --plugin=../../node_modules/.bin/protoc-gen-ts_proto -I=./proto --ts_proto_out=src/ ./proto/mailing.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb --experimental_allow_proto3_optional",
     "proto:account": "protoc --plugin=../../node_modules/.bin/protoc-gen-ts_proto -I=./proto --ts_proto_out=src/ ./proto/account.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
-    "proto:all": "npm run proto:mailing && npm run proto:account"
+    "proto:trash": "protoc --plugin=../../node_modules/.bin/protoc-gen-ts_proto -I=./proto --ts_proto_out=src/ ./proto/trash.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
+    "proto:all": "npm run proto:mailing && npm run proto:account && npm run proto:trash",
+    "sync:methods": "node scripts/extract-grpc-methods.js"
   },
   "devDependencies": {
     "@grpc/grpc-js": "^1.8.12",

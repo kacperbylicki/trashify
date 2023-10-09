@@ -30,4 +30,8 @@ export class AppConfig {
   @From('ACCOUNTS_SERVICE_URL')
   @IsString()
   accountServiceUrl!: string;
+
+  @From('TRASH_SERVICE_URL')
+  @IsString()
+  trashServiceUrl!: string;
 }

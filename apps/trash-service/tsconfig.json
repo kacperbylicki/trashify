@@ -1,0 +1,15 @@
+{
+  "extends": "@trashify/tsconfig/backend-nest.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/unit/**/*.test.ts",
+    "test/integration/**/*.test.ts",
+    "test/unit/**/setup.ts",
+    "test/factories/**.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
