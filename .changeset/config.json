@@ -11,6 +11,7 @@
     "@trashify/accounts-service",
     "@trashify/api-gateway",
     "@trashify/mailing-service",
+    "@trashify/trash-service",
     "@trashify/testing"
   ]
 }
