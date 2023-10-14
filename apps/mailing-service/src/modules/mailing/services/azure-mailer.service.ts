@@ -35,10 +35,9 @@ export class AzureMailerService {
       this.logger = new Logger(AzureMailerService.name);
     }
 
-    this.emailClient = new EmailClient(
-      `endpoint=${options.connectionString}`,
-      options.clientOptions,
-    );
+    this.emailClient = new EmailClient(`endpoint=${options.connectionString}`, {
+      ...options.clientOptions,
+    });
   }
 
   async sendEmail(msg: Omit<EmailMessage, 'senderAddress'>): Promise<void> {

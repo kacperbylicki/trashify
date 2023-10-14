@@ -1,6 +1,7 @@
 export const accountGrpcMethod = {
   getAccount: 'getAccount',
   register: 'register',
+  confirmRegistration: 'confirmRegistration',
   login: 'login',
   validateJwt: 'validateJwt',
   validateRefreshJwt: 'validateRefreshJwt',
@@ -10,6 +11,7 @@ export const accountGrpcMethod = {
   changePassword: 'changePassword',
   changeUsername: 'changeUsername',
   changeEmail: 'changeEmail',
+  confirmNewEmail: 'confirmNewEmail',
 } as const;
 
 export type accountGrpcMethodEnum = keyof typeof accountGrpcMethod;

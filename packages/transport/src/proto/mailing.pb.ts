@@ -5,7 +5,11 @@ import { Observable } from "rxjs";
 export const mailingProtobufPackage = 'mailing';
 
 export interface SendEmailRequest {
-  email: Email | undefined;
+  content: EmailContent | undefined;
+  recipients: EmailRecipients | undefined;
+  senderAddress?: string;
+  disableUserEngagementTracking: boolean;
+  attachments: EmailAttachment[];
 }
 
 export interface MailingError {
@@ -21,11 +25,10 @@ export interface SendEmailResponse {
 export interface Email {
   content: EmailContent | undefined;
   recipients: EmailRecipients | undefined;
-  senderAddress: string;
+  senderAddress?: string;
   disableUserEngagementTracking: boolean;
   replyTo: EmailAddress[];
   attachments: EmailAttachment[];
-  headers: { [key: string]: string };
 }
 
 export interface Email_HeadersEntry {
@@ -61,7 +64,7 @@ export const MAILING_PACKAGE_NAME = "mailing";
 export abstract class MailingServiceClient {
   abstract sendEmail(
     request: SendEmailRequest,
-  ): Promise<SendEmailResponse> | Observable<SendEmailResponse> | SendEmailResponse;
+  ): Observable<SendEmailResponse>;
 }
 
 export interface MailingServiceController {

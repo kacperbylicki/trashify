@@ -1,8 +1,10 @@
+import { API_GATEWAY_URL_TOKEN } from '../symbols';
 import {
   AccountServiceClient,
   GetAccountResponse,
   LoginResponse,
   LogoutResponse,
+  MailingServiceClient,
   RefreshTokenResponse,
   RegisterResponse,
 } from '@trashify/transport';
@@ -20,8 +22,11 @@ import {
   Get,
   HttpCode,
   HttpStatus,
-  Param,
+  Inject,
+  Logger,
+  Patch,
   Post,
+  Query,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -51,13 +56,27 @@ import {
   RequestRefreshToken,
   TimeoutInterceptor,
 } from '@/common';
-import { Observable, map } from 'rxjs';
+import { Observable, first, map } from 'rxjs';
+import {
+  getPasswordChangedEmailTemplate,
+  getRegistrationConfirmationEmailTemplate,
+  getResetPasswordEmailTemplate,
+} from '../templates';
 
 @Controller('accounts')
 @ApiTags(AccountController.name)
 @UseInterceptors(TimeoutInterceptor, HttpStatusInterceptor)
 export class AccountController {
-  public constructor(private readonly client: AccountServiceClient) {}
+  private logger: Logger;
+
+  public constructor(
+    private readonly accountsClient: AccountServiceClient,
+    private readonly mailingClient: MailingServiceClient,
+    @Inject(API_GATEWAY_URL_TOKEN)
+    private readonly baseUrl: string,
+  ) {
+    this.logger = new Logger(AccountController.name);
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get('me')
@@ -70,7 +89,7 @@ export class AccountController {
   async currentAccount(
     @RequestAccountId() accountId: string,
   ): Promise<Observable<GetAccountResponse>> {
-    return this.client.getAccount({ accountId });
+    return this.accountsClient.getAccount({ accountId });
   }
 
   @Public()
@@ -79,7 +98,11 @@ export class AccountController {
   @ApiUnauthorizedResponse({ description: `Invalid token` })
   @ApiOkResponse({ type: LoginResponseDto, description: `Logged in` })
   async login(@Body() dto: LoginRequestDto): Promise<Observable<LoginResponse>> {
-    return this.client.login(dto);
+    return this.accountsClient.login(dto).pipe(
+      map((response) => {
+        return response;
+      }),
+    );
   }
 
   @Public()
@@ -89,7 +112,25 @@ export class AccountController {
     description: `Account created`,
   })
   async register(@Body() dto: RegisterRequestDto): Promise<Observable<RegisterResponse>> {
-    return this.client.register(dto);
+    return this.accountsClient.register(dto).pipe(
+      map((response) => {
+        if (response.status !== HttpStatus.OK) {
+          return response;
+        }
+
+        if (response.email && response.username) {
+          this.mailingClient.sendEmail(
+            getRegistrationConfirmationEmailTemplate({
+              email: response.email,
+              username: response.username,
+              url: '',
+            }),
+          );
+        }
+
+        return response;
+      }),
+    );
   }
 
   @UseGuards(JwtAuthGuard)
@@ -99,7 +140,7 @@ export class AccountController {
   @ApiOkResponse({ description: `Logged out` })
   @ApiBearerAuth()
   async logout(@RequestAccountId() accountId: string): Promise<Observable<LogoutResponse>> {
-    return this.client.logout({ accountId });
+    return this.accountsClient.logout({ accountId });
   }
 
   @UseGuards(RefreshJwtAuthGuard)
@@ -115,7 +156,7 @@ export class AccountController {
     @RequestAccountId() accountId: string,
     @RequestRefreshToken() refreshToken: string,
   ): Promise<Observable<RefreshTokenResponse>> {
-    return this.client.refreshToken({ accountId, refreshToken });
+    return this.accountsClient.refreshToken({ accountId, refreshToken });
   }
 
   @UseGuards(JwtAuthGuard)
@@ -132,7 +173,9 @@ export class AccountController {
   ): Promise<Observable<ChangeEmailResponseDto>> {
     const { email } = request;
 
-    return this.client.changeEmail({
+    // TODO: Add email changed email
+
+    return this.accountsClient.changeEmail({
       uuid: accountId,
       email,
     });
@@ -150,7 +193,7 @@ export class AccountController {
     @RequestAccountId() accountId: string,
     @Body() request: ChangeUsernameDto,
   ): Promise<Observable<ChangeUsernameResponseDto>> {
-    return this.client.changeUsername({
+    return this.accountsClient.changeUsername({
       username: request.username,
       uuid: accountId,
     });
@@ -167,37 +210,86 @@ export class AccountController {
   ): Promise<Observable<ResetPasswordResponseDto>> {
     const { email } = request;
 
-    const result = this.client.createResetPasswordToken({
+    const result = this.accountsClient.createResetPasswordToken({
       email,
     });
 
     return result.pipe(
-      map(() => {
+      map((response) => {
+        if (response.status !== HttpStatus.OK) {
+          return {
+            status: HttpStatus.OK,
+          };
+        }
+
+        if (response.email && response.username) {
+          this.mailingClient
+            .sendEmail(
+              getResetPasswordEmailTemplate({
+                email: response.email,
+                url: `${this.baseUrl}/change-password/${response.token}`,
+                username: response.username,
+              }),
+            )
+            .pipe(first())
+            .subscribe((value) => {
+              this.logger.log(`Email sending result: ${value?.ok}`);
+            });
+        }
+
         return {
-          // TODO: Add conditional email dispatch, unless there is a better way :)
           status: HttpStatus.OK,
         };
       }),
     );
   }
 
-  @Post('change-password/:token')
+  @Post('change-password')
   @ApiOkResponse({
     type: ChangePasswordResponseDto,
     description: 'Password changed.',
   })
-  @ApiBearerAuth()
   @HttpCode(HttpStatus.OK)
   public async changePassword(
-    @Param('token') token: string,
+    @Query('token') token: string,
     @Body() request: ChangePasswordDto,
   ): Promise<Observable<ChangePasswordResponseDto>> {
     const { password, repeatedPassword } = request;
 
-    return this.client.changePassword({
-      password,
-      repeatedPassword,
-      token,
-    });
+    return this.accountsClient
+      .changePassword({
+        password,
+        repeatedPassword,
+        token,
+      })
+      .pipe(
+        map((response) => {
+          if (response.status !== HttpStatus.OK) {
+            return response;
+          }
+
+          if (response.email && response.username) {
+            this.mailingClient
+              .sendEmail(
+                getPasswordChangedEmailTemplate({
+                  email: response.email,
+                  username: response.username,
+                }),
+              )
+              .pipe(first())
+              .subscribe((value) => {
+                this.logger.log(`Change password email sent: ${value?.ok}`);
+              });
+          }
+
+          return response;
+        }),
+      );
+  }
+
+  @Patch('confirm-email')
+  @HttpCode(HttpStatus.OK)
+  public async confirmEmail(@Query('token') token: string) {
+    return {};
   }
 }

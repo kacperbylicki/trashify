@@ -67,6 +67,15 @@ message ChangeEmailResponse {
     repeated string error = 3;
 }
 
+message ConfirmNewEmailRequest {
+    string token = 1;
+}
+
+message ConfirmNewEmailResponse {
+    int32 status = 1;
+    repeated string error = 2;
+}
+
 message CreateResetPasswordTokenRequest {
     string email = 1;
 }
@@ -75,6 +84,8 @@ message CreateResetPasswordTokenResponse {
     int32 status = 1;
     optional string token = 2;
     repeated string error = 3;
+    optional string username = 4;
+    optional string email = 5;
 }
 
 message ChangePasswordRequest {
@@ -86,11 +97,15 @@ message ChangePasswordRequest {
 message ChangePasswordResponse {
     int32 status = 1;
     repeated string error = 2;
+    optional string username = 3;
+    optional string email = 4;
 }
 
 message RegisterResponse {
     int32 status = 1;
     repeated string error = 2;
+    optional string email = 3;
+    optional string username = 4;
 }
   
 // Login

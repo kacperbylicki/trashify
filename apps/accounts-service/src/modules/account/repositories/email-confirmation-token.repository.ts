@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
+import { EmailConfirmationToken } from '../entities';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { ResetPasswordToken } from '../entities';
 
 interface SavePayload {
   accountUuid: string;
@@ -10,35 +10,35 @@ interface SavePayload {
 }
 
 @Injectable()
-export class ResetPasswordTokenRepository {
+export class EmailConfirmationTokenRepository {
   public constructor(
-    @InjectModel(ResetPasswordToken.name)
-    private readonly resetPasswordTokenModel: Model<ResetPasswordToken>,
+    @InjectModel(EmailConfirmationToken.name)
+    private readonly emailConfirmationTokenModel: Model<EmailConfirmationToken>,
   ) {}
 
-  public async findByToken(token: string): Promise<ResetPasswordToken | null> {
-    const resetPasswordToken = await this.resetPasswordTokenModel
+  public async findByToken(token: string): Promise<EmailConfirmationToken | null> {
+    const entity = await this.emailConfirmationTokenModel
       .findOne({
         token,
       })
       .lean();
 
-    if (!resetPasswordToken) {
+    if (!entity) {
       return null;
     }
 
-    return resetPasswordToken;
+    return entity;
   }
 
   public async save(payload: SavePayload): Promise<void> {
     const { accountUuid, token } = payload;
 
-    const existsForAccount = await this.resetPasswordTokenModel.findOne({
+    const existsForAccount = await this.emailConfirmationTokenModel.findOne({
       accountUuid,
     });
 
     if (existsForAccount) {
-      await this.resetPasswordTokenModel
+      await this.emailConfirmationTokenModel
         .updateOne(
           {
             accountUuid,
@@ -52,7 +52,7 @@ export class ResetPasswordTokenRepository {
       return;
     }
 
-    await this.resetPasswordTokenModel.create({
+    await this.emailConfirmationTokenModel.create({
       accountUuid,
       token,
       createdAt: dayjs().unix(),
@@ -60,7 +60,7 @@ export class ResetPasswordTokenRepository {
   }
 
   public async delete(accountUuid: string): Promise<void> {
-    await this.resetPasswordTokenModel.deleteOne({
+    await this.emailConfirmationTokenModel.deleteOne({
       accountUuid,
     });
   }

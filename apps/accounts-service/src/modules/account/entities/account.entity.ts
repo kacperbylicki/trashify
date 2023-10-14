@@ -9,6 +9,12 @@ export class Account {
   @Prop({ type: String, unique: true })
   email!: string;
 
+  @Prop({ type: Boolean, default: false })
+  emailConfirmed!: boolean;
+
+  @Prop({ type: String, unique: true, optional: true })
+  newEmail?: string;
+
   @Prop({ type: String })
   username!: string;
 

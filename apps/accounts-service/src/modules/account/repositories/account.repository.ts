@@ -7,7 +7,19 @@ export class AccountRepository {
   constructor(@InjectModel(Account.name) private readonly accountModel: Model<Account>) {}
 
   async findByEmail(email: string): Promise<Account | null> {
-    return this.accountModel.findOne({ email }).lean().exec();
+    return this.accountModel
+      .findOne({
+        $or: [
+          {
+            email,
+          },
+          {
+            newEmail: email,
+          },
+        ],
+      })
+      .lean()
+      .exec();
   }
 
   async findById(uuid: string): Promise<Account | null> {
@@ -28,6 +40,27 @@ export class AccountRepository {
     const updatedAccount = await this.accountModel
       .findOneAndUpdate({ uuid }, { ...data, updatedAt: dayjs().unix() }, { new: true })
       .lean()
+      .exec();
+
+    return updatedAccount;
+  }
+
+  async setNewEmail(uuid: string): Promise<Account | null> {
+    const updatedAccount = await this.accountModel
+      .findOneAndUpdate(
+        {
+          uuid,
+        },
+        {
+          $set: {
+            email: '$newEmail',
+            newEmail: null,
+          },
+        },
+        {
+          new: true,
+        },
+      )
       .exec();
 
     return updatedAccount;

@@ -8,9 +8,13 @@ export class ResetPasswordTokenCacheService {
   public async get(key: string): Promise<string | null> {
     const resetPasswordToken = await this.resetPasswordTokenRepository.findByToken(key);
 
+    // TODO: Reduce to single DB operation :)
+
     if (!resetPasswordToken) {
       return null;
     }
+
+    await this.resetPasswordTokenRepository.delete(resetPasswordToken.accountUuid);
 
     return resetPasswordToken.accountUuid;
   }

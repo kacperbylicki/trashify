@@ -16,6 +16,8 @@ import {
   ChangeEmailResponse,
   ChangePasswordResponse,
   ChangeUsernameResponse,
+  ConfirmNewEmailResponse,
+  ConfirmRegistrationResponse,
   CreateResetPasswordTokenResponse,
   GetAccountResponse,
   LoginResponse,
@@ -23,16 +25,20 @@ import {
   RefreshTokenResponse,
   RegisterResponse,
 } from '@trashify/transport';
-import { HttpStatus, Injectable } from '@nestjs/common';
-import { ResetPasswordTokenCacheService } from '../cache';
+import { EMAIL_VERIFICATION_FEATURE_FLAG } from '../symbols';
+import { EmailConfirmationTokenCacheService, ResetPasswordTokenCacheService } from '../cache';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AccountService {
-  constructor(
+  public constructor(
     private readonly authService: AuthService,
     private readonly resetPasswordTokenCacheService: ResetPasswordTokenCacheService,
+    private readonly emailConfirmationTokenCacheService: EmailConfirmationTokenCacheService,
     private readonly accountRepository: AccountRepository,
+    @Inject(EMAIL_VERIFICATION_FEATURE_FLAG)
+    private readonly emailVerificationEnabled: boolean,
   ) {}
 
   async findById(uuid: string): Promise<Account | null> {
@@ -65,6 +71,13 @@ export class AccountService {
       return {
         status: HttpStatus.UNAUTHORIZED,
         error: ['Invalid email or password.'],
+      };
+    }
+
+    if (!account.emailConfirmed && this.emailVerificationEnabled) {
+      return {
+        status: HttpStatus.UNAUTHORIZED,
+        error: ['Email not confirmed.'],
       };
     }
 
@@ -108,6 +121,7 @@ export class AccountService {
       password: await argon2.hash(payload.password),
       createdAt: dayjs().unix(),
       updatedAt: dayjs().unix(),
+      emailConfirmed: false,
     };
 
     await this.accountRepository.save(account);
@@ -158,12 +172,41 @@ export class AccountService {
     }
 
     await this.accountRepository.update(uuid, {
-      email,
+      newEmail: email,
     });
 
     return {
       status: HttpStatus.OK,
       email,
+      error: [],
+    };
+  }
+
+  public async confirmRegistration(uuid: string): Promise<ConfirmRegistrationResponse> {
+    await this.accountRepository.update(uuid, {
+      emailConfirmed: true,
+    });
+
+    return {
+      status: HttpStatus.OK,
+      error: [],
+    };
+  }
+
+  public async confirmNewEmail(uuid: string): Promise<ConfirmNewEmailResponse> {
+    const tokenExists = await this.emailConfirmationTokenCacheService.get(uuid);
+
+    if (!tokenExists) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Invalid token.'],
+      };
+    }
+
+    await this.accountRepository.setNewEmail('uuid');
+
+    return {
+      status: HttpStatus.OK,
       error: [],
     };
   }
@@ -218,20 +261,13 @@ export class AccountService {
       token: token,
       status: HttpStatus.OK,
       error: [],
+      email: userExists.email,
+      username: userExists.username,
     };
   }
 
   public async changePassword(payload: ChangePasswordRequestDto): Promise<ChangePasswordResponse> {
     const { password, repeatedPassword, token } = payload;
-
-    const userId = await this.resetPasswordTokenCacheService.get(token);
-
-    if (!userId) {
-      return {
-        status: HttpStatus.BAD_REQUEST,
-        error: ['Invalid token.'],
-      };
-    }
 
     const passwordRepeatedCorrectly = password === repeatedPassword;
 
@@ -242,13 +278,24 @@ export class AccountService {
       };
     }
 
-    await this.accountRepository.update(userId, {
+    const userId = await this.resetPasswordTokenCacheService.get(token);
+
+    if (!userId) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Invalid token.'],
+      };
+    }
+
+    const account = (await this.accountRepository.update(userId, {
       password,
-    });
+    })) as Account;
 
     return {
       status: HttpStatus.OK,
       error: [],
+      email: account.email,
+      username: account.username,
     };
   }
 
