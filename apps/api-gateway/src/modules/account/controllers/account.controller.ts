@@ -1,4 +1,4 @@
-import { API_GATEWAY_URL_TOKEN } from '../symbols';
+import { API_GATEWAY_URL_TOKEN, EMAILS_FEATURE_FLAG } from '../symbols';
 import {
   AccountServiceClient,
   GetAccountResponse,
@@ -13,6 +13,7 @@ import {
   ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
@@ -37,6 +38,10 @@ import {
   ChangePasswordResponseDto,
   ChangeUsernameDto,
   ChangeUsernameResponseDto,
+  ConfirmNewEmailRequestDto,
+  ConfirmNewEmailResponseDto,
+  ConfirmRegistrationRequestDto,
+  ConfirmRegistrationResponseDto,
   GetAccountResponseDto,
   LoginRequestDto,
   LoginResponseDto,
@@ -58,6 +63,7 @@ import {
 } from '@/common';
 import { Observable, first, map } from 'rxjs';
 import {
+  getEmailChangeRequestEmailTemplate,
   getPasswordChangedEmailTemplate,
   getRegistrationConfirmationEmailTemplate,
   getResetPasswordEmailTemplate,
@@ -74,6 +80,8 @@ export class AccountController {
     private readonly mailingClient: MailingServiceClient,
     @Inject(API_GATEWAY_URL_TOKEN)
     private readonly baseUrl: string,
+    @Inject(EMAILS_FEATURE_FLAG)
+    private readonly emailsFeatureFlag: boolean,
   ) {
     this.logger = new Logger(AccountController.name);
   }
@@ -118,12 +126,12 @@ export class AccountController {
           return response;
         }
 
-        if (response.email && response.username) {
+        if (this.emailsFeatureFlag && response.email && response.username) {
           this.mailingClient.sendEmail(
             getRegistrationConfirmationEmailTemplate({
               email: response.email,
               username: response.username,
-              url: '',
+              url: `${this.baseUrl}/confirm-registration`,
             }),
           );
         }
@@ -131,6 +139,19 @@ export class AccountController {
         return response;
       }),
     );
+  }
+
+  @Public()
+  @ApiQuery({
+    type: ConfirmRegistrationRequestDto,
+  })
+  @Post('confirm-registration')
+  async confirmRegistration(
+    @Query('uuid') uuid: string,
+  ): Promise<Observable<ConfirmRegistrationResponseDto>> {
+    return this.accountsClient.confirmRegistration({
+      uuid,
+    });
   }
 
   @UseGuards(JwtAuthGuard)
@@ -173,12 +194,38 @@ export class AccountController {
   ): Promise<Observable<ChangeEmailResponseDto>> {
     const { email } = request;
 
-    // TODO: Add email changed email
+    return this.accountsClient
+      .changeEmail({
+        uuid: accountId,
+        email,
+      })
+      .pipe(
+        map((response) => {
+          if (response.status !== HttpStatus.OK) {
+            return response;
+          }
 
-    return this.accountsClient.changeEmail({
-      uuid: accountId,
-      email,
-    });
+          if (this.emailsFeatureFlag && response.email && response.username) {
+            this.mailingClient
+              .sendEmail(
+                getEmailChangeRequestEmailTemplate({
+                  email: response.email,
+                  url: `${this.baseUrl}/confirm-email`,
+                  username: response.username,
+                }),
+              )
+              .pipe(first())
+              .subscribe((value) => {
+                this.logger.log(`Email sending result: ${value?.ok}`);
+              });
+          }
+
+          return {
+            status: HttpStatus.OK,
+            email: response.email,
+          };
+        }),
+      );
   }
 
   @UseGuards(JwtAuthGuard)
@@ -222,7 +269,7 @@ export class AccountController {
           };
         }
 
-        if (response.email && response.username) {
+        if (this.emailsFeatureFlag && response.email && response.username) {
           this.mailingClient
             .sendEmail(
               getResetPasswordEmailTemplate({
@@ -268,7 +315,7 @@ export class AccountController {
             return response;
           }
 
-          if (response.email && response.username) {
+          if (this.emailsFeatureFlag && response.email && response.username) {
             this.mailingClient
               .sendEmail(
                 getPasswordChangedEmailTemplate({
@@ -288,8 +335,15 @@ export class AccountController {
   }
 
   @Patch('confirm-email')
+  @ApiQuery({
+    type: ConfirmNewEmailRequestDto,
+  })
   @HttpCode(HttpStatus.OK)
-  public async confirmEmail(@Query('token') token: string) {
-    return {};
+  public async confirmEmail(
+    @Query('token') token: string,
+  ): Promise<Observable<ConfirmNewEmailResponseDto>> {
+    return this.accountsClient.confirmNewEmail({
+      token,
+    });
   }
 }

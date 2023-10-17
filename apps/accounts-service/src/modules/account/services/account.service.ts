@@ -171,14 +171,21 @@ export class AccountService {
       };
     }
 
-    await this.accountRepository.update(uuid, {
-      newEmail: email,
-    });
+    if (this.emailVerificationEnabled) {
+      await this.accountRepository.update(uuid, {
+        newEmail: email,
+      });
+    } else {
+      await this.accountRepository.update(uuid, {
+        email,
+      });
+    }
 
     return {
       status: HttpStatus.OK,
       email,
       error: [],
+      username: userExists.username,
     };
   }
 

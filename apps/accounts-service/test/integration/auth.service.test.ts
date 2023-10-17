@@ -42,6 +42,7 @@ describe('AuthService', () => {
       // given
       const account: Account = {
         uuid: 'sample-uuid',
+        emailConfirmed: true,
         email: 'test@example.com',
         username: 'testuser',
         password: '',
@@ -66,6 +67,7 @@ describe('AuthService', () => {
       const account: Account = {
         uuid: 'sample-uuid',
         email: 'test@example.com',
+        emailConfirmed: true,
         username: 'testuser',
         password: '',
         createdAt: 0,
@@ -98,6 +100,7 @@ describe('AuthService', () => {
       const account: Account = {
         uuid: 'sample-uuid',
         email: 'test@example.com',
+        emailConfirmed: true,
         username: 'testuser',
         password: '',
         createdAt: 0,

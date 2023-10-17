@@ -15,7 +15,6 @@ service AccountService {
     rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
     rpc ChangeUsername (ChangeUsernameRequest) returns (ChangeUsernameResponse);
     rpc ChangeEmail (ChangeEmailRequest) returns (ChangeEmailResponse);
-    rpc ConfirmNewEmail (ConfirmNewEmailRequest) returns (ConfirmNewEmailResponse);
 }
 
 message Tokens {
@@ -47,15 +46,8 @@ message RegisterRequest {
     string confirmPassword = 4;
 }
 
-message RegisterResponse {
-    int32 status = 1;
-    repeated string error = 2;
-    optional string email = 3;
-    optional string username = 4;
-}
-
 message ConfirmRegistrationRequest {
-    string token = 1;
+    string uuid = 1;
 }
 
 message ConfirmRegistrationResponse {
@@ -83,6 +75,7 @@ message ChangeEmailResponse {
     int32 status = 1;
     string email = 2;
     repeated string error = 3;
+    optional string username = 4;
 }
 
 message ConfirmNewEmailRequest {
@@ -119,6 +112,12 @@ message ChangePasswordResponse {
     optional string email = 4;
 }
 
+message RegisterResponse {
+    int32 status = 1;
+    repeated string error = 2;
+    optional string email = 3;
+    optional string username = 4;
+}
   
 // Login
 message LoginRequest {

@@ -31,15 +31,6 @@ export const accountModuleProviders = [
   ResetPasswordTokenRepository,
   EmailConfirmationTokenRepository,
   EmailConfirmationTokenCacheService,
-  {
-    provide: EMAIL_VERIFICATION_FEATURE_FLAG,
-    inject: [getConfigContainerToken(AppConfig)],
-    useFactory: (): boolean => {
-      const { emailVerificationFeatureFlag } = Config.getValues(AppConfig);
-
-      return emailVerificationFeatureFlag;
-    },
-  },
 ];
 
 @Module({
@@ -68,6 +59,17 @@ export const accountModuleProviders = [
     ]),
   ],
   controllers: [AccountController],
-  providers: accountModuleProviders,
+  providers: [
+    ...accountModuleProviders,
+    {
+      provide: EMAIL_VERIFICATION_FEATURE_FLAG,
+      inject: [getConfigContainerToken(AppConfig)],
+      useFactory: (): boolean => {
+        const { emailVerificationFeatureFlag } = Config.getValues(AppConfig);
+
+        return emailVerificationFeatureFlag;
+      },
+    },
+  ],
 })
 export class AccountModule {}

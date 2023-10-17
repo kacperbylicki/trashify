@@ -6,6 +6,8 @@ import {
   AccountRepository,
   AccountSchema,
   AccountService,
+  EmailConfirmationToken,
+  EmailConfirmationTokenSchema,
   LoginRequestDto,
   RefreshTokenRequestDto,
   RegisterRequestDto,
@@ -16,6 +18,7 @@ import {
 import { AuthConfig } from '@/config';
 import { Config, PlainConfigAdapter } from '@unifig/core';
 import { ConfigModule } from '@unifig/nest';
+import { EMAIL_VERIFICATION_FEATURE_FLAG } from '../../src/modules/account/symbols';
 import { HttpStatus } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { MongooseModule, getConnectionToken, getModelToken } from '@nestjs/mongoose';
@@ -55,10 +58,20 @@ describe('AccountService', () => {
             name: ResetPasswordToken.name,
             schema: ResetPasswordTokenSchema,
           },
+          {
+            name: EmailConfirmationToken.name,
+            schema: EmailConfirmationTokenSchema,
+          },
         ]),
         ConfigModule.forFeature(AuthConfig),
       ],
-      providers: accountModuleProviders,
+      providers: [
+        ...accountModuleProviders,
+        {
+          provide: EMAIL_VERIFICATION_FEATURE_FLAG,
+          useValue: false,
+        },
+      ],
     }).compile();
 
     accountService = moduleRef.get<AccountService>(AccountService);

@@ -60,7 +60,7 @@ export class AccountController {
   public confirmRegistration(
     payload: ConfirmRegistrationRequest,
   ): Promise<ConfirmRegistrationResponse> {
-    return this.accountService.confirmRegistration(payload.token);
+    return this.accountService.confirmRegistration(payload.uuid);
   }
 
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.validateJwt)

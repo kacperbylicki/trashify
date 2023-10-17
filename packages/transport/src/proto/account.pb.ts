@@ -70,6 +70,7 @@ export interface ChangeEmailResponse {
   status: number;
   email: string;
   error?: string[];
+  username?: string;
 }
 
 export interface ConfirmNewEmailRequest {
@@ -97,7 +98,7 @@ export interface RegisterResponse {
 }
 
 export interface ConfirmRegistrationRequest {
-  token: string;
+  uuid: string;
 }
 
 export interface ConfirmRegistrationResponse {
@@ -176,7 +177,9 @@ export const ACCOUNT_PACKAGE_NAME = 'account';
 export abstract class AccountServiceClient {
   abstract getAccount(request: GetAccountRequest): Observable<GetAccountResponse>;
   abstract register(request: RegisterRequest): Observable<RegisterResponse>;
-  abstract confirmRegistration(request: ConfirmRegistrationRequest): Observable<ConfirmRegistrationResponse>;
+  abstract confirmRegistration(
+    request: ConfirmRegistrationRequest,
+  ): Observable<ConfirmRegistrationResponse>;
   abstract login(request: LoginRequest): Observable<LoginResponse>;
   abstract validateJwt(request: ValidateJwtRequest): Observable<ValidateJwtResponse>;
   abstract validateRefreshJwt(
@@ -250,19 +253,19 @@ export interface AccountServiceController {
 export function AccountServiceControllerMethods() {
   return function (constructor: Function) {
     const grpcMethods: string[] = [
-      "getAccount",
-      "register",
-      "confirmRegistration",
-      "login",
-      "validateJwt",
-      "validateRefreshJwt",
-      "refreshToken",
-      "logout",
-      "createResetPasswordToken",
-      "changePassword",
-      "changeUsername",
-      "changeEmail",
-      "confirmNewEmail",
+      'getAccount',
+      'register',
+      'confirmRegistration',
+      'login',
+      'validateJwt',
+      'validateRefreshJwt',
+      'refreshToken',
+      'logout',
+      'createResetPasswordToken',
+      'changePassword',
+      'changeUsername',
+      'changeEmail',
+      'confirmNewEmail',
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);

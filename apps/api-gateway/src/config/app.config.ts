@@ -42,4 +42,10 @@ export class AppConfig {
   @From('API_GATEWAY_URL')
   @IsString()
   apiGatewayUrl!: string;
+
+  @From({
+    key: 'EMAILS_FEATURE_FLAG',
+    default: false,
+  })
+  emailsFeatureFlag!: boolean;
 }

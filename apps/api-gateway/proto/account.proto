@@ -5,6 +5,7 @@ package account;
 service AccountService {
     rpc GetAccount (GetAccountRequest) returns (GetAccountResponse);
     rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc ConfirmRegistration (ConfirmRegistrationRequest) returns (ConfirmRegistrationResponse);
     rpc Login (LoginRequest) returns (LoginResponse);
     rpc ValidateJwt (ValidateJwtRequest) returns (ValidateJwtResponse);
     rpc ValidateRefreshJwt (ValidateRefreshJwtRequest) returns (ValidateRefreshJwtResponse);
@@ -45,6 +46,15 @@ message RegisterRequest {
     string confirmPassword = 4;
 }
 
+message ConfirmRegistrationRequest {
+    string uuid = 1;
+}
+
+message ConfirmRegistrationResponse {
+    int32 status = 1;
+    repeated string error = 2;
+}
+
 message ChangeUsernameRequest {
     string username = 1;
     string uuid = 2;
@@ -65,6 +75,7 @@ message ChangeEmailResponse {
     int32 status = 1;
     string email = 2;
     repeated string error = 3;
+    optional string username = 4;
 }
 
 message ConfirmNewEmailRequest {
