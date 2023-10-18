@@ -4,6 +4,11 @@
     "baseUrl": "./",
     "outDir": "dist"
   },
-  "include": ["src/**/*.ts", "test/unit/**/*.test.ts", "test/integration/**/*.test.ts"],
+  "include": [
+    "src/**/*.ts",
+    "test/unit/**/*.test.ts",
+    "test/integration/**/*.test.ts",
+    "test/factories/**.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

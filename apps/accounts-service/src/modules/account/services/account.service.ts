@@ -258,7 +258,7 @@ export class AccountService {
 
     const token = await this.authService.createResetPasswordToken();
 
-    // TODO: Delete upon connecting emails
+    // TODO: Delete once mailing is enabled :)
     //eslint-disable-next-line
     console.log(token);
 

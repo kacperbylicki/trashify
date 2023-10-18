@@ -6,6 +6,7 @@ import {
   AccountRepository,
   AccountSchema,
   AccountService,
+  AuthService,
   EmailConfirmationToken,
   EmailConfirmationTokenSchema,
   LoginRequestDto,
@@ -15,10 +16,15 @@ import {
   ResetPasswordTokenSchema,
   accountModuleProviders,
 } from '@/modules';
+import { AccountTestFactory } from '../factories/account-test.factory';
 import { AuthConfig } from '@/config';
 import { Config, PlainConfigAdapter } from '@unifig/core';
 import { ConfigModule } from '@unifig/nest';
 import { EMAIL_VERIFICATION_FEATURE_FLAG } from '../../src/modules/account/symbols';
+import {
+  EmailConfirmationTokenCacheService,
+  ResetPasswordTokenCacheService,
+} from '../../src/modules/account/cache';
 import { HttpStatus } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { MongooseModule, getConnectionToken, getModelToken } from '@nestjs/mongoose';
@@ -29,9 +35,12 @@ import { v4 as uuidv4 } from 'uuid';
 describe('AccountService', () => {
   const mongooseTestModule = new MongooseTestModule();
 
+  const accountTestFactory = new AccountTestFactory();
+
   let moduleRef: TestingModule;
 
   let accountService: AccountService;
+  let accountServiceWithFlagActive: AccountService;
   let accountRepository: AccountRepository;
 
   let accountModel: Model<Account>;
@@ -80,6 +89,13 @@ describe('AccountService', () => {
     resetPasswordTokenModel = moduleRef.get<Model<ResetPasswordToken>>(
       getModelToken(ResetPasswordToken.name),
     );
+    accountServiceWithFlagActive = new AccountService(
+      moduleRef.get(AuthService),
+      moduleRef.get(ResetPasswordTokenCacheService),
+      moduleRef.get(EmailConfirmationTokenCacheService),
+      moduleRef.get(AccountRepository),
+      true,
+    );
   });
 
   beforeEach(async () => {
@@ -101,13 +117,8 @@ describe('AccountService', () => {
     });
 
     it('should return the account if it exists', async () => {
-      const account = {
-        uuid: uuidv4(),
-        email: 'test@example.com',
-        password: await argon2.hash('password'),
-        createdAt: dayjs().unix(),
-        updatedAt: dayjs().unix(),
-      };
+      const account = accountTestFactory.create({});
+
       await accountModel.create(account);
 
       const result = await accountService.findById(account.uuid);
@@ -128,13 +139,8 @@ describe('AccountService', () => {
     });
 
     it('should return the account if it exists', async () => {
-      const account = {
-        uuid: uuidv4(),
-        email: 'test@example.com',
-        password: await argon2.hash('password'),
-        createdAt: dayjs().unix(),
-        updatedAt: dayjs().unix(),
-      };
+      const account = accountTestFactory.create({});
+
       await accountModel.create(account);
 
       const result = await accountService.findByEmail(account.email);
@@ -150,14 +156,19 @@ describe('AccountService', () => {
   describe('getCurrentAccount', () => {
     let accountId: string;
 
+    let registerPayload: RegisterRequestDto;
+
     beforeEach(async () => {
       // given
-      const registerPayload: RegisterRequestDto = {
-        email: 'test@example.com',
-        username: 'test',
-        password: 'test123',
-        confirmPassword: 'test123',
+      const password = UserDataGenerator.password(10);
+
+      registerPayload = {
+        email: UserDataGenerator.email(),
+        username: UserDataGenerator.username(),
+        password: password,
+        confirmPassword: password,
       };
+
       await accountService.register(registerPayload);
       const account = await accountRepository.findByEmail(registerPayload.email);
       accountId = account?.uuid ?? '';
@@ -170,7 +181,7 @@ describe('AccountService', () => {
       // then
       expect(status).toEqual(HttpStatus.OK);
       expect(data?.uuid).toEqual(accountId);
-      expect(data?.email).toEqual('test@example.com');
+      expect(data?.email).toEqual(registerPayload.email);
     });
 
     it('should return null if account ID is incorrect', async () => {
@@ -188,11 +199,13 @@ describe('AccountService', () => {
 
   describe('register', () => {
     // given
+    const password = UserDataGenerator.password(10);
+
     const payload: RegisterRequestDto = {
-      email: 'test@example.com',
-      username: 'test',
-      password: 'test123',
-      confirmPassword: 'test123',
+      email: UserDataGenerator.email(),
+      username: UserDataGenerator.username(),
+      password: password,
+      confirmPassword: password,
     };
 
     it('should create a new account and return HttpStatus.CREATED', async () => {
@@ -238,11 +251,13 @@ describe('AccountService', () => {
 
   describe('login', () => {
     // given
+    const password = UserDataGenerator.password(10);
+
     const payload: RegisterRequestDto = {
-      email: 'test@example.com',
-      username: 'test',
-      password: 'test123',
-      confirmPassword: 'test123',
+      email: UserDataGenerator.email(),
+      username: UserDataGenerator.username(),
+      password: password,
+      confirmPassword: password,
     };
 
     beforeEach(async () => {
@@ -252,8 +267,8 @@ describe('AccountService', () => {
     it('should successfully log in and return tokens', async () => {
       // given
       const loginPayload: LoginRequestDto = {
-        email: 'test@example.com',
-        password: 'test123',
+        email: payload.email,
+        password: payload.password,
       };
 
       // when
@@ -268,8 +283,8 @@ describe('AccountService', () => {
     it('should return HttpStatus.UNAUTHORIZED if email is incorrect', async () => {
       // given
       const loginPayload: LoginRequestDto = {
-        email: 'wrong@example.com',
-        password: 'test123',
+        email: payload.email + 'XDDDD',
+        password: payload.password,
       };
 
       // when
@@ -283,8 +298,8 @@ describe('AccountService', () => {
     it('should return HttpStatus.UNAUTHORIZED if password is incorrect', async () => {
       // given
       const loginPayload: LoginRequestDto = {
-        email: 'test@example.com',
-        password: 'wrong123',
+        email: payload.email,
+        password: payload.password + 'XDDDD',
       };
 
       // when
@@ -296,23 +311,67 @@ describe('AccountService', () => {
     });
   });
 
+  describe('login - when emailFeatureFlag is enabled', () => {
+    it('throws an error - when email is not confirmed', async () => {
+      const pass = UserDataGenerator.password(10);
+
+      const account = accountTestFactory.create({
+        emailConfirmed: false,
+        password: await argon2.hash(pass),
+      });
+
+      await accountModel.create(account);
+
+      const response = await accountServiceWithFlagActive.login({
+        email: account.email,
+        password: pass,
+      });
+
+      expect(response.status).toEqual(HttpStatus.UNAUTHORIZED);
+      expect(response.error).toEqual(['Email not confirmed.']);
+    });
+
+    it('returns tokens pair', async () => {
+      const pass = UserDataGenerator.password(10);
+
+      const account = accountTestFactory.create({
+        emailConfirmed: true,
+        password: await argon2.hash(pass),
+      });
+
+      await accountModel.create(account);
+
+      const response = await accountServiceWithFlagActive.login({
+        email: account.email,
+        password: pass,
+      });
+
+      expect(response.status).toEqual(HttpStatus.OK);
+      expect(response.data?.accessToken).toBeDefined();
+      expect(response.data?.refreshToken).toBeDefined();
+    });
+  });
+
   describe('refreshToken', () => {
     let accountId: string;
     let refreshToken: string;
 
     beforeEach(async () => {
       // given
+      const password = UserDataGenerator.password(10);
+
       const registerPayload: RegisterRequestDto = {
-        email: 'test@example.com',
-        username: 'test',
-        password: 'test123',
-        confirmPassword: 'test123',
+        email: UserDataGenerator.email(),
+        username: UserDataGenerator.username(),
+        password: password,
+        confirmPassword: password,
       };
+
       await accountService.register(registerPayload);
 
       const loginPayload: LoginRequestDto = {
-        email: 'test@example.com',
-        password: 'test123',
+        email: registerPayload.email,
+        password: registerPayload.password,
       };
       const { data } = await accountService.login(loginPayload);
       const account = await accountRepository.findByEmail(registerPayload.email);
@@ -375,17 +434,20 @@ describe('AccountService', () => {
 
     beforeEach(async () => {
       // given
+      const password = UserDataGenerator.password(10);
+
       const registerPayload: RegisterRequestDto = {
-        email: 'test@example.com',
-        username: 'test',
-        password: 'test123',
-        confirmPassword: 'test123',
+        email: UserDataGenerator.email(),
+        username: UserDataGenerator.username(),
+        password: password,
+        confirmPassword: password,
       };
+
       await accountService.register(registerPayload);
 
       const loginPayload: LoginRequestDto = {
-        email: 'test@example.com',
-        password: 'test123',
+        email: registerPayload.email,
+        password: registerPayload.password,
       };
       await accountService.login(loginPayload);
       const account = await accountRepository.findByEmail(registerPayload.email);
@@ -484,6 +546,62 @@ describe('AccountService', () => {
       const rawUser = await accountModel.findOne({ uuid: user.uuid });
 
       expect(rawUser?.email).toEqual(newEmail);
+    });
+  });
+
+  describe('changeEmail - given emailVerificationFlag is enabled', () => {
+    it('throws an error - if email already exists', async () => {
+      const existingAccount = accountTestFactory.create({});
+
+      const accountTryingDuplicate = accountTestFactory.create({});
+
+      await accountModel.create(existingAccount, accountTryingDuplicate);
+
+      const response = await accountServiceWithFlagActive.changeEmail({
+        email: existingAccount.email,
+        uuid: accountTryingDuplicate.uuid,
+      });
+
+      expect(response.status).toEqual(HttpStatus.CONFLICT);
+      expect(response.error).toEqual(['Email already taken.']);
+
+      const rawAccount = await accountModel.findOne({ uuid: accountTryingDuplicate.uuid }).lean();
+
+      expect(rawAccount).toMatchObject(accountTryingDuplicate);
+    });
+
+    it('throws an error - if user does not exist', async () => {
+      const response = await accountServiceWithFlagActive.changeEmail({
+        email: UserDataGenerator.email(),
+        uuid: UserDataGenerator.uuid(),
+      });
+
+      expect(response.status).toEqual(HttpStatus.CONFLICT);
+
+      expect(response.error).toEqual(['Email already taken.']);
+    });
+
+    it('updates newEmail field', async () => {
+      const existingAccount = accountTestFactory.create({});
+
+      await accountModel.create(existingAccount);
+
+      const newEmail = UserDataGenerator.email();
+
+      const response = await accountServiceWithFlagActive.changeEmail({
+        email: newEmail,
+        uuid: existingAccount.uuid,
+      });
+
+      expect(response.status).toEqual(HttpStatus.OK);
+      expect(response.username).toEqual(existingAccount.username);
+
+      const rawAccount = await accountModel.findOne({ uuid: existingAccount.uuid }).lean();
+
+      expect(rawAccount).toMatchObject({
+        ...existingAccount,
+        updatedAt: expect.any(Number),
+      });
     });
   });
 

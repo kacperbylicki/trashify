@@ -1,6 +1,7 @@
 import { AZURE_MAILER_MODULE_OPTIONS_TOKEN } from '../configurable-azure-mailer.module';
 import { AzureIdentityProvider } from '../../identity';
 import { AzureMailerModuleOptions, Poller } from '../types';
+import { EMAILS_FEATURE_FLAG } from '../symbols';
 import {
   EmailClient,
   EmailMessage,
@@ -13,15 +14,21 @@ import { delay } from '../../../common/util';
 
 @Injectable()
 export class AzureMailerService {
-  private emailClient: EmailClient;
+  private emailClient!: EmailClient;
   constructor(
     @Inject(AZURE_MAILER_MODULE_OPTIONS_TOKEN)
     private readonly options: AzureMailerModuleOptions,
+    @Inject(EMAILS_FEATURE_FLAG)
+    private readonly emailsFeatureFlag: boolean,
     @Optional()
     azureIdentityProvider: AzureIdentityProvider,
     @Optional()
     private readonly logger: Logger,
   ) {
+    if (!emailsFeatureFlag) {
+      return;
+    }
+
     if (azureIdentityProvider) {
       this.emailClient = new EmailClient(
         options.connectionString,
@@ -41,6 +48,15 @@ export class AzureMailerService {
   }
 
   async sendEmail(msg: Omit<EmailMessage, 'senderAddress'>): Promise<void> {
+    if (!this.emailsFeatureFlag) {
+      this.logger.log(AzureMailerService.name, {
+        info: 'Email processing skipped.',
+        reason: 'Emails feature flag is disabled.',
+      });
+
+      return;
+    }
+
     const poller = await this.startEmailPoller({
       ...msg,
       senderAddress: this.options.defaultFromEmail,
