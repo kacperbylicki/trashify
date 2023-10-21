@@ -126,7 +126,11 @@ export class AccountService {
 
     await this.accountRepository.save(account);
 
-    return { status: HttpStatus.CREATED };
+    return {
+      status: HttpStatus.CREATED,
+      email: account.email,
+      username: account.username,
+    };
   }
 
   async refreshToken(request: RefreshTokenRequestDto): Promise<RefreshTokenResponse> {
@@ -210,7 +214,7 @@ export class AccountService {
       };
     }
 
-    await this.accountRepository.setNewEmail('uuid');
+    await this.accountRepository.setNewEmail(uuid);
 
     return {
       status: HttpStatus.OK,

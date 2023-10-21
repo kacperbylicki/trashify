@@ -122,18 +122,23 @@ export class AccountController {
   async register(@Body() dto: RegisterRequestDto): Promise<Observable<RegisterResponse>> {
     return this.accountsClient.register(dto).pipe(
       map((response) => {
-        if (response.status !== HttpStatus.OK) {
+        if (response.status !== HttpStatus.CREATED) {
           return response;
         }
 
         if (this.emailsFeatureFlag && response.email && response.username) {
-          this.mailingClient.sendEmail(
-            getRegistrationConfirmationEmailTemplate({
-              email: response.email,
-              username: response.username,
-              url: `${this.baseUrl}/confirm-registration`,
-            }),
-          );
+          this.mailingClient
+            .sendEmail(
+              getRegistrationConfirmationEmailTemplate({
+                email: response.email,
+                username: response.username,
+                url: `${this.baseUrl}/confirm-registration`,
+              }),
+            )
+            .pipe(first())
+            .subscribe((value) => {
+              this.logger.log(`Email sending result: ${value?.ok}`);
+            });
         }
 
         return response;

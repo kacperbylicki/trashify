@@ -11,14 +11,6 @@ terraform {
     }
   }
 }
-
-resource "azurerm_email_communication_service" "email_service" {
-  name     = "${var.app_prefix}-communication-service"
-  data_location = var.data_location
-  resource_group_name = var.resource_group_id
-}
-
-
 resource "azapi_resource" "comm-service" {
   type      = "Microsoft.Communication/communicationServices@2023-04-01-preview"
   name      = "${var.app_prefix}-comm-service"
