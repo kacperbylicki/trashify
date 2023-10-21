@@ -62,12 +62,14 @@ import {
   TimeoutInterceptor,
 } from '@/common';
 import { Observable, first, map } from 'rxjs';
+import { SendHtmlResponseInterceptor } from '../../../common/interceptors/send-html-response.interceptor';
 import {
   getEmailChangeRequestEmailTemplate,
   getPasswordChangedEmailTemplate,
   getRegistrationConfirmationEmailTemplate,
   getResetPasswordEmailTemplate,
-} from '../templates';
+} from '../templates/email';
+import { getRegistrationConfirmedTemplate } from '../templates';
 
 @Controller('accounts')
 @ApiTags(AccountController.name)
@@ -132,7 +134,7 @@ export class AccountController {
               getRegistrationConfirmationEmailTemplate({
                 email: response.email,
                 username: response.username,
-                url: `${this.baseUrl}/confirm-registration`,
+                url: `${this.baseUrl}/api/v1/accounts/confirm-registration?uuid=${response.uuid}`,
               }),
             )
             .pipe(first())
@@ -141,7 +143,9 @@ export class AccountController {
             });
         }
 
-        return response;
+        return {
+          status: response.status,
+        };
       }),
     );
   }
@@ -150,13 +154,32 @@ export class AccountController {
   @ApiQuery({
     type: ConfirmRegistrationRequestDto,
   })
-  @Post('confirm-registration')
+  @UseInterceptors(SendHtmlResponseInterceptor)
+  @Get('confirm-registration')
   async confirmRegistration(
     @Query('uuid') uuid: string,
   ): Promise<Observable<ConfirmRegistrationResponseDto>> {
-    return this.accountsClient.confirmRegistration({
-      uuid,
-    });
+    return this.accountsClient
+      .confirmRegistration({
+        uuid,
+      })
+      .pipe(
+        map((response) => {
+          if (response.status === HttpStatus.OK) {
+            return {
+              status: response.status,
+              html: getRegistrationConfirmedTemplate(true),
+              error: [],
+            };
+          }
+
+          return {
+            status: response.status,
+            error: [],
+            html: getRegistrationConfirmedTemplate(false),
+          };
+        }),
+      );
   }
 
   @UseGuards(JwtAuthGuard)

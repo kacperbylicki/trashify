@@ -95,6 +95,7 @@ export interface RegisterResponse {
   error?: string[];
   email?: string;
   username?: string;
+  uuid?: string;
 }
 
 export interface ConfirmRegistrationRequest {

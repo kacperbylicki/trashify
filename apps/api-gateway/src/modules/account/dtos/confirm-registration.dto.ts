@@ -14,4 +14,6 @@ export class ConfirmRegistrationResponseDto implements ConfirmRegistrationRespon
 
   @ApiProperty({ type: [String], example: ['unauthorized'] })
   error!: string[];
+
+  html!: string;
 }

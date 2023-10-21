@@ -6,11 +6,15 @@ export interface Response<T> {
 }
 
 @Injectable()
-export class HttpStatusInterceptor<T> implements NestInterceptor<T, Response<T>> {
+export class SendHtmlResponseInterceptor<T> implements NestInterceptor<T, Response<T>> {
   intercept(context: ExecutionContext, next: CallHandler): Observable<Response<T>> {
     return next.handle().pipe(
       map((data) => {
-        context.switchToHttp().getResponse().status(data.status);
+        const response = context.switchToHttp().getResponse();
+
+        response.type('text/html; charset=utf-8');
+
+        response.send(data.html);
 
         return data;
       }),

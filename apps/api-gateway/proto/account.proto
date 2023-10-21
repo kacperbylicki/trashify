@@ -117,6 +117,7 @@ message RegisterResponse {
     repeated string error = 2;
     optional string email = 3;
     optional string username = 4;
+    optional string uuid = 5;
 }
   
 // Login

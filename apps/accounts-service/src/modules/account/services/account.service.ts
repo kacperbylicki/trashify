@@ -130,6 +130,7 @@ export class AccountService {
       status: HttpStatus.CREATED,
       email: account.email,
       username: account.username,
+      uuid: account.uuid,
     };
   }
 
@@ -194,9 +195,16 @@ export class AccountService {
   }
 
   public async confirmRegistration(uuid: string): Promise<ConfirmRegistrationResponse> {
-    await this.accountRepository.update(uuid, {
+    const account = await this.accountRepository.update(uuid, {
       emailConfirmed: true,
     });
+
+    if (!account) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Invalid payload.'],
+      };
+    }
 
     return {
       status: HttpStatus.OK,
