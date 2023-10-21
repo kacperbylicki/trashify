@@ -22,5 +22,5 @@ export class ChangePasswordResponseDto implements ChangePasswordResponse {
   status!: number;
 
   @ApiProperty({ type: [String], example: ['unauthorized'] })
-  error?: string[] | undefined;
+  error?: string[];
 }

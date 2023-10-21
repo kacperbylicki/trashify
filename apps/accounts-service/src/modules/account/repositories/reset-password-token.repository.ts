@@ -17,17 +17,17 @@ export class ResetPasswordTokenRepository {
   ) {}
 
   public async findByToken(token: string): Promise<ResetPasswordToken | null> {
-    const entity = await this.resetPasswordTokenModel
+    const resetPasswordToken = await this.resetPasswordTokenModel
       .findOne({
         token,
       })
       .lean();
 
-    if (!entity) {
+    if (!resetPasswordToken) {
       return null;
     }
 
-    return entity;
+    return resetPasswordToken;
   }
 
   public async save(payload: SavePayload): Promise<void> {

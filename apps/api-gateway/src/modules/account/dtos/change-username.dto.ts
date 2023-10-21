@@ -22,5 +22,5 @@ export class ChangeUsernameResponseDto implements ChangeUsernameResponse {
   username!: string;
 
   @ApiProperty({ type: [String], example: ['unauthorized'] })
-  error?: string[] | undefined;
+  error?: string[];
 }
