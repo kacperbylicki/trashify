@@ -154,6 +154,12 @@ export class AccountController {
   }
 
   @Public()
+  @ApiBody({
+    type: ResendRegistrationConfirmationEmailRequestDto,
+  })
+  @ApiOkResponse({
+    type: ResendRegistrationConfirmationEmailResponseDto,
+  })
   @Post('resend-verification')
   public async resendEmailConfirmation(
     payload: ResendRegistrationConfirmationEmailRequestDto,
