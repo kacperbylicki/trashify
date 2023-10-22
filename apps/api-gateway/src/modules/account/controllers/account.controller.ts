@@ -162,7 +162,7 @@ export class AccountController {
   })
   @Post('resend-verification')
   public async resendEmailConfirmation(
-    payload: ResendRegistrationConfirmationEmailRequestDto,
+    @Body() payload: ResendRegistrationConfirmationEmailRequestDto,
   ): Promise<Observable<ResendRegistrationConfirmationEmailResponseDto>> {
     return this.accountsClient.resendRegistrationConfirmationEmail(payload).pipe(
       map((response) => {

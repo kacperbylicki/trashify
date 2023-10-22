@@ -302,10 +302,6 @@ export class AccountService {
 
     const token = await this.authService.createResetPasswordToken();
 
-    // TODO: Delete once mailing is enabled :)
-    //eslint-disable-next-line
-    console.log(token);
-
     await this.resetPasswordTokenCacheService.set(token, userExists.uuid);
 
     return {
@@ -338,8 +334,10 @@ export class AccountService {
       };
     }
 
+    const hashedPassword = await argon2.hash(password);
+
     const account = (await this.accountRepository.update(userId, {
-      password,
+      password: hashedPassword,
     })) as Account;
 
     return {
