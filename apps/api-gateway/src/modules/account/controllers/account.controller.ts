@@ -36,6 +36,7 @@ import {
   ChangeEmailResponseDto,
   ChangePasswordDto,
   ChangePasswordResponseDto,
+  ChangePasswordTemplateDto,
   ChangeUsernameDto,
   ChangeUsernameResponseDto,
   ConfirmNewEmailRequestDto,
@@ -61,15 +62,15 @@ import {
   RequestRefreshToken,
   TimeoutInterceptor,
 } from '@/common';
-import { Observable, first, map } from 'rxjs';
+import { Observable, first, map, of } from 'rxjs';
 import { SendHtmlResponseInterceptor } from '../../../common/interceptors/send-html-response.interceptor';
+import { getChangePasswordTemplate, getRegistrationConfirmedTemplate } from '../templates';
 import {
   getEmailChangeRequestEmailTemplate,
   getPasswordChangedEmailTemplate,
   getRegistrationConfirmationEmailTemplate,
   getResetPasswordEmailTemplate,
 } from '../templates/email';
-import { getRegistrationConfirmedTemplate } from '../templates';
 
 @Controller('accounts')
 @ApiTags(AccountController.name)
@@ -148,38 +149,6 @@ export class AccountController {
         };
       }),
     );
-  }
-
-  @Public()
-  @ApiQuery({
-    type: ConfirmRegistrationRequestDto,
-  })
-  @UseInterceptors(SendHtmlResponseInterceptor)
-  @Get('confirm-registration')
-  async confirmRegistration(
-    @Query('uuid') uuid: string,
-  ): Promise<Observable<ConfirmRegistrationResponseDto>> {
-    return this.accountsClient
-      .confirmRegistration({
-        uuid,
-      })
-      .pipe(
-        map((response) => {
-          if (response.status === HttpStatus.OK) {
-            return {
-              status: response.status,
-              html: getRegistrationConfirmedTemplate(true),
-              error: [],
-            };
-          }
-
-          return {
-            status: response.status,
-            error: [],
-            html: getRegistrationConfirmedTemplate(false),
-          };
-        }),
-      );
   }
 
   @UseGuards(JwtAuthGuard)
@@ -302,7 +271,7 @@ export class AccountController {
             .sendEmail(
               getResetPasswordEmailTemplate({
                 email: response.email,
-                url: `${this.baseUrl}/change-password/${response.token}`,
+                url: `${this.baseUrl}/api/v1/accounts/change-password?token=${response.token}`,
                 username: response.username,
               }),
             )
@@ -317,6 +286,49 @@ export class AccountController {
         };
       }),
     );
+  }
+
+  @Public()
+  @UseInterceptors(SendHtmlResponseInterceptor)
+  @Get('change-password')
+  public changePasswordForm(): Observable<ChangePasswordTemplateDto> {
+    return of({
+      status: HttpStatus.OK,
+      html: getChangePasswordTemplate(`${this.baseUrl}/api/v1/accounts/change-password?token=`),
+      error: [],
+    });
+  }
+
+  @Public()
+  @ApiQuery({
+    type: ConfirmRegistrationRequestDto,
+  })
+  @UseInterceptors(SendHtmlResponseInterceptor)
+  @Get('confirm-registration')
+  public async confirmRegistration(
+    @Query('uuid') uuid: string,
+  ): Promise<Observable<ConfirmRegistrationResponseDto>> {
+    return this.accountsClient
+      .confirmRegistration({
+        uuid,
+      })
+      .pipe(
+        map((response) => {
+          if (response.status === HttpStatus.OK) {
+            return {
+              status: response.status,
+              html: getRegistrationConfirmedTemplate(true),
+              error: [],
+            };
+          }
+
+          return {
+            status: response.status,
+            error: [],
+            html: getRegistrationConfirmedTemplate(false),
+          };
+        }),
+      );
   }
 
   @Post('change-password')

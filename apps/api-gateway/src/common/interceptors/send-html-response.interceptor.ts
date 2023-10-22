@@ -12,9 +12,9 @@ export class SendHtmlResponseInterceptor<T> implements NestInterceptor<T, Respon
       map((data) => {
         const response = context.switchToHttp().getResponse();
 
-        response.type('text/html; charset=utf-8');
+        response.type('text/html');
 
-        response.send(data.html);
+        response.status(data.status);
 
         return data;
       }),
