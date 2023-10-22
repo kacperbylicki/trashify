@@ -98,6 +98,18 @@ export interface RegisterResponse {
   uuid?: string;
 }
 
+export interface ResendRegistrationConfirmationEmailRequest {
+  email: string;
+}
+
+export interface ResendRegistrationConfirmationEmailResponse {
+  status: number;
+  error: string[];
+  email?: string;
+  username?: string;
+  uuid?: string;
+}
+
 export interface ConfirmRegistrationRequest {
   uuid: string;
 }
@@ -178,6 +190,9 @@ export const ACCOUNT_PACKAGE_NAME = 'account';
 export abstract class AccountServiceClient {
   abstract getAccount(request: GetAccountRequest): Observable<GetAccountResponse>;
   abstract register(request: RegisterRequest): Observable<RegisterResponse>;
+  abstract resendRegistrationConfirmationEmail(
+    request: ResendRegistrationConfirmationEmailRequest,
+  ): Observable<ResendRegistrationConfirmationEmailResponse>;
   abstract confirmRegistration(
     request: ConfirmRegistrationRequest,
   ): Observable<ConfirmRegistrationResponse>;
@@ -205,6 +220,13 @@ export interface AccountServiceController {
   register(
     request: RegisterRequest,
   ): Promise<RegisterResponse> | Observable<RegisterResponse> | RegisterResponse;
+
+  resendRegistrationConfirmationEmail(
+    request: ResendRegistrationConfirmationEmailRequest,
+  ):
+    | Promise<ResendRegistrationConfirmationEmailResponse>
+    | Observable<ResendRegistrationConfirmationEmailResponse>
+    | ResendRegistrationConfirmationEmailResponse;
 
   confirmRegistration(request: ConfirmRegistrationRequest): Observable<ConfirmRegistrationResponse>;
 
@@ -256,6 +278,7 @@ export function AccountServiceControllerMethods() {
     const grpcMethods: string[] = [
       'getAccount',
       'register',
+      'resendRegistrationConfirmationEmail',
       'confirmRegistration',
       'login',
       'validateJwt',

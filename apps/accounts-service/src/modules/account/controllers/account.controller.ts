@@ -13,6 +13,7 @@ import {
   LogoutResponse,
   RefreshTokenResponse,
   RegisterResponse,
+  ResendRegistrationConfirmationEmailResponse,
   ValidateJwtResponse,
   ValidateRefreshJwtResponse,
   accountGrpcMethod,
@@ -28,6 +29,7 @@ import {
   LogoutRequestDto,
   RefreshTokenRequestDto,
   RegisterRequestDto,
+  ResendRegistrationEmailRequestDto,
   ValidateJwtRequestDto,
   ValidateRefreshJwtRequestDto,
 } from '../dtos';
@@ -54,6 +56,13 @@ export class AccountController {
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.register)
   public register(payload: RegisterRequestDto): Promise<RegisterResponse> {
     return this.accountService.register(payload);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.resendRegistrationConfirmationEmail)
+  public resendRegistrationEmail(
+    payload: ResendRegistrationEmailRequestDto,
+  ): Promise<ResendRegistrationConfirmationEmailResponse> {
+    return this.accountService.getExistingUser(payload);
   }
 
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.confirmRegistration)

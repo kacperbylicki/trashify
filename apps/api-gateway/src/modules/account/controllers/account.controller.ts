@@ -50,6 +50,8 @@ import {
   RefreshTokenResponseDto,
   RegisterRequestDto,
   RegisterResponseDto,
+  ResendRegistrationConfirmationEmailRequestDto,
+  ResendRegistrationConfirmationEmailResponseDto,
   ResetPasswordDto,
   ResetPasswordResponseDto,
 } from '../dtos';
@@ -146,6 +148,40 @@ export class AccountController {
 
         return {
           status: response.status,
+        };
+      }),
+    );
+  }
+
+  @Public()
+  @Post('resend-verification')
+  public async resendEmailConfirmation(
+    payload: ResendRegistrationConfirmationEmailRequestDto,
+  ): Promise<Observable<ResendRegistrationConfirmationEmailResponseDto>> {
+    return this.accountsClient.resendRegistrationConfirmationEmail(payload).pipe(
+      map((response) => {
+        if (response.status !== HttpStatus.OK) {
+          return response;
+        }
+
+        if (response.email && response.username && response.uuid) {
+          this.mailingClient
+            .sendEmail(
+              getRegistrationConfirmationEmailTemplate({
+                email: response.email,
+                url: `${this.baseUrl}/api/v1/accounts/confirm-registration?uuid=${response.uuid}`,
+                username: response.username,
+              }),
+            )
+            .pipe(first())
+            .subscribe((value) => {
+              this.logger.log(`Email sending result: ${value?.ok}`);
+            });
+        }
+
+        return {
+          status: response.status,
+          error: response.error,
         };
       }),
     );

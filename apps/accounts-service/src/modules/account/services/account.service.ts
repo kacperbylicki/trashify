@@ -11,6 +11,7 @@ import {
   LoginRequestDto,
   RefreshTokenRequestDto,
   RegisterRequestDto,
+  ResendRegistrationEmailRequestDto,
 } from '../dtos';
 import {
   ChangeEmailResponse,
@@ -24,6 +25,7 @@ import {
   LogoutResponse,
   RefreshTokenResponse,
   RegisterResponse,
+  ResendRegistrationConfirmationEmailResponse,
 } from '@trashify/transport';
 import { EMAIL_VERIFICATION_FEATURE_FLAG } from '../symbols';
 import { EmailConfirmationTokenCacheService, ResetPasswordTokenCacheService } from '../cache';
@@ -95,6 +97,36 @@ export class AccountService {
         accessToken,
         refreshToken,
       },
+    };
+  }
+
+  async getExistingUser(
+    payload: ResendRegistrationEmailRequestDto,
+  ): Promise<ResendRegistrationConfirmationEmailResponse> {
+    const { email } = payload;
+
+    const user = await this.findByEmail(email);
+
+    if (!user) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['User does not exist.'],
+      };
+    }
+
+    if (user.emailConfirmed) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Email already confirmed.'],
+      };
+    }
+
+    return {
+      status: HttpStatus.OK,
+      email: user.email,
+      username: user.username,
+      uuid: user.uuid,
+      error: [],
     };
   }
 
