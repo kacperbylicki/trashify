@@ -59,9 +59,9 @@ export class EmailConfirmationTokenRepository {
     });
   }
 
-  public async delete(accountUuid: string): Promise<void> {
+  public async delete(token: string): Promise<void> {
     await this.emailConfirmationTokenModel.deleteOne({
-      accountUuid,
+      token,
     });
   }
 }

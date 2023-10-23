@@ -66,7 +66,11 @@ import {
 } from '@/common';
 import { Observable, first, map, of } from 'rxjs';
 import { SendHtmlResponseInterceptor } from '../../../common/interceptors/send-html-response.interceptor';
-import { getChangePasswordTemplate, getRegistrationConfirmedTemplate } from '../templates';
+import {
+  getChangePasswordTemplate,
+  getNewEmailConfirmedTemplate,
+  getRegistrationConfirmedTemplate,
+} from '../templates';
 import {
   getEmailChangeRequestEmailTemplate,
   getPasswordChangedEmailTemplate,
@@ -244,12 +248,12 @@ export class AccountController {
             return response;
           }
 
-          if (this.emailsFeatureFlag && response.email && response.username) {
+          if (this.emailsFeatureFlag && response.email && response.username && response.token) {
             this.mailingClient
               .sendEmail(
                 getEmailChangeRequestEmailTemplate({
                   email: response.email,
-                  url: `${this.baseUrl}/confirm-email`,
+                  url: `${this.baseUrl}/api/v1/accounts/confirm-email?token=${response.token}`,
                   username: response.username,
                 }),
               )
@@ -414,6 +418,17 @@ export class AccountController {
           return response;
         }),
       );
+  }
+
+  @Public()
+  @UseInterceptors(SendHtmlResponseInterceptor)
+  @Get('confirm-email')
+  @HttpCode(HttpStatus.OK)
+  public confirmEmailTemplate(): Observable<{ html: string; status: number }> {
+    return of({
+      html: getNewEmailConfirmedTemplate(`'${this.baseUrl}/api/v1/accounts/confirm-email?token='`),
+      status: HttpStatus.OK,
+    });
   }
 
   @Patch('confirm-email')

@@ -16,6 +16,7 @@ service AccountService {
     rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
     rpc ChangeUsername (ChangeUsernameRequest) returns (ChangeUsernameResponse);
     rpc ChangeEmail (ChangeEmailRequest) returns (ChangeEmailResponse);
+    rpc ConfirmNewEmail (ConfirmNewEmailRequest) returns (ConfirmNewEmailResponse);
 }
 
 message Tokens {
@@ -89,6 +90,7 @@ message ChangeEmailResponse {
     string email = 2;
     repeated string error = 3;
     optional string username = 4;
+    optional string token = 5;
 }
 
 message ConfirmNewEmailRequest {

@@ -71,6 +71,7 @@ export interface ChangeEmailResponse {
   email: string;
   error?: string[];
   username?: string;
+  token?: string;
 }
 
 export interface ConfirmNewEmailRequest {

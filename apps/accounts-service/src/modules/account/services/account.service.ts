@@ -208,10 +208,16 @@ export class AccountService {
       };
     }
 
+    let token: string | undefined = undefined;
+
     if (this.emailVerificationEnabled) {
       await this.accountRepository.update(uuid, {
         newEmail: email,
       });
+
+      token = await this.authService.createEmailChangeConfirmationToken();
+
+      await this.emailConfirmationTokenCacheService.set(token, userExists.uuid);
     } else {
       await this.accountRepository.update(uuid, {
         email,
@@ -223,6 +229,7 @@ export class AccountService {
       email,
       error: [],
       username: userExists.username,
+      token,
     };
   }
 
@@ -244,10 +251,10 @@ export class AccountService {
     };
   }
 
-  public async confirmNewEmail(uuid: string): Promise<ConfirmNewEmailResponse> {
-    const tokenExists = await this.emailConfirmationTokenCacheService.get(uuid);
+  public async confirmNewEmail(token: string): Promise<ConfirmNewEmailResponse> {
+    const uuid = await this.emailConfirmationTokenCacheService.get(token);
 
-    if (!tokenExists) {
+    if (!uuid) {
       return {
         status: HttpStatus.BAD_REQUEST,
         error: ['Invalid token.'],
@@ -255,6 +262,8 @@ export class AccountService {
     }
 
     await this.accountRepository.setNewEmail(uuid);
+
+    await this.emailConfirmationTokenCacheService.delete(token);
 
     return {
       status: HttpStatus.OK,
