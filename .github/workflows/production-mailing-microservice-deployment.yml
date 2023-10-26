@@ -38,9 +38,11 @@ jobs:
         push: true
         tags: crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-mailing-service:${{ github.sha }}
         file: ./apps/mailing-service/Dockerfile
+        target: production
+        build-args: |
+          NPM_READ_TOKEN=${{ secrets.NPM_READ_TOKEN }}
       env:
         NODE_ENV: production
-        PROTO_PATH: ${{ secrets.PROTO_PATH }}
         MAILING_SERVICE_URL: ${{ secrets.MAILING_SERVICE_URL }}
 
   deploy:

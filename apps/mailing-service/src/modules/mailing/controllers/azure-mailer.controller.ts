@@ -5,6 +5,7 @@ import {
   MAILING_SERVICE_NAME,
   MailingServiceController,
   SendEmailResponse,
+  mailingGrpcMethod,
 } from '@trashify/transport';
 import { SendEmailRequestDto } from '../dtos';
 import { isMailerExceptionTypeGuard } from '../../../common/type-guards/is-mailer-exception.type-guard';
@@ -20,7 +21,7 @@ export class AzureMailerController implements MailingServiceController {
     }
   }
 
-  @GrpcMethod(MAILING_SERVICE_NAME, 'SendEmail')
+  @GrpcMethod(MAILING_SERVICE_NAME, mailingGrpcMethod.sendEmail)
   async sendEmail(request: SendEmailRequestDto): Promise<SendEmailResponse> {
     try {
       const payload = {

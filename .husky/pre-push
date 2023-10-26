@@ -2,4 +2,9 @@
 
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn test:ci
+if [ "$CI_RELEASE" = "true" ]; then
+  echo "Skipping tests due to CI release"
+  exit 0
+else
+  yarn test:ci
+fi

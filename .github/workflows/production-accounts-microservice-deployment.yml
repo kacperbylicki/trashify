@@ -38,9 +38,11 @@ jobs:
         push: true
         tags: crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-accounts-service:${{ github.sha }}
         file: ./apps/accounts-service/Dockerfile
+        target: production
+        build-args: |
+          NPM_READ_TOKEN=${{ secrets.NPM_READ_TOKEN }}
       env:
         NODE_ENV: production
-        PROTO_PATH: ${{ secrets.PROTO_PATH }}
         ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
 
   deploy:

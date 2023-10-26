@@ -1,3 +1,4 @@
 export * from './mailing.pb';
 export * from './account.pb';
-export * from './test.pb';
+export * from './trash.pb';
+

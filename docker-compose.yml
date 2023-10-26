@@ -2,7 +2,8 @@ version: '3.8'
 
 networks:
   internal_services:
-  accounts:  
+  accounts:
+  trash:
   api_gateway:
 
 services:
@@ -17,7 +18,7 @@ services:
     restart: unless-stopped
     networks:
       - accounts
-    ports: 
+    ports:
       - ${MONGODB_ACCOUNTS_PORT}:${MONGODB_ACCOUNTS_PORT}
     expose:
       - ${MONGODB_ACCOUNTS_PORT}
@@ -46,7 +47,7 @@ services:
       - ${API_GATEWAY_REDIS_CACHE_PORT:-6379}:${API_GATEWAY_REDIS_CACHE_PORT:-6379}
     command: redis-server --save 20 1 --loglevel warning --requirepass ${API_GATEWAY_REDIS_CACHE_PASSWORD:-3HOiHBc6CQiTN0c}
     restart: unless-stopped
-    volumes: 
+    volumes:
       - api-gateway-cache:/data
       - api-gateway-cache-conf:/usr/local/etc/redis/redis.conf
     networks:
@@ -63,7 +64,7 @@ services:
       - /app/node_modules
     env_file: .env
     ports:
-      - ${API_GATEWAY_PORT:-50000}:${API_GATEWAY_PORT:-50000}
+      - ${PORT:-50000}:${PORT:-50000}
       - ${API_GATEWAY_DEBUGGER_PORT:-9229}:${API_GATEWAY_DEBUGGER_PORT:-9229}
     restart: unless-stopped
     networks:
@@ -71,7 +72,39 @@ services:
       - internal_services
       - accounts
 
+  trash-mongodb:
+    container_name: trashify-trash-mongodb
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGODB_TRASH_DATABASE}
+    volumes:
+      - trashify-trash-mongodb:/data/db
+    command: mongod --port ${MONGODB_TRASH_PORT}
+    restart: unless-stopped
+    networks:
+      - trash
+    ports: 
+      - ${MONGODB_TRASH_PORT}:${MONGODB_TRASH_PORT}
+    expose:
+      - ${MONGODB_TRASH_PORT}
+
+  trash-service:
+    container_name: trashify-trash-service
+    build:
+      context: .
+      dockerfile: ./apps/trash-service/Dockerfile
+      target: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file: .env
+    restart: unless-stopped
+    networks:
+      - internal_services
+      - trash
+
 volumes:
   trashify-accounts-mongodb:
+  trashify-trash-mongodb:
   api-gateway-cache:
   api-gateway-cache-conf:

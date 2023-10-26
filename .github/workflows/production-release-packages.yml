@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "packages/transport/**"
+      - "packages/testing/**"
       - ".github/workflows/production-release-packages.yml"
   workflow_dispatch:
     
@@ -30,6 +31,15 @@ jobs:
     - name: Install dependencies
       run: yarn install --silent --frozen-lockfile
 
+    - name: Creating .npmrc
+      run: |
+        cat << EOF > "$HOME/.npmrc"
+          @trashify:registry=https://registry.npmjs.org/
+          //registry.npmjs.org/:_authToken=$NPM_TOKEN
+        EOF
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
     - name: Create Release Pull Request or Publish to npm
       id: changesets
       uses: changesets/action@v1
@@ -40,3 +50,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        CI_RELEASE: true

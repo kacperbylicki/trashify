@@ -1,8 +1,9 @@
 {
   "name": "@trashify/transport",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Kacper Bylicki & Marek Gerszendorf & Jakub Barczewski",
-  "private": true,
+  "license": "ISC",
+  "description": "Library used for communication between microservices",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -10,11 +11,13 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup-node src/index.ts --format cjs,esm --dts",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "proto:mailing": "protoc --plugin=../../node_modules/.bin/protoc-gen-ts_proto -I=./proto --ts_proto_out=src/ ./proto/mailing.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb --experimental_allow_proto3_optional",
     "proto:account": "protoc --plugin=../../node_modules/.bin/protoc-gen-ts_proto -I=./proto --ts_proto_out=src/ ./proto/account.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
-    "proto:all": "npm run proto:mailing && npm run proto:account"
+    "proto:trash": "protoc --plugin=../../node_modules/.bin/protoc-gen-ts_proto -I=./proto --ts_proto_out=src/ ./proto/trash.proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
+    "proto:all": "npm run proto:mailing && npm run proto:account && npm run proto:trash",
+    "sync:methods": "node scripts/extract-grpc-methods.js"
   },
   "devDependencies": {
     "@grpc/grpc-js": "^1.8.12",
