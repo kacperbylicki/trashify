@@ -232,10 +232,10 @@ poszczególnych elementów pracy, takich jak:
 \begin{itemize}
     \item Język programowania wykorzystany do projektowania aplikacji;
     \item Framework;
-    \item Testy jednostkowe i integracyjne % - bla bla, dodam;
-    \item Testy e2e %- bla bla, dodam;
-    \item Baza danych %- bla bla, dodam;
-    \item Query Buildery bądź dedykowane ORMy. % Info o tym dlaczego są stosowane
+    \item Testy jednostkowe i integracyjne; % - bla bla, dodam;
+    \item Testy e2e; %- bla bla, dodam;
+    \item Baza danych; %- bla bla, dodam;
+    \item Query Buildery bądź dedykowane ORMy; % Info o tym dlaczego są stosowane
 \end{itemize}
 
 \paragraph{Język programowania wykorzystany do projektowania aplikacji\\}
@@ -247,10 +247,10 @@ systemy IOS.
 Aplikacja serwerowa uruchamiana jest w środowisku uruchomieniowym Node.js, które bazowane jest na
 silniku V8 stworzonym przez firmę Google LLC.
 
-\paragraph{Dobór frameworka}
+\paragraph{Dobór frameworka aplikacji serwerowej}
 \subparagraph{Czym jest framework?\\}
 
-Framework jest zestawem dopasowanych narzędzi do projektowania aplikacji.
+Framework jest zestawem dopasowanych narzędzi do stworzenia konkretnego rozwiązania.
 W przestrzeni środowiska Node.js na przestrzeni lat pojawiło się ich wiele, bardziej i
 mniej znanych. Przypatrzyliśmy się trzem najbardziej popularnym i na bieżąco wspieranym
 rozwiązaniom.
@@ -307,6 +307,70 @@ Plusy oraz minusy takiej decyzji są następujące:
     \item komunikaty błędów mogą niewiele mówić programiście, co utrudnia proces debuggowania.
 \end{itemize}
 
+\paragraph{Dobór frameworka do testowania automatycznego}
+\subparagraph{Dlaczego testować aplikację?\\}
+
+Testowanie aplikacji jest kluczową decyzją dla zespołu programistów. Chociaż początkowo może to być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności). Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
+
+\textbf{Jest} - popularny i potężny framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące:
+\begin{enumerate}[label=--]
+    \item Łatwa konfiguracja - w pliku `package.json`, plikach `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
+    \item Obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem bilbioteki supertest i testów migawkowych;
+    \item mocking - z wysokim stopniem dostosowania, w tym mockowanie wartości zwracanych (zarówno w funkcjach synchronicznych, jak i asynchronicznych). Są one przechowywane i mogą być walidowane;
+    \item pokrycie kodu - wbudowane narzędzie do raportowania pokrycia kodu źródłowego;
+    \item testowanie równoległe - zwiększenie szybkości testowania, zwłaszcza gdy testy są w pełni niezależne i nie mutują wspólnego zestawu danych;
+    \item tryb watch - uruchamianie testów w tle wraz ze zmianami w kodzie źródłowym i/lub samych testach;
+    \item test matchers - wbudowany zestaw matcherów, które pozwalają na szybkie i wygodne sprawdzanie wyników funkcji i/lub komponentów. Obejmują one między innymi: `toEqual`, `toHaveLength`, `toContain`, `toBeTruthy`, `toBeDefined`;
+    \item konfiguracja globalna - możliwość zadeklarowania zestawu akcji lub manipulacji przed wszystkimi testami (lub określonym ich podzbiorem). Pozwala to programiście na zbudowanie konkretnego, czasochłonnego modułu lub funkcjonalności raz i operowanie na nim we wszystkich testach. Hooki zadeklarowane w konfiguracji globalnej zostaną zastosowane do wszystkich zestawów testów;
+    \item obsługa globalnego usuwania środowiska;
+    \item haki cyklu życia testów - są to `beforeEach()`, `beforeAll()`, `afterEach()` i `afterAll()`, które pozwalają na wykonywanie akcji w określonych punktach uruchomionych testów. Pozwala to programistom zadeklarować takie akcje raz i zastosować je do wszystkich przypadków;
+    \item wsparcie dla środowisk testowych Node.js i przeglądarki;
+    \item jednoczesne uruchamianie testów w danej przestrzeni (funkcja eksperymentalna);
+\end{enumerate}
+
+\textbf{Mocha z Chai} - framework testowy Mocha z biblioteką do asercji Chai:
+\begin{enumerate}[label=--]
+    \item wyczerpujące i czytelne dla człowieka asercje;
+    \item używane głównie w BDD (Behavior-Driven Development);
+    \item obsługa haków cyklu życia `before`, `after`, `beforeEach` i `afterEach`;
+    \item testowanie równoległe ma swoje dobrze zdefiniowane ograniczenia, takie jak użycie `it.only` lub `describe.only`, które są niedostępne. Testowanie równoległe jest dostępne tylko w środowisku Node.js. Haki zadeklarowane na poziomie root nie są globalne w przypadku testowania równoległego;
+    \item dostępny cały zestaw reporterów, zarówno wbudowanych, takich jak `json-stream`, `markdown`, `progress`, `xunit`, `html reporter`, jak i opcji innych firm. Nie działają one dobrze z testami równoległymi, ponieważ oczekują, że Mocha będzie wiedzieć, ile testów planuje uruchomić przed wykonaniem;
+    \item obsługa globalnej konfiguracji za pomocą `mochaGlobalSetup`;
+    \item obsługa globalnego usuwania środowiska za pomocą `mochaGlobalTeardown`;
+    \item obsługa zarówno modułów ES, jak i CommonJS, z zastrzeżeniem, że moduły ES nie są obsługiwane przez tryb watch. To samo dotyczy niestandardowych raportów i niestandardowego interfejsu;
+    \item konfiguracja może być tylko plikiem CommonJS `.mocharc.js` lub `.mocharc.cjs`;
+\end{enumerate}
+
+\subparagraph{Decyzja\\}
+
+Zespół zdecydował się na framework testowy Jest, ponieważ nie wymaga wielu dodatkowych wtyczek do spełnienia potrzeb zespołu. Ponadto ma lepsze wsparcie dla testów równoległych i posiada potężny zestaw funkcji, które umożliwią szybsze tworzenie pakietów testowych.
+
+Plusy oraz minusy takiej decyzji są następujące:
+\begin{itemize}
+    \item Testy będą tworzone przy użyciu dobrze ugruntowanych reguł;
+    \item Pakiet jest-plugin będzie musiał zostać dodany do pliku `.eslintrc` i `package.json`.
+    \item Jest ma olbrzymią społeczność z dużą ilością ekspertów, którzy go używają i otwarcie dzielą się wiedzą.
+    \item Ilość matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności.
+\end{itemize}
+
+\paragraph{Dobór bazy danych}
+
+\subparagraph{Typy baz danych\\}
+
+\textbf{Bazy nierelacyjne - Not only SQL (NoSQL)}:\\
+Bazy danych No-SQL nie mają tak sztywnego schematu bazy danych jak ich relacyjne odpowiedniki. Struktura organizacyjna różni się w zależności od typu nierelacyjnej bazy danych. Biorąc to pod uwagę, wszystkie mają na celu rozwiązanie problemów tradycyjnej, relacyjnej bazy danych, poprzez rozwiązanie kwestii elastyczności i skalowalności. Bazy danych SQL nie są idealne do przechowywania nieustrukturyzowanych formatów danych, takich jak tekst, wideo i obrazy. Bazy danych NoSQL przedkładają dostępność nad spójność.
+Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL (niektóre obsługują SQL), można go dokładnie podsumować jako "nie tylko SQL".
+Rodzaje nierelacyjnych struktur baz danych to:
+\begin{enumerate}[label=--]
+    \item Key-value store - jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość, gdzie każdy element ma klucz i wartość. Klucz może być podobny do tego, co znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika. Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji. Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz. Przykładami takich baz danych są Redis i Memcached.
+    \item Document store - jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów. Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON. Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji. Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych. Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników. Przykładem bazy danych zorientowanej na dokumenty jest MongoDB.
+    \item Wide-column store - informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci. Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach. Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn. Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data. Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych. Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym.
+    \item Graph store - zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości. Węzłem może być dowolny obiekt, miejsce lub osoba. Krawędź definiuje relację między węzłami. Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu. Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source, w której użytkownicy mogą kupować licencje na tworzenie kopii zapasowych online i rozszerzenia wysokiej dostępności lub licencjonowaną wersję wstępną z kopią zapasową i rozszerzeniami.
+\end{enumerate}
+
+Teoria CAP
+Tak zwana "teoria CAP" oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z "twierdzeniem CAP", a nawet jest zgodna z ACID.
+
 % Teoria - warum, co, gdzie, z kim?
 
 % Narzędzia - decyzja, dlaczego?
@@ -324,6 +388,8 @@ Narzędzia - decyzja, dlaczego?
 \subsection{Badania empiryczne/Inne}
 
 \section{Zadania w projekcie}
+
+\newpage
 
 \begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
     \hline
@@ -387,6 +453,6 @@ Narzędzia - decyzja, dlaczego?
 
 \section{Wykorzystane materiały i bibliografia związana z realizacją projektu}
 
-Załączniki - mają być generowane automatycznie, do ogarnięcia :)
+%Załączniki - mają być generowane automatycznie, do ogarnięcia :)
 
 \end{document}
