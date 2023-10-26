@@ -310,7 +310,9 @@ Plusy oraz minusy takiej decyzji są następujące:
 \paragraph{Dobór frameworka do testowania automatycznego}
 \subparagraph{Dlaczego testować aplikację?\\}
 
-Testowanie aplikacji jest kluczową decyzją dla zespołu programistów. Chociaż początkowo może to być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności). Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
+Testowanie aplikacji jest kluczową decyzją dla zespołu programistów.
+Chociaż początkowo może to być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności).
+Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
 \textbf{Jest} - popularny i potężny framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące:
 \begin{enumerate}[label=--]
@@ -371,6 +373,38 @@ Rodzaje nierelacyjnych struktur baz danych to:
 Teoria CAP
 Tak zwana "teoria CAP" oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z "twierdzeniem CAP", a nawet jest zgodna z ACID.
 
+\textbf{Relacyjne bazy danych - SQLowe bazy danych}:\\
+\subparagraph*{Czym jest SQL?\\}
+Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych. Pierwotnie znany jako SEQUEL, został później uproszczony do SQL, ze względu na kwestię znaku towarowego. Jest to de facto standard relacyjnych systemów baz danych. Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost między bazą danych a użytkownikami. Niezależnie od tego, czy jest to programista stojący za danym systemem, czy zwykły użytkownik, wszyscy ludzie zaznajomieni z nowoczesną technologią, nawet jeśli nieświadomie, używali SQL. Biorąc pod uwagę, jak blisko relacyjne bazy danych są powiązane z SQL, są one powszechnie nazywane "bazami danych SQL"
+
+\subparagraph{Czym jest relacyjna baza danych?\\}
+Relacyjna baza danych to, jak sama nazwa wskazuje, magazyn danych, który przechowuje je w sposób relacyjny.
+Ten typ pamięci masowej rozumie i przechowuje dane w formacie tabelarycznym, tj. wierszy i kolumn.
+Relacje są deklarowane za pomocą kluczy podstawowych i obcych, które służą jako identyfikatory danej relacji.
+Relacje te są zwykle ilustrowane za pomocą różnych typów modeli danych (https://www.ibm.com/topics/relational-databases).
+Kolumny są traktowane jako pola przechowujące nazwę danej zmiennej (na przykład identyfikatorUżytkownika) i typ SQL, podczas gdy wiersze przechowują rzeczywiste wartości.
+Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami danych, które uruchamiają polecenia w sekwencji znanej jako transakcja.
+Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu.\\
+Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID:
+\begin{enumerate}[label=--]
+    \item \textbf{Atomiczność} - wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
+    \item \textbf{Spójność} - dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
+    \item \textbf{Izolacja} - stan pośredni transakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
+    \item \textbf{Trwałość} - po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
+\end{enumerate}
+
+
+\subparagraph*{Decyzja}
+
+Ponieważ projekt będzie w większości dotyczył przechwytywania i przetwarzania obrazów, jedynym realnym i efektywnym czasowo rozwiązaniem będzie system baz danych NoSQL zorientowany na dokumenty.
+
+Plusy oraz minusy takiej decyzji są następujące:
+\begin{enumerate}[label=--]
+    \item zespół będzie miał większą elastyczność wprowadzania zmian;
+    \item obsługa formatów multimediów będzie znacznie prostsza i wykonalna;
+    \item zgodność z ACID będzie musiała zostać dokładnie zbadana i wdrożona;
+    \item zespół będzie musiał zapoznać się z nową składnią, w zależności od wybranego systemu bazy danych, aby dostosować się do braku znajomości SQL;
+\end{enumerate}
 % Teoria - warum, co, gdzie, z kim?
 
 % Narzędzia - decyzja, dlaczego?
