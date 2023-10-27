@@ -248,27 +248,27 @@ Aplikacja serwerowa uruchamiana jest w środowisku uruchomieniowym Node.js, któ
 silniku V8 stworzonym przez firmę Google LLC.
 
 \paragraph{Dobór frameworka aplikacji serwerowej}
-\subparagraph{Czym jest framework?\\}
+\subparagraph{Framework serwerowy\\}
 
 Framework jest zestawem dopasowanych narzędzi do stworzenia konkretnego rozwiązania.
 W przestrzeni środowiska Node.js na przestrzeni lat pojawiło się ich wiele, bardziej i
 mniej znanych. Przypatrzyliśmy się trzem najbardziej popularnym i na bieżąco wspieranym
 rozwiązaniom.
 
-\textbf{Express} - jeden z pierwszych frameworków dla środowiska Node.js, powstały w roku 2010.
+\textbf{Express} -- jeden z pierwszych frameworków dla środowiska Node.js, powstały w roku 2010.
 Jest on dojrzałym, niezwykle lubianym przez społeczność rozwiązaniem, oferującym
 minimalistyczny interfejs, bezstronny względem wzorców projektowych. Posiada bogaty ekosystem
 oprogramowań pośredniczących tworzonych i wspieranych przez społeczność.
 Jest on pobierany średnio 13 milionów razy w tygodniu, co czyni go liderem w popularności.
 
-\textbf{Fastify} - framework zainspirowany Express oraz Hapi. Tak jak w przypadku Expressa,
+\textbf{Fastify} -- framework zainspirowany Express oraz Hapi. Tak jak w przypadku Expressa,
 jest on minimalistyczny, jednakże wprowadza kilka usprawnień oraz rozszerzeń do
 konceptów w nim prezentowanych. Głównym wzorcem tego frameworka jest bogaty system
-wtyczek, które zaimplementowane są na podstawie skierowanego grafu acyklicznego (Rysunek~\ref{fig:ADG}). %TODO: Add refDrawing command or smthn
+wtyczek, które zaimplementowane są na podstawie skierowanego grafu acyklicznego (Rysunek~\ref{fig:ADG}).
 Każda ścieżka żądania HTTP, dekoratory, haki są traktowane jako wtyczki.
 Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo aplikacji.
 
-% Fix numbering
+% TODO: Fix numbering
 \begin{figure}[h]
     \caption{Reprezentacja skierowanego grafu acyklicznego}
     \includegraphics[width=6cm]{../ADG.png}
@@ -276,7 +276,7 @@ Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo aplika
     \label{fig:ADG}
 \end{figure}
 
-\textbf{NestJS} - To framework opiniowany i jako taki wymusza na użytkowniku stosowanie określonych wzorców.
+\textbf{NestJS} -- To framework opiniowany i jako taki wymusza na użytkowniku stosowanie określonych wzorców.
 Wykorzystuje progresywny JavaScript, jest zbudowany i w pełni obsługuje TypeScript oraz łączy elementy
 programowania obiektowego, programowania funkcyjnego i reaktywnego programowania funkcyjnego.
 W przypadku aplikacji internetowych Nest używa Express jako sterownika HTTP,
@@ -308,13 +308,13 @@ Plusy oraz minusy takiej decyzji są następujące:
 \end{itemize}
 
 \paragraph{Dobór frameworka do testowania automatycznego}
-\subparagraph{Dlaczego testować aplikację?\\}
+\subparagraph{Testowanie aplikacji\\}
 
 Testowanie aplikacji jest kluczową decyzją dla zespołu programistów.
 Chociaż początkowo może to być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności).
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
-\textbf{Jest} - popularny i potężny framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące:
+\textbf{Jest} -- popularny i pełen wbudowanych funkcjonalności framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące:
 \begin{enumerate}[label=--]
     \item Łatwa konfiguracja - w pliku `package.json`, plikach `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
     \item Obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem bilbioteki supertest i testów migawkowych;
@@ -327,10 +327,10 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
     \item obsługa globalnego usuwania środowiska;
     \item haki cyklu życia testów - są to `beforeEach()`, `beforeAll()`, `afterEach()` i `afterAll()`, które pozwalają na wykonywanie akcji w określonych punktach uruchomionych testów. Pozwala to programistom zadeklarować takie akcje raz i zastosować je do wszystkich przypadków;
     \item wsparcie dla środowisk testowych Node.js i przeglądarki;
-    \item jednoczesne uruchamianie testów w danej przestrzeni (funkcja eksperymentalna);
+    \item jednoczesne uruchamianie testów w danej przestrzeni (funkcja eksperymentalna).
 \end{enumerate}
 
-\textbf{Mocha z Chai} - framework testowy Mocha z biblioteką do asercji Chai:
+\textbf{Mocha z Chai} -- framework testowy Mocha z biblioteką do asercji Chai:
 \begin{enumerate}[label=--]
     \item wyczerpujące i czytelne dla człowieka asercje;
     \item używane głównie w BDD (Behavior-Driven Development);
@@ -340,7 +340,7 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
     \item obsługa globalnej konfiguracji za pomocą `mochaGlobalSetup`;
     \item obsługa globalnego usuwania środowiska za pomocą `mochaGlobalTeardown`;
     \item obsługa zarówno modułów ES, jak i CommonJS, z zastrzeżeniem, że moduły ES nie są obsługiwane przez tryb watch. To samo dotyczy niestandardowych raportów i niestandardowego interfejsu;
-    \item konfiguracja może być tylko plikiem CommonJS `.mocharc.js` lub `.mocharc.cjs`;
+    \item konfiguracja może być tylko plikiem CommonJS `.mocharc.js` lub `.mocharc.cjs`.
 \end{enumerate}
 
 \subparagraph{Decyzja\\}
@@ -359,9 +359,9 @@ Plusy oraz minusy takiej decyzji są następujące:
 
 \subparagraph{Typy baz danych\\}
 
-\textbf{Bazy nierelacyjne - Not only SQL (NoSQL)}:\\
+\textbf{Bazy nierelacyjne -- Not only SQL (NoSQL)}:\\
 Bazy danych No-SQL nie mają tak sztywnego schematu bazy danych jak ich relacyjne odpowiedniki. Struktura organizacyjna różni się w zależności od typu nierelacyjnej bazy danych. Biorąc to pod uwagę, wszystkie mają na celu rozwiązanie problemów tradycyjnej, relacyjnej bazy danych, poprzez rozwiązanie kwestii elastyczności i skalowalności. Bazy danych SQL nie są idealne do przechowywania nieustrukturyzowanych formatów danych, takich jak tekst, wideo i obrazy. Bazy danych NoSQL przedkładają dostępność nad spójność.
-Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL (niektóre obsługują SQL), można go dokładnie podsumować jako "nie tylko SQL".
+Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL (niektóre obsługują SQL), można go dokładnie podsumować jako ,,nie tylko SQL``.
 Rodzaje nierelacyjnych struktur baz danych to:
 \begin{enumerate}[label=--]
     \item Key-value store - jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość, gdzie każdy element ma klucz i wartość. Klucz może być podobny do tego, co znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika. Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji. Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz. Przykładami takich baz danych są Redis i Memcached.
@@ -370,14 +370,14 @@ Rodzaje nierelacyjnych struktur baz danych to:
     \item Graph store - zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości. Węzłem może być dowolny obiekt, miejsce lub osoba. Krawędź definiuje relację między węzłami. Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu. Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source, w której użytkownicy mogą kupować licencje na tworzenie kopii zapasowych online i rozszerzenia wysokiej dostępności lub licencjonowaną wersję wstępną z kopią zapasową i rozszerzeniami.
 \end{enumerate}
 
-Teoria CAP
-Tak zwana "teoria CAP" oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z "twierdzeniem CAP", a nawet jest zgodna z ACID.
+Teoria CAP \\
+Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.
 
-\textbf{Relacyjne bazy danych - SQLowe bazy danych}:\\
-\subparagraph*{Czym jest SQL?\\}
-Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych. Pierwotnie znany jako SEQUEL, został później uproszczony do SQL, ze względu na kwestię znaku towarowego. Jest to de facto standard relacyjnych systemów baz danych. Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost między bazą danych a użytkownikami. Niezależnie od tego, czy jest to programista stojący za danym systemem, czy zwykły użytkownik, wszyscy ludzie zaznajomieni z nowoczesną technologią, nawet jeśli nieświadomie, używali SQL. Biorąc pod uwagę, jak blisko relacyjne bazy danych są powiązane z SQL, są one powszechnie nazywane "bazami danych SQL"
+\textbf{Relacyjne bazy danych -- SQLowe bazy danych}:\\
+\subparagraph*{SQL\\}
+Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych. Pierwotnie znany jako SEQUEL, został później uproszczony do SQL, ze względu na kwestię znaku towarowego. Jest to de facto standard relacyjnych systemów baz danych. Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost między bazą danych a użytkownikami. Niezależnie od tego, czy jest to programista stojący za danym systemem, czy zwykły użytkownik, wszyscy ludzie zaznajomieni z nowoczesną technologią, nawet jeśli nieświadomie, używali SQL. Biorąc pod uwagę, jak blisko relacyjne bazy danych są powiązane z SQL, są one powszechnie nazywane ,,bazami danych SQL``
 
-\subparagraph{Czym jest relacyjna baza danych?\\}
+\subparagraph{Relacyjne bazy danych\\}
 Relacyjna baza danych to, jak sama nazwa wskazuje, magazyn danych, który przechowuje je w sposób relacyjny.
 Ten typ pamięci masowej rozumie i przechowuje dane w formacie tabelarycznym, tj. wierszy i kolumn.
 Relacje są deklarowane za pomocą kluczy podstawowych i obcych, które służą jako identyfikatory danej relacji.
@@ -403,13 +403,105 @@ Plusy oraz minusy takiej decyzji są następujące:
     \item zespół będzie miał większą elastyczność wprowadzania zmian;
     \item obsługa formatów multimediów będzie znacznie prostsza i wykonalna;
     \item zgodność z ACID będzie musiała zostać dokładnie zbadana i wdrożona;
-    \item zespół będzie musiał zapoznać się z nową składnią, w zależności od wybranego systemu bazy danych, aby dostosować się do braku znajomości SQL;
+    \item zespół będzie musiał zapoznać się z nową składnią, w zależności od wybranego systemu bazy danych, aby dostosować się do braku znajomości SQL.
 \end{enumerate}
 % Teoria - warum, co, gdzie, z kim?
 
 % Narzędzia - decyzja, dlaczego?
 
 \subsubsection{Aplikacja mobilna}
+
+\subparagraph{Wybór technologii}
+Jako zespół programistów stanęliśmy przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji musimy wziąć pod uwagę nasze umiejętności, okres czasu, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
+
+\textbf{Javascript -- Ionic 6\\}
+
+Ionic 6 to framework typu open-source do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty UI oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji.
+    
+Zalety:
+
+- Łatwość i szybkość tworzenia aplikacji dzięki wykorzystaniu języków programowania webowego, takich jak HTML, CSS i JavaScript
+- Możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji desktopowych
+- Duża społeczność deweloperów i rozwijająca się platforma, co oznacza, że istnieje wiele narzędzi, wtyczek i bibliotek, które ułatwiają proces tworzenia aplikacji.
+- Wbudowane narzędzia do testowania i debugowania kodu, co ułatwia proces tworzenia i utrzymywania aplikacji
+- Dostęp do wielu wbudowanych komponentów UI opartych na bibliotece Ionic, co pozwala na tworzenie atrakcyjnych i responsywnych aplikacji.
+
+Wady:
+
+- W porównaniu do innych popularnych frameworków, takich jak React Native czy Flutter, aplikacje Ionic 6 mogą cechować się gorszą wydajnością ze względu na wykorzystanie technologii webowych
+- Brak w pełni natywnej wydajności, co może wpływać na szybkość działania aplikacji, szczególnie w przypadku bardziej złożonych aplikacji
+- Możliwe trudności w dostosowaniu aplikacji do różnych platform, co może wymagać dodatkowych prac programistycznych.
+
+\textbf{Javascript -- React Native\\}
+
+React Native to oparty na JavaScript framework do tworzenia aplikacji mobilnych, który umożliwia programistom tworzenie natywnych aplikacji mobilnych na platformy iOS i Android przy użyciu jednej bazy kodu.
+Opiera się on na bibliotece ReactJS i wykorzystuje kombinację JavaScript i natywnego kodu do tworzenia wysokowydajnych aplikacji mobilnych.
+React Native pozwala programistom na ponowne wykorzystanie kodu na różnych platformach, co pomaga zaoszczędzić czas i zasoby.
+
+Zalety:
+\begin{enumerate}[label=--]
+    \item Szybkie tworzenie aplikacji dzięki wykorzystaniu JavaScript i popularnej biblioteki React
+    \item Możliwość tworzenia natywnych aplikacji mobilnych z jedną bazą kodu dla różnych systemów operacyjnych
+    \item Łatwa konserwacja i skalowalność aplikacji dzięki wykorzystaniu komponentów UI wielokrotnego użytku, które mogą być używane w różnych systemach operacyjnych
+    \item Dostęp do natywnych funkcji systemu operacyjnego poprzez architekturę "bridge"
+    \item Łatwe wdrażanie aktualizacji i zmian aplikacji bez konieczności weryfikacji w sklepie z aplikacjami, która jest wymagana w przypadku aplikacji natywnych
+    \item Duża społeczność deweloperów i liczne zasoby online, które ułatwiają rozwiązywanie problemów i znajdowanie gotowych rozwiązań.
+\end{enumerate}
+
+Wady:
+\begin{enumerate}[label=--]
+    \item Niższa wydajność w porównaniu do natywnych aplikacji mobilnych, zwłaszcza w przypadku bardziej złożonych i wymagających aplikacji
+    \item Niektóre natywne funkcjonalności mogą być trudne lub niemożliwe do osiągnięcia w React Native, co może wymagać stworzenia dodatkowego natywnego kodu.
+    \item Potrzeba znajomości natywnych systemów operacyjnych i ich różnic w celu tworzenia zoptymalizowanych aplikacji dla każdej platformy.
+    \item Wyższa krzywa uczenia się dla początkujących programistów, którzy muszą nauczyć się zarówno JavaScript, jak i architektury React Native.
+\end{enumerate}
+
+\textbf{Flutter\\}
+
+Flutter to framework open-source do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe.
+    
+Zalety:
+\begin{enumerate}[label=--]
+    \item Szybkość i wydajność aplikacji dzięki wykorzystaniu języka programowania Dart oraz implementacji narzędzi Ahead of Time (AOT) i Just in Time (JIT) do kompilacji kodu
+    \item Możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji webowych i desktopowych
+    \item Możliwość tworzenia pięknych i atrakcyjnych interfejsów użytkownika z wykorzystaniem biblioteki Material Design oraz narzędzi do tworzenia animacji i efektów wizualnych
+    \item Szybkie wdrażanie zmian i aktualizacji dzięki narzędziom Hot Reload, które pozwalają na szybkie testowanie i modyfikowanie kodu bez ponownego uruchamiania aplikacji
+    \item Wbudowane narzędzia do testowania i debugowania kodu, co ułatwia proces tworzenia i utrzymania aplikacji.
+\end{enumerate}
+
+Wady:
+\begin{enumerate}[label=--]
+ \item Mniejsza społeczność deweloperów w porównaniu do innych popularnych frameworków, takich jak React Native czy Ionic
+ \item Nieco większe rozmiary plików aplikacji ze względu na wykorzystanie wbudowanych bibliotek i narzędzi
+ \item Brak w pełni natywnej wydajności w porównaniu do aplikacji napisanych w językach natywnych, takich jak Java lub Kotlin dla Androida i Objective-C lub Swift dla iOS. Jednak dzięki wykorzystaniu silnika Flutter, który jest zoptymalizowany pod kątem wydajności, różnica w wydajności nie jest tak duża, jak mogłoby się wydawać.
+\end{enumerate}
+
+\textbf{Swift\\}
+%TODO: PRZEROBIĆ
+Programowanie aplikacji mobilnych przy użyciu języków natywnych odnosi się do tworzenia aplikacji przy użyciu języków i narzędzi dostarczanych przez platformę, dla której aplikacja jest tworzona. Na przykład aplikacje na iOS mogą być pisane w języku Swift lub Objective-C, podczas gdy aplikacje na Androida mogą być pisane w języku Kotlin lub Java.
+    
+Zalety:
+
+- Wysoka wydajność: Aplikacje natywne mają dostęp do pełnych możliwości platformy, co może skutkować szybszym i płynniejszym działaniem w porównaniu do aplikacji zbudowanych przy użyciu wieloplatformowych frameworków.
+- Lepsze doświadczenie użytkownika: Aplikacje natywne mogą wykorzystywać komponenty interfejsu użytkownika specyficzne dla platformy, co zapewnia bardziej dopracowane i płynne wrażenia użytkownika.
+- Dostęp do funkcji urządzenia: Twórcy aplikacji natywnych mają dostęp do funkcji i możliwości specyficznych dla urządzenia, takich jak GPS, kamera i mikrofon, co pozwala im tworzyć aplikacje z zaawansowanymi funkcjami.
+- Solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (IDE), narzędzia do debugowania i struktury do testowania aplikacji.
+
+Wady:
+
+- Dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy.
+- Ograniczona przenośność: Aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy.
+- Stroma krzywa uczenia się: Nauka natywnych języków i narzędzi programistycznych może być trudnym i czasochłonnym procesem, szczególnie dla programistów, którzy są nowicjuszami w tworzeniu aplikacji mobilnych.
+
+\textbf{Decyzja\\}
+
+Zdecydowaliśmy się na wykorzystanie natywnego dla systemów iOS języka Swift ze względu na wbudowane wsparcie Machine Learning oraz możliwość użycia Neural Engine na urządzeniach mobilnych.
+
+\textbf{Konsekwencje\\}
+
+Decyzja o użyciu Fluttera podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Nasze rozwiązanie będzie dostępne dla urządzeń z systemem Android i IOS. W tym celu będziemy mogli użyć tylko jednego kodu bez konieczności pisania oddzielnych aplikacji. Dzięki wsparciu CoreML unikniemy wielu problemów związanych z implementacją rozwiązania.
+
+Referencje
 
 Teoria - warum, co, gdzie, z kim?
 
