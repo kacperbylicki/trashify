@@ -1,5 +1,5 @@
 export const mailingGrpcMethod = {
-  "sendEmail": "sendEmail"
+  sendEmail: 'sendEmail',
 } as const;
 
 export type mailingGrpcMethodEnum = keyof typeof mailingGrpcMethod;

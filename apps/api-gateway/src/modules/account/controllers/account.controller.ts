@@ -20,11 +20,18 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import {
+  ChangeEmailDto,
+  ChangeEmailResponseDto,
+  ChangePasswordDto,
+  ChangePasswordResponseDto,
+  ChangeUsernameDto,
+  ChangeUsernameResponseDto,
   GetAccountResponseDto,
   LoginRequestDto,
   LoginResponseDto,
@@ -32,6 +39,8 @@ import {
   RefreshTokenResponseDto,
   RegisterRequestDto,
   RegisterResponseDto,
+  ResetPasswordDto,
+  ResetPasswordResponseDto,
 } from '../dtos';
 import {
   HttpStatusInterceptor,
@@ -42,7 +51,7 @@ import {
   RequestRefreshToken,
   TimeoutInterceptor,
 } from '@/common';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Controller('accounts')
 @ApiTags(AccountController.name)
@@ -107,5 +116,88 @@ export class AccountController {
     @RequestRefreshToken() refreshToken: string,
   ): Promise<Observable<RefreshTokenResponse>> {
     return this.client.refreshToken({ accountId, refreshToken });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('email')
+  @ApiOkResponse({
+    type: ChangeEmailResponseDto,
+    description: 'Email changed.',
+  })
+  @ApiBearerAuth()
+  @HttpCode(HttpStatus.OK)
+  public async changeEmail(
+    @RequestAccountId() accountId: string,
+    @Body() request: ChangeEmailDto,
+  ): Promise<Observable<ChangeEmailResponseDto>> {
+    const { email } = request;
+
+    return this.client.changeEmail({
+      uuid: accountId,
+      email,
+    });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('username')
+  @ApiOkResponse({
+    type: ChangeUsernameResponseDto,
+    description: 'Account username changed.',
+  })
+  @ApiBearerAuth()
+  @HttpCode(HttpStatus.OK)
+  public async changeUsername(
+    @RequestAccountId() accountId: string,
+    @Body() request: ChangeUsernameDto,
+  ): Promise<Observable<ChangeUsernameResponseDto>> {
+    return this.client.changeUsername({
+      username: request.username,
+      uuid: accountId,
+    });
+  }
+
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({
+    type: ResetPasswordResponseDto,
+    description: 'Reset password link sent',
+  })
+  public async createResetPasswordToken(
+    @Body() request: ResetPasswordDto,
+  ): Promise<Observable<ResetPasswordResponseDto>> {
+    const { email } = request;
+
+    const result = this.client.createResetPasswordToken({
+      email,
+    });
+
+    return result.pipe(
+      map(() => {
+        return {
+          // TODO: Add conditional email dispatch, unless there is a better way :)
+          status: HttpStatus.OK,
+        };
+      }),
+    );
+  }
+
+  @Post('change-password/:token')
+  @ApiOkResponse({
+    type: ChangePasswordResponseDto,
+    description: 'Password changed.',
+  })
+  @ApiBearerAuth()
+  @HttpCode(HttpStatus.OK)
+  public async changePassword(
+    @Param('token') token: string,
+    @Body() request: ChangePasswordDto,
+  ): Promise<Observable<ChangePasswordResponseDto>> {
+    const { password, repeatedPassword } = request;
+
+    return this.client.changePassword({
+      password,
+      repeatedPassword,
+      token,
+    });
   }
 }
