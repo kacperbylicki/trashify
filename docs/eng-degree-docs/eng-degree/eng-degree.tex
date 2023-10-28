@@ -238,11 +238,10 @@ poszczególnych elementów pracy, takich jak:
     \item Query Buildery bądź dedykowane ORMy; % Info o tym dlaczego są stosowane
 \end{itemize}
 
-\paragraph{Język programowania wykorzystany do projektowania aplikacji\\}
+\paragraph{Język programowania wykorzystany do projektowania aplikacji serwerowej\\}
 
 Z uwagi na znajomość tego języka wśród członków zespołu wybraliśmy język JavaScript
-po stronie aplikacji serwerowej oraz Swift do stworzenia aplikacji mobilnej na
-systemy IOS.
+po stronie aplikacji serwerowej.
 
 Aplikacja serwerowa uruchamiana jest w środowisku uruchomieniowym Node.js, które bazowane jest na
 silniku V8 stworzonym przez firmę Google LLC.
@@ -268,11 +267,10 @@ wtyczek, które zaimplementowane są na podstawie skierowanego grafu acykliczneg
 Każda ścieżka żądania HTTP, dekoratory, haki są traktowane jako wtyczki.
 Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo aplikacji.
 
-% TODO: Fix numbering
 \begin{figure}[h]
-    \caption{Reprezentacja skierowanego grafu acyklicznego}
     \includegraphics[width=6cm]{../ADG.png}
     \centering
+    \caption{Reprezentacja skierowanego grafu acyklicznego}
     \label{fig:ADG}
 \end{figure}
 
@@ -311,13 +309,13 @@ Plusy oraz minusy takiej decyzji są następujące:
 \subparagraph{Testowanie aplikacji\\}
 
 Testowanie aplikacji jest kluczową decyzją dla zespołu programistów.
-Chociaż początkowo może to być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności).
+Chociaż początkowo może to być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie logiki biznesowej (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności).
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
 \textbf{Jest} -- popularny i pełen wbudowanych funkcjonalności framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące:
 \begin{enumerate}[label=--]
-    \item Łatwa konfiguracja - w pliku `package.json`, plikach `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
-    \item Obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem bilbioteki supertest i testów migawkowych;
+    \item łatwa konfiguracja - w pliku `package.json`, `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
+    \item obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem bilbioteki supertest i testów migawkowych;
     \item mocking - z wysokim stopniem dostosowania, w tym mockowanie wartości zwracanych (zarówno w funkcjach synchronicznych, jak i asynchronicznych). Są one przechowywane i mogą być walidowane;
     \item pokrycie kodu - wbudowane narzędzie do raportowania pokrycia kodu źródłowego;
     \item testowanie równoległe - zwiększenie szybkości testowania, zwłaszcza gdy testy są w pełni niezależne i nie mutują wspólnego zestawu danych;
@@ -336,10 +334,10 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
     \item używane głównie w BDD (Behavior-Driven Development);
     \item obsługa haków cyklu życia `before`, `after`, `beforeEach` i `afterEach`;
     \item testowanie równoległe ma swoje dobrze zdefiniowane ograniczenia, takie jak użycie `it.only` lub `describe.only`, które są niedostępne. Testowanie równoległe jest dostępne tylko w środowisku Node.js. Haki zadeklarowane na poziomie root nie są globalne w przypadku testowania równoległego;
-    \item dostępny cały zestaw reporterów, zarówno wbudowanych, takich jak `json-stream`, `markdown`, `progress`, `xunit`, `html reporter`, jak i opcji innych firm. Nie działają one dobrze z testami równoległymi, ponieważ oczekują, że Mocha będzie wiedzieć, ile testów planuje uruchomić przed wykonaniem;
+    \item dostępny cały zestaw reporterów, zarówno wbudowanych, takich jak `json-stream`, `markdown`, `progress`, `xunit`, `html reporter`, jak i opcji innych firm. Nie działają one dobrze z testami równoległymi, ponieważ oczekują, że Mocha będzie wiedzieć, ile testów planuje uruchomić przed ich wykonaniem;
     \item obsługa globalnej konfiguracji za pomocą `mochaGlobalSetup`;
     \item obsługa globalnego usuwania środowiska za pomocą `mochaGlobalTeardown`;
-    \item obsługa zarówno modułów ES, jak i CommonJS, z zastrzeżeniem, że moduły ES nie są obsługiwane przez tryb watch. To samo dotyczy niestandardowych raportów i niestandardowego interfejsu;
+    \item obsługa zarówno modułów ES, jak i CommonJS, z zastrzeżeniem, że moduły ES nie są obsługiwane przez tryb watch. To samo dotyczy niestandardowych raporterów i niestandardowego interfejsu;
     \item konfiguracja może być tylko plikiem CommonJS `.mocharc.js` lub `.mocharc.cjs`.
 \end{enumerate}
 
@@ -349,33 +347,38 @@ Zespół zdecydował się na framework testowy Jest, ponieważ nie wymaga wielu 
 
 Plusy oraz minusy takiej decyzji są następujące:
 \begin{itemize}
-    \item Testy będą tworzone przy użyciu dobrze ugruntowanych reguł;
-    \item Pakiet jest-plugin będzie musiał zostać dodany do pliku `.eslintrc` i `package.json`.
-    \item Jest ma olbrzymią społeczność z dużą ilością ekspertów, którzy go używają i otwarcie dzielą się wiedzą.
-    \item Ilość matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności.
+    \item testy będą tworzone przy użyciu dobrze ugruntowanych reguł;
+    \item paczka jest-plugin będzie musiała zostać dodana do pliku `.eslintrc` i `package.json`.
+    \item jest ma olbrzymią społeczność z dużą ilością ekspertów, którzy go używają i otwarcie dzielą się wiedzą.
+    \item ilość matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności.
 \end{itemize}
 
 \paragraph{Dobór bazy danych}
 
 \subparagraph{Typy baz danych\\}
 
-\textbf{Bazy nierelacyjne -- Not only SQL (NoSQL)}:\\
-Bazy danych No-SQL nie mają tak sztywnego schematu bazy danych jak ich relacyjne odpowiedniki. Struktura organizacyjna różni się w zależności od typu nierelacyjnej bazy danych. Biorąc to pod uwagę, wszystkie mają na celu rozwiązanie problemów tradycyjnej, relacyjnej bazy danych, poprzez rozwiązanie kwestii elastyczności i skalowalności. Bazy danych SQL nie są idealne do przechowywania nieustrukturyzowanych formatów danych, takich jak tekst, wideo i obrazy. Bazy danych NoSQL przedkładają dostępność nad spójność.
+\textbf{Bazy nierelacyjne (NoSQL)}\\
+Bazy danych No-SQL nie mają tak sztywnego schematu bazy danych jak ich relacyjne odpowiedniki. Struktura organizacyjna różni się w zależności od typu nierelacyjnej bazy danych. Biorąc to pod uwagę, wszystkie mają na celu rozwiązanie problemów tradycyjnej, relacyjnej bazy danych, poprzez zaadresowanie kwestii elastyczności i skalowalności. Bazy danych SQL nie są idealne do przechowywania nieustrukturyzowanych formatów danych, takich jak tekst, wideo i obrazy. Bazy danych NoSQL przedkładają dostępność nad spójność.
 Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL (niektóre obsługują SQL), można go dokładnie podsumować jako ,,nie tylko SQL``.
 Rodzaje nierelacyjnych struktur baz danych to:
 \begin{enumerate}[label=--]
     \item Key-value store - jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość, gdzie każdy element ma klucz i wartość. Klucz może być podobny do tego, co znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika. Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji. Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz. Przykładami takich baz danych są Redis i Memcached.
     \item Document store - jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów. Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON. Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji. Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych. Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników. Przykładem bazy danych zorientowanej na dokumenty jest MongoDB.
     \item Wide-column store - informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci. Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach. Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn. Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data. Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych. Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym.
-    \item Graph store - zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości. Węzłem może być dowolny obiekt, miejsce lub osoba. Krawędź definiuje relację między węzłami. Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu. Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source, w której użytkownicy mogą kupować licencje na tworzenie kopii zapasowych online i rozszerzenia wysokiej dostępności lub licencjonowaną wersję wstępną z kopią zapasową i rozszerzeniami.
+    \item Graph store - zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości. Węzłem może być dowolny obiekt, miejsce lub osoba. Krawędź definiuje relację między węzłami. Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu. Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source, w której użytkownicy mogą kupować licencje na tworzenie kopii zapasowych online i rozszerzenia wysokiej dostępności lub licencjonowaną wersję wstępną z kopią zapasową i rozszerzeniami.
 \end{enumerate}
 
-Teoria CAP \\
+\textbf{Teoria CAP} \\
 Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.
 
 \textbf{Relacyjne bazy danych -- SQLowe bazy danych}:\\
 \subparagraph*{SQL\\}
-Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych. Pierwotnie znany jako SEQUEL, został później uproszczony do SQL, ze względu na kwestię znaku towarowego. Jest to de facto standard relacyjnych systemów baz danych. Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost między bazą danych a użytkownikami. Niezależnie od tego, czy jest to programista stojący za danym systemem, czy zwykły użytkownik, wszyscy ludzie zaznajomieni z nowoczesną technologią, nawet jeśli nieświadomie, używali SQL. Biorąc pod uwagę, jak blisko relacyjne bazy danych są powiązane z SQL, są one powszechnie nazywane ,,bazami danych SQL``
+Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych.
+Pierwotnie znany jako SEQUEL, został później uproszczony do SQL, ze względu na kwestię znaku towarowego.
+Jest to de facto standard relacyjnych systemów baz danych.
+Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost między bazą danych a użytkownikami.
+Niezależnie od tego, czy jest to programista stojący za danym systemem, czy zwykły użytkownik, wszyscy ludzie zaznajomieni z nowoczesną technologią, nawet jeśli nieświadomie, używali SQL.
+Biorąc pod uwagę, jak blisko relacyjne bazy danych są powiązane z SQL, są one powszechnie nazywane ,,bazami danych SQL``.
 
 \subparagraph{Relacyjne bazy danych\\}
 Relacyjna baza danych to, jak sama nazwa wskazuje, magazyn danych, który przechowuje je w sposób relacyjny.
@@ -387,25 +390,27 @@ Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami da
 Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu.\\
 Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID:
 \begin{enumerate}[label=--]
-    \item \textbf{Atomiczność} - wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
-    \item \textbf{Spójność} - dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
-    \item \textbf{Izolacja} - stan pośredni transakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
-    \item \textbf{Trwałość} - po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
+    \item \textbf{Atomiczność (eng. Atomicity)} - wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
+    \item \textbf{Spójność (eng. Consistency)} - dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
+    \item \textbf{Izolacja (eng. Isolation)} - stan pośredni transakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
+    \item \textbf{Trwałość (eng. Durability)} - po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
 \end{enumerate}
 
 
-\subparagraph*{Decyzja}
+\textbf{Decyzja}\\
 
 Ponieważ projekt będzie w większości dotyczył przechwytywania i przetwarzania obrazów, jedynym realnym i efektywnym czasowo rozwiązaniem będzie system baz danych NoSQL zorientowany na dokumenty.
 
 Plusy oraz minusy takiej decyzji są następujące:
 \begin{enumerate}[label=--]
     \item zespół będzie miał większą elastyczność wprowadzania zmian;
-    \item obsługa formatów multimediów będzie znacznie prostsza i wykonalna;
+    \item obsługa formatów multimediów będzie znacznie prostsza;
     \item zgodność z ACID będzie musiała zostać dokładnie zbadana i wdrożona;
     \item zespół będzie musiał zapoznać się z nową składnią, w zależności od wybranego systemu bazy danych, aby dostosować się do braku znajomości SQL.
 \end{enumerate}
 % Teoria - warum, co, gdzie, z kim?
+
+% TODO: Model API GraphQL vs REST
 
 % Narzędzia - decyzja, dlaczego?
 
@@ -417,20 +422,22 @@ Jako zespół programistów stanęliśmy przed wyborem odpowiedniej technologii 
 \textbf{Javascript -- Ionic 6\\}
 
 Ionic 6 to framework typu open-source do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty UI oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji.
-    
-Zalety:
 
-- Łatwość i szybkość tworzenia aplikacji dzięki wykorzystaniu języków programowania webowego, takich jak HTML, CSS i JavaScript
-- Możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji desktopowych
-- Duża społeczność deweloperów i rozwijająca się platforma, co oznacza, że istnieje wiele narzędzi, wtyczek i bibliotek, które ułatwiają proces tworzenia aplikacji.
-- Wbudowane narzędzia do testowania i debugowania kodu, co ułatwia proces tworzenia i utrzymywania aplikacji
-- Dostęp do wielu wbudowanych komponentów UI opartych na bibliotece Ionic, co pozwala na tworzenie atrakcyjnych i responsywnych aplikacji.
+Zalety:
+\begin{enumerate}[label=--]
+    \item łatwość i szybkość tworzenia aplikacji dzięki wykorzystaniu języków programowania webowego, takich jak HTML, CSS i JavaScript;
+    \item możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji desktopowych;
+    \item duża społeczność deweloperów i rozwijająca się platforma, co oznacza, że istnieje wiele narzędzi, wtyczek i bibliotek, które ułatwiają proces tworzenia aplikacji;
+    \item wbudowane narzędzia do testowania i debugowania kodu, co ułatwia proces tworzenia i utrzymywania aplikacji;
+    \item dostęp do wielu wbudowanych komponentów UI opartych na bibliotece Ionic, co pozwala na tworzenie atrakcyjnych i responsywnych aplikacji.
+\end{enumerate}
 
 Wady:
-
-- W porównaniu do innych popularnych frameworków, takich jak React Native czy Flutter, aplikacje Ionic 6 mogą cechować się gorszą wydajnością ze względu na wykorzystanie technologii webowych
-- Brak w pełni natywnej wydajności, co może wpływać na szybkość działania aplikacji, szczególnie w przypadku bardziej złożonych aplikacji
-- Możliwe trudności w dostosowaniu aplikacji do różnych platform, co może wymagać dodatkowych prac programistycznych.
+\begin{enumerate}[label=--]
+    \item w porównaniu do innych popularnych frameworków, takich jak React Native czy Flutter, aplikacje Ionic 6 mogą cechować się gorszą wydajnością ze względu na wykorzystanie technologii webowych;
+    \item brak w pełni natywnej wydajności, co może wpływać na szybkość działania aplikacji, szczególnie w przypadku bardziej złożonych aplikacji;
+    \item możliwe trudności w dostosowaniu aplikacji do różnych platform, co może wymagać dodatkowych prac programistycznych.
+\end{enumerate}
 
 \textbf{Javascript -- React Native\\}
 
@@ -440,40 +447,40 @@ React Native pozwala programistom na ponowne wykorzystanie kodu na różnych pla
 
 Zalety:
 \begin{enumerate}[label=--]
-    \item Szybkie tworzenie aplikacji dzięki wykorzystaniu JavaScript i popularnej biblioteki React
-    \item Możliwość tworzenia natywnych aplikacji mobilnych z jedną bazą kodu dla różnych systemów operacyjnych
-    \item Łatwa konserwacja i skalowalność aplikacji dzięki wykorzystaniu komponentów UI wielokrotnego użytku, które mogą być używane w różnych systemach operacyjnych
-    \item Dostęp do natywnych funkcji systemu operacyjnego poprzez architekturę "bridge"
-    \item Łatwe wdrażanie aktualizacji i zmian aplikacji bez konieczności weryfikacji w sklepie z aplikacjami, która jest wymagana w przypadku aplikacji natywnych
-    \item Duża społeczność deweloperów i liczne zasoby online, które ułatwiają rozwiązywanie problemów i znajdowanie gotowych rozwiązań.
+    \item szybkie tworzenie aplikacji dzięki wykorzystaniu JavaScript i popularnej biblioteki React;
+    \item możliwość tworzenia natywnych aplikacji mobilnych z jedną bazą kodu dla różnych systemów operacyjnych;
+    \item łatwa konserwacja i skalowalność aplikacji dzięki wykorzystaniu komponentów UI wielokrotnego użytku, które mogą być używane w różnych systemach operacyjnych;
+    \item dostęp do natywnych funkcji systemu operacyjnego poprzez architekturę "bridge";
+    \item łatwe wdrażanie aktualizacji i zmian aplikacji bez konieczności weryfikacji w sklepie z aplikacjami, która jest wymagana w przypadku aplikacji natywnych;
+    \item duża społeczność deweloperów i liczne zasoby online, które ułatwiają rozwiązywanie problemów i znajdowanie gotowych rozwiązań.
 \end{enumerate}
 
 Wady:
 \begin{enumerate}[label=--]
-    \item Niższa wydajność w porównaniu do natywnych aplikacji mobilnych, zwłaszcza w przypadku bardziej złożonych i wymagających aplikacji
-    \item Niektóre natywne funkcjonalności mogą być trudne lub niemożliwe do osiągnięcia w React Native, co może wymagać stworzenia dodatkowego natywnego kodu.
-    \item Potrzeba znajomości natywnych systemów operacyjnych i ich różnic w celu tworzenia zoptymalizowanych aplikacji dla każdej platformy.
-    \item Wyższa krzywa uczenia się dla początkujących programistów, którzy muszą nauczyć się zarówno JavaScript, jak i architektury React Native.
+    \item niższa wydajność w porównaniu do natywnych aplikacji mobilnych, zwłaszcza w przypadku bardziej złożonych i wymagających aplikacji;
+    \item niektóre natywne funkcjonalności mogą być trudne lub niemożliwe do osiągnięcia w React Native, co może wymagać stworzenia dodatkowego natywnego kodu;
+    \item potrzeba znajomości natywnych systemów operacyjnych i ich różnic w celu tworzenia zoptymalizowanych aplikacji dla każdej platformy;
+    \item wyższa krzywa uczenia się dla początkujących programistów, którzy muszą nauczyć się zarówno JavaScript, jak i architektury React Native.
 \end{enumerate}
 
 \textbf{Flutter\\}
 
-Flutter to framework open-source do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe.
+Flutter to otwarto-źródłowy framework do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe.
     
 Zalety:
 \begin{enumerate}[label=--]
-    \item Szybkość i wydajność aplikacji dzięki wykorzystaniu języka programowania Dart oraz implementacji narzędzi Ahead of Time (AOT) i Just in Time (JIT) do kompilacji kodu
-    \item Możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji webowych i desktopowych
-    \item Możliwość tworzenia pięknych i atrakcyjnych interfejsów użytkownika z wykorzystaniem biblioteki Material Design oraz narzędzi do tworzenia animacji i efektów wizualnych
-    \item Szybkie wdrażanie zmian i aktualizacji dzięki narzędziom Hot Reload, które pozwalają na szybkie testowanie i modyfikowanie kodu bez ponownego uruchamiania aplikacji
-    \item Wbudowane narzędzia do testowania i debugowania kodu, co ułatwia proces tworzenia i utrzymania aplikacji.
+    \item szybkość i wydajność aplikacji dzięki wykorzystaniu języka programowania Dart oraz implementacji narzędzi Ahead of Time (AOT) i Just in Time (JIT) do kompilacji kodu;
+    \item możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji webowych i desktopowych;
+    \item możliwość tworzenia pięknych i atrakcyjnych interfejsów użytkownika z wykorzystaniem biblioteki Material Design oraz narzędzi do tworzenia animacji i efektów wizualnych;
+    \item szybkie wdrażanie zmian i aktualizacji dzięki narzędziom Hot Reload, które pozwalają na szybkie testowanie i modyfikowanie kodu bez ponownego uruchamiania aplikacji;
+    \item wbudowane narzędzia do testowania i debugowania kodu, co ułatwia proces tworzenia i utrzymania aplikacji.
 \end{enumerate}
 
 Wady:
 \begin{enumerate}[label=--]
- \item Mniejsza społeczność deweloperów w porównaniu do innych popularnych frameworków, takich jak React Native czy Ionic
- \item Nieco większe rozmiary plików aplikacji ze względu na wykorzystanie wbudowanych bibliotek i narzędzi
- \item Brak w pełni natywnej wydajności w porównaniu do aplikacji napisanych w językach natywnych, takich jak Java lub Kotlin dla Androida i Objective-C lub Swift dla iOS. Jednak dzięki wykorzystaniu silnika Flutter, który jest zoptymalizowany pod kątem wydajności, różnica w wydajności nie jest tak duża, jak mogłoby się wydawać.
+ \item mniejsza społeczność deweloperów w porównaniu do innych popularnych frameworków, takich jak React Native czy Ionic;
+ \item nieco większe rozmiary plików aplikacji ze względu na wykorzystanie wbudowanych bibliotek i narzędzi;
+ \item brak w pełni natywnej wydajności w porównaniu do aplikacji napisanych w językach natywnych, takich jak Java lub Kotlin dla Androida i Objective-C lub Swift dla iOS.
 \end{enumerate}
 
 \textbf{Swift\\}
@@ -481,17 +488,19 @@ Wady:
 Programowanie aplikacji mobilnych przy użyciu języków natywnych odnosi się do tworzenia aplikacji przy użyciu języków i narzędzi dostarczanych przez platformę, dla której aplikacja jest tworzona. Na przykład aplikacje na iOS mogą być pisane w języku Swift lub Objective-C, podczas gdy aplikacje na Androida mogą być pisane w języku Kotlin lub Java.
     
 Zalety:
-
-- Wysoka wydajność: Aplikacje natywne mają dostęp do pełnych możliwości platformy, co może skutkować szybszym i płynniejszym działaniem w porównaniu do aplikacji zbudowanych przy użyciu wieloplatformowych frameworków.
-- Lepsze doświadczenie użytkownika: Aplikacje natywne mogą wykorzystywać komponenty interfejsu użytkownika specyficzne dla platformy, co zapewnia bardziej dopracowane i płynne wrażenia użytkownika.
-- Dostęp do funkcji urządzenia: Twórcy aplikacji natywnych mają dostęp do funkcji i możliwości specyficznych dla urządzenia, takich jak GPS, kamera i mikrofon, co pozwala im tworzyć aplikacje z zaawansowanymi funkcjami.
-- Solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (IDE), narzędzia do debugowania i struktury do testowania aplikacji.
+\begin{enumerate}[label=--]
+    \item wysoka wydajność: Aplikacje natywne mają dostęp do pełnych możliwości platformy, co może skutkować szybszym i płynniejszym działaniem w porównaniu do aplikacji zbudowanych przy użyciu wieloplatformowych frameworków;
+    \item lepsze doświadczenie użytkownika: Aplikacje natywne mogą wykorzystywać komponenty interfejsu użytkownika specyficzne dla platformy, co zapewnia bardziej dopracowane i płynne wrażenia użytkownika;
+    \item dostęp do funkcji urządzenia: Twórcy aplikacji natywnych mają dostęp do funkcji i możliwości specyficznych dla urządzenia, takich jak GPS, kamera i mikrofon, co pozwala im tworzyć aplikacje z zaawansowanymi funkcjami;
+    \item solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (IDE), narzędzia do debugowania i struktury do testowania aplikacji.
+\end{enumerate}
 
 Wady:
-
-- Dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy.
-- Ograniczona przenośność: Aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy.
-- Stroma krzywa uczenia się: Nauka natywnych języków i narzędzi programistycznych może być trudnym i czasochłonnym procesem, szczególnie dla programistów, którzy są nowicjuszami w tworzeniu aplikacji mobilnych.
+\begin{enumerate}[label=--]
+    \item Dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy.
+    \item Ograniczona przenośność: Aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy.
+    \item Stroma krzywa uczenia się: Nauka natywnych języków i narzędzi programistycznych może być trudnym i czasochłonnym procesem, szczególnie dla programistów, którzy są nowicjuszami w tworzeniu aplikacji mobilnych.
+\end{enumerate}
 
 \textbf{Decyzja\\}
 
@@ -499,13 +508,13 @@ Zdecydowaliśmy się na wykorzystanie natywnego dla systemów iOS języka Swift 
 
 \textbf{Konsekwencje\\}
 
-Decyzja o użyciu Fluttera podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Nasze rozwiązanie będzie dostępne dla urządzeń z systemem Android i IOS. W tym celu będziemy mogli użyć tylko jednego kodu bez konieczności pisania oddzielnych aplikacji. Dzięki wsparciu CoreML unikniemy wielu problemów związanych z implementacją rozwiązania.
+Decyzja o użyciu języka Swifta podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Nasze rozwiązanie będzie dostępne dla urządzeń z systemem IOS. Dzięki wsparciu Machine Learning unikniemy wielu problemów związanych z implementacją rozwiązania.
 
 Referencje
 
-Teoria - warum, co, gdzie, z kim?
+%Teoria - warum, co, gdzie, z kim?
 
-Narzędzia - decyzja, dlaczego?
+%Narzędzia - decyzja, dlaczego?
 
 \subsection{Założenia teoretyczne}
 
