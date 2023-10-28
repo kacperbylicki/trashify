@@ -120,7 +120,6 @@ Problem utylizacji odpadów stał się w ostatnich latach jednym z największych
 
 Dzięki rozwojowi technologii uczenia maszynowego, pojawiła się możliwość stworzenia aplikacji mobilnej, która rozpoznawać będzie pojemniki na odpady na podstawie zdjęć oraz oznaczać je na mapie. Ułatwi ona lokalizowanie pojemników na dany typ odpadów oraz proces właściwego utylizowania śmieci dla użytkowników. Taka aplikacja może również zwiększyć świadomość społeczną w zakresie utylizacji odpadów i przyczynić się do zmniejszenia ilości odpadów zalegających na składowiskach.
 
-
 Temat ten jest aktualny i ważny, a jednocześnie daje wiele możliwości na zastosowanie różnych technologii i algorytmów uczenia maszynowego. Przy realizacji projektu można wykorzystać m.in. sieci neuronowe, algorytmy uczenia głębokiego, przetwarzanie obrazów, uczenie maszynowe w chmurze oraz usługi geolokalizacyjne.
 
 Podsumowując, projekt \topic jest uzasadniony ze względu na aktualność i ważność tematu, możliwość wykorzystania najnowszych technologii oraz potencjalne korzyści dla społeczeństwa i środowiska naturalnego.
@@ -305,6 +304,52 @@ Plusy oraz minusy takiej decyzji są następujące:
     \item komunikaty błędów mogą niewiele mówić programiście, co utrudnia proces debuggowania.
 \end{itemize}
 
+\paragraph{Architektura interfejsu programistycznego aplikacji}
+\subparagraph{Framework serwerowy\\}
+Zaprojektowanie interfejsu API, który będzie responsywny zarówno na urządzeniach mobilnych, jak i w sieci, jest wyzwaniem ze względu na nadmierne oraz niedostateczne pobieranie danych i potencjalne wykonywanie wielu żądań  do serwera na urządzeniu mobilnym. W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL zamiast tradycyjnego RESTful API.
+
+\textbf{GraphQL}\\
+Jest językiem zapytań oraz środowiskiem wykonawczym do interakcji z danymi w aplikacjach opracowanym przez Facebooka (obecnie Meta), którego celem jest ograniczenie nadmiernego i niedostatecznego pobierania danych. Został zaprojektowany z myślą o urządzeniach mobilnych, biorąc pod uwagę ich niską prędkość, pamięć masową i drogie żądania internetowe.
+W tym języku zapytań wszystkie żądania są wysyłane do pojedynczego punktu końcowego, a wykres danych, zwykle w formacie json, jest analizowany. Następnie zapytania są oceniane i stosowane są odpowiednie zapytania i mutacje.
+
+Składa się on z głównych trzech części:
+\begin{enumerate}
+    \item Zapytań (Queries): Służą do pobierania danych z serwera. Klient definiuje, jakie informacje potrzebuje, a serwer dostarcza tylko te dane.
+    \item Mutacji (Mutations): Pozwalają na modyfikację danych na serwerze, takie jak dodawanie, aktualizowanie lub usuwanie rekordów.
+    \item Typów (Types): GraphQL definiuje struktury typów danych i relacje między nimi, co umożliwia klientowi zrozumienie, jakie dane mogą być dostępne i jakie zapytania można wykonywać.
+\end{enumerate}
+
+\textbf{REST}\\
+REST to akronim REpresentational State Transfer  i styl architektoniczny dla rozproszonych systemów hipermedialnych. Sam w sobie jest wzorcem architektonicznym, który zakłada rozdzielenie odpowiedzialności między zapytaniami (GET), mutacjami (POST, PATCH, PUT) i metodami usuwania (DELETE). Został on przetestowany w boju od 2000 roku i został szeroko przyjęty w społeczności programistów.
+
+\textbf{Decyzja}\\
+Zespół programistów zdecydował się wybrać REST jako drogę, którą należy podążać ze względu na:
+\begin{enumerate}[label=--]
+    \item ustalone normy i dużą społeczność ekspertów, od których można się uczyć;
+    \item możliwość łatwego przesyłania plików, co będzie kluczowe w kontekście tej aplikacji;
+    \item różnorodność dostępnych formatów wyjściowych;
+    \item możliwość kontrolowania szczegółowych uprawnień w ramach autoryzacji;
+    \item ekspresywne kody statusu odpowiedzi.
+\end{enumerate}
+
+
+Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z następującymi zaletami i wadami:
+
+\begin{enumerate}[label=--]
+    \item buforowanie będzie łatwo dostępne zarówno po stronie serwera, jak i klienta;
+    \item w przypadku problemów, istnieje duża społeczność ekspertów, od których można uzyskać wskazówki;
+    \item dobrze udokumentowany zestaw najlepszych praktyk;
+    \item obsługę transferów plików w łatwy, ustandaryzowany sposób;
+    \item możliwość zwracania odpowiedzi w wielu formatach;
+    \item prostotę implementacji precyzyjnej autoryzacji użytkowników;
+    \item łatwiejsza obsługa błędów po stronie klienta i debugowanie aplikacji serwerowej w porównaniu do środowiska GraphQL;
+    \item większa ilość tzw. ,,boilerplate'u`` do napisania - interfejsy API RESTful zwykle wymagają więcej standardowego kodu niż ich odpowiedniki GraphQL;
+    \item możliwość niedostatecznego i nadmiernego pobierania danych - zostanie to złagodzone dzięki zastosowaniu schematu JSON;
+    \item aplikacja po stronie klienta może być mniej reaktywna ze względu na mnogość wywołań do serwera - zostanie to złagodzone dzięki wykorzystaniu schematu JSON i rozbudowanemu buforowaniu zarówno po stronie klienta, jak i serwera;
+    \item paginacja musi zostać zaimplementowana przez deweloperów;
+    \item wersjonowanie API będzie musiało być spójne.
+\end{enumerate}
+
 \paragraph{Dobór frameworka do testowania automatycznego}
 \subparagraph{Testowanie aplikacji\\}
 
@@ -354,7 +399,6 @@ Plusy oraz minusy takiej decyzji są następujące:
 \end{itemize}
 
 \paragraph{Dobór bazy danych}
-
 \subparagraph{Typy baz danych\\}
 
 \textbf{Bazy nierelacyjne (NoSQL)}\\
@@ -371,8 +415,7 @@ Rodzaje nierelacyjnych struktur baz danych to:
 \textbf{Teoria CAP} \\
 Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.
 
-\textbf{Relacyjne bazy danych -- SQLowe bazy danych}:\\
-\subparagraph*{SQL\\}
+\textbf{SQL\\}
 Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych.
 Pierwotnie znany jako SEQUEL, został później uproszczony do SQL, ze względu na kwestię znaku towarowego.
 Jest to de facto standard relacyjnych systemów baz danych.
@@ -380,11 +423,12 @@ Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost mi�
 Niezależnie od tego, czy jest to programista stojący za danym systemem, czy zwykły użytkownik, wszyscy ludzie zaznajomieni z nowoczesną technologią, nawet jeśli nieświadomie, używali SQL.
 Biorąc pod uwagę, jak blisko relacyjne bazy danych są powiązane z SQL, są one powszechnie nazywane ,,bazami danych SQL``.
 
+%  (https://www.ibm.com/topics/relational-databases)
 \subparagraph{Relacyjne bazy danych\\}
 Relacyjna baza danych to, jak sama nazwa wskazuje, magazyn danych, który przechowuje je w sposób relacyjny.
 Ten typ pamięci masowej rozumie i przechowuje dane w formacie tabelarycznym, tj. wierszy i kolumn.
 Relacje są deklarowane za pomocą kluczy podstawowych i obcych, które służą jako identyfikatory danej relacji.
-Relacje te są zwykle ilustrowane za pomocą różnych typów modeli danych (https://www.ibm.com/topics/relational-databases).
+Relacje te są zwykle ilustrowane za pomocą różnych typów modeli danych.
 Kolumny są traktowane jako pola przechowujące nazwę danej zmiennej (na przykład identyfikatorUżytkownika) i typ SQL, podczas gdy wiersze przechowują rzeczywiste wartości.
 Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami danych, które uruchamiają polecenia w sekwencji znanej jako transakcja.
 Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu.\\
@@ -398,7 +442,6 @@ Transakcje mają specyficzne właściwości, które są reprezentowane przez akr
 
 
 \textbf{Decyzja}\\
-
 Ponieważ projekt będzie w większości dotyczył przechwytywania i przetwarzania obrazów, jedynym realnym i efektywnym czasowo rozwiązaniem będzie system baz danych NoSQL zorientowany na dokumenty.
 
 Plusy oraz minusy takiej decyzji są następujące:
@@ -410,8 +453,6 @@ Plusy oraz minusy takiej decyzji są następujące:
 \end{enumerate}
 % Teoria - warum, co, gdzie, z kim?
 
-% TODO: Model API GraphQL vs REST
-
 % Narzędzia - decyzja, dlaczego?
 
 \subsubsection{Aplikacja mobilna}
@@ -420,7 +461,6 @@ Plusy oraz minusy takiej decyzji są następujące:
 Jako zespół programistów stanęliśmy przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji musimy wziąć pod uwagę nasze umiejętności, okres czasu, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 
 \textbf{Javascript -- Ionic 6\\}
-
 Ionic 6 to framework typu open-source do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty UI oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji.
 
 Zalety:
@@ -440,7 +480,6 @@ Wady:
 \end{enumerate}
 
 \textbf{Javascript -- React Native\\}
-
 React Native to oparty na JavaScript framework do tworzenia aplikacji mobilnych, który umożliwia programistom tworzenie natywnych aplikacji mobilnych na platformy iOS i Android przy użyciu jednej bazy kodu.
 Opiera się on na bibliotece ReactJS i wykorzystuje kombinację JavaScript i natywnego kodu do tworzenia wysokowydajnych aplikacji mobilnych.
 React Native pozwala programistom na ponowne wykorzystanie kodu na różnych platformach, co pomaga zaoszczędzić czas i zasoby.
@@ -464,7 +503,6 @@ Wady:
 \end{enumerate}
 
 \textbf{Flutter\\}
-
 Flutter to otwarto-źródłowy framework do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe.
     
 Zalety:
@@ -503,20 +541,34 @@ Wady:
 \end{enumerate}
 
 \textbf{Decyzja\\}
-
 Zdecydowaliśmy się na wykorzystanie natywnego dla systemów iOS języka Swift ze względu na wbudowane wsparcie Machine Learning oraz możliwość użycia Neural Engine na urządzeniach mobilnych.
 
 \textbf{Konsekwencje\\}
-
 Decyzja o użyciu języka Swifta podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Nasze rozwiązanie będzie dostępne dla urządzeń z systemem IOS. Dzięki wsparciu Machine Learning unikniemy wielu problemów związanych z implementacją rozwiązania.
 
-Referencje
+%Referencje
 
 %Teoria - warum, co, gdzie, z kim?
 
 %Narzędzia - decyzja, dlaczego?
 
 \subsection{Założenia teoretyczne}
+
+\subsubsection{Model uczenia maszynowego}
+
+\paragraph{Maszynowe rozpoznawanie obrazów}
+
+\paragraph{Proces zbierania potrzebnych danych}
+
+\paragraph{Preprocesowanie danych}
+
+\paragraph{Dobór kluczowych cech szczególnych}
+
+\paragraph{Dobór algorytmów uczenia maszynowego}
+
+\paragraph{Proces nauczania modelu}
+
+\paragraph{Ewaluacja modelu}
 
 \subsection{Opis sytuacji faktycznej}
 
