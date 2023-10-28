@@ -1,25 +1,39 @@
 import {
   ACCOUNT_SERVICE_NAME,
+  ChangeEmailResponse,
+  ChangePasswordResponse,
+  ChangeUsernameResponse,
+  ConfirmNewEmailRequest,
+  ConfirmNewEmailResponse,
+  ConfirmRegistrationRequest,
+  ConfirmRegistrationResponse,
+  CreateResetPasswordTokenResponse,
   GetAccountResponse,
   LoginResponse,
   LogoutResponse,
   RefreshTokenResponse,
   RegisterResponse,
+  ResendRegistrationConfirmationEmailResponse,
   ValidateJwtResponse,
   ValidateRefreshJwtResponse,
   accountGrpcMethod,
 } from '@trashify/transport';
 import { AccountService, AuthService } from '../services';
-import { Controller } from '@nestjs/common';
 import {
+  ChangeEmailRequestDto,
+  ChangePasswordRequestDto,
+  ChangeUsernameRequestDto,
+  CreateResetPasswordTokenRequestDto,
   GetAccountRequestDto,
   LoginRequestDto,
   LogoutRequestDto,
   RefreshTokenRequestDto,
   RegisterRequestDto,
+  ResendRegistrationEmailRequestDto,
   ValidateJwtRequestDto,
   ValidateRefreshJwtRequestDto,
 } from '../dtos';
+import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 
 @Controller()
@@ -30,37 +44,80 @@ export class AccountController {
   ) {}
 
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.getAccount)
-  getAccount(payload: GetAccountRequestDto): Promise<GetAccountResponse> {
+  public getAccount(payload: GetAccountRequestDto): Promise<GetAccountResponse> {
     return this.accountService.getCurrentAccount(payload.accountId);
   }
 
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.login)
-  login(payload: LoginRequestDto): Promise<LoginResponse> {
+  public login(payload: LoginRequestDto): Promise<LoginResponse> {
     return this.accountService.login(payload);
   }
 
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.register)
-  register(payload: RegisterRequestDto): Promise<RegisterResponse> {
+  public register(payload: RegisterRequestDto): Promise<RegisterResponse> {
     return this.accountService.register(payload);
   }
 
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.resendRegistrationConfirmationEmail)
+  public resendRegistrationEmail(
+    payload: ResendRegistrationEmailRequestDto,
+  ): Promise<ResendRegistrationConfirmationEmailResponse> {
+    return this.accountService.getExistingUser(payload);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.confirmRegistration)
+  public confirmRegistration(
+    payload: ConfirmRegistrationRequest,
+  ): Promise<ConfirmRegistrationResponse> {
+    return this.accountService.confirmRegistration(payload.uuid);
+  }
+
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.validateJwt)
-  validateJwt(payload: ValidateJwtRequestDto): Promise<ValidateJwtResponse> {
+  public validateJwt(payload: ValidateJwtRequestDto): Promise<ValidateJwtResponse> {
     return this.authService.validateJwt(payload.accessToken);
   }
 
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.validateRefreshJwt)
-  validateRefreshJwt(payload: ValidateRefreshJwtRequestDto): Promise<ValidateRefreshJwtResponse> {
+  public validateRefreshJwt(
+    payload: ValidateRefreshJwtRequestDto,
+  ): Promise<ValidateRefreshJwtResponse> {
     return this.authService.validateRefreshJwt(payload.refreshToken);
   }
 
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.refreshToken)
-  refreshToken(payload: RefreshTokenRequestDto): Promise<RefreshTokenResponse> {
+  public refreshToken(payload: RefreshTokenRequestDto): Promise<RefreshTokenResponse> {
     return this.accountService.refreshToken(payload);
   }
 
   @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.logout)
-  logout(payload: LogoutRequestDto): Promise<LogoutResponse> {
+  public logout(payload: LogoutRequestDto): Promise<LogoutResponse> {
     return this.accountService.logout(payload.accountId);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.changeEmail)
+  public changeEmail(payload: ChangeEmailRequestDto): Promise<ChangeEmailResponse> {
+    return this.accountService.changeEmail(payload);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.confirmNewEmail)
+  public confirmNewEmail(payload: ConfirmNewEmailRequest): Promise<ConfirmNewEmailResponse> {
+    return this.accountService.confirmNewEmail(payload.token);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.changePassword)
+  public changePassword(payload: ChangePasswordRequestDto): Promise<ChangePasswordResponse> {
+    return this.accountService.changePassword(payload);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.createResetPasswordToken)
+  public createResetPasswordToken(
+    payload: CreateResetPasswordTokenRequestDto,
+  ): Promise<CreateResetPasswordTokenResponse> {
+    return this.accountService.createResetPasswordToken(payload);
+  }
+
+  @GrpcMethod(ACCOUNT_SERVICE_NAME, accountGrpcMethod.changeUsername)
+  public changeUsername(payload: ChangeUsernameRequestDto): Promise<ChangeUsernameResponse> {
+    return this.accountService.changeUsername(payload);
   }
 }

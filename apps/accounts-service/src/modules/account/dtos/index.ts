@@ -5,3 +5,8 @@ export * from './refresh-token-request.dto';
 export * from './register-request.dto';
 export * from './validate-jwt-request.dto';
 export * from './validate-refresh-jwt-request.dto';
+export * from './change-email-request.dto';
+export * from './change-username-request.dto';
+export * from './change-password-request.dto';
+export * from './create-reset-password-token-request.dto';
+export * from './resend-registration-email-request.dto';

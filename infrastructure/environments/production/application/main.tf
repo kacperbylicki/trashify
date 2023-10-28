@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.32.0"
+      version = "3.54.0"
     }
     azurecaf = {
       source  = "aztfmod/azurecaf"
@@ -162,6 +162,13 @@ module "api-gateway-service" {
   accounts_service_host = module.accounts-service.application_url
   mailing_service_host  = module.mailing-service.application_url
   application_port      = 50000
+}
+
+module "communication-service" {
+  source = "../../../modules/communication-service"
+  app_prefix = var.application_name
+  data_location = var.location
+  resource_group_id = azurerm_resource_group.main.id
 }
 
 module "key-vault" {

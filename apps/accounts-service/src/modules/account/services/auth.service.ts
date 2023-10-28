@@ -88,4 +88,26 @@ export class AuthService {
       };
     }
   }
+
+  public async createResetPasswordToken(): Promise<string> {
+    const token = await this.jwtService.signAsync(
+      {},
+      {
+        secret: this.authConfig.values.accessTokenSecret,
+      },
+    );
+
+    return token;
+  }
+
+  public async createEmailChangeConfirmationToken(): Promise<string> {
+    const token = await this.jwtService.signAsync(
+      {},
+      {
+        secret: this.authConfig.values.accessTokenSecret,
+      },
+    );
+
+    return token;
+  }
 }

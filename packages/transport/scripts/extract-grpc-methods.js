@@ -4,6 +4,7 @@ const { resolve } = require('path');
 
 (async () => {
   console.time('TotalTimeTaken');
+
   const protoFolderPath = resolve(__dirname, '../src/proto');
 
   const saveGrpcMethodsPath = resolve(__dirname, '../src/methods');
@@ -17,7 +18,7 @@ const { resolve } = require('path');
   files = files.filter((fileName) => fileName !== 'index.ts');
 
   for (let i = 0; i < files.length; i++) {
-    console.log('Processing ', files[i], '...')
+    console.log('Processing ', files[i], '...');
     const filePath = resolve(protoFolderPath, files[i]);
     const filesContents = await readFile(filePath);
 
@@ -35,7 +36,7 @@ const { resolve } = require('path');
 
     if (!grpcMethodsArray) continue;
 
-    const grpcMethods = new (class GrpcMethods {})();
+    const grpcMethods = {};
 
     for (const method of grpcMethodsArray) {
       if (method === '') continue;
@@ -55,16 +56,15 @@ const { resolve } = require('path');
     await writeFile(resolve(saveGrpcMethodsPath, `${pbName}-grpc-method.ts`), payload);
   }
 
-  const indexFilePayload = files.map((filePath) => {
-    const pbName = filePath.match(new RegExp(/[A-Z]\w+/, 'gi'))?.[0];
+  const indexFilePayload = files
+    .map((filePath) => {
+      const pbName = filePath.match(new RegExp(/[A-Z]\w+/, 'gi'))?.[0];
 
-    return `export * from "./${pbName}-grpc-method";`
-  }).join('\n');
+      return `export * from "./${pbName}-grpc-method";`;
+    })
+    .join('\n');
 
-  await writeFile(
-    resolve(saveGrpcMethodsPath, 'index.ts'),
-    indexFilePayload,
-  );
+  await writeFile(resolve(saveGrpcMethodsPath, 'index.ts'), indexFilePayload);
 
   const mainIndexPath = resolve(__dirname, '../src', 'index.ts');
 

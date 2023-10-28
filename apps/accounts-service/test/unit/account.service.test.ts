@@ -1,4 +1,5 @@
 import { Account, AccountRepository, AccountService } from '@/modules';
+import { EMAIL_VERIFICATION_FEATURE_FLAG } from '../../src/modules/account/symbols';
 import { GetAccountResponse } from '@trashify/transport';
 import { HttpStatus } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
@@ -10,7 +11,13 @@ describe('AccountService', () => {
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [AccountService],
+      providers: [
+        AccountService,
+        {
+          provide: EMAIL_VERIFICATION_FEATURE_FLAG,
+          useValue: false,
+        },
+      ],
     })
       .useMocker(createMock)
       .compile();
@@ -39,6 +46,7 @@ describe('AccountService', () => {
       const account: Account = {
         uuid,
         email: 'test@test.com',
+        emailConfirmed: true,
         username: 'test',
         password: 'password',
         createdAt: 123,
@@ -74,6 +82,7 @@ describe('AccountService', () => {
       const email = 'test@test.com';
       const account: Account = {
         uuid: '123',
+        emailConfirmed: true,
         email,
         username: 'test',
         password: 'password',
@@ -98,6 +107,7 @@ describe('AccountService', () => {
       const account: Account = {
         uuid: accountId,
         email: 'test@test.com',
+        emailConfirmed: true,
         username: 'test',
         password: 'password',
         createdAt: 123,
