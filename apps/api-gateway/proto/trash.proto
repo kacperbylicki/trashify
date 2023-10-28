@@ -13,19 +13,19 @@ service TrashService {
 
 message Trash {
     string uuid = 1;
-    repeated float location = 2;
+    repeated float geolocation = 2;
     string tag = 3;
 }
 
 message CreateTrashPayload {
-    repeated float location = 1;
+    repeated float geolocation = 1;
     string tag = 2;
 }
 
 message UpdateTrashPayload {
     string uuid = 1;
     optional string tag = 2;
-    repeated float location = 3;
+    repeated float geolocation = 3;
 }
 
 message GetAllTrashRequest {}
