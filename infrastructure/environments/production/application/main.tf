@@ -167,7 +167,6 @@ module "api-gateway-service" {
 module "communication-service" {
   source = "../../../modules/communication-service"
   app_prefix = var.application_name
-  data_location = var.location
   resource_group_id = azurerm_resource_group.main.id
 }
 
