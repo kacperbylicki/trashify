@@ -3,9 +3,10 @@ import { Config } from '@unifig/core';
 import { DatabaseConfig } from './config/database.config';
 import { EnvConfigAdapter } from '@unifig/adapter-env';
 import { HttpExceptionFilter, trashProtobufPackage } from '@trashify/transport';
-import { INestMicroservice, ValidationPipe } from '@nestjs/common';
+import { INestMicroservice, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
+import { ValidationError } from 'class-validator';
 import { join } from 'path';
 import { toJSON } from '@unifig/validation-presenter-json';
 
@@ -34,7 +35,19 @@ import { toJSON } from '@unifig/validation-presenter-json';
     },
   });
 
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+  const logger = new Logger();
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      exceptionFactory: (errors: ValidationError[]): ValidationError[] => {
+        logger.error('New errors in the Validation pipeline: ', undefined, errors);
+
+        return errors;
+      },
+    }),
+  );
   app.useGlobalFilters(new HttpExceptionFilter());
 
   await app.listen();
