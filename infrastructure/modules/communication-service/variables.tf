@@ -1,7 +1,7 @@
 variable "data_location" {
   type        = string
   description = "The Azure region where all resources in this example should be created"
-  default     = "West Europe"
+  default     = "Europe"
 }
 
 variable "app_prefix" {
