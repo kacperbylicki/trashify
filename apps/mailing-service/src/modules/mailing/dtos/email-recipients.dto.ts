@@ -1,26 +1,28 @@
 import { EmailAddressDto } from './email-address.dto';
 import { EmailRecipients } from '@trashify/transport';
-import { IsArray, IsOptional } from 'class-validator';
+import { IsDefined, IsOptional, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class EmailRecipientsDto implements EmailRecipients {
-  @IsArray({
+  @IsDefined()
+  @ValidateNested({
     each: true,
+    always: true,
   })
   @Type(() => EmailAddressDto)
   to!: EmailAddressDto[];
 
-  @IsArray({
+  @IsOptional()
+  @ValidateNested({
     each: true,
   })
   @Type(() => EmailAddressDto)
-  @IsOptional()
   cc!: EmailAddressDto[];
 
-  @IsArray({
+  @IsOptional()
+  @ValidateNested({
     each: true,
   })
   @Type(() => EmailAddressDto)
-  @IsOptional()
   bcc!: EmailAddressDto[];
 }

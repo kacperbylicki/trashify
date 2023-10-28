@@ -34,4 +34,18 @@ export class AppConfig {
   @From('TRASH_SERVICE_URL')
   @IsString()
   trashServiceUrl!: string;
+
+  @From('MAILING_SERVICE_URL')
+  @IsString()
+  mailingServiceUrl!: string;
+
+  @From('API_GATEWAY_URL')
+  @IsString()
+  apiGatewayUrl!: string;
+
+  @From({
+    key: 'EMAILS_FEATURE_FLAG',
+    default: false,
+  })
+  emailsFeatureFlag!: boolean;
 }

@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.32.0"
+      version = "=3.54.0"
     }
 
     azapi = {
@@ -11,7 +11,6 @@ terraform {
     }
   }
 }
-
 resource "azapi_resource" "comm-service" {
   type      = "Microsoft.Communication/communicationServices@2023-04-01-preview"
   name      = "${var.app_prefix}-comm-service"

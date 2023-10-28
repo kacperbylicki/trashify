@@ -1,3 +1,4 @@
+import { API_GATEWAY_URL_TOKEN, EMAILS_FEATURE_FLAG } from '../../src/modules/account/symbols';
 import { AccountController, LoginRequestDto, RegisterRequestDto } from '@/modules';
 import {
   AccountServiceClient,
@@ -7,7 +8,7 @@ import {
   RefreshTokenResponse,
   RegisterResponse,
 } from '@trashify/transport';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { createMock as autoMocker } from '@golevelup/ts-jest';
 
@@ -18,6 +19,20 @@ describe('AccountController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AccountController],
+      providers: [
+        {
+          provide: API_GATEWAY_URL_TOKEN,
+          useFactory: (): string => {
+            return 'dummy-url';
+          },
+        },
+        {
+          provide: EMAILS_FEATURE_FLAG,
+          useFactory: (): boolean => {
+            return false;
+          },
+        },
+      ],
     })
       .useMocker(autoMocker)
       .compile();
@@ -64,37 +79,74 @@ describe('AccountController', () => {
 
     it('should login successfully and return a token', async () => {
       // given
-      const mockResponse: Observable<LoginResponse> = of({
+      const mockResponsePayload = {
         status: 200,
         error: [],
         data: {
           accessToken: 'access_token',
           refreshToken: 'refresh_token',
         },
-      });
+      };
+
+      const mockResponse: Observable<LoginResponse> = of(mockResponsePayload);
       jest.spyOn(client, 'login').mockReturnValueOnce(mockResponse);
 
       // when
       const result = await controller.login(mockRequest);
 
+      const checkPromise = new Promise<void>((resolve, reject) => {
+        result
+          .pipe(
+            map((response) => {
+              try {
+                expect(response).toEqual(mockResponsePayload);
+
+                resolve();
+              } catch (error) {
+                reject(error);
+              }
+            }),
+          )
+          .subscribe();
+      });
+
       // then
-      expect(result).toEqual(mockResponse);
+      await checkPromise;
     });
 
     it('should return an error response when invalid login details are provided', async () => {
       // given
-      const mockResponse: Observable<LoginResponse> = of({
+      const mockResponsePayload = {
         status: 401,
         error: ['unauthorized'],
         data: undefined,
-      });
+      };
+
+      const mockResponse: Observable<LoginResponse> = of(mockResponsePayload);
+
       jest.spyOn(client, 'login').mockReturnValueOnce(mockResponse);
 
       // when
       const result = await controller.login(mockRequest);
 
+      const checkPromise = new Promise<void>((resolve, reject) => {
+        result
+          .pipe(
+            map((value) => {
+              try {
+                expect(value).toEqual(mockResponsePayload);
+
+                resolve();
+              } catch (error) {
+                reject(error);
+              }
+            }),
+          )
+          .subscribe();
+      });
+
       // then
-      expect(result).toEqual(mockResponse);
+      await checkPromise;
     });
   });
 
@@ -109,18 +161,36 @@ describe('AccountController', () => {
 
     it('should create a new account and return success', async () => {
       // given
-      const mockResponse: Observable<RegisterResponse> = of({
+      const mockResponsePayload = {
         status: 200,
         error: [],
         data: undefined,
-      });
+      };
+
+      const mockResponse: Observable<RegisterResponse> = of(mockResponsePayload);
       jest.spyOn(client, 'register').mockReturnValueOnce(mockResponse);
 
       // when
       const result = await controller.register(mockRequest);
 
       // then
-      expect(result).toEqual(mockResponse);
+      const checkPromise = new Promise<void>((resolve, reject) => {
+        result
+          .pipe(
+            map((value) => {
+              try {
+                expect(value).toEqual(mockResponsePayload);
+
+                resolve();
+              } catch (error) {
+                reject(error);
+              }
+            }),
+          )
+          .subscribe();
+      });
+
+      await checkPromise;
     });
 
     it('should return an error response when invalid registration details are provided', async () => {
@@ -129,18 +199,37 @@ describe('AccountController', () => {
         ...mockRequest,
         confirmPassword: 'invalid_password',
       };
-      const mockResponse: Observable<RegisterResponse> = of({
+
+      const mockResponsePayload = {
         status: 400,
         error: ['invalid_password_confirmation'],
         data: undefined,
-      });
+      };
+
+      const mockResponse: Observable<RegisterResponse> = of(mockResponsePayload);
       jest.spyOn(client, 'register').mockReturnValueOnce(mockResponse);
 
       // when
       const result = await controller.register(mockInvalidConfirmPasswordRequest);
 
       // then
-      expect(result).toEqual(mockResponse);
+      const checkPromise = new Promise<void>((resolve, reject) => {
+        result
+          .pipe(
+            map((value) => {
+              try {
+                expect(value).toEqual(mockResponsePayload);
+
+                resolve();
+              } catch (error) {
+                reject(error);
+              }
+            }),
+          )
+          .subscribe();
+      });
+
+      await checkPromise;
     });
   });
 

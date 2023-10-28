@@ -6,3 +6,7 @@ export * from './change-email.dto';
 export * from './change-username.dto';
 export * from './change-password.dto';
 export * from './reset-password.dto';
+export * from './confirm-registration.dto';
+export * from './confirm-new-email.dto';
+export * from './change-password-template.dto';
+export * from './resend-confirmation-email.dto';

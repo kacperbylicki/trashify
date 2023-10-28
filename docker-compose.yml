@@ -5,6 +5,7 @@ networks:
   accounts:
   trash:
   api_gateway:
+  mailing:
 
 services:
   accounts-mongodb:
@@ -71,6 +72,7 @@ services:
       - api_gateway
       - internal_services
       - accounts
+      - mailing
 
   trash-mongodb:
     container_name: trashify-trash-mongodb
@@ -103,7 +105,24 @@ services:
       - internal_services
       - trash
 
+  mailing-service:
+    container_name: trashify-mailing-service
+    build: 
+      context: .
+      dockerfile: ./apps/mailing-service/Dockerfile
+      target: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - internal_services
+      - mailing
+
 volumes:
+  trashify-mailing-service:
   trashify-accounts-mongodb:
   trashify-trash-mongodb:
   api-gateway-cache:

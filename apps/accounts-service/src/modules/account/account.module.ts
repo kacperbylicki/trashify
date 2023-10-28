@@ -1,14 +1,26 @@
-import { Account, AccountSchema, ResetPasswordToken, ResetPasswordTokenSchema } from './entities';
+import {
+  Account,
+  AccountSchema,
+  EmailConfirmationToken,
+  EmailConfirmationTokenSchema,
+  ResetPasswordToken,
+  ResetPasswordTokenSchema,
+} from './entities';
 import { AccountController } from './controllers';
-import { AccountRepository, ResetPasswordTokenRepository } from './repositories';
+import {
+  AccountRepository,
+  EmailConfirmationTokenRepository,
+  ResetPasswordTokenRepository,
+} from './repositories';
 import { AccountService, AuthService } from './services';
-import { AuthConfig } from '@/config';
+import { AppConfig, AuthConfig } from '@/config';
 import { Config } from '@unifig/core';
 import { ConfigModule, getConfigContainerToken } from '@unifig/nest';
+import { EMAIL_VERIFICATION_FEATURE_FLAG } from './symbols';
+import { EmailConfirmationTokenCacheService, ResetPasswordTokenCacheService } from './cache';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ResetPasswordTokenCacheService } from './cache';
 
 export const accountModuleProviders = [
   AccountService,
@@ -17,6 +29,8 @@ export const accountModuleProviders = [
   JwtService,
   ResetPasswordTokenCacheService,
   ResetPasswordTokenRepository,
+  EmailConfirmationTokenRepository,
+  EmailConfirmationTokenCacheService,
 ];
 
 @Module({
@@ -38,9 +52,24 @@ export const accountModuleProviders = [
         name: ResetPasswordToken.name,
         schema: ResetPasswordTokenSchema,
       },
+      {
+        name: EmailConfirmationToken.name,
+        schema: EmailConfirmationTokenSchema,
+      },
     ]),
   ],
   controllers: [AccountController],
-  providers: accountModuleProviders,
+  providers: [
+    ...accountModuleProviders,
+    {
+      provide: EMAIL_VERIFICATION_FEATURE_FLAG,
+      inject: [getConfigContainerToken(AppConfig)],
+      useFactory: (): boolean => {
+        const { emailVerificationFeatureFlag } = Config.getValues(AppConfig);
+
+        return emailVerificationFeatureFlag;
+      },
+    },
+  ],
 })
 export class AccountModule {}

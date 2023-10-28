@@ -58,4 +58,10 @@ export class ResetPasswordTokenRepository {
       createdAt: dayjs().unix(),
     });
   }
+
+  public async delete(accountUuid: string): Promise<void> {
+    await this.resetPasswordTokenModel.deleteOne({
+      accountUuid,
+    });
+  }
 }

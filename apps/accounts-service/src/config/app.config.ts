@@ -9,4 +9,10 @@ export class AppConfig {
   @From('ACCOUNTS_SERVICE_URL')
   @IsString()
   serviceUrl!: string;
+
+  @From({
+    key: 'EMAIL_VERIFICATION_FEATURE_FLAG',
+    default: false,
+  })
+  emailVerificationFeatureFlag!: boolean;
 }

@@ -1,6 +1,6 @@
 import { AzureMailerService } from '../services/azure-mailer.service';
+import { Controller, HttpStatus, Logger, Optional } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { HttpStatus, Injectable, Logger, Optional } from '@nestjs/common';
 import {
   MAILING_SERVICE_NAME,
   MailingServiceController,
@@ -10,7 +10,7 @@ import {
 import { SendEmailRequestDto } from '../dtos';
 import { isMailerExceptionTypeGuard } from '../../../common/type-guards/is-mailer-exception.type-guard';
 
-@Injectable()
+@Controller()
 export class AzureMailerController implements MailingServiceController {
   constructor(
     private readonly azureMailerService: AzureMailerService,
@@ -26,30 +26,27 @@ export class AzureMailerController implements MailingServiceController {
     try {
       const payload = {
         recipients: {
-          to: request.email.recipients.to,
-          cc: request.email.recipients.cc,
-          bcc: request.email.recipients.bcc,
+          to: request.recipients.to,
+          cc: request.recipients.cc,
+          bcc: request.recipients.bcc,
         },
-        senderAddress: request.email.senderAddress,
-        disableUserEngagementTracking: request.email.disableUserEngagementTracking,
-        replyTo: request.email.replyTo,
-        attachments: request.email.attachments,
-        headers: request.email.headers,
+        disableUserEngagementTracking: request.disableUserEngagementTracking,
+        attachments: request.attachments,
       };
 
-      if (request.email.content.html) {
+      if (request.content.html) {
         await this.azureMailerService.sendEmail({
           content: {
-            subject: request.email.content.subject,
-            html: request.email.content.html,
+            subject: request.content.subject,
+            html: request.content.html,
           },
           ...payload,
         });
-      } else if (request.email.content.plainText) {
+      } else if (request.content.plainText) {
         await this.azureMailerService.sendEmail({
           content: {
-            subject: request.email.content.subject,
-            plainText: request.email.content.plainText,
+            subject: request.content.subject,
+            plainText: request.content.plainText,
           },
           ...payload,
         });

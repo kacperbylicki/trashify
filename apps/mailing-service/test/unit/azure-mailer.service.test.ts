@@ -1,5 +1,6 @@
 import { AZURE_MAILER_MODULE_OPTIONS_TOKEN } from '../../src/modules/mailing/configurable-azure-mailer.module';
 import { AzureMailerService } from '../../src/modules';
+import { EMAILS_FEATURE_FLAG } from '../../src/modules/mailing/symbols';
 import { EmailClient, KnownEmailSendStatus } from '@azure/communication-email';
 import { Logger } from '@nestjs/common';
 import { PollerNotStartedException } from '../../src/modules/mailing/exception';
@@ -23,6 +24,10 @@ describe('AzureMailerService', () => {
           useValue: {
             connectionString: 'lalala',
           },
+        },
+        {
+          provide: EMAILS_FEATURE_FLAG,
+          useValue: true,
         },
       ],
     })

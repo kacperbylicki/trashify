@@ -11,28 +11,36 @@ import {
   LoginRequestDto,
   RefreshTokenRequestDto,
   RegisterRequestDto,
+  ResendRegistrationEmailRequestDto,
 } from '../dtos';
 import {
   ChangeEmailResponse,
   ChangePasswordResponse,
   ChangeUsernameResponse,
+  ConfirmNewEmailResponse,
+  ConfirmRegistrationResponse,
   CreateResetPasswordTokenResponse,
   GetAccountResponse,
   LoginResponse,
   LogoutResponse,
   RefreshTokenResponse,
   RegisterResponse,
+  ResendRegistrationConfirmationEmailResponse,
 } from '@trashify/transport';
-import { HttpStatus, Injectable } from '@nestjs/common';
-import { ResetPasswordTokenCacheService } from '../cache';
+import { EMAIL_VERIFICATION_FEATURE_FLAG } from '../symbols';
+import { EmailConfirmationTokenCacheService, ResetPasswordTokenCacheService } from '../cache';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AccountService {
-  constructor(
+  public constructor(
     private readonly authService: AuthService,
     private readonly resetPasswordTokenCacheService: ResetPasswordTokenCacheService,
+    private readonly emailConfirmationTokenCacheService: EmailConfirmationTokenCacheService,
     private readonly accountRepository: AccountRepository,
+    @Inject(EMAIL_VERIFICATION_FEATURE_FLAG)
+    private readonly emailVerificationEnabled: boolean,
   ) {}
 
   async findById(uuid: string): Promise<Account | null> {
@@ -68,6 +76,13 @@ export class AccountService {
       };
     }
 
+    if (!account.emailConfirmed && this.emailVerificationEnabled) {
+      return {
+        status: HttpStatus.UNAUTHORIZED,
+        error: ['Email not confirmed.'],
+      };
+    }
+
     const { accessToken, refreshToken } = await this.authService.createTokensPair(account);
 
     const hashedRefreshToken = await argon2.hash(refreshToken);
@@ -82,6 +97,36 @@ export class AccountService {
         accessToken,
         refreshToken,
       },
+    };
+  }
+
+  async getExistingUser(
+    payload: ResendRegistrationEmailRequestDto,
+  ): Promise<ResendRegistrationConfirmationEmailResponse> {
+    const { email } = payload;
+
+    const user = await this.findByEmail(email);
+
+    if (!user) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['User does not exist.'],
+      };
+    }
+
+    if (user.emailConfirmed) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Email already confirmed.'],
+      };
+    }
+
+    return {
+      status: HttpStatus.OK,
+      email: user.email,
+      username: user.username,
+      uuid: user.uuid,
+      error: [],
     };
   }
 
@@ -108,11 +153,17 @@ export class AccountService {
       password: await argon2.hash(payload.password),
       createdAt: dayjs().unix(),
       updatedAt: dayjs().unix(),
+      emailConfirmed: false,
     };
 
     await this.accountRepository.save(account);
 
-    return { status: HttpStatus.CREATED };
+    return {
+      status: HttpStatus.CREATED,
+      email: account.email,
+      username: account.username,
+      uuid: account.uuid,
+    };
   }
 
   async refreshToken(request: RefreshTokenRequestDto): Promise<RefreshTokenResponse> {
@@ -157,13 +208,65 @@ export class AccountService {
       };
     }
 
-    await this.accountRepository.update(uuid, {
-      email,
-    });
+    let token: string | undefined = undefined;
+
+    if (this.emailVerificationEnabled) {
+      await this.accountRepository.update(uuid, {
+        newEmail: email,
+      });
+
+      token = await this.authService.createEmailChangeConfirmationToken();
+
+      await this.emailConfirmationTokenCacheService.set(token, userExists.uuid);
+    } else {
+      await this.accountRepository.update(uuid, {
+        email,
+      });
+    }
 
     return {
       status: HttpStatus.OK,
       email,
+      error: [],
+      username: userExists.username,
+      token,
+    };
+  }
+
+  public async confirmRegistration(uuid: string): Promise<ConfirmRegistrationResponse> {
+    const account = await this.accountRepository.update(uuid, {
+      emailConfirmed: true,
+    });
+
+    if (!account) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Invalid payload.'],
+      };
+    }
+
+    return {
+      status: HttpStatus.OK,
+      error: [],
+    };
+  }
+
+  public async confirmNewEmail(token: string): Promise<ConfirmNewEmailResponse> {
+    const uuid = await this.emailConfirmationTokenCacheService.get(token);
+
+    if (!uuid) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Invalid token.'],
+      };
+    }
+
+    await this.accountRepository.setNewEmail(uuid);
+
+    await this.emailConfirmationTokenCacheService.delete(token);
+
+    return {
+      status: HttpStatus.OK,
       error: [],
     };
   }
@@ -208,30 +311,19 @@ export class AccountService {
 
     const token = await this.authService.createResetPasswordToken();
 
-    // TODO: Delete upon connecting emails
-    //eslint-disable-next-line
-    console.log(token);
-
     await this.resetPasswordTokenCacheService.set(token, userExists.uuid);
 
     return {
       token: token,
       status: HttpStatus.OK,
       error: [],
+      email: userExists.email,
+      username: userExists.username,
     };
   }
 
   public async changePassword(payload: ChangePasswordRequestDto): Promise<ChangePasswordResponse> {
     const { password, repeatedPassword, token } = payload;
-
-    const userId = await this.resetPasswordTokenCacheService.get(token);
-
-    if (!userId) {
-      return {
-        status: HttpStatus.BAD_REQUEST,
-        error: ['Invalid token.'],
-      };
-    }
 
     const passwordRepeatedCorrectly = password === repeatedPassword;
 
@@ -242,13 +334,26 @@ export class AccountService {
       };
     }
 
-    await this.accountRepository.update(userId, {
-      password,
-    });
+    const userId = await this.resetPasswordTokenCacheService.get(token);
+
+    if (!userId) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Invalid token.'],
+      };
+    }
+
+    const hashedPassword = await argon2.hash(password);
+
+    const account = (await this.accountRepository.update(userId, {
+      password: hashedPassword,
+    })) as Account;
 
     return {
       status: HttpStatus.OK,
       error: [],
+      email: account.email,
+      username: account.username,
     };
   }
 

@@ -36,8 +36,10 @@ export interface CreateResetPasswordTokenRequest {
 
 export interface CreateResetPasswordTokenResponse {
   status: number;
-  token?: string | undefined;
+  token?: string;
   error?: string[];
+  username?: string;
+  email?: string;
 }
 
 export interface ChangePasswordRequest {
@@ -49,6 +51,8 @@ export interface ChangePasswordRequest {
 export interface ChangePasswordResponse {
   status: number;
   error?: string[];
+  username?: string;
+  email?: string;
 }
 
 export interface ChangeUsernameResponse {
@@ -66,6 +70,17 @@ export interface ChangeEmailResponse {
   status: number;
   email: string;
   error?: string[];
+  username?: string;
+  token?: string;
+}
+
+export interface ConfirmNewEmailRequest {
+  token: string;
+}
+
+export interface ConfirmNewEmailResponse {
+  status: number;
+  error: string[];
 }
 
 /** Register */
@@ -79,6 +94,30 @@ export interface RegisterRequest {
 export interface RegisterResponse {
   status: number;
   error?: string[];
+  email?: string;
+  username?: string;
+  uuid?: string;
+}
+
+export interface ResendRegistrationConfirmationEmailRequest {
+  email: string;
+}
+
+export interface ResendRegistrationConfirmationEmailResponse {
+  status: number;
+  error: string[];
+  email?: string;
+  username?: string;
+  uuid?: string;
+}
+
+export interface ConfirmRegistrationRequest {
+  uuid: string;
+}
+
+export interface ConfirmRegistrationResponse {
+  status: number;
+  error: string[];
 }
 
 /** Login */
@@ -152,6 +191,12 @@ export const ACCOUNT_PACKAGE_NAME = 'account';
 export abstract class AccountServiceClient {
   abstract getAccount(request: GetAccountRequest): Observable<GetAccountResponse>;
   abstract register(request: RegisterRequest): Observable<RegisterResponse>;
+  abstract resendRegistrationConfirmationEmail(
+    request: ResendRegistrationConfirmationEmailRequest,
+  ): Observable<ResendRegistrationConfirmationEmailResponse>;
+  abstract confirmRegistration(
+    request: ConfirmRegistrationRequest,
+  ): Observable<ConfirmRegistrationResponse>;
   abstract login(request: LoginRequest): Observable<LoginResponse>;
   abstract validateJwt(request: ValidateJwtRequest): Observable<ValidateJwtResponse>;
   abstract validateRefreshJwt(
@@ -165,6 +210,7 @@ export abstract class AccountServiceClient {
     request: CreateResetPasswordTokenRequest,
   ): Observable<CreateResetPasswordTokenResponse>;
   abstract changePassword(request: ChangePasswordRequest): Observable<ChangePasswordResponse>;
+  abstract confirmNewEmail(request: ConfirmNewEmailRequest): Observable<ConfirmNewEmailResponse>;
 }
 
 export interface AccountServiceController {
@@ -175,6 +221,15 @@ export interface AccountServiceController {
   register(
     request: RegisterRequest,
   ): Promise<RegisterResponse> | Observable<RegisterResponse> | RegisterResponse;
+
+  resendRegistrationConfirmationEmail(
+    request: ResendRegistrationConfirmationEmailRequest,
+  ):
+    | Promise<ResendRegistrationConfirmationEmailResponse>
+    | Observable<ResendRegistrationConfirmationEmailResponse>
+    | ResendRegistrationConfirmationEmailResponse;
+
+  confirmRegistration(request: ConfirmRegistrationRequest): Observable<ConfirmRegistrationResponse>;
 
   login(request: LoginRequest): Promise<LoginResponse> | Observable<LoginResponse> | LoginResponse;
 
@@ -215,6 +270,8 @@ export interface AccountServiceController {
   changeEmail(
     request: ChangeEmailRequest,
   ): Promise<ChangeEmailResponse> | Observable<ChangeEmailResponse> | ChangeEmailResponse;
+
+  confirmNewEmail(request: ConfirmNewEmailRequest): Observable<ConfirmNewEmailResponse>;
 }
 
 export function AccountServiceControllerMethods() {
@@ -222,6 +279,8 @@ export function AccountServiceControllerMethods() {
     const grpcMethods: string[] = [
       'getAccount',
       'register',
+      'resendRegistrationConfirmationEmail',
+      'confirmRegistration',
       'login',
       'validateJwt',
       'validateRefreshJwt',
@@ -231,6 +290,7 @@ export function AccountServiceControllerMethods() {
       'changePassword',
       'changeUsername',
       'changeEmail',
+      'confirmNewEmail',
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
