@@ -11,6 +11,7 @@ import { TrashRawEntity, TrashSchema } from '../../src/modules/trash/entities/tr
 import { TrashRepository } from '../../src/modules/trash/repository/trash.repository';
 import { TrashTags } from '../../src/modules/trash/enums/trash-tags.enum';
 import { TrashUpdateDto } from '../../src/modules/trash/dtos';
+import { getDistance } from 'geolib';
 
 describe('TrashRepository', () => {
   const mongooseTestModule = new MongooseTestModule();
@@ -112,6 +113,77 @@ describe('TrashRepository', () => {
     });
   });
 
+  describe('findInDistance', () => {
+    it('returns objects within a sphere', async () => {
+      await trashModel.deleteMany({});
+
+      const startingLatitude = CoordinatesGenerator.latitude({ precision: 10 });
+
+      const startingLongitude = CoordinatesGenerator.longitude({ precision: 10 });
+
+      const maxDistance = 5000;
+
+      const dummyTrashArray = Array.from({ length: 100 }).map(() =>
+        trashTestFactory.create({
+          geolocation: {
+            type: 'Point',
+            coordinates: CoordinatesGenerator.coordinates({
+              latitudeOptions: {
+                min: startingLatitude - 0.455691,
+                max: startingLatitude + 0.455691,
+                precision: 10,
+              },
+              longitudeOptions: {
+                min: startingLongitude - 0.455691,
+                max: startingLongitude + 0.455691,
+                precision: 10,
+              },
+            }),
+          },
+        }),
+      );
+
+      await trashModel.insertMany(dummyTrashArray);
+
+      /* Wondering What in the flying Hells?
+       * You are in no luck, as I ain't gonna explain this.
+       * If you wanna know more, here you go: https://community.esri.com/t5/coordinate-reference-systems-blog/distance-on-a-sphere-the-haversine-formula/ba-p/902128
+       * ...BUT, as a little bonus, this is not the same model used by Mongo.
+       * They are using something called WGS 84, which the geolib library implements.
+       * Bless Manuel Bieh, author of this library.
+       * :)
+       */
+      const expectedResults = dummyTrashArray
+        .map((trash) => {
+          const [longitude, latitude] = trash.geolocation.coordinates;
+
+          const distanceInMeters = getDistance(
+            {
+              latitude,
+              longitude,
+            },
+            {
+              latitude: startingLatitude,
+              longitude: startingLongitude,
+            },
+          );
+
+          if (distanceInMeters < maxDistance) {
+            return trash;
+          }
+        })
+        .filter(Boolean);
+
+      const foundTrash = await trashRepository.findInDistance({
+        coordinates: [startingLongitude, startingLatitude],
+        maxDistance,
+        minDistance: 0,
+      });
+
+      expect(foundTrash.length).toEqual(expectedResults.length);
+    });
+  });
+
   describe('save', () => {
     it('persists a new Trash - when given TrashDraft', async () => {
       const trashDraft = new TrashDraft({
@@ -182,6 +254,24 @@ describe('TrashRepository', () => {
           reason: 'Entity does not exist.',
         });
       }
+    });
+  });
+
+  describe('delete', () => {
+    it('deletes Trash from db', async () => {
+      const testTrash = trashTestFactory.create();
+
+      await trashModel.insertMany([testTrash]);
+
+      await trashRepository.delete(testTrash.uuid);
+
+      const rawTrash = await trashModel
+        .findOne({
+          uuid: testTrash.uuid,
+        })
+        .lean();
+
+      expect(rawTrash).toBeNull();
     });
   });
 });

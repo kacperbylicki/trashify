@@ -26,6 +26,7 @@ import {
   ResetPasswordTokenCacheService,
 } from '../../src/modules/account/cache';
 import { HttpStatus } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { Model } from 'mongoose';
 import { MongooseModule, getConnectionToken, getModelToken } from '@nestjs/mongoose';
 import { MongooseTestModule, UserDataGenerator } from '@trashify/testing';
@@ -42,9 +43,11 @@ describe('AccountService', () => {
   let accountService: AccountService;
   let accountServiceWithFlagActive: AccountService;
   let accountRepository: AccountRepository;
+  let jwtService: JwtService;
 
   let accountModel: Model<Account>;
   let resetPasswordTokenModel: Model<ResetPasswordToken>;
+  let emailConfirmationTokenModel: Model<EmailConfirmationToken>;
 
   beforeAll(async () => {
     Config.registerSync({
@@ -89,6 +92,10 @@ describe('AccountService', () => {
     resetPasswordTokenModel = moduleRef.get<Model<ResetPasswordToken>>(
       getModelToken(ResetPasswordToken.name),
     );
+    emailConfirmationTokenModel = moduleRef.get<Model<EmailConfirmationToken>>(
+      getModelToken(EmailConfirmationToken.name),
+    );
+    jwtService = moduleRef.get<JwtService>(JwtService);
     accountServiceWithFlagActive = new AccountService(
       moduleRef.get(AuthService),
       moduleRef.get(ResetPasswordTokenCacheService),
@@ -194,6 +201,217 @@ describe('AccountService', () => {
       // then
       expect(response.status).toEqual(HttpStatus.OK);
       expect(response.data).toBeNull();
+    });
+  });
+
+  describe('getExistingUser', () => {
+    it('returns an error - when User does not exist', async () => {
+      const testEmail = UserDataGenerator.email();
+
+      const result = await accountService.getExistingUser({
+        email: testEmail,
+      });
+
+      expect(result.status).toEqual(HttpStatus.BAD_REQUEST);
+      expect(result.error).toEqual(['User does not exist.']);
+    });
+
+    it('returns an error - when User email is confirmed', async () => {
+      const testUser = accountTestFactory.create({
+        emailConfirmed: true,
+      });
+
+      await accountModel.insertMany([testUser]);
+
+      const result = await accountService.getExistingUser({
+        email: testUser.email,
+      });
+
+      expect(result.status).toEqual(HttpStatus.BAD_REQUEST);
+      expect(result.error).toEqual(['Email already confirmed.']);
+    });
+
+    it('returns the requested account', async () => {
+      const testUser = accountTestFactory.create({
+        emailConfirmed: false,
+      });
+
+      await accountModel.insertMany([testUser]);
+
+      const result = await accountService.getExistingUser({
+        email: testUser.email,
+      });
+
+      expect(result).toMatchObject({
+        status: HttpStatus.OK,
+        email: testUser.email,
+        username: testUser.username,
+        uuid: testUser.uuid,
+        error: [],
+      });
+    });
+  });
+
+  describe('confirmRegistration', () => {
+    it('returns an error - when User does not exist', async () => {
+      const testUser = accountTestFactory.create({});
+
+      const result = await accountService.confirmRegistration(testUser.uuid);
+
+      expect(result).toMatchObject({
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Invalid payload.'],
+      });
+    });
+
+    it('returns ok & confirms user email', async () => {
+      const testUser = accountTestFactory.create({
+        emailConfirmed: false,
+      });
+
+      await accountModel.insertMany([testUser]);
+
+      const result = await accountService.confirmRegistration(testUser.uuid);
+
+      expect(result.status).toEqual(HttpStatus.OK);
+
+      const rawAccount = await accountModel
+        .findOne({
+          uuid: testUser.uuid,
+        })
+        .lean();
+
+      expect(rawAccount?.emailConfirmed).toEqual(true);
+    });
+  });
+
+  describe('changePassword', () => {
+    it('returns an error - when password & repeatedPassword are not identical', async () => {
+      const result = await accountService.changePassword({
+        password: 'XDDDD',
+        repeatedPassword: 'XDDDDDDDDDDDDDD',
+        token: 'XD',
+      });
+
+      expect(result).toMatchObject({
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Password is not the same as repeated password.'],
+      });
+    });
+
+    it('returns an error - when given Invalid Token', async () => {
+      const token = jwtService.sign({}, { secret: 'XDDDDD' });
+
+      const result = await accountService.changePassword({
+        password: 'XDDDDDDD',
+        repeatedPassword: 'XDDDDDDD',
+        token,
+      });
+
+      expect(result).toMatchObject({
+        status: HttpStatus.BAD_REQUEST,
+        error: ['Invalid token.'],
+      });
+    });
+
+    it('returns Ok & persists new User password', async () => {
+      const testUser = accountTestFactory.create({});
+      const token = jwtService.sign({}, { secret: 'XDDDDD' });
+
+      await accountModel.insertMany([testUser]);
+      await resetPasswordTokenModel.insertMany([
+        {
+          accountUuid: testUser.uuid,
+          createdAt: dayjs().unix(),
+          token,
+        },
+      ]);
+
+      const pass = UserDataGenerator.password(69);
+
+      const result = await accountService.changePassword({
+        password: pass,
+        repeatedPassword: pass,
+        token,
+      });
+
+      expect(result).toMatchObject({
+        status: HttpStatus.OK,
+        error: [],
+        email: testUser.email,
+        username: testUser.username,
+      });
+    });
+  });
+
+  describe('confirmNewEmail', () => {
+    it('returns an error - when token was not found', async () => {
+      const someUuid = UserDataGenerator.uuid();
+
+      const result = await accountService.confirmNewEmail(someUuid);
+
+      expect(result.status).toEqual(HttpStatus.BAD_REQUEST);
+    });
+
+    it('returns an error - when User has no new Email enqueued', async () => {
+      const testUser = accountTestFactory.create({});
+
+      const dummyToken = jwtService.sign(
+        {},
+        {
+          secret: 'XDDDDDDDDDDDDD',
+        },
+      );
+
+      await emailConfirmationTokenModel.insertMany([
+        {
+          accountUuid: testUser.uuid,
+          createdAt: dayjs().unix(),
+          token: dummyToken,
+        },
+      ]);
+
+      const result = await accountService.confirmNewEmail(dummyToken);
+
+      expect(result).toMatchObject({
+        status: HttpStatus.BAD_REQUEST,
+        error: ['User does not have a new email enqueued.'],
+      });
+    });
+
+    it('returns Ok & updates User email', async () => {
+      await accountModel.deleteMany({});
+      await emailConfirmationTokenModel.deleteMany({});
+
+      const testUser = accountTestFactory.create({
+        email: UserDataGenerator.email(),
+        emailConfirmed: true,
+        newEmail: UserDataGenerator.email(),
+      });
+
+      const dummyToken = jwtService.sign(
+        {},
+        {
+          secret: 'XDDDDDDDDDDDDD',
+        },
+      );
+
+      await accountModel.insertMany([testUser]);
+
+      await emailConfirmationTokenModel.insertMany([
+        {
+          accountUuid: testUser.uuid,
+          createdAt: dayjs().unix(),
+          token: dummyToken,
+        },
+      ]);
+
+      const result = await accountService.confirmNewEmail(dummyToken);
+
+      expect(result).toMatchObject({
+        status: HttpStatus.OK,
+        error: [],
+      });
     });
   });
 
@@ -567,7 +785,14 @@ describe('AccountService', () => {
 
       const rawAccount = await accountModel.findOne({ uuid: accountTryingDuplicate.uuid }).lean();
 
-      expect(rawAccount).toMatchObject(accountTryingDuplicate);
+      expect(rawAccount).toMatchObject({
+        createdAt: accountTryingDuplicate.createdAt,
+        email: accountTryingDuplicate.email,
+        emailConfirmed: accountTryingDuplicate.emailConfirmed,
+        updatedAt: accountTryingDuplicate.updatedAt,
+        username: accountTryingDuplicate.username,
+        uuid: accountTryingDuplicate.uuid,
+      });
     });
 
     it('throws an error - if user does not exist', async () => {
@@ -601,6 +826,7 @@ describe('AccountService', () => {
       expect(rawAccount).toMatchObject({
         ...existingAccount,
         updatedAt: expect.any(Number),
+        newEmail,
       });
     });
   });

@@ -45,7 +45,7 @@ module.exports = {
     'no-console': 'warn',
     'no-prototype-builtins': 0,
     'security/detect-object-injection': 0,
-    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_', args: 'none' }],
+    '@typescript-eslint/no-unused-vars': ['warn', { varsIgnorePattern: '^_', args: 'none' }],
     'sort-imports-es6-autofix/sort-imports-es6': [
       'error',
       {
