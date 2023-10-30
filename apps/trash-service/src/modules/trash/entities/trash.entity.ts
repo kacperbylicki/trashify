@@ -32,7 +32,9 @@ export class TrashRawEntity {
   updatedAt!: number;
 }
 
-export const TrashSchema = SchemaFactory.createForClass(TrashRawEntity);
+export const TrashSchema = SchemaFactory.createForClass(TrashRawEntity).index({
+  geolocation: '2dsphere',
+});
 
 export const TrashModelDefinition: ModelDefinition = {
   name: TrashRawEntity.name,

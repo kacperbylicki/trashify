@@ -9,6 +9,7 @@ export interface CreatePayload {
   uuid?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  newEmail?: string;
 }
 
 export class AccountTestFactory {
@@ -21,6 +22,7 @@ export class AccountTestFactory {
       username = UserDataGenerator.username(),
       uuid = UserDataGenerator.uuid(),
       emailConfirmed = true,
+      newEmail,
     } = payload;
 
     return {
@@ -31,6 +33,7 @@ export class AccountTestFactory {
       updatedAt: updatedAt.getTime(),
       username,
       uuid,
+      newEmail,
     };
   }
 }
