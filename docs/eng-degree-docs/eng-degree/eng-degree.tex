@@ -279,11 +279,7 @@ Każda ścieżka żądania HTTP, dekoratory, haki są traktowane jako wtyczki.
 Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo aplikacji.
 
 \begin{figure}[h]
-<<<<<<< Updated upstream
-    \includegraphics[width=6cm]{../ADG.png}
-=======
     \includegraphics[width=6cm]{./static/ADG.png}
->>>>>>> Stashed changes
     \centering
     \caption{Reprezentacja skierowanego grafu acyklicznego}
     \label{fig:ADG}
@@ -370,11 +366,7 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
 \subparagraph{Testowanie aplikacji\\}
 
 Testowanie aplikacji jest kluczową decyzją dla zespołu programistów.
-<<<<<<< Updated upstream
-Chociaż początkowo może to być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie logiki biznesowej (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności).
-=======
 Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności).
->>>>>>> Stashed changes
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
 \textbf{Jest} -- popularny i pełen wbudowanych funkcjonalności framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące:
@@ -523,11 +515,7 @@ Wady:
 \end{enumerate}
 
 \textbf{Flutter\\}
-<<<<<<< Updated upstream
 Flutter to otwarto-źródłowy framework do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe.
-=======
-Flutter to framework open-source do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe.
->>>>>>> Stashed changes
     
 Zalety:
 \begin{enumerate}[label=--]
@@ -568,7 +556,6 @@ Wady:
 Zdecydowaliśmy się na wykorzystanie natywnego dla systemów iOS języka Swift ze względu na wbudowane wsparcie Machine Learning oraz możliwość użycia Neural Engine na urządzeniach mobilnych.
 
 \textbf{Konsekwencje\\}
-<<<<<<< Updated upstream
 Decyzja o użyciu języka Swifta podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Nasze rozwiązanie będzie dostępne dla urządzeń z systemem IOS. Dzięki wsparciu Machine Learning unikniemy wielu problemów związanych z implementacją rozwiązania.
 
 %Referencje
@@ -576,28 +563,6 @@ Decyzja o użyciu języka Swifta podczas tworzenia aplikacji mobilnej będzie mi
 %Teoria - warum, co, gdzie, z kim?
 
 %Narzędzia - decyzja, dlaczego?
-=======
-Decyzja o użyciu Fluttera podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Nasze rozwiązanie będzie dostępne dla urządzeń z systemem Android i IOS. W tym celu będziemy mogli użyć tylko jednego kodu bez konieczności pisania oddzielnych aplikacji. Dzięki wsparciu CoreML unikniemy wielu problemów związanych z implementacją rozwiązania.
-
-\subsubsection{Infrastruktura aplikacji}
-
-Z uwagi na szeroką ofertę darmowych rozwiązań, zespół zdecydował się na wykorzystanie chmury Microsoft Azure.
-Aplikacja serwerowa oparta jest na mikroserwisach, co pozwala na wysoką skalowalność, przy zachowaniu racjonalnych kosztów. W czasie trwania testów oraz tworzenia aplikacji, zespół w pełni wykorzystał pułap darmowy od Microsoft, dzięki czemu nie poniósł żadnych kosztów.
-
-Diagram rozwiązania prezentuje się następująco:
-% Naprawić pozycjonowanie
-\begin{figure}[h]
-    \centering\includegraphics[width=12cm]{./static/architecture-diagram.png} %TODO: Fix source positioning
-    \caption{Diagram infrastruktury aplikacji serwerowej.\newline Źródło: Opracowanie własne}
-    \label{fig:Diag}
-\end{figure}
-
-% Referencje
-
-% Teoria - warum, co, gdzie, z kim?
-
-% Narzędzia - decyzja, dlaczego?
->>>>>>> Stashed changes
 
 \subsection{Założenia teoretyczne}
 
