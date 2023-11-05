@@ -2,7 +2,9 @@
   "extends": "@trashify/tsconfig/backend-nest.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "dist"
+    "outDir": "dist",
+    "noUnusedParameters": false,
+    "noUnusedLocals": false
   },
   "include": [
     "src/**/*.ts",

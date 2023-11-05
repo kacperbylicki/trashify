@@ -261,7 +261,14 @@ export class AccountService {
       };
     }
 
-    await this.accountRepository.setNewEmail(uuid);
+    const res = await this.accountRepository.setNewEmail(uuid);
+
+    if (!res) {
+      return {
+        status: HttpStatus.BAD_REQUEST,
+        error: ['User does not have a new email enqueued.'],
+      };
+    }
 
     await this.emailConfirmationTokenCacheService.delete(token);
 

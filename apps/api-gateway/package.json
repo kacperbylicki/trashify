@@ -89,5 +89,9 @@
   },
   "ts-jest": {
     "isolatedModules": false
+  },
+  "volta": {
+    "node": "18.17.1",
+    "yarn": "1.22.19"
   }
 }
