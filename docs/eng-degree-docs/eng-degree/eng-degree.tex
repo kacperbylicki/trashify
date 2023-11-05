@@ -35,6 +35,8 @@
 
 \renewcommand\thesection{\Alph{chapter}\arabic{section}}
 
+\addtolength{\topmargin}{-34.91641pt}
+
 \linespread{1.5}
 
 \setlist[itemize]{label=--}
@@ -118,6 +120,7 @@ Jednym z kluczowych aspektów tego wyzwania jest efektywne segregowanie i recykl
     \caption{Poziom recyklingu odpadów komunalnych w krajach Unii Europejskiej.\\Źródło: \cite{eea-municipal}}
 \end{figure}
 
+% TODO: Znaleźć badania na ten temat, zacytować - @kuba
 Jednakże, aby skutecznie promować segregację odpadów i recykling, niezbędne jest zrozumienie ludzkiego zachowania oraz eliminacja "tarcia" związanego ze znalezieniem odpowiedniego pojemnika na odpady. Projekt oferujący łatwy dostęp do informacji o pojemnikach na odpady oraz lokalizacji najbliższego odpowiedniego kontenera usuwa bariery, które często zniechęcają do segregacji. Behawioryka sugeruje, że ludzie są podatni na wpływ norm społecznych i nacisku społeczności lokalnej, co stanowi kolejny argument za promowaniem proekologicznych norm i społecznego zaangażowania.
 
 Niniejsza praca inżynierska skupia się na rozwiązaniu tego wyzwania poprzez wykorzystanie zaawansowanych technologii, takich jak sztuczna inteligencja, uczenie maszynowe, technologie wizyjne oraz geolokalizacja, w celu stworzenia systemu automatycznej klasyfikacji odpadów oraz aplikacji mobilnej, która umożliwia łatwiejsze lokalizowanie pojemników na śmieci w najbliższej okolicy. Naszym celem jest nie tylko zwiększenie efektywności gospodarki odpadami, ale także kształtowanie proekologicznego zachowania i eliminacja barier, które utrudniają segregację odpadów.
@@ -243,10 +246,10 @@ poszczególnych elementów pracy, takich jak:
 \begin{itemize}
     \item Język programowania wykorzystany do projektowania aplikacji;
     \item Framework;
-    \item Testy jednostkowe i integracyjne; % - bla bla, dodam;
-    \item Testy e2e; %- bla bla, dodam;
-    \item Baza danych; %- bla bla, dodam;
-    \item Query Buildery bądź dedykowane ORMy; % Info o tym dlaczego są stosowane
+    \item Testy jednostkowe i integracyjne;
+    \item Testy e2e;
+    \item Baza danych;
+    \item Query Buildery bądź dedykowane ORMy; % todo
 \end{itemize}
 
 \paragraph{Język programowania wykorzystany do projektowania aplikacji serwerowej\\}
@@ -343,7 +346,6 @@ Zespół programistów zdecydował się wybrać REST jako drogę, którą należ
     \item możliwość kontrolowania szczegółowych uprawnień w ramach autoryzacji;
     \item ekspresywne kody statusu odpowiedzi.
 \end{enumerate}
-
 
 Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z następującymi zaletami i wadami:
 
@@ -452,6 +454,7 @@ Transakcje mają specyficzne właściwości, które są reprezentowane przez akr
     \item \textbf{Trwałość (eng. Durability)} - po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
 \end{enumerate}
 
+% TODO: Query Builders vs ORMs
 
 \textbf{Decyzja}\\
 Ponieważ projekt będzie w większości dotyczył przechwytywania i przetwarzania obrazów, jedynym realnym i efektywnym czasowo rozwiązaniem będzie system baz danych NoSQL zorientowany na dokumenty.
@@ -463,9 +466,6 @@ Plusy oraz minusy takiej decyzji są następujące:
     \item zgodność z ACID będzie musiała zostać dokładnie zbadana i wdrożona;
     \item zespół będzie musiał zapoznać się z nową składnią, w zależności od wybranego systemu bazy danych, aby dostosować się do braku znajomości SQL.
 \end{enumerate}
-% Teoria - warum, co, gdzie, z kim?
-
-% Narzędzia - decyzja, dlaczego?
 
 \subsubsection{Aplikacja mobilna}
 
@@ -533,8 +533,7 @@ Wady:
  \item brak w pełni natywnej wydajności w porównaniu do aplikacji napisanych w językach natywnych, takich jak Java lub Kotlin dla Androida i Objective-C lub Swift dla iOS.
 \end{enumerate}
 
-\textbf{Swift\\}
-%TODO: PRZEROBIĆ
+\textbf{Języki natywne\\}
 Programowanie aplikacji mobilnych przy użyciu języków natywnych odnosi się do tworzenia aplikacji przy użyciu języków i narzędzi dostarczanych przez platformę, dla której aplikacja jest tworzona. Na przykład aplikacje na iOS mogą być pisane w języku Swift lub Objective-C, podczas gdy aplikacje na Androida mogą być pisane w języku Kotlin lub Java.
     
 Zalety:
@@ -558,36 +557,29 @@ Zdecydowaliśmy się na wykorzystanie natywnego dla systemów iOS języka Swift 
 \textbf{Konsekwencje\\}
 Decyzja o użyciu języka Swifta podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Nasze rozwiązanie będzie dostępne dla urządzeń z systemem IOS. Dzięki wsparciu Machine Learning unikniemy wielu problemów związanych z implementacją rozwiązania.
 
-%Referencje
-
-%Teoria - warum, co, gdzie, z kim?
-
-%Narzędzia - decyzja, dlaczego?
-
 \subsection{Założenia teoretyczne}
-
+% TODO
 \subsubsection{Model uczenia maszynowego}
-
+% TODO @kacper
 \paragraph{Maszynowe rozpoznawanie obrazów}
-
+% TODO @kacper
 \paragraph{Proces zbierania potrzebnych danych}
-
+% TODO @kacper
 \paragraph{Preprocesowanie danych}
-
+% TODO @kacper
 \paragraph{Dobór kluczowych cech szczególnych}
-
+% TODO @kacper
 \paragraph{Dobór algorytmów uczenia maszynowego}
-
+% TODO @kacper
 \paragraph{Proces nauczania modelu}
-
+% TODO @kacper
 \paragraph{Ewaluacja modelu}
-
+% TODO @kacper
 \subsection{Opis sytuacji faktycznej}
-
+% TODO cały zespół
 \subsection{Badania empiryczne/Inne}
-
+% TODO cały zespół
 \section{Zadania w projekcie}
-
 
 \newpage
 
