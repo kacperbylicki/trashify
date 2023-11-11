@@ -1,5 +1,5 @@
 # Builder stage
-FROM --platform=$BUILDPLATFORM node:lts-alpine AS builder
+FROM --platform=$BUILDPLATFORM node:18-alpine AS builder
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
@@ -11,7 +11,7 @@ COPY . .
 RUN turbo prune --scope=@trashify/trash-service --docker
 
 # Development Installer stage
-FROM --platform=$BUILDPLATFORM node:lts-alpine AS development-installer
+FROM --platform=$BUILDPLATFORM node:18-alpine AS development-installer
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
@@ -24,7 +24,7 @@ COPY --from=builder /app/turbo.json ./turbo.json
 RUN yarn install --frozen-lockfile
 
 # Production Installer stage
-FROM --platform=$BUILDPLATFORM node:lts-alpine AS production-installer
+FROM --platform=$BUILDPLATFORM node:18-alpine AS production-installer
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
@@ -38,7 +38,7 @@ COPY --from=builder /app/out/json/.npmrc ./.npmrc
 RUN yarn install --production
 
 # Sourcer stage
-FROM --platform=$BUILDPLATFORM node:lts-alpine AS sourcer
+FROM --platform=$BUILDPLATFORM node:18-alpine AS sourcer
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
@@ -50,7 +50,7 @@ COPY --from=builder /app/out/full/ .
 RUN yarn turbo run build --scope=@trashify/trash-service --include-dependencies --no-deps
 
 # Development stage
-FROM --platform=$BUILDPLATFORM node:lts-alpine AS development
+FROM --platform=$BUILDPLATFORM node:18-alpine AS development
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
@@ -63,7 +63,7 @@ WORKDIR /app/apps/trash-service/
 ENTRYPOINT ["yarn", "start:dev"]
 
 # Production stage
-FROM --platform=$BUILDPLATFORM node:lts-alpine AS production
+FROM --platform=$BUILDPLATFORM node:18-alpine AS production
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 

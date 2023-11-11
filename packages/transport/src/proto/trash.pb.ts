@@ -16,7 +16,8 @@ export interface Trash {
     | 'paper'
     | 'petFeces'
     | 'plastic'
-    | 'toners';
+    | 'toners'
+    | 'glass';
 }
 
 export interface CreateTrashPayload {
