@@ -164,6 +164,8 @@ module "api-gateway-service" {
   application_port      = 50000
 }
 
+# TODO: Add trash-service module & microservice
+
 module "communication-service" {
   source = "../../../modules/communication-service"
   app_prefix = var.application_name
