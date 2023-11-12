@@ -342,6 +342,7 @@ REST to akronim REpresentational State Transfer\footnote{Rozdział 5; Roy Thomas
 \textbf{Decyzja}\\
 Zespół programistów zdecydował się wybrać REST jako abstrakcyjny interfejs aplikacji serwerowej, ze względu na:
 \begin{enumerate}[label=--]
+    % TODO: Znaleźć źródło @kuba
     \item ustalone normy i dużą społeczność ekspertów, od których można się uczyć;
     \item możliwość łatwego przesyłania plików, co będzie kluczowe w kontekście tej aplikacji;
     \item różnorodność dostępnych formatów wyjściowych; \footnote{Dane za stroną internetową \url{https://www.rfc-editor.org/rfc/rfc9110#field.content-type} (dostęp: 12.11.2023 r.)}
@@ -561,23 +562,163 @@ Zdecydowaliśmy się na wykorzystanie natywnego dla systemów iOS języka Swift 
 Decyzja o użyciu języka Swifta podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Nasze rozwiązanie będzie dostępne dla urządzeń z systemem IOS. Dzięki wsparciu Machine Learning unikniemy wielu problemów związanych z implementacją rozwiązania.
 
 \subsection{Założenia teoretyczne}
-% TODO
 \subsubsection{Model uczenia maszynowego}
-% TODO @kacper
-\paragraph{Maszynowe rozpoznawanie obrazów}
-% TODO @kacper
-\paragraph{Proces zbierania potrzebnych danych}
-% TODO @kacper
-\paragraph{Preprocesowanie danych}
-% TODO @kacper
-\paragraph{Dobór kluczowych cech szczególnych}
-% TODO @kacper
-\paragraph{Dobór algorytmów uczenia maszynowego}
-% TODO @kacper
-\paragraph{Proces nauczania modelu}
-% TODO @kacper
-\paragraph{Ewaluacja modelu}
-% TODO @kacper
+%1. Architektura Modelu:
+\textbf{Architektura Modelu\\}
+Model opiera się na architekturze wykorzystującej głębokie sieci neuronowe.
+Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CNN), które są skuteczne w zadaniach przetwarzania obrazów.
+Wytrenowano warstwy konwolucyjne do ekstrakcji hierarchicznych cech z obrazów, a następnie zastosowano warstwy gęste do klasyfikacji.
+
+%2. Parametry Modelu:
+\textbf{Parametry modelu:}
+\begin{enumerate}[label=--]
+    \item liczba warstw konwolucyjnych: [X] warstw;
+    \item liczba warstw gęstych: [Y] warstw;
+    \item rozmiar filtrów konwolucyjnych: [Z] x [Z];
+    \item funkcja aktywacji: ReLU (Rectified Linear Unit);
+    \item funkcja aktywacji na wyjściu: softmax (dla wieloklasowej klasyfikacji);
+    \item liczba neuronów na warstwie gęstej: [N];
+    \item rozmiar batcha: [B].
+\end{enumerate}
+
+%3. Proces Nauczania Modelu:
+Model został wytrenowany na zbiorze treningowym składającym się z 5000 obrazów, z podziałem 80/20 na zbiory treningowy i walidacyjny.
+Proces nauczania obejmował 1000 iteracji.
+Użyto algorytmu optymalizacyjnego SGD (eng. Stochastic Gradient Descent), w celu minimalizacji funkcji kosztu.
+W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby uniknąć przetrenowania modelu.
+
+%4. Ewaluacja Modelu:
+\textbf{Ewaluacja modelu\\}
+Model został oceniony na zbiorze testowym, a osiągnięte accuracy wyniosło 68\%. 
+Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz F1-score, aby dostarczyć kompleksowej oceny skuteczności modelu.
+
+%5. Użyte Technologie:
+\textbf{Użyte technologie\\}
+Do implementacji modelu wykorzystano technologie takie jak CoreML i Create ML, a jako ekstraktor cech użyto ,,Image Feature Print V2``. 
+Te technologie umożliwiają efektywną implementację modelu na platformach Apple.
+
+\paragraph{Preprocesowanie danych\\}
+%1. Normalizacja Danych:
+\textbf{Normalizacja danych\\}
+Pierwszym krokiem preprocesowania danych było dostosowanie skali pikseli obrazów.
+Zastosowano normalizację, aby wartości pikseli znajdowały się w zakresie od 0 do 1.
+To pozwala na lepszą zbieżność w procesie uczenia i minimalizuje wpływ wartości odstających.
+
+%2. Przycinanie i Zmiana Rozmiaru:
+Obrazy zostały poddane przycinaniu i zmianie rozmiaru, aby dostosować je do jednolitego formatu wejściowego modelu.
+To kroki mające na celu unifikację danych wejściowych, co ułatwia proces uczenia.
+
+%3. Usuwanie Zniekształceń:
+Aby zapobiec wprowadzeniu zniekształceń, które nie mają istotnego znaczenia dla rozpoznawania obrazów, zastosowano techniki usuwania szumów i filtry wygładzające.
+Działa to zarówno na korzyść procesu uczenia, jak i na efektywność modelu.
+
+%4. Konwersja Do Formatu Wejściowego Modelu:
+Model wymagał, aby dane były w odpowiednim formacie, który umożliwiają technologie takie jak CoreML efektywne przetwarzanie.
+Zastosowano konwersję obrazów do formatu zgodnego z wymaganiami modelu.
+
+%5. Etykietowanie Danych:
+Ważnym krokiem było przypisanie etykiet do obrazów, co umożliwiło modelowi uczenie się odnośnie do różnych klas obiektów.
+Etykiety były integralną częścią zbioru danych treningowych.
+
+%6. Augmentacja Danych:
+W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności generalizacji modelu, zastosowano techniki augmentacji danych, takie jak obracanie, odbijanie lustrzane czy zmiana jasności.
+
+\paragraph{Dobór kluczowych cech szczególnych\\}
+%1. Wykorzystanie Ekstraktora Cech "Image Feature Print V2":
+\textbf{Ekstraktor cech\\}
+W ramach tej pracy inżynierskiej zdecydowano się na skorzystanie z "Image Feature Print V2" jako ekstraktora cech.
+Ten ekstraktor pozwala na automatyczne wydobycie istotnych cech z obrazów, co jest szczególnie ważne w kontekście uczenia maszynowego.
+
+%2. Analiza Hierarchii Cech:
+Przed rozpoczęciem procesu uczenia modelu, przeprowadzono analizę hierarchii cech w ramach ekstraktora.
+Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zaczynając od prostych, takich jak krawędzie, a kończąc na bardziej abstrakcyjnych, reprezentujących bardziej złożone struktury.
+
+%3. Selekcja Istotnych Regionów:
+Dobór kluczowych cech obejmował także selekcję istotnych regionów na obrazach.
+Zidentyfikowano obszary, które są szczególnie ważne dla rozpoznawania określonych klas obiektów.
+To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu.
+
+%4. Redukcja Wymiarowości:
+W celu efektywnego przetwarzania danych, zastosowano techniki redukcji wymiarowości, takie jak PCA (Principal Component Analysis).
+Pozwoliło to na zachowanie istotnych informacji przy jednoczesnej redukcji liczby cech, co było szczególnie korzystne dla wydajności modelu.
+
+%5. Ocena Wpływu Cech na Model:
+Przeprowadzono analizę wpływu poszczególnych cech na skuteczność modelu.
+Cechy, które nie przynosiły znaczącego wkładu w proces rozpoznawania, były poddawane selekcji lub odrzucane, co pozwalało na zoptymalizowanie zestawu cech.
+
+%6. Adaptacja do Specyfiki Problemu:
+Dobór cech był dostosowany do specyfiki problemu rozpoznawania obrazów.
+Na przykład, w przypadku konkretnego zadania, kluczowe mogą być kształty, tekstury lub charakterystyczne punkty na obiektach.
+
+%7. Ocena Stabilności Cech:
+Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilności. Stabilne cechy mają tendencję do lepszego generalizowania się na nowe dane, co wpływa na zdolność modelu do skutecznego rozpoznawania obrazów spoza zbioru treningowego.
+
+\paragraph{Dobór algorytmów uczenia maszynowego\\}
+%1. Analiza Zadania i Danych:
+Przed dokonaniem wyboru algorytmów, dokonano analizy samego zadania rozpoznawania obrazów oraz charakterystyki zbioru danych.
+Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności.
+
+%2. Wybór Algorytmów Konwolucyjnych:
+Ze względu na specyfikę zadania rozpoznawania obrazów, zdecydowano się na wykorzystanie algorytmów konwolucyjnych (CNN).
+Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych.
+
+%3. Wykorzystanie CoreML i Create ML:
+Zdecydowano się na technologie takie jak CoreML i Create ML, które są zoptymalizowane pod kątem platform Apple.
+Umożliwiają one skuteczne implementowanie modeli opartych na algorytmach CNN na urządzeniach mobilnych.
+
+%4. Zastosowanie Feature Extractora "Image Feature Print V2":
+Feature Extractor "Image Feature Print V2" został użyty do automatycznego wydobycia kluczowych cech z obrazów.
+Jego wybór był związany z założeniem, że odpowiednie cechy istotnie wpłyną na skuteczność modelu.
+
+%5. Tunele Hiperparametru:
+Przeprowadzono proces tuneowania hiperparametrów, takich jak współczynniki uczenia, liczba warstw konwolucyjnych, liczba neuronów w warstwach gęstych itp.
+Optymalizacja hiperparametrów była kluczowym elementem w dostosowaniu modelu do konkretnego zadania.
+
+%6. Ocena Algorytmów Klasyfikacyjnych:
+W ramach analizy wydajności algorytmów, dokonano oceny różnych modeli klasyfikacyjnych dostępnych w bibliotekach machine learning.
+Oceniano ich zdolność do radzenia sobie z danymi treningowymi i walidacyjnymi oraz ich skuteczność w rozpoznawaniu różnych klas.
+
+%7. Rozważanie Wersji Ensemble:
+Rozważono również użycie technik Ensemble, takich jak połączenie wielu modeli w celu poprawy ogólnej skuteczności.
+Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów.
+
+%8. Analiza Wydajności na Platformie Apple:
+Ponieważ model miał być implementowany na platformie Apple, uwzględniono specyfiki tego środowiska.
+Sprawdzono, czy wybrane algorytmy i technologie są zoptymalizowane pod kątem wydajności na urządzeniach 
+mobilnych.
+
+\paragraph{Proces nauczania modelu\\}
+%1. Podział Danych:
+Zbiór danych został podzielony na zbiór treningowy i zbiór walidacyjny w proporcji 80/20.
+Zbiór treningowy posłużył do nauczania modelu, podczas gdy zbiór walidacyjny był wykorzystywany do monitorowania jego skuteczności na danych nieuczonych.
+
+%2. Inicjalizacja Modelu:
+Model został zainicjowany zgodnie z wybraną architekturą. W przypadku algorytmów konwolucyjnych, wagi są zazwyczaj losowo inicjowane, a następnie dostosowywane w trakcie procesu uczenia.
+
+%3. Definicja Funkcji Kosztu:
+Funkcja kosztu została zdefiniowana, oceniając różnicę między prognozami modelu a rzeczywistymi etykietami w zbiorze treningowym.
+Wartość tej funkcji jest minimalizowana w trakcie procesu optymalizacji.
+
+%4. Wybór Algorytmu Optymalizacyjnego:
+Algorytm optymalizacyjny, tak jak SGD (Stochastic Gradient Descent), został wybrany do minimalizacji funkcji kosztu.
+Dobór współczynnika uczenia był przedmiotem optymalizacji, aby zapewnić szybkie, ale stabilne dostosowanie wag modelu.
+
+%5. Przeprowadzenie Iteracji:
+Proces uczenia składał się z iteracji, gdzie dla każdego batcha danych model aktualizował wagi, aby lepiej dopasować się do charakterystyki zbioru treningowego.
+Liczba iteracji była ustalona na 1000, co pozwalało na wystarczającą liczbę aktualizacji.
+
+%6. Techniki Regularyzacji:
+Zastosowano techniki regularyzacji, takie jak dropout, które pomagały w zapobieganiu przetrenowaniu modelu.
+Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co poprawia zdolność generalizacji modelu.
+
+%7. Monitorowanie Skuteczności:
+Podczas procesu nauczania monitorowano skuteczność modelu na zbiorze walidacyjnym.
+Oceniano miary takie jak accuracy, precyzja, recall i F1-score.
+To pozwalało na ocenę, czy model generalizuje się dobrze na nowe dane.
+
+%8. Ewaluacja i Optymalizacja:
+Po zakończeniu procesu nauczania, model został oceniony na zbiorze testowym. Analizowano wyniki, identyfikując obszary poprawy.
+Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacji modelu.
 \subsection{Opis sytuacji faktycznej}
 % TODO cały zespół
 \subsection{Badania empiryczne/Inne}
@@ -660,7 +801,6 @@ Decyzja o użyciu języka Swifta podczas tworzenia aplikacji mobilnej będzie mi
     \bibitem{architectural-styles-and-design} Roy Thomas Fielding, "Architectural Styles and the Design of Network-based Software Architectures," 2000, \url{https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm}. (dostęp
     12.11.2023r.).
     \bibitem{migrating-to-graphql} Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019. \url{https://ieeexplore-ieee-org.proxy.lnu.se/document/8667986}. (dostęp: 12.11.2023r.)
-    \bibitem{representational-state-transfer} Robert Richards, Pro PHP XML and Web Services, Apress, Berkley, CA, 2006r.
     \bibitem{rfc-standards} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}
     \bibitem{authorization-rest-web-services} Bojan Suzic, Bernd Prünster, Dominik Ziegler, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.
     \end{thebibliography}
