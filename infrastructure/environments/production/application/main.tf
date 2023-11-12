@@ -67,6 +67,38 @@ resource "azurerm_service_plan" "application" {
   }
 }
 
+module "trash-service-application-insights" {
+  source = "../../../modules/application-insights"
+  resource_group = azurerm_resource_group.main.name
+  application_name = "${var.application_name}-trash-service"
+  environment = var.environment
+  location = var.location
+}
+
+module "trash-service" {
+  source                      = "../../../modules/app-service"
+  resource_group              = azurerm_resource_group.main
+  application_name            = "${var.application_name}-trash-service"
+  environment                 = var.environment
+  location                    = var.location
+  service_plan_application_id = azurerm_service_plan.application.id
+
+  docker_registry_name            = module.container-registry.container_registry_name
+  docker_registry_server_url      = "https://${module.container-registry.container_registry_login_server}"
+  docker_registry_server_username = module.container-registry.container_registry_admin_username
+  docker_registry_server_password = module.container-registry.container_registry_admin_password
+
+  azure_application_insights_instrumentation_key = module.trash-service-application-insights.azure_application_insights_instrumentation_key
+
+  vault_id = module.key-vault.vault_id
+
+  azure_cosmosdb_mongodb_accounts_database = module.cosmosdb-mongodb.azure_cosmosdb_mongodb_database
+  azure_cosmosdb_mongodb_accounts_uri      = "@Microsoft.KeyVault(SecretUri=${module.key-vault.vault_uri}secrets/cosmosdb-mongodb-uri)"
+
+  application_port = 50003
+}
+
+
 module "mailing-service-application-insights" {
   source           = "../../../modules/application-insights"
   resource_group   = azurerm_resource_group.main.name
@@ -167,8 +199,8 @@ module "api-gateway-service" {
 # TODO: Add trash-service module & microservice
 
 module "communication-service" {
-  source = "../../../modules/communication-service"
-  app_prefix = var.application_name
+  source            = "../../../modules/communication-service"
+  app_prefix        = var.application_name
   resource_group_id = azurerm_resource_group.main.id
 }
 
