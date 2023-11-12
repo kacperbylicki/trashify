@@ -8,6 +8,7 @@ export const TrashTags = {
   petFeces: 'petFeces',
   plastic: 'plastic',
   toners: 'toners',
+  glass: 'glass',
 } as const;
 
 export type TrashTagsEnum = keyof typeof TrashTags;
