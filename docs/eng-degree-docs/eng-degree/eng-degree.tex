@@ -111,9 +111,9 @@
 
 % Example table and figure formatting
 \section{Wprowadzenie}
-W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń - rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \cite[s. 149]{gus}.
+W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń - rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \footnote{s. 149 Ochrona środowiska 2022 - }.
 
-Jednym z kluczowych aspektów tego wyzwania jest efektywne segregowanie i recykling odpadów, co przyczynia się nie tylko do ochrony środowiska naturalnego, ale także do potencjalnych oszczędności. Jak podaje EEA (Europejska Agencja Ochrony Środowiska), na obywatela Unii Europejskiej przypada średnio 4,8 ton odpadów komunalnych, z czego 49\% jest recyklingowanych \cite{eea-waste}. Recykling może przynieść znaczące korzyści gospodarcze i środowiskowe, w tym zmniejszenie emisji gazów cieplarnianych, ograniczenie zużycia surowców naturalnych oraz tworzenie miejsc pracy. W samej Polsce, między latami 2004 i 2020, procent recyklingu odpadów komunalnych wzrósł z poziomu 4,9 do 38.7\%.
+Jednym z kluczowych aspektów tego wyzwania jest efektywne segregowanie i recykling odpadów, co przyczynia się nie tylko do ochrony środowiska naturalnego, ale także do potencjalnych oszczędności. Jak podaje EEA (Europejska Agencja Ochrony Środowiska), na obywatela Unii Europejskiej przypada średnio 4,8 ton odpadów komunalnych, z czego 49\% jest recyklingowanych \footnote{European Environment Agency}. Recykling może przynieść znaczące korzyści gospodarcze i środowiskowe, w tym zmniejszenie emisji gazów cieplarnianych, ograniczenie zużycia surowców naturalnych oraz tworzenie miejsc pracy. W samej Polsce, między latami 2004 i 2020, procent recyklingu odpadów komunalnych wzrósł z poziomu 4,9 do 38.7\%.
 
 \begin{figure}[h]
     \centering\includegraphics[width=12cm]{./static/Municipal waste recycling rates in Europe by country.png}
@@ -171,11 +171,11 @@ Celem nadrzędnym jest stworzenie aplikacji mobilnej, która będzie pomagać u�
 Cele podrzędne:
 \begin{itemize}
     \item analiza dostępnych zbiorów danych: analiza zbiorów danych dostępnych w Internecie, które mogą posłużyć do treningu i testowania modelu rozpoznawania pojemników na odpady;
-    \item wybór odpowiednich algorytmów uczenia maszynowego: wybór algorytmów uczenia maszynowego, które będą najlepiej nadawały się do rozpoznawania pojemników na odpady na podstawie zdjęć;
-    \item przygotowanie zbiorów danych: przygotowanie zbiorów danych do treningu modelu rozpoznawania pojemników na odpady;
-    \item implementacja i trening modelu: implementacja i trening modelu rozpoznawania pojemników na odpady;
-    \item ocena skuteczności modelu: ocena skuteczności modelu rozpoznawania pojemników na odpady;
-    \item analiza cech obrazów: analiza cech obrazów odpowiadających za skuteczność procesu rozpoznawania pojemników na odpady;
+    \item wybór odpowiednich algorytmów uczenia maszynowego najlepiej nadających się do rozpoznawania pojemników na odpady na podstawie zdjęć;
+    \item przygotowanie zbiorów danych do treningu modelu rozpoznawania pojemników na odpady;
+    \item implementacja i trening modelu rozpoznawania pojemników na odpady;
+    \item ocena skuteczności modelu rozpoznawania pojemników na odpady;
+    \item analiza cech obrazów odpowiadających za skuteczność procesu rozpoznawania pojemników na odpady;
     \item określenie, które cechy obrazów mają największy wpływ na skuteczność procesu rozpoznawania i jak można je wykorzystać do dalszej optymalizacji modelu.
 \end{itemize}
 
@@ -232,7 +232,7 @@ Cele podrzędne:
 
 Na etapie planowania pracy projektowej kluczowym jest dobranie odpowiednich narzędzi
 do poszczególnych elementów aplikacji. Z tego względu zespół zdecydował się na stworzenie
-dokumentacji decyzji architektonicznych, w których opisano decyzję, plusy oraz minusy wybranch rozwiązań.
+dokumentacji decyzji architektonicznych, w których opisano decyzję, plusy oraz minusy wybranch rozwiązań. \footnote{s. 48; Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.}
 
 \subsubsection{Aplikacja serwerowa}
 
@@ -245,7 +245,7 @@ Przy projektowaniu aplikacji kluczowym było dobranie odpowiednich narzędzi do
 poszczególnych elementów pracy, takich jak:
 \begin{itemize}
     \item Język programowania wykorzystany do projektowania aplikacji;
-    \item Framework;
+    \item Framework serwerowy;
     \item Testy jednostkowe i integracyjne;
     \item Testy e2e;
     \item Baza danych;
@@ -263,7 +263,7 @@ silniku V8 stworzonym przez firmę Google LLC.
 \paragraph{Dobór frameworka aplikacji serwerowej}
 \subparagraph{Framework serwerowy\\}
 
-Framework jest zestawem dopasowanych narzędzi do stworzenia konkretnego rozwiązania.
+Framework jest zestawem dopasowanych narzędzi do stworzenia konkretnego rozwiązania.\footnote{s. 1; Server-Centric Web Frameworks: An Overview; Iwan Vosloo and Derrick G. Kourie, University of Pretoria, ACM Computing Surveys, Vol. 40, No. 2, Artykuł 4, 2008r.}
 W przestrzeni środowiska Node.js na przestrzeni lat pojawiło się ich wiele, bardziej i
 mniej znanych. Przypatrzyliśmy się trzem najbardziej popularnym i na bieżąco wspieranym
 rozwiązaniom.
@@ -272,7 +272,7 @@ rozwiązaniom.
 Jest on dojrzałym, niezwykle lubianym przez społeczność rozwiązaniem, oferującym
 minimalistyczny interfejs, bezstronny względem wzorców projektowych. Posiada bogaty ekosystem
 oprogramowań pośredniczących tworzonych i wspieranych przez społeczność.
-Jest on pobierany średnio 13 milionów razy w tygodniu, co czyni go liderem w popularności.
+Jest on pobierany średnio 30 milionów razy w tygodniu \footnote{Dane za stroną internetową (dostęp: 12.11.2023r.) \url{https://www.npmjs.com/package/express}}, co czyni go liderem w popularności.
 
 \textbf{Fastify} -- framework zainspirowany Express oraz Hapi. Tak jak w przypadku Expressa,
 jest on minimalistyczny, jednakże wprowadza kilka usprawnień oraz rozszerzeń do
@@ -320,31 +320,33 @@ Plusy oraz minusy takiej decyzji są następujące:
 \end{itemize}
 
 \paragraph{Architektura interfejsu programistycznego aplikacji}
-\subparagraph{Framework serwerowy\\}
+\subparagraph{Interfejs aplikacji\\}
 Zaprojektowanie interfejsu API, który będzie responsywny zarówno na urządzeniach mobilnych, jak i w sieci, jest wyzwaniem ze względu na nadmierne oraz niedostateczne pobieranie danych i potencjalne wykonywanie wielu żądań  do serwera na urządzeniu mobilnym. W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL zamiast tradycyjnego RESTful API.
 
 \textbf{GraphQL}\\
-Jest językiem zapytań oraz środowiskiem wykonawczym do interakcji z danymi w aplikacjach opracowanym przez Facebooka (obecnie Meta), którego celem jest ograniczenie nadmiernego i niedostatecznego pobierania danych. Został zaprojektowany z myślą o urządzeniach mobilnych, biorąc pod uwagę ich niską prędkość, pamięć masową i drogie żądania internetowe.
+Jest językiem zapytań oraz środowiskiem wykonawczym do interakcji z danymi w aplikacjach opracowanym przez Facebooka (obecnie Meta), którego celem jest ograniczenie nadmiernego i niedostatecznego pobierania danych \footnote{S. 140; Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019. \url{https://ieeexplore-ieee-org.proxy.lnu.se/document/8667986}. (dostęp: 12.11.2023r.)}. Został zaprojektowany z myślą o urządzeniach mobilnych, biorąc pod uwagę ich niską prędkość, pamięć masową i drogie żądania internetowe.
 W tym języku zapytań wszystkie żądania są wysyłane do pojedynczego punktu końcowego, a wykres danych, zwykle w formacie json, jest analizowany. Następnie zapytania są oceniane i stosowane są odpowiednie zapytania i mutacje.
 
 Składa się on z głównych trzech części:
 \begin{enumerate}
-    \item Zapytań (Queries): Służą do pobierania danych z serwera. Klient definiuje, jakie informacje potrzebuje, a serwer dostarcza tylko te dane.
-    \item Mutacji (Mutations): Pozwalają na modyfikację danych na serwerze, takie jak dodawanie, aktualizowanie lub usuwanie rekordów.
-    \item Typów (Types): GraphQL definiuje struktury typów danych i relacje między nimi, co umożliwia klientowi zrozumienie, jakie dane mogą być dostępne i jakie zapytania można wykonywać.
+    \item Zapytań (Queries): Służą do pobierania danych z serwera. Klient definiuje, jakie informacje potrzebuje, a serwer dostarcza tylko te dane. \footnote{Dane za stroną internetową: \url{https://graphql.org/learn/queries/}, Rozdział ,,Queries and Mutations`` (dostęp: 12.11.2023r.)}
+    \item Mutacji (Mutations): Pozwalają na modyfikację danych na serwerze, takie jak dodawanie, aktualizowanie lub usuwanie rekordów. \footnote{Dane za stroną internetową: \url{https://graphql.org/learn/queries/}, Rozdział ,,Queries and Mutations`` (dostęp: 12.11.2023r.)}
+    \item Typów (Types): GraphQL definiuje struktury typów danych i relacje między nimi, co umożliwia klientowi zrozumienie, jakie dane mogą być dostępne i jakie zapytania można wykonywać.\footnote{Dane za stroną internetową: \url{https://graphql.org/learn/schema/}, Rozdział ,,Schemas and Types`` (dostęp: 12.11.2023r.)}
 \end{enumerate}
 
 \textbf{REST}\\
-REST to akronim REpresentational State Transfer  i styl architektoniczny dla rozproszonych systemów hipermedialnych. Sam w sobie jest wzorcem architektonicznym, który zakłada rozdzielenie odpowiedzialności między zapytaniami (GET), mutacjami (POST, PATCH, PUT) i metodami usuwania (DELETE). Został on przetestowany w boju od 2000 roku i został szeroko przyjęty w społeczności programistów.
+REST to akronim REpresentational State Transfer\footnote{Rozdział 5; Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000, Wydanie online. dostępne pod adresem:
+\url{https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm}. (dostęp
+12.11.2023r.)} i styl architektoniczny dla rozproszonych systemów hipermedialnych. Sam w sobie jest wzorcem architektonicznym, który zakłada rozdzielenie odpowiedzialności między zapytaniami (GET), mutacjami (POST, PATCH, PUT) i metodami usuwania (DELETE). Został on przetestowany w boju od 2000 roku i szeroko przyjęty w społeczności programistów.
 
 \textbf{Decyzja}\\
-Zespół programistów zdecydował się wybrać REST jako drogę, którą należy podążać ze względu na:
+Zespół programistów zdecydował się wybrać REST jako abstrakcyjny interfejs aplikacji serwerowej, ze względu na:
 \begin{enumerate}[label=--]
     \item ustalone normy i dużą społeczność ekspertów, od których można się uczyć;
     \item możliwość łatwego przesyłania plików, co będzie kluczowe w kontekście tej aplikacji;
-    \item różnorodność dostępnych formatów wyjściowych;
-    \item możliwość kontrolowania szczegółowych uprawnień w ramach autoryzacji;
-    \item ekspresywne kody statusu odpowiedzi.
+    \item różnorodność dostępnych formatów wyjściowych; \footnote{Dane za stroną internetową \url{https://www.rfc-editor.org/rfc/rfc9110#field.content-type} (dostęp: 12.11.2023 r.)}
+    \item możliwość kontrolowania szczegółowych uprawnień w ramach autoryzacji; \footnote{S. 1719-1722; Bojan Suzic, Bernd Prünster, Dominik Ziegler, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.}
+    \item ekspresywne kody statusu odpowiedzi. \footnote{Dane za stroną internetową \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}}
 \end{enumerate}
 
 Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z następującymi zaletami i wadami:
@@ -357,13 +359,14 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     \item możliwość zwracania odpowiedzi w wielu formatach;
     \item prostotę implementacji precyzyjnej autoryzacji użytkowników;
     \item łatwiejsza obsługa błędów po stronie klienta i debugowanie aplikacji serwerowej w porównaniu do środowiska GraphQL;
-    \item większa ilość tzw. ,,boilerplate'u`` do napisania - interfejsy API RESTful zwykle wymagają więcej standardowego kodu niż ich odpowiedniki GraphQL;
+    \item większa ilość tzw. ,,boilerplate'u`` do napisania - interfejsy ,,RESTful`` zwykle wymagają więcej standardowego kodu niż ich odpowiedniki GraphQL;
     \item możliwość niedostatecznego i nadmiernego pobierania danych - zostanie to złagodzone dzięki zastosowaniu schematu JSON;
     \item aplikacja po stronie klienta może być mniej reaktywna ze względu na mnogość wywołań do serwera - zostanie to złagodzone dzięki wykorzystaniu schematu JSON i rozbudowanemu buforowaniu zarówno po stronie klienta, jak i serwera;
     \item paginacja musi zostać zaimplementowana przez deweloperów;
     \item wersjonowanie API będzie musiało być spójne.
 \end{enumerate}
 
+\newpage
 \paragraph{Dobór frameworka do testowania automatycznego}
 \subparagraph{Testowanie aplikacji\\}
 
@@ -648,8 +651,17 @@ Decyzja o użyciu języka Swifta podczas tworzenia aplikacji mobilnej będzie mi
 %Załączniki - mają być generowane automatycznie, do ogarnięcia :)
 
 \begin{thebibliography}{9}
-    \bibitem{gus} GUS - Ochrona środowiska 2022. - \url{https://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5484/1/23/1/ochrona_srodowiska_2022.pdf}
-    \bibitem{eea-waste} Waste \& Recycling, 03.11.2023r. \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling?size=n_10_n&filters%5B0%5D%5Bfield%5D=readingTime&filters%5B0%5D%5Btype%5D=any&filters%5B0%5D%5Bvalues%5D%5B0%5D%5Bname%5D=All&filters%5B0%5D%5Bvalues%5D%5B0%5D%5BrangeType%5D=fixed&filters%5B1%5D%5Bfield%5D=issued.date&filters%5B1%5D%5Btype%5D=any&filters%5B1%5D%5Bvalues%5D%5B0%5D=Last%205%20years&filters%5B2%5D%5Bfield%5D=language&filters%5B2%5D%5Btype%5D=any&filters%5B2%5D%5Bvalues%5D%5B0%5D=en}
-    \bibitem{eea-municipal} Municipal waste recycling rates in Europe by country \url{https://www.eea.europa.eu/data-and-maps/daviz/municipal-waste-recycled-and-composted-6#tab-chart_7}
+    \bibitem{gus} Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022 - \url{https://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5484/1/23/1/ochrona_srodowiska_2022.pdf}
+    \bibitem{eea-waste} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling?size=n_10_n&filters%5B0%5D%5Bfield%5D=readingTime&filters%5B0%5D%5Btype%5D=any&filters%5B0%5D%5Bvalues%5D%5B0%5D%5Bname%5D=All&filters%5B0%5D%5Bvalues%5D%5B0%5D%5BrangeType%5D=fixed&filters%5B1%5D%5Bfield%5D=issued.date&filters%5B1%5D%5Btype%5D=any&filters%5B1%5D%5Bvalues%5D%5B0%5D=Last%205%20years&filters%5B2%5D%5Bfield%5D=language&filters%5B2%5D%5Btype%5D=any&filters%5B2%5D%5Bvalues%5D%5B0%5D=en}
+    \bibitem{eea-municipal} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/data-and-maps/daviz/municipal-waste-recycled-and-composted-6#tab-chart_7}
+    \bibitem{markdown-arch-dec-rec} Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.
+    \bibitem{server-centric-web-frameworks} Server-Centric Web Frameworks: An Overview; Iwan Vosloo and Derrick G. Kourie, University of Pretoria, ACM Computing Surveys, Vol. 40, No. 2, Artykuł 4, 2008r.
+    \bibitem{express-npm-lib} Dane za stroną internetową (dostęp: 12.11.2023r.) \url{https://www.npmjs.com/package/express}
+    \bibitem{architectural-styles-and-design} Roy Thomas Fielding, "Architectural Styles and the Design of Network-based Software Architectures," 2000, \url{https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm}. (dostęp
+    12.11.2023r.).
+    \bibitem{migrating-to-graphql} Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019. \url{https://ieeexplore-ieee-org.proxy.lnu.se/document/8667986}. (dostęp: 12.11.2023r.)
+    \bibitem{representational-state-transfer} Robert Richards, Pro PHP XML and Web Services, Apress, Berkley, CA, 2006r.
+    \bibitem{rfc-standards} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}
+    \bibitem{authorization-rest-web-services} Bojan Suzic, Bernd Prünster, Dominik Ziegler, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.
     \end{thebibliography}
 \end{document}
