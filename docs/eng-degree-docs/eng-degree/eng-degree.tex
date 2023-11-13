@@ -342,7 +342,6 @@ REST to akronim REpresentational State Transfer\footnote{Rozdział 5; Roy Thomas
 \textbf{Decyzja}\\
 Zespół programistów zdecydował się wybrać REST jako abstrakcyjny interfejs aplikacji serwerowej, ze względu na:
 \begin{enumerate}[label=--]
-    % TODO: Znaleźć źródło @kuba
     \item ustalone normy i dużą społeczność ekspertów, od których można się uczyć;
     \item możliwość łatwego przesyłania plików, co będzie kluczowe w kontekście tej aplikacji;
     \item różnorodność dostępnych formatów wyjściowych; \footnote{Dane za stroną internetową \url{https://www.rfc-editor.org/rfc/rfc9110#field.content-type} (dostęp: 12.11.2023 r.)}
@@ -420,21 +419,25 @@ Plusy oraz minusy takiej decyzji są następujące:
 \subparagraph{Typy baz danych\\}
 
 \textbf{Bazy nierelacyjne (NoSQL)}\\
-Bazy danych No-SQL nie mają tak sztywnego schematu bazy danych jak ich relacyjne odpowiedniki. Struktura organizacyjna różni się w zależności od typu nierelacyjnej bazy danych. Biorąc to pod uwagę, wszystkie mają na celu rozwiązanie problemów tradycyjnej, relacyjnej bazy danych, poprzez zaadresowanie kwestii elastyczności i skalowalności. Bazy danych SQL nie są idealne do przechowywania nieustrukturyzowanych formatów danych, takich jak tekst, wideo i obrazy. Bazy danych NoSQL przedkładają dostępność nad spójność.
+Bazy danych No-SQL nie mają tak sztywnego schematu bazy danych jak ich relacyjne odpowiedniki.
+Struktura organizacyjna różni się w zależności od typu nierelacyjnej bazy danych\footnote{S.1; Deka Ganesha Chandra, BASE Analysis of NoSQL Database, Regional Vocational Training Instutite for Women, Tura, Meghalaya, India, 19.11.2012r.}.
+Biorąc to pod uwagę, wszystkie mają na celu rozwiązanie problemów tradycyjnej, relacyjnej bazy danych, poprzez zaadresowanie kwestii elastyczności i skalowalności.
+Bazy danych SQL nie są idealne do przechowywania nieustrukturyzowanych formatów danych, takich jak tekst, wideo i obrazy, co adresują bazy NoSQL.
+Przedkładają one dostępność nad spójność.
 Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL (niektóre obsługują SQL), można go dokładnie podsumować jako ,,nie tylko SQL``.
 Rodzaje nierelacyjnych struktur baz danych to:
 \begin{enumerate}[label=--]
-    \item Key-value store - jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość, gdzie każdy element ma klucz i wartość. Klucz może być podobny do tego, co znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika. Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji. Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz. Przykładami takich baz danych są Redis i Memcached.
-    \item Document store - jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów. Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON. Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji. Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych. Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników. Przykładem bazy danych zorientowanej na dokumenty jest MongoDB.
-    \item Wide-column store - informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci. Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach. Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn. Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data. Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych. Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym.
-    \item Graph store - zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości. Węzłem może być dowolny obiekt, miejsce lub osoba. Krawędź definiuje relację między węzłami. Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu. Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source, w której użytkownicy mogą kupować licencje na tworzenie kopii zapasowych online i rozszerzenia wysokiej dostępności lub licencjonowaną wersję wstępną z kopią zapasową i rozszerzeniami.
+    \item Key-value store - jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość, gdzie każdy element ma klucz i wartość. Klucz może być podobny do tego, co znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika. Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji. Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz. Przykładami takich baz danych są Redis, Memcached, KeyDB, czy DragonflyDB\footnote{S. 5 - 19; Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.}.
+    \item Document store - jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów. Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON. Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji. Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych. Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników. Przykładem bazy danych zorientowanej na dokumenty jest MongoDB\footnote{S. 337; Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.}.
+    \item Wide-column store - informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci. Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach. Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn. Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data. Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych. Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym\footnote{S. 118-122; K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.}.
+    \item Graph store - zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości. Węzłem może być dowolny obiekt, miejsce lub osoba. Krawędź definiuje relację między węzłami. Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu. Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source, w której użytkownicy mogą kupować licencje na tworzenie kopii zapasowych online i rozszerzenia wysokiej dostępności lub licencjonowaną wersję wstępną z kopią zapasową i rozszerzeniami\footnote{S. 1548-1552; I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia}.
 \end{enumerate}
 
 \textbf{Teoria CAP} \\
-Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.
+Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.\footnote{S. 10-18; Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.}
 
 \textbf{SQL\\}
-Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych.
+Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych \footnote{S. 79; Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r}.
 Pierwotnie znany jako SEQUEL, został później uproszczony do SQL, ze względu na kwestię znaku towarowego.
 Jest to de facto standard relacyjnych systemów baz danych.
 Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost między bazą danych a użytkownikami.
@@ -450,7 +453,7 @@ Relacje te są zwykle ilustrowane za pomocą różnych typów modeli danych.
 Kolumny są traktowane jako pola przechowujące nazwę danej zmiennej (na przykład identyfikatorUżytkownika) i typ SQL, podczas gdy wiersze przechowują rzeczywiste wartości.
 Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami danych, które uruchamiają polecenia w sekwencji znanej jako transakcja.
 Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu.\\
-Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID:
+Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID\footnote{S. 1; Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.}:
 \begin{enumerate}[label=--]
     \item \textbf{Atomiczność (eng. Atomicity)} - wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
     \item \textbf{Spójność (eng. Consistency)} - dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
@@ -721,6 +724,14 @@ Po zakończeniu procesu nauczania, model został oceniony na zbiorze testowym. A
 Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacji modelu.
 \subsection{Opis sytuacji faktycznej}
 % TODO cały zespół
+
+% TODO: Embed in the mobile section
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=13.5cm]{./MobileAppFlows.png}
+    \caption{Widoki aplikacji mobilnej w formie diagramu przepływu\\Źródło: Opracowanie własne}
+\end{figure}
+
 \subsection{Badania empiryczne/Inne}
 % TODO cały zespół
 \section{Zadania w projekcie}
@@ -803,5 +814,13 @@ Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacj
     \bibitem{migrating-to-graphql} Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019. \url{https://ieeexplore-ieee-org.proxy.lnu.se/document/8667986}. (dostęp: 12.11.2023r.)
     \bibitem{rfc-standards} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}
     \bibitem{authorization-rest-web-services} Bojan Suzic, Bernd Prünster, Dominik Ziegler, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.
+    \bibitem{early-history-of-sequel} Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r.
+    \bibitem{survey-and-comparison-of-relational} Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.
+    \bibitem{base-analysis-of-nosql-database} Deka Ganesha Chandra, BASE Analysis of NoSQL Database, Regional Vocational Training Instutite for Women, Tura, Meghalaya, India, 19.11.2012r.
+    \bibitem{key-value-store-a-practical-overview} Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.
+    \bibitem{no-sql-evaluation-a-use-case-oriented-survey} Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.
+    \bibitem{modern-column-stores-for-big-data-processing} K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.
+    \bibitem{towards-robust-distributed-systems} Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.
+    \bibitem{citekey}I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia
     \end{thebibliography}
 \end{document}
