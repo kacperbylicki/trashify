@@ -271,15 +271,16 @@ rozwiązaniom.
 \textbf{Express} -- jeden z pierwszych frameworków dla środowiska Node.js, powstały w roku 2010.
 Jest on dojrzałym, niezwykle lubianym przez społeczność rozwiązaniem, oferującym
 minimalistyczny interfejs, bezstronny względem wzorców projektowych. Posiada bogaty ekosystem
-oprogramowań pośredniczących tworzonych i wspieranych przez społeczność.
+oprogramowań pośredniczących tworzonych i wspieranych przez społeczność.\footnote{Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://expressjs.com/en/4x/api.html}}
 Jest on pobierany średnio 30 milionów razy w tygodniu \footnote{Dane za stroną internetową (dostęp: 12.11.2023r.) \url{https://www.npmjs.com/package/express}}, co czyni go liderem w popularności.
 
 \textbf{Fastify} -- framework zainspirowany Express oraz Hapi. Tak jak w przypadku Expressa,
 jest on minimalistyczny, jednakże wprowadza kilka usprawnień oraz rozszerzeń do
 konceptów w nim prezentowanych. Głównym wzorcem tego frameworka jest bogaty system
-wtyczek, które zaimplementowane są na podstawie skierowanego grafu acyklicznego (Rysunek~\ref{fig:ADG}).
+wtyczek, które zaimplementowane są na podstawie skierowanego grafu acyklicznego (Rysunek~\ref{fig:ADG})\footnote{Dane za stroną internetową (dostęp 14.11.2023r.)\url{https://fastify.dev/docs/latest/Guides/}}.
 Każda ścieżka żądania HTTP, dekoratory, haki są traktowane jako wtyczki.
 Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo aplikacji.
+Dodatkowo jest on jednym z najszybszych frameworków serwerowych w ekosystemie node.js\footnote{S. 7; Danil Demashov, Ilya Gosudarve, Efficiency Evaluation of Node.js Web-Server Frameworks, Uniwersytet ITMO, Petersburg, Rosja, 2020r.}
 
 \begin{figure}[h]
     \includegraphics[width=6cm]{./static/ADG.png}
@@ -289,14 +290,14 @@ Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo aplika
 \end{figure}
 
 \textbf{NestJS} -- To framework opiniowany i jako taki wymusza na użytkowniku stosowanie określonych wzorców.
-Wykorzystuje progresywny JavaScript, jest zbudowany i w pełni obsługuje TypeScript oraz łączy elementy
-programowania obiektowego, programowania funkcyjnego i reaktywnego programowania funkcyjnego.
-W przypadku aplikacji internetowych Nest używa Express jako sterownika HTTP,
-z opcjonalną konfiguracją Fastify. Zapewnia abstrakcję nad frameworkami,
-ale jednocześnie udostępnia ich interfejsy API bezpośrednio programistom, zapewniając uncję wolności.
-Jest dostarczany z dedykowanym interfejsem terminalowym, którego można użyć do uruchomienia projektu,
+Wykorzystuje bieżące zmiany w języku JavaScript (ECMAScript), został zbudowany przy użyciu i w pełni obsługuje TypeScript oraz zawiera w sobie fragmenty
+programowania obiektowego, funkcyjnego i reaktywnego programowania funkcyjnego.
+W przypadku aplikacji internetowych Nest bazowo używa Express jako sterownika HTTP,
+z możliwością wykorzystania Fastify, co wiąże się z dodatkowymi mankamentami. Niejako próbuje naśladować frameworki pokroju Laravela,
+.NET, czy Spring, wykorzystując dekoratory niemal do każdej części aplikacji związanej z architekturą. Wprowadza to dużo abstrakcji, natomiast interfejsy API są w pełni udostępnione programistom, zapewniając uncję wolności.
+Posiada dedykowany interfejs terminalowy, którego można użyć do uruchomienia projektu,
 utworzenia nowego z zainstalowanymi wszystkimi zależnościami, generowania zasobów HTTP,
-kontrolerów, usług, obiektów transferu danych i innych.
+kontrolerów, usług, obiektów transferu danych i innych\footnote{Dane za stroną internetową (14.11.2023r.) \url{https://docs.nestjs.com/}}.
 
 \subparagraph{Decyzja\\}
 
@@ -324,7 +325,7 @@ Plusy oraz minusy takiej decyzji są następujące:
 Zaprojektowanie interfejsu API, który będzie responsywny zarówno na urządzeniach mobilnych, jak i w sieci, jest wyzwaniem ze względu na nadmierne oraz niedostateczne pobieranie danych i potencjalne wykonywanie wielu żądań  do serwera na urządzeniu mobilnym. W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL zamiast tradycyjnego RESTful API.
 
 \textbf{GraphQL}\\
-Jest językiem zapytań oraz środowiskiem wykonawczym do interakcji z danymi w aplikacjach opracowanym przez Facebooka (obecnie Meta), którego celem jest ograniczenie nadmiernego i niedostatecznego pobierania danych \footnote{S. 140; Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019. \url{https://ieeexplore-ieee-org.proxy.lnu.se/document/8667986}. (dostęp: 12.11.2023r.)}. Został zaprojektowany z myślą o urządzeniach mobilnych, biorąc pod uwagę ich niską prędkość, pamięć masową i drogie żądania internetowe.
+Jest językiem zapytań oraz środowiskiem wykonawczym do interakcji z danymi w aplikacjach opracowanym przez Facebooka (obecnie Meta), którego celem jest ograniczenie nadmiernego i niedostatecznego pobierania danych \footnote{S. 140; Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019.}. Został zaprojektowany z myślą o urządzeniach mobilnych, biorąc pod uwagę ich niską prędkość, pamięć masową i drogie żądania internetowe.
 W tym języku zapytań wszystkie żądania są wysyłane do pojedynczego punktu końcowego, a wykres danych, zwykle w formacie json, jest analizowany. Następnie zapytania są oceniane i stosowane są odpowiednie zapytania i mutacje.
 
 Składa się on z głównych trzech części:
@@ -335,9 +336,7 @@ Składa się on z głównych trzech części:
 \end{enumerate}
 
 \textbf{REST}\\
-REST to akronim REpresentational State Transfer\footnote{Rozdział 5; Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000, Wydanie online. dostępne pod adresem:
-\url{https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm}. (dostęp
-12.11.2023r.)} i styl architektoniczny dla rozproszonych systemów hipermedialnych. Sam w sobie jest wzorcem architektonicznym, który zakłada rozdzielenie odpowiedzialności między zapytaniami (GET), mutacjami (POST, PATCH, PUT) i metodami usuwania (DELETE). Został on przetestowany w boju od 2000 roku i szeroko przyjęty w społeczności programistów.
+REST to akronim REpresentational State Transfer\footnote{Rozdział 5; Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000r.} i styl architektoniczny dla rozproszonych systemów hipermedialnych. Sam w sobie jest wzorcem architektonicznym, który zakłada rozdzielenie odpowiedzialności między zapytaniami (GET), mutacjami (POST, PATCH, PUT) i metodami usuwania (DELETE). Został on przetestowany w boju od 2000 roku i szeroko przyjęty w społeczności programistów.
 
 \textbf{Decyzja}\\
 Zespół programistów zdecydował się wybrać REST jako abstrakcyjny interfejs aplikacji serwerowej, ze względu na:
@@ -345,7 +344,7 @@ Zespół programistów zdecydował się wybrać REST jako abstrakcyjny interfejs
     \item ustalone normy i dużą społeczność ekspertów, od których można się uczyć;
     \item możliwość łatwego przesyłania plików, co będzie kluczowe w kontekście tej aplikacji;
     \item różnorodność dostępnych formatów wyjściowych; \footnote{Dane za stroną internetową \url{https://www.rfc-editor.org/rfc/rfc9110#field.content-type} (dostęp: 12.11.2023 r.)}
-    \item możliwość kontrolowania szczegółowych uprawnień w ramach autoryzacji; \footnote{S. 1719-1722; Bojan Suzic, Bernd Prünster, Dominik Ziegler, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.}
+    \item możliwość kontrolowania szczegółowych uprawnień w ramach autoryzacji; \footnote{S. 1719-1722; Bojan Suzic, Bernd Prünster, Dominik Ziegler, On the structure and authorization management of RESTful web services, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.}
     \item ekspresywne kody statusu odpowiedzi. \footnote{Dane za stroną internetową \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}}
 \end{enumerate}
 
@@ -366,15 +365,14 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     \item wersjonowanie API będzie musiało być spójne.
 \end{enumerate}
 
-\newpage
 \paragraph{Dobór frameworka do testowania automatycznego}
 \subparagraph{Testowanie aplikacji\\}
 
 Testowanie aplikacji jest kluczową decyzją dla zespołu programistów.
-Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności).
+Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności)\footnote{S. 1-4; Jiantao Pan, Software Testing, Carnegie Mellon University, Stany Zjednoczone Ameryki, Wiosna 1999}.
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
-\textbf{Jest} -- popularny i pełen wbudowanych funkcjonalności framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące:
+\textbf{Jest} -- popularny i pełen wbudowanych funkcjonalności framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://jestjs.io/docs/api}}:
 \begin{enumerate}[label=--]
     \item łatwa konfiguracja - w pliku `package.json`, `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
     \item obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem bilbioteki supertest i testów migawkowych;
@@ -390,7 +388,7 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
     \item jednoczesne uruchamianie testów w danej przestrzeni (funkcja eksperymentalna).
 \end{enumerate}
 
-\textbf{Mocha z Chai} -- framework testowy Mocha z biblioteką do asercji Chai:
+\textbf{Mocha z Chai} -- framework testowy Mocha\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://mochajs.org/}} z biblioteką do asercji Chai\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://www.chaijs.com/api/}}:
 \begin{enumerate}[label=--]
     \item wyczerpujące i czytelne dla człowieka asercje;
     \item używane głównie w BDD (Behavior-Driven Development);
@@ -434,7 +432,7 @@ Rodzaje nierelacyjnych struktur baz danych to:
 \end{enumerate}
 
 \textbf{Teoria CAP} \\
-Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.\footnote{S. 10-18; Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.}
+Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź, nawet jeżeli ma przekazać przestarzałe dane. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.\footnote{S. 10-18; Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.}
 
 \textbf{SQL\\}
 Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych \footnote{S. 79; Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r}.
@@ -452,7 +450,7 @@ Relacje są deklarowane za pomocą kluczy podstawowych i obcych, które służą
 Relacje te są zwykle ilustrowane za pomocą różnych typów modeli danych.
 Kolumny są traktowane jako pola przechowujące nazwę danej zmiennej (na przykład identyfikatorUżytkownika) i typ SQL, podczas gdy wiersze przechowują rzeczywiste wartości.
 Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami danych, które uruchamiają polecenia w sekwencji znanej jako transakcja.
-Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu.\\
+Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu\footnote{S. 1079-1112; Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.}.\\
 Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID\footnote{S. 1; Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.}:
 \begin{enumerate}[label=--]
     \item \textbf{Atomiczność (eng. Atomicity)} - wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
@@ -803,24 +801,32 @@ Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacj
 %Załączniki - mają być generowane automatycznie, do ogarnięcia :)
 
 \begin{thebibliography}{9}
-    \bibitem{gus} Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022 - \url{https://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5484/1/23/1/ochrona_srodowiska_2022.pdf}
+    \bibitem{gus} Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022r.
     \bibitem{eea-waste} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling?size=n_10_n&filters%5B0%5D%5Bfield%5D=readingTime&filters%5B0%5D%5Btype%5D=any&filters%5B0%5D%5Bvalues%5D%5B0%5D%5Bname%5D=All&filters%5B0%5D%5Bvalues%5D%5B0%5D%5BrangeType%5D=fixed&filters%5B1%5D%5Bfield%5D=issued.date&filters%5B1%5D%5Btype%5D=any&filters%5B1%5D%5Bvalues%5D%5B0%5D=Last%205%20years&filters%5B2%5D%5Bfield%5D=language&filters%5B2%5D%5Btype%5D=any&filters%5B2%5D%5Bvalues%5D%5B0%5D=en}
     \bibitem{eea-municipal} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/data-and-maps/daviz/municipal-waste-recycled-and-composted-6#tab-chart_7}
     \bibitem{markdown-arch-dec-rec} Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.
     \bibitem{server-centric-web-frameworks} Server-Centric Web Frameworks: An Overview; Iwan Vosloo and Derrick G. Kourie, University of Pretoria, ACM Computing Surveys, Vol. 40, No. 2, Artykuł 4, 2008r.
     \bibitem{express-npm-lib} Dane za stroną internetową (dostęp: 12.11.2023r.) \url{https://www.npmjs.com/package/express}
-    \bibitem{architectural-styles-and-design} Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000, \url{https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm}. (dostęp
-    12.11.2023r.).
-    \bibitem{migrating-to-graphql} Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019. \url{https://ieeexplore-ieee-org.proxy.lnu.se/document/8667986}. (dostęp: 12.11.2023r.)
+    \bibitem{architectural-styles-and-design} Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000
+    \bibitem{migrating-to-graphql} Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019r.
     \bibitem{rfc-standards} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}
-    \bibitem{authorization-rest-web-services} Bojan Suzic, Bernd Prünster, Dominik Ziegler, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.
+    \bibitem{authorization-rest-web-services} Bojan Suzic, Bernd Prünster, Dominik Ziegler, On the structure and authorization management of RESTful web services, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.
     \bibitem{early-history-of-sequel} Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r.
     \bibitem{survey-and-comparison-of-relational} Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.
+    \bibitem{elements-of-relational-database-theory} Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.
     \bibitem{base-analysis-of-nosql-database} Deka Ganesha Chandra, BASE Analysis of NoSQL Database, Regional Vocational Training Instutite for Women, Tura, Meghalaya, India, 19.11.2012r.
     \bibitem{key-value-store-a-practical-overview} Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.
     \bibitem{no-sql-evaluation-a-use-case-oriented-survey} Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.
     \bibitem{modern-column-stores-for-big-data-processing} K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.
     \bibitem{towards-robust-distributed-systems} Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.
     \bibitem{citekey}I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia
+    \bibitem{software-testing} Jiantao Pan, Software Testing, Carnegie Mellon University, Stany Zjednoczone Ameryki, Wiosna 1999
+    \bibitem{jest-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://jestjs.io/docs/api}
+    \bibitem{mocha-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://mochajs.org/}
+    \bibitem{chai-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://www.chaijs.com/api/}
+    \bibitem{efficiency-evaluation-nodejs-web-server-frameworks} Danil Demashov, Ilya Gosudarve, Efficiency Evaluation of Node.js Web-Server Frameworks, Uniwersytet ITMO, Petersburg, Rosja, 2020r.
+    \bibitem{fastify-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://fastify.dev/docs/latest/Guides/}
+    \bibitem{express-documentation} Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://expressjs.com/en/4x/api.html}
+    \bibitem{nestjs-documentation} Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://docs.nestjs.com/}
     \end{thebibliography}
 \end{document}
