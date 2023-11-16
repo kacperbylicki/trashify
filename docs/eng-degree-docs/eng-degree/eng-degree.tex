@@ -322,7 +322,8 @@ Plusy oraz minusy takiej decyzji są następujące:
 
 \paragraph{Architektura interfejsu programistycznego aplikacji}
 \subparagraph{Interfejs aplikacji\\}
-Zaprojektowanie interfejsu API, który będzie responsywny zarówno na urządzeniach mobilnych, jak i w sieci, jest wyzwaniem ze względu na nadmierne oraz niedostateczne pobieranie danych i potencjalne wykonywanie wielu żądań  do serwera na urządzeniu mobilnym. W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL zamiast tradycyjnego RESTful API.
+Zaprojektowanie interfejsu API, który będzie responsywny zarówno na urządzeniach mobilnych, jak i w sieci, jest wyzwaniem ze względu na nadmierne oraz niedostateczne pobieranie danych i potencjalne wykonywanie wielu żądań do serwera na urządzeniu mobilnym.
+W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL zamiast tradycyjnego RESTful API.
 
 \textbf{GraphQL}\\
 Jest językiem zapytań oraz środowiskiem wykonawczym do interakcji z danymi w aplikacjach opracowanym przez Facebooka (obecnie Meta), którego celem jest ograniczenie nadmiernego i niedostatecznego pobierania danych \footnote{S. 140; Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019.}. Został zaprojektowany z myślą o urządzeniach mobilnych, biorąc pod uwagę ich niską prędkość, pamięć masową i drogie żądania internetowe.
@@ -408,9 +409,10 @@ Zespół zdecydował się na framework testowy Jest, ponieważ nie wymaga wielu 
 Plusy oraz minusy takiej decyzji są następujące:
 \begin{itemize}
     \item testy będą tworzone przy użyciu dobrze ugruntowanych reguł;
-    \item paczka jest-plugin będzie musiała zostać dodana do pliku `.eslintrc` i `package.json`.
+    \item paczka ,,jest-plugin`` będzie musiała zostać dodana do pliku `.eslintrc` i `package.json`.
     \item jest ma olbrzymią społeczność z dużą ilością ekspertów, którzy go używają i otwarcie dzielą się wiedzą.
     \item ilość matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności.
+    \item jest z uwagi na ilość dostępnych możliwości, jak i kompatybilność wsteczną, jest obecnie jednym z najwolniejszych frameworków testowych, co znacznie zwiększy czas potrzebny do wykonania testów.
 \end{itemize}
 
 \paragraph{Dobór bazy danych}
@@ -442,7 +444,6 @@ Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost mi�
 Niezależnie od tego, czy jest to programista stojący za danym systemem, czy zwykły użytkownik, wszyscy ludzie zaznajomieni z nowoczesną technologią, nawet jeśli nieświadomie, używali SQL.
 Biorąc pod uwagę, jak blisko relacyjne bazy danych są powiązane z SQL, są one powszechnie nazywane ,,bazami danych SQL``.
 
-%  (https://www.ibm.com/topics/relational-databases)
 \subparagraph{Relacyjne bazy danych\\}
 Relacyjna baza danych to, jak sama nazwa wskazuje, magazyn danych, który przechowuje je w sposób relacyjny.
 Ten typ pamięci masowej rozumie i przechowuje dane w formacie tabelarycznym, tj. wierszy i kolumn.
@@ -459,8 +460,6 @@ Transakcje mają specyficzne właściwości, które są reprezentowane przez akr
     \item \textbf{Trwałość (eng. Durability)} - po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
 \end{enumerate}
 
-% TODO: Query Builders vs ORMs
-
 \textbf{Decyzja}\\
 Ponieważ projekt będzie w większości dotyczył przechwytywania i przetwarzania obrazów, jedynym realnym i efektywnym czasowo rozwiązaniem będzie system baz danych NoSQL zorientowany na dokumenty.
 
@@ -471,6 +470,30 @@ Plusy oraz minusy takiej decyzji są następujące:
     \item zgodność z ACID będzie musiała zostać dokładnie zbadana i wdrożona;
     \item zespół będzie musiał zapoznać się z nową składnią, w zależności od wybranego systemu bazy danych, aby dostosować się do braku znajomości SQL.
 \end{enumerate}
+
+% TODO: Query Builders vs ORMs
+
+\paragraph{Warstwa komunikacji z bazą danych}
+\subparagraph{Mapowanie obiektowo-relacyjne, Mapowanie obiektowo-dokumentowe i Budowniczy Kwerend\\}
+% Was, warum, womit?!
+
+\textbf{Mapowanie obiektowo-relacyjne\\}
+Wykorzystywanie mapowania obiektowo-relacyjnego (eng. Object Relational Mapping) to powszechna praktyka w projektach programistycznych.
+Stanowi ono dodatkową warstwę abstrakcji nad sam język SQL, czy budowniczych kwerend, zapewniając automatyczną konwersję obiektów źródłowych na ich odpowiedniki zrozumiałe dla bazy danych oraz rekordów bazodanowych na obiekty.
+W kontekście baz danych, mapowanie obiektowo-relacyjne można uznać za najwyższą formę abstrakcji dla komunikacji z bazą danych w środowisku serwerowym.
+
+W środowisku node.js pojawiło się takowych wiele, między innymi:
+\begin{enumerate}[label=--]
+    \item TypeORM - wykorzystujący eksperymentalne dekoratory w języku Typescript celem deklarowania schematu encji w bazie danych. Zdecydowana większość operacji jest w nim dostępna za ich pomocą.
+    \item Sequelize - najstarszy na tej liście, pierwsze wzmianki na witrynie StackOverflow sięgają roku 2011. Jest on dojrzałym, pełnym funkcjonalności maperem, którego popularność odzwierciedlona jest w 1,5 miliona tygodniowych pobrań\footnote{Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}}.
+    \item Prisma - kontrowersyjny maper, którego operacje łączenia (eng. join) wykonywane są w sposób wirtualny, to znaczy poprzez wysłanie kilku kwerend do bazy danych i połączeniu ich wedle instrukcji użytkownika w ,,Prisma Engine``, który napisany został przy pomocy języka Rust, co zapewnia relatywne bezpieczeństwo oraz wysoką wydajność takiego rozwiązania\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.)\url{https://www.prisma.io/}}.
+    \item Drizzle - maper obiecujący pełne typowanie, syntax podobny do tego znanego z SQLa oraz automatyczną generację schematów za pomocą biblioteki Zod.
+    \item Mikro-ORM - oparty na domniemanych transakcjach, automatycznym grupowaniu kwerend za pomocą wzorca jednostki pracy (eng. Unit of Work). Wzorowany jest na Hibernate, znanym z języka Java oraz Doctrine z PHP.\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}}
+\end{enumerate}
+
+\textbf{Mapowanie obiektowo-dokumentowe\\}
+Mapowanie obiektowo-dokumentowe powstało wraz z bazami NoSQL, których to system często nie posiada schematów danych.
+Tak samo jak w przypadku mapowania obiektowo-relacyjnego, ma ono na celu uproszczenie interakcji pomiędzy aplikacją, a bazą danych. Powstało ono w celu wyabstrakcjonowania procesu zarządznia i mapowania obiektów z ich natywnej dla bazy danych struktury, do takiej zrozumiałej przez język programowania, jak również utrzymującej konwencje programowania obiektowego.\footnote{S. 59130-59131; Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania}
 
 \subsubsection{Aplikacja mobilna}
 
@@ -828,5 +851,8 @@ Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacj
     \bibitem{fastify-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://fastify.dev/docs/latest/Guides/}
     \bibitem{express-documentation} Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://expressjs.com/en/4x/api.html}
     \bibitem{nestjs-documentation} Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://docs.nestjs.com/}
+    \bibitem{sequelize-npm-page} Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}
+    \bibitem{mikro-orm} Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}
+    \bibitem{a-model-driven-approach-odms} Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania
     \end{thebibliography}
 \end{document}
