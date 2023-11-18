@@ -427,10 +427,28 @@ Przedkładają one dostępność nad spójność.
 Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL (niektóre obsługują SQL), można go dokładnie podsumować jako ,,nie tylko SQL``.
 Rodzaje nierelacyjnych struktur baz danych to:
 \begin{enumerate}[label=--]
-    \item Key-value store - jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość, gdzie każdy element ma klucz i wartość. Klucz może być podobny do tego, co znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika. Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji. Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz. Przykładami takich baz danych są Redis, Memcached, KeyDB, czy DragonflyDB\footnote{S. 5 - 19; Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.}.
-    \item Document store - jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów. Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON. Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji. Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych. Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników. Przykładem bazy danych zorientowanej na dokumenty jest MongoDB\footnote{S. 337; Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.}.
-    \item Wide-column store - informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci. Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach. Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn. Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data. Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych. Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym\footnote{S. 118-122; K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.}.
-    \item Graph store - zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości. Węzłem może być dowolny obiekt, miejsce lub osoba. Krawędź definiuje relację między węzłami. Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu. Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source, w której użytkownicy mogą kupować licencje na tworzenie kopii zapasowych online i rozszerzenia wysokiej dostępności lub licencjonowaną wersję wstępną z kopią zapasową i rozszerzeniami\footnote{S. 1548-1552; I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia}.
+    \item Key-value store - jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość.
+    Klucz może być podobny do tego, co znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika.
+    Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji.
+    Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz.
+    Przykładami takich baz danych są Redis, Memcached, KeyDB, czy DragonflyDB\footnote{S. 5 - 19; Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.}.
+    \item Document store - jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów.
+    Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON.
+    Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji.
+    Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych.
+    Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników.
+    Przykładem bazy danych zorientowanej na dokumenty jest MongoDB\footnote{S. 337; Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.}.
+    \item Wide-column store - informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci.
+    Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach.
+    Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn.
+    Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data.
+    Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych.
+    Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym\footnote{S. 118-122; K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.}.
+    \item Graph store - zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości.
+    Węzłem może być dowolny obiekt, miejsce lub osoba.
+    Krawędź definiuje relację między węzłami.
+    Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu.
+    Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source, w której użytkownicy mogą kupować licencje na tworzenie kopii zapasowych online i rozszerzenia wysokiej dostępności lub licencjonowaną wersję wstępną z kopią zapasową i rozszerzeniami\footnote{S. 1548-1552; I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia}.
 \end{enumerate}
 
 \textbf{Teoria CAP} \\
@@ -471,16 +489,19 @@ Plusy oraz minusy takiej decyzji są następujące:
     \item zespół będzie musiał zapoznać się z nową składnią, w zależności od wybranego systemu bazy danych, aby dostosować się do braku znajomości SQL.
 \end{enumerate}
 
-% TODO: Query Builders vs ORMs
-
+% TODO: Delete if necessaryX
+\newpage
 \paragraph{Warstwa komunikacji z bazą danych}
 \subparagraph{Mapowanie obiektowo-relacyjne, Mapowanie obiektowo-dokumentowe i Budowniczy Kwerend\\}
-% Was, warum, womit?!
+Mapery obiektowo-relacyjne, obiektowo-dokumentowe czy budowniczy kwerend są niezbędnymi narzędziami do utrzymywania deklaratywnego podejścia do komunikacji z systemem bazo-danowym.
+Na rynku dostępnych jest wiele bibliotek oferujących konkurujące rozwiązania.
+Zespół postanowił zbadać możliwość wykorzystania każdego z kategorii abstrakcji, celem wyłonienia najbardziej dopasowanego do potrzeb rozwiązania.
+Wybór ten determinuje ilość złożoności i kodu bazowego, a także wymagania techniczne dotyczące konfiguracji bazy danych.
 
 \textbf{Mapowanie obiektowo-relacyjne\\}
 Wykorzystywanie mapowania obiektowo-relacyjnego (eng. Object Relational Mapping) to powszechna praktyka w projektach programistycznych.
 Stanowi ono dodatkową warstwę abstrakcji nad sam język SQL, czy budowniczych kwerend, zapewniając automatyczną konwersję obiektów źródłowych na ich odpowiedniki zrozumiałe dla bazy danych oraz rekordów bazodanowych na obiekty.
-W kontekście baz danych, mapowanie obiektowo-relacyjne można uznać za najwyższą formę abstrakcji dla komunikacji z bazą danych w środowisku serwerowym.
+W kontekście baz danych, mapowanie obiektowo-relacyjne można uznać za najwyższą formę abstrakcji dla komunikacji z bazą danych w środowisku serwerowym.\footnote{S. 1-4; Alexandre Torres [i inni] Twenty years of object-relational mapping: A survey on patterns, solutions, and their implications on application design, 28.09.2016r.}
 
 W środowisku node.js pojawiło się takowych wiele, między innymi:
 \begin{enumerate}[label=--]
@@ -494,6 +515,32 @@ W środowisku node.js pojawiło się takowych wiele, między innymi:
 \textbf{Mapowanie obiektowo-dokumentowe\\}
 Mapowanie obiektowo-dokumentowe powstało wraz z bazami NoSQL, których to system często nie posiada schematów danych.
 Tak samo jak w przypadku mapowania obiektowo-relacyjnego, ma ono na celu uproszczenie interakcji pomiędzy aplikacją, a bazą danych. Powstało ono w celu wyabstrakcjonowania procesu zarządznia i mapowania obiektów z ich natywnej dla bazy danych struktury, do takiej zrozumiałej przez język programowania, jak również utrzymującej konwencje programowania obiektowego.\footnote{S. 59130-59131; Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania}
+
+W środowisku node.js na przestreni lat powstały między innymi następujące mapery obiektowo-dokumentowe:
+\begin{enumerate}[label=--]
+    \item mongoose - dedykowany dla bazy MongoDB mapper obiektowo-dokumentowy. Posiada wiele funkcjonalności związane z procesem hydracji POJO (eng. plain-old-javascript-object), ktore zapewniają walidację obiektów, dodawanie pól wirtualnych i inne.
+    \item prisma - wcześniej wymieniony ORM, który posiada wsparcie dla MongoDB i funkcjonuje w trybie wymuszonej transakcyjności danych na bazie tzw. zbiorów replik (eng. replica set).
+\end{enumerate}
+
+\textbf{Budowniczy kwerend\\}
+Budowniczy kwerend stanowią abstrakcję na język SQL w wybranym języku programowania.
+Pozwalają one na deklaratywne tworzenie kwerend za pomocą operacji takich jak: select, insert, join, delete, update, with, where, not, etc.
+Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne wsparcie intellisense w danym jęzku programowania oraz rozwiązują popularne problemy związane z cyberbezpieczeństwem przeprowadzania operacji na bazie danych, czego najpopularniejszym przykładem są operacje wstrzykiwania SQL`a (eng. SQL Injection)\footnote{Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}}.
+
+\textbf{Decyzja\\}
+Wraz z wyborem bazy danych, zespół zdecydował się użyć mapera obiektowo-dokumentowego Mongoose.
+
+Plusy oraz minusy takiej decyzji są następujące:
+\begin{enumerate}[label=--]
+    \item wszystkie typy danych natywne dla MongoDB będą łatwo dostępne pod ręką z intuicyjnym, przewidywalnym zachowaniem;
+    \item wbudowana walidacja zmniejszy ilość wymaganego kodu standardowego;
+    \item nie będzie żadnych, narzuconych przez bibliotekę, ograniczeń dotyczących samej konfiguracji bazy danych;
+    \item wszystkie funkcje MongoDB będą dostępne i wyabstraktoowane za pośrednictwem interfejsów API Mongoose;
+    \item polecenia będą buforowane na wypadek awarii lub ponownego uruchomienia bazy danych;
+    \item bezpieczeństwo typów będzie trudniejsze do utrzymania;
+    \item dogłębna znajomość tego narzędzia będzie niezbędna, celem pełnego wykorzystania jego możliwości;
+    \item brak wbudowanego GUI, służącego jako swoisty debugger - złagodzone za pomocą MongoDB Atlas;
+\end{enumerate}
 
 \subsubsection{Aplikacja mobilna}
 
@@ -854,5 +901,7 @@ Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacj
     \bibitem{sequelize-npm-page} Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}
     \bibitem{mikro-orm} Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}
     \bibitem{a-model-driven-approach-odms} Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania
+    \bibitem{patterns-solutions-object-relational-mapping} Alexandre Torres [i inni] Twenty years of object-relational mapping: A survey on patterns, solutions, and their implications on application design, 28.09.2016r.
+    \bibitem{query-builder-paradigm}Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}
     \end{thebibliography}
 \end{document}
