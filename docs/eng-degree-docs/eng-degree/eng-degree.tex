@@ -389,7 +389,7 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
     \item jednoczesne uruchamianie testów w danej przestrzeni (funkcja eksperymentalna).
 \end{enumerate}
 
-\textbf{Mocha z Chai} -- framework testowy Mocha\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://mochajs.org/}} z biblioteką do asercji Chai\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://www.chaijs.com/api/}}:
+\textbf{Mocha z Chai} -- framework testowy Mocha\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://mochajs.org/}} z biblioteką do asercji Chai \footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://www.chaijs.com/api/}}:
 \begin{enumerate}[label=--]
     \item wyczerpujące i czytelne dla człowieka asercje;
     \item używane głównie w BDD (Behavior-Driven Development);
@@ -548,14 +548,13 @@ Plusy oraz minusy takiej decyzji są następujące:
 Jako zespół programistów stanęliśmy przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji musimy wziąć pod uwagę nasze umiejętności, okres czasu, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 
 \textbf{Javascript -- Ionic 6\\}
-Ionic 6 to framework typu open-source do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty UI oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji.
-
+Ionic 6 to framework typu open-source do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty UI oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji. \footnote{S. 3181 - 3182; Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018}
 Zalety:
 \begin{enumerate}[label=--]
     \item łatwość i szybkość tworzenia aplikacji dzięki wykorzystaniu języków programowania webowego, takich jak HTML, CSS i JavaScript;
     \item możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji desktopowych;
-    \item duża społeczność deweloperów i rozwijająca się platforma, co oznacza, że istnieje wiele narzędzi, wtyczek i bibliotek, które ułatwiają proces tworzenia aplikacji;
     \item wbudowane narzędzia do testowania i debugowania kodu, co ułatwia proces tworzenia i utrzymywania aplikacji;
+    \item duża społeczność deweloperów i rozwijająca się platforma, co oznacza, że istnieje wiele narzędzi, wtyczek i bibliotek, które ułatwiają proces tworzenia aplikacji; \footnote{Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/@ionic/cli}}
     \item dostęp do wielu wbudowanych komponentów UI opartych na bibliotece Ionic, co pozwala na tworzenie atrakcyjnych i responsywnych aplikacji.
 \end{enumerate}
 
@@ -569,16 +568,16 @@ Wady:
 \textbf{Javascript -- React Native\\}
 React Native to oparty na JavaScript framework do tworzenia aplikacji mobilnych, który umożliwia programistom tworzenie natywnych aplikacji mobilnych na platformy iOS i Android przy użyciu jednej bazy kodu.
 Opiera się on na bibliotece ReactJS i wykorzystuje kombinację JavaScript i natywnego kodu do tworzenia wysokowydajnych aplikacji mobilnych.
-React Native pozwala programistom na ponowne wykorzystanie kodu na różnych platformach, co pomaga zaoszczędzić czas i zasoby.
+React Native pozwala programistom na ponowne wykorzystanie kodu na różnych platformach, co pomaga zaoszczędzić czas i zasoby. \footnote{S. 10 - 11; William Danielsson, React Native application development – A comparison between native Android and React Native, Szwecja, Linköpings universitet, 2016}
 
 Zalety:
 \begin{enumerate}[label=--]
     \item szybkie tworzenie aplikacji dzięki wykorzystaniu JavaScript i popularnej biblioteki React;
     \item możliwość tworzenia natywnych aplikacji mobilnych z jedną bazą kodu dla różnych systemów operacyjnych;
     \item łatwa konserwacja i skalowalność aplikacji dzięki wykorzystaniu komponentów UI wielokrotnego użytku, które mogą być używane w różnych systemach operacyjnych;
-    \item dostęp do natywnych funkcji systemu operacyjnego poprzez architekturę "bridge";
-    \item łatwe wdrażanie aktualizacji i zmian aplikacji bez konieczności weryfikacji w sklepie z aplikacjami, która jest wymagana w przypadku aplikacji natywnych;
-    \item duża społeczność deweloperów i liczne zasoby online, które ułatwiają rozwiązywanie problemów i znajdowanie gotowych rozwiązań.
+    \item dostęp do natywnych funkcji systemu operacyjnego poprzez architekturę "bridge"; \footnote{S. 154; Sreekanth Dekkati, Karu Lal, Harshith Desamsetti, React Native for Android: Cross-Platform Mobile Application Development, Global Disclosure of Economics and Business, 12.2019}
+    \item łatwe wdrażanie aktualizacji i zmian aplikacji bez konieczności weryfikacji w sklepie z aplikacjami, która jest wymagana w przypadku aplikacji natywnych; \footnote{S. 42; Hugo Hutri, COMPARISON OF REACT NATIVE AND EXPO, Finlandia, Lappeenranta–Lahti University of Technology LUT, 2023}
+    \item duża społeczność deweloperów i liczne zasoby online, które ułatwiają rozwiązywanie problemów i znajdowanie gotowych rozwiązań. \footnote{Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/react-native}}
 \end{enumerate}
 
 Wady:
@@ -590,11 +589,10 @@ Wady:
 \end{enumerate}
 
 \textbf{Flutter\\}
-Flutter to otwarto-źródłowy framework do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe.
+Flutter to otwarto-źródłowy framework do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe. \footnote{S. 6; Wenhao Wu, React Native vs Flutter, cross-platform mobile application frameworks, Finlandia, Metropolia University of Applied Sciences, 01.03.2018}
     
 Zalety:
 \begin{enumerate}[label=--]
-    \item szybkość i wydajność aplikacji dzięki wykorzystaniu języka programowania Dart oraz implementacji narzędzi Ahead of Time (AOT) i Just in Time (JIT) do kompilacji kodu;
     \item możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji webowych i desktopowych;
     \item możliwość tworzenia pięknych i atrakcyjnych interfejsów użytkownika z wykorzystaniem biblioteki Material Design oraz narzędzi do tworzenia animacji i efektów wizualnych;
     \item szybkie wdrażanie zmian i aktualizacji dzięki narzędziom Hot Reload, które pozwalają na szybkie testowanie i modyfikowanie kodu bez ponownego uruchamiania aplikacji;
@@ -613,17 +611,18 @@ Programowanie aplikacji mobilnych przy użyciu języków natywnych odnosi się d
     
 Zalety:
 \begin{enumerate}[label=--]
-    \item wysoka wydajność: Aplikacje natywne mają dostęp do pełnych możliwości platformy, co może skutkować szybszym i płynniejszym działaniem w porównaniu do aplikacji zbudowanych przy użyciu wieloplatformowych frameworków;
+    \item wysoka wydajność: Aplikacje natywne mają dostęp do pełnych możliwości platformy, co może skutkować szybszym i płynniejszym działaniem w porównaniu do aplikacji zbudowanych przy użyciu wieloplatformowych frameworków; \footnote{S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020}
     \item lepsze doświadczenie użytkownika: Aplikacje natywne mogą wykorzystywać komponenty interfejsu użytkownika specyficzne dla platformy, co zapewnia bardziej dopracowane i płynne wrażenia użytkownika;
-    \item dostęp do funkcji urządzenia: Twórcy aplikacji natywnych mają dostęp do funkcji i możliwości specyficznych dla urządzenia, takich jak GPS, kamera i mikrofon, co pozwala im tworzyć aplikacje z zaawansowanymi funkcjami;
-    \item solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (IDE), narzędzia do debugowania i struktury do testowania aplikacji.
+    \item dostęp do funkcji urządzenia: Twórcy aplikacji natywnych mają dostęp do funkcji i możliwości specyficznych dla urządzenia, takich jak GPS, kamera i mikrofon, co pozwala im tworzyć aplikacje z zaawansowanymi funkcjami; \footnote{S. 16; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
+    \item solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (eng. IDE), narzędzia do debugowania i struktury do testowania aplikacji.
+    \item wykorzystanie zaawansowanych możliwości uczenia maszynowego dzięki integracji z Core ML oraz optymalizacja dla Neural Engine w urządzeniach Apple, co pozwala na wydajne i efektywne wykonywanie zadań związanych z AI, takich jak rozpoznawanie obrazu, przetwarzanie języka naturalnego czy analiza danych. \footnote{ Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml} }
 \end{enumerate}
 
 Wady:
 \begin{enumerate}[label=--]
-    \item Dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy.
-    \item Ograniczona przenośność: Aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy.
-    \item Stroma krzywa uczenia się: Nauka natywnych języków i narzędzi programistycznych może być trudnym i czasochłonnym procesem, szczególnie dla programistów, którzy są nowicjuszami w tworzeniu aplikacji mobilnych.
+    \item dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy. \footnote{S. 26 - 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
+    \item ograniczona przenośność: Aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy.
+    \item stroma krzywa uczenia się: Nauka natywnych języków i narzędzi programistycznych może być trudnym i czasochłonnym procesem, szczególnie dla programistów, którzy są nowicjuszami w tworzeniu aplikacji mobilnych.
 \end{enumerate}
 
 \textbf{Decyzja\\}
@@ -903,5 +902,16 @@ Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacj
     \bibitem{a-model-driven-approach-odms} Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania
     \bibitem{patterns-solutions-object-relational-mapping} Alexandre Torres [i inni] Twenty years of object-relational mapping: A survey on patterns, solutions, and their implications on application design, 28.09.2016r.
     \bibitem{query-builder-paradigm}Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}
+    \bibitem{ionic-framework} Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018
+    \bibitem{ionic-npm} Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/@ionic/cli}
+    \bibitem{react-native-application-development} William Danielsson, React Native application development – A comparison between native Android and React Native, Szwecja, Linköpings universitet, 2016
+    \bibitem{bridge-react-native} Sreekanth Dekkati, Karu Lal, Harshith Desamsetti, React Native for Android: Cross-Platform Mobile Application Development, Global Disclosure of Economics and Business, 12.2019
+    \bibitem{comparison-react-native-and-expo} Hugo Hutri, COMPARISON OF REACT NATIVE AND EXPO, Finlandia, Lappeenranta–Lahti University of Technology LUT, 2023
+    \bibitem{react-native-npm} Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/react-native}
+    \bibitem{react-native-vs-flutter} Wenhao Wu, React Native vs Flutter, cross-platform mobile application frameworks, Finlandia, Metropolia University of Applied Sciences, 01.03.2018
+    \bibitem{flutter-native-performance} Thanh Tran, Flutter Native Performance and Expressive UI/UX, Finlandia, Metropolia University of Applied Sciences, 04.04.2023
+    \bibitem{comparison-between-flutter-and-native-applications} Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020
+    \bibitem{apple-documentation} Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml}
+    
     \end{thebibliography}
 \end{document}
