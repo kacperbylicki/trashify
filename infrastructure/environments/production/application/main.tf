@@ -77,7 +77,7 @@ module "trash-service-application-insights" {
 
 module "trash-service" {
   source                      = "../../../modules/app-service"
-  resource_group              = azurerm_resource_group.main
+  resource_group              = azurerm_resource_group.main.name
   application_name            = "${var.application_name}-trash-service"
   environment                 = var.environment
   location                    = var.location
