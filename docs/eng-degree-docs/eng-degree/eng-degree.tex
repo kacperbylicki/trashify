@@ -21,6 +21,8 @@
 \usepackage{multirow}
 \usepackage{longtable}
 \usepackage{url}
+\usepackage{indentfirst}
+\usepackage{tabularray}
 
 \import{../}{commands.tex}
 
@@ -32,6 +34,18 @@
 }
 
 % Wymogi edycyjne: https://moodle2.e-wsb.pl/pluginfile.php/7505508/mod_resource/content/2/Wymogi%20edycyjne_praca%20dyplomowa.pdf
+
+\NewTblrTheme{fancy}{
+    \SetTblrStyle{firsthead}{foot=\bfseries}
+    \SetTblrStyle{firstfoot}{fg=blue2}
+    \SetTblrStyle{middlefoot}{\itshape}
+    \SetTblrStyle{caption-tag}{red2}
+}
+
+\DefTblrTemplate{contfoot-text}{normal}{Kontynuowane na następnej stronie}
+\SetTblrTemplate{contfoot-text}{normal}
+\DefTblrTemplate{conthead-text}{normal}{(Kontynuacja)}
+\SetTblrTemplate{conthead-text}{normal}
 
 \renewcommand\thesection{\Alph{chapter}\arabic{section}}
 
@@ -89,17 +103,17 @@
 \end{titlepage}
 
 \setcounter{tocdepth}{3}
-\tableofcontents
 
 \chapter{\MakeUppercase{dane partnerów}}
 
 \section{Dane Promotora}
 
+\noindent
 \begin{tabular}{ |p{5cm}|p{7cm}|}
     \hline
     Imię i nazwisko         & Izabela Janicka-Lipska \\
     \hline
-    Stopień / Tytuł naukowy & dr. inż.               \\
+    Stopień / Tytuł naukowy & dr inż.               \\
     \hline
     Data i podpis           &                        \\ \hline
 \end{tabular}
@@ -111,19 +125,20 @@
 
 % Example table and figure formatting
 \section{Wprowadzenie}
-W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń - rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \footnote{s. 149 Ochrona środowiska 2022 - }.
+W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń - rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \footnote{s. 149; Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022r.}.
 
-Jednym z kluczowych aspektów tego wyzwania jest efektywne segregowanie i recykling odpadów, co przyczynia się nie tylko do ochrony środowiska naturalnego, ale także do potencjalnych oszczędności. Jak podaje EEA (Europejska Agencja Ochrony Środowiska), na obywatela Unii Europejskiej przypada średnio 4,8 ton odpadów komunalnych, z czego 49\% jest recyklingowanych \footnote{European Environment Agency}. Recykling może przynieść znaczące korzyści gospodarcze i środowiskowe, w tym zmniejszenie emisji gazów cieplarnianych, ograniczenie zużycia surowców naturalnych oraz tworzenie miejsc pracy. W samej Polsce, między latami 2004 i 2020, procent recyklingu odpadów komunalnych wzrósł z poziomu 4,9 do 38.7\%.
+Jednym z kluczowych aspektów tego wyzwania jest efektywne segregowanie i recykling odpadów, co przyczynia się nie tylko do ochrony środowiska naturalnego, ale także do potencjalnych oszczędności. Jak podaje EEA (Europejska Agencja Ochrony Środowiska), na obywatela Unii Europejskiej przypada średnio 4,8 ton odpadów komunalnych, z czego 49\% jest recyklingowanych \footnote{Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling}}. Recykling może przynieść znaczące korzyści gospodarcze i środowiskowe, w tym zmniejszenie emisji gazów cieplarnianych, ograniczenie zużycia surowców naturalnych oraz tworzenie miejsc pracy. W samej Polsce, między latami 2004 i 2020, procent recyklingu odpadów komunalnych wzrósł z poziomu 4,9 do 38.7\%.
 
 \begin{figure}[h]
-    \centering\includegraphics[width=12cm]{./static/Municipal waste recycling rates in Europe by country.png}
-    \caption{Poziom recyklingu odpadów komunalnych w krajach Unii Europejskiej.\\Źródło: \cite{eea-municipal}}
+    \caption{Poziom recyklingu odpadów komunalnych w krajach Unii Europejskiej.}
+    \centering\includegraphics[width=12cm]{./static/Municipal waste recycling rates in Europe by country.png}\\
+    Źródło: Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling}
 \end{figure}
 
 % TODO: Znaleźć badania na ten temat, zacytować - @kuba
 Jednakże, aby skutecznie promować segregację odpadów i recykling, niezbędne jest zrozumienie ludzkiego zachowania oraz eliminacja "tarcia" związanego ze znalezieniem odpowiedniego pojemnika na odpady. Projekt oferujący łatwy dostęp do informacji o pojemnikach na odpady oraz lokalizacji najbliższego odpowiedniego kontenera usuwa bariery, które często zniechęcają do segregacji. Behawioryka sugeruje, że ludzie są podatni na wpływ norm społecznych i nacisku społeczności lokalnej, co stanowi kolejny argument za promowaniem proekologicznych norm i społecznego zaangażowania.
 
-Niniejsza praca inżynierska skupia się na rozwiązaniu tego wyzwania poprzez wykorzystanie zaawansowanych technologii, takich jak sztuczna inteligencja, uczenie maszynowe, technologie wizyjne oraz geolokalizacja, w celu stworzenia systemu automatycznej klasyfikacji odpadów oraz aplikacji mobilnej, która umożliwia łatwiejsze lokalizowanie pojemników na śmieci w najbliższej okolicy. Naszym celem jest nie tylko zwiększenie efektywności gospodarki odpadami, ale także kształtowanie proekologicznego zachowania i eliminacja barier, które utrudniają segregację odpadów.
+Niniejsza praca inżynierska skupia się na rozwiązaniu tego wyzwania poprzez wykorzystanie zaawansowanych technologii, takich jak sztuczna inteligencja, uczenie maszynowe, technologie wizyjne oraz geolokalizacja, w celu stworzenia systemu automatycznej klasyfikacji pojemników na odpady oraz aplikacji mobilnej, która umożliwia łatwiejsze lokalizowanie pojemników na śmieci w najbliższej okolicy. Naszym celem jest nie tylko zwiększenie efektywności gospodarki odpadami, ale także kształtowanie proekologicznego zachowania i eliminacja barier, które utrudniają segregację odpadów.
 
 \chapter{\MakeUppercase{Założenia projektu}}
 
@@ -148,20 +163,20 @@ W ramach tego problemu badawczego można skoncentrować się na kilku podproblem
     \item analiza dostępnych zbiorów danych:
           \begin{itemize}
               \item znalezienie zbiorów danych do treningu i testowania modelu rozpoznawania pojemników na odpady;
-              \item określenie jak są one zdefiniowane oraz jakie informacje zawierają.
+              \item określenie jak są one zdefiniowane oraz jakie informacje zawierają;
           \end{itemize}
     \item wybór odpowiednich algorytmów uczenia maszynowego:
           \begin{itemize}
-              \item określenie algorytmów uczenia maszynowego, które najlepiej nadają się do rozpoznawania pojemników na odpady na podstawie zdjęć.
+              \item określenie algorytmów uczenia maszynowego, które najlepiej nadają się do rozpoznawania pojemników na odpady na podstawie zdjęć;
           \end{itemize}
     \item przygotowanie zbiorów danych:
           \begin{itemize}
               \item zastosowanie technik przetwarzania obrazów;
-              \item potencjalne użycie technik augmentacji danych.
+              \item potencjalne użycie technik augmentacji danych;
           \end{itemize}
     \item implementacja i trening modelu: wyłonienie najlepszej techniki trenowania modelu bazowanego na obrazach;
     \item ocena skuteczności modelu: określenie metryk, które pozwolą dokładnie ocenić skuteczność modelu w rozpoznawaniu pojemników na odpady;
-    \item analiza cech obrazów: na podstawie analizy modelu, zlokalizowanie cech obrazów odpowiadających za skuteczność procesu rozpoznawania pojemników na odpady;
+    \item analiza cech obrazów: na podstawie analizy modelu, zlokalizowanie cech obrazów odpowiadających za skuteczność procesu rozpoznawania pojemników na odpady.
 \end{itemize}
 
 \subsection{Cel główny i cele szczegółowe projektu}
@@ -192,7 +207,7 @@ Cele podrzędne:
 \begin{itemize}
     \item Metoda analizy i konstrukcji logicznej:
           \begin{itemize}
-              \item analiza składników systemu informacyjnego Trashify na składniki cząstkowe (np. interfejs użytkownika, algorytmy uczenia maszynowego, baza danych itp.);
+              \item analiza składników aplikacji Trashify (np. interfejs użytkownika, algorytmy uczenia maszynowego, baza danych itp.);
               \item indywidualna analiza każdego z tych składników,
                     synteza wyników analizy w celu stworzenia spójnego i logicznego systemu informacyjnego.
           \end{itemize}
@@ -205,7 +220,7 @@ Cele podrzędne:
     \item Metoda symulacji komputerowej:
           \begin{itemize}
               \item wykorzystanie algorytmów uczenia maszynowego do stworzenia modelu rozpoznającego typ pojemnika na odpady;
-              \item przeprowadzenie symulacji na tym modelu, aby zbadać wpływ różnych czynników trafność jego predykcji (np. rozdzielczość zdjęcia, kąt pod jakim zostało ono wykonane, oświetlenie itp.).
+              \item przeprowadzenie symulacji na tym modelu, celem zbadania różnych czynników na jego dokładność (np. rozdzielczość zdjęcia, kąt pod jakim zostało ono wykonane, oświetlenie itp.).
           \end{itemize}
     \item Metoda heurystyczna:
           \begin{itemize}
@@ -244,12 +259,12 @@ niebezpiecznych dla środowisk klienckich.
 Przy projektowaniu aplikacji kluczowym było dobranie odpowiednich narzędzi do
 poszczególnych elementów pracy, takich jak:
 \begin{itemize}
-    \item Język programowania wykorzystany do projektowania aplikacji;
-    \item Framework serwerowy;
-    \item Testy jednostkowe i integracyjne;
-    \item Testy e2e;
-    \item Baza danych;
-    \item Query Buildery bądź dedykowane ORMy; % todo
+    \item język programowania wykorzystany do projektowania aplikacji;
+    \item framework serwerowy;
+    \item testy jednostkowe i integracyjne;
+    \item testy e2e;
+    \item baza danych;
+    \item budowniczy kwerend, dedykowane mapery obiektowo-relacyjne badź mapery obiektowo-dokumentowe;
 \end{itemize}
 
 \paragraph{Język programowania wykorzystany do projektowania aplikacji serwerowej\\}
@@ -277,19 +292,19 @@ Jest on pobierany średnio 30 milionów razy w tygodniu \footnote{Dane za stron�
 \textbf{Fastify} -- framework zainspirowany Express oraz Hapi. Tak jak w przypadku Expressa,
 jest on minimalistyczny, jednakże wprowadza kilka usprawnień oraz rozszerzeń do
 konceptów w nim prezentowanych. Głównym wzorcem tego frameworka jest bogaty system
-wtyczek, które zaimplementowane są na podstawie skierowanego grafu acyklicznego (Rysunek~\ref{fig:ADG})\footnote{Dane za stroną internetową (dostęp 14.11.2023r.)\url{https://fastify.dev/docs/latest/Guides/}}.
+wtyczek, które zaimplementowane są na podstawie skierowanego grafu acyklicznego\footnote{Dane za stroną internetową (dostęp 14.11.2023r.)\url{https://fastify.dev/docs/latest/Guides/}}.
 Każda ścieżka żądania HTTP, dekoratory, haki są traktowane jako wtyczki.
 Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo aplikacji.
 Dodatkowo jest on jednym z najszybszych frameworków serwerowych w ekosystemie node.js\footnote{S. 7; Danil Demashov, Ilya Gosudarve, Efficiency Evaluation of Node.js Web-Server Frameworks, Uniwersytet ITMO, Petersburg, Rosja, 2020r.}
 
 \begin{figure}[h]
+    \caption{Reprezentacja skierowanego grafu acyklicznego}
     \includegraphics[width=6cm]{./static/ADG.png}
     \centering
-    \caption{Reprezentacja skierowanego grafu acyklicznego}
     \label{fig:ADG}
 \end{figure}
 
-\textbf{NestJS} -- To framework opiniowany i jako taki wymusza na użytkowniku stosowanie określonych wzorców.
+\textbf{NestJS} -- to framework opiniowany i jako taki wymusza na użytkowniku stosowanie określonych wzorców.
 Wykorzystuje bieżące zmiany w języku JavaScript (ECMAScript), został zbudowany przy użyciu i w pełni obsługuje TypeScript oraz zawiera w sobie fragmenty
 programowania obiektowego, funkcyjnego i reaktywnego programowania funkcyjnego.
 W przypadku aplikacji internetowych Nest bazowo używa Express jako sterownika HTTP,
@@ -302,7 +317,7 @@ kontrolerów, usług, obiektów transferu danych i innych\footnote{Dane za stron
 \subparagraph{Decyzja\\}
 
 Zespół projektowy zdecydował się na wykorzystanie frameworka NestJS z wykorzystaniem
-Fastify jako sterownik HTTP z uwagi na znaczną różnicę w wydajności względem sterownika Express.
+Fastify jako sterownika HTTP z uwagi na znaczną różnicę w wydajności względem sterownika Express.
 
 Plusy oraz minusy takiej decyzji są następujące:
 
@@ -312,8 +327,8 @@ Plusy oraz minusy takiej decyzji są następujące:
     oraz korzystać z gotowych rozwiązań popularnych problemów;
     \item mniejsza ilość kodu bazowego do napisania;
     \item prostsza separacja logiki biznesowej;
-    \item ułatwione testowanie jednostkowe oraz integracyjne za pomocą wstrzykiwaniu
-    zależności oraz wbudowanym narzędziom testowym;
+    \item ułatwione testowanie jednostkowe oraz integracyjne za pomocą wstrzykiwania
+    zależności oraz dzięki wbudowanym narzędziom testowym;
     \item problematyczna implementacja rozwiązań nieprzewidzianych przez twórców
     frameworka;
     \item niski poziom kontroli nad cyklem życia żądań HTTP oraz samej architektury;
@@ -326,7 +341,7 @@ Zaprojektowanie interfejsu API, który będzie responsywny zarówno na urządzen
 W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL zamiast tradycyjnego RESTful API.
 
 \textbf{GraphQL}\\
-Jest językiem zapytań oraz środowiskiem wykonawczym do interakcji z danymi w aplikacjach opracowanym przez Facebooka (obecnie Meta), którego celem jest ograniczenie nadmiernego i niedostatecznego pobierania danych \footnote{S. 140; Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019.}. Został zaprojektowany z myślą o urządzeniach mobilnych, biorąc pod uwagę ich niską prędkość, pamięć masową i drogie żądania internetowe.
+Opracowanym przez firmę Facebook (obecnie Meta), graphql jest językiem zapytań oraz środowiskiem wykonawczym do interakcji z danymi w aplikacjach, którego celem jest ograniczenie nadmiernego i niedostatecznego pobierania danych \footnote{S. 140; Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019.}. Został zaprojektowany z myślą o urządzeniach mobilnych, biorąc pod uwagę ich niską prędkość, pamięć masową i drogie żądania internetowe.
 W tym języku zapytań wszystkie żądania są wysyłane do pojedynczego punktu końcowego, a wykres danych, zwykle w formacie json, jest analizowany. Następnie zapytania są oceniane i stosowane są odpowiednie zapytania i mutacje.
 
 Składa się on z głównych trzech części:
@@ -355,12 +370,12 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     \item buforowanie będzie łatwo dostępne zarówno po stronie serwera, jak i klienta;
     \item w przypadku problemów, istnieje duża społeczność ekspertów, od których można uzyskać wskazówki;
     \item dobrze udokumentowany zestaw najlepszych praktyk;
-    \item obsługę transferów plików w łatwy, ustandaryzowany sposób;
+    \item obsługa transferów plików w łatwy, ustandaryzowany sposób;
     \item możliwość zwracania odpowiedzi w wielu formatach;
-    \item prostotę implementacji precyzyjnej autoryzacji użytkowników;
+    \item prostota implementacji precyzyjnej autoryzacji użytkowników;
     \item łatwiejsza obsługa błędów po stronie klienta i debugowanie aplikacji serwerowej w porównaniu do środowiska GraphQL;
     \item większa ilość tzw. ,,boilerplate'u`` do napisania - interfejsy ,,RESTful`` zwykle wymagają więcej standardowego kodu niż ich odpowiedniki GraphQL;
-    \item możliwość niedostatecznego i nadmiernego pobierania danych - zostanie to złagodzone dzięki zastosowaniu schematu JSON;
+    \item możliwość niedostatecznego i nadmiernego pobierania danych -- zostanie to złagodzone dzięki zastosowaniu schematu JSON;
     \item aplikacja po stronie klienta może być mniej reaktywna ze względu na mnogość wywołań do serwera - zostanie to złagodzone dzięki wykorzystaniu schematu JSON i rozbudowanemu buforowaniu zarówno po stronie klienta, jak i serwera;
     \item paginacja musi zostać zaimplementowana przez deweloperów;
     \item wersjonowanie API będzie musiało być spójne.
@@ -375,16 +390,16 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
 
 \textbf{Jest} -- popularny i pełen wbudowanych funkcjonalności framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://jestjs.io/docs/api}}:
 \begin{enumerate}[label=--]
-    \item łatwa konfiguracja - w pliku `package.json`, `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
+    \item łatwa konfiguracja -- w pliku `package.json`, `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
     \item obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem bilbioteki supertest i testów migawkowych;
-    \item mocking - z wysokim stopniem dostosowania, w tym mockowanie wartości zwracanych (zarówno w funkcjach synchronicznych, jak i asynchronicznych). Są one przechowywane i mogą być walidowane;
-    \item pokrycie kodu - wbudowane narzędzie do raportowania pokrycia kodu źródłowego;
+    \item mocking -- z wysokim stopniem dostosowania, w tym mockowanie wartości zwracanych (zarówno w funkcjach synchronicznych, jak i asynchronicznych). Są one przechowywane i mogą być walidowane;
+    \item pokrycie kodu -- wbudowane narzędzie do raportowania pokrycia kodu źródłowego;
     \item testowanie równoległe - zwiększenie szybkości testowania, zwłaszcza gdy testy są w pełni niezależne i nie mutują wspólnego zestawu danych;
-    \item tryb watch - uruchamianie testów w tle wraz ze zmianami w kodzie źródłowym i/lub samych testach;
-    \item test matchers - wbudowany zestaw matcherów, które pozwalają na szybkie i wygodne sprawdzanie wyników funkcji i/lub komponentów. Obejmują one między innymi: `toEqual`, `toHaveLength`, `toContain`, `toBeTruthy`, `toBeDefined`;
-    \item konfiguracja globalna - możliwość zadeklarowania zestawu akcji lub manipulacji przed wszystkimi testami (lub określonym ich podzbiorem). Pozwala to programiście na zbudowanie konkretnego, czasochłonnego modułu lub funkcjonalności raz i operowanie na nim we wszystkich testach. Hooki zadeklarowane w konfiguracji globalnej zostaną zastosowane do wszystkich zestawów testów;
+    \item tryb watch -- uruchamianie testów w tle wraz ze zmianami w kodzie źródłowym i/lub samych testach;
+    \item test matchers -- wbudowany zestaw matcherów, które pozwalają na szybkie i wygodne sprawdzanie wyników funkcji i/lub komponentów. Obejmują one między innymi: `toEqual`, `toHaveLength`, `toContain`, `toBeTruthy`, `toBeDefined`;
+    \item konfiguracja globalna -- możliwość zadeklarowania zestawu akcji lub manipulacji przed wszystkimi testami (lub określonym ich podzbiorem). Pozwala to programiście na zbudowanie konkretnego, czasochłonnego modułu lub funkcjonalności raz i operowanie na nim we wszystkich testach. Haki zadeklarowane w konfiguracji globalnej zostaną zastosowane do wszystkich zestawów testów;
     \item obsługa globalnego usuwania środowiska;
-    \item haki cyklu życia testów - są to `beforeEach()`, `beforeAll()`, `afterEach()` i `afterAll()`, które pozwalają na wykonywanie akcji w określonych punktach uruchomionych testów. Pozwala to programistom zadeklarować takie akcje raz i zastosować je do wszystkich przypadków;
+    \item haki cyklu życia testów -- są to `beforeEach()`, `beforeAll()`, `afterEach()` i `afterAll()`, które pozwalają na wykonywanie akcji w określonych punktach uruchomionych testów. Pozwala to programistom zadeklarować takie akcje raz i zastosować je do wszystkich przypadków;
     \item wsparcie dla środowisk testowych Node.js i przeglądarki;
     \item jednoczesne uruchamianie testów w danej przestrzeni (funkcja eksperymentalna).
 \end{enumerate}
@@ -395,7 +410,7 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
     \item używane głównie w BDD (Behavior-Driven Development);
     \item obsługa haków cyklu życia `before`, `after`, `beforeEach` i `afterEach`;
     \item testowanie równoległe ma swoje dobrze zdefiniowane ograniczenia, takie jak użycie `it.only` lub `describe.only`, które są niedostępne. Testowanie równoległe jest dostępne tylko w środowisku Node.js. Haki zadeklarowane na poziomie root nie są globalne w przypadku testowania równoległego;
-    \item dostępny cały zestaw reporterów, zarówno wbudowanych, takich jak `json-stream`, `markdown`, `progress`, `xunit`, `html reporter`, jak i opcji innych firm. Nie działają one dobrze z testami równoległymi, ponieważ oczekują, że Mocha będzie wiedzieć, ile testów planuje uruchomić przed ich wykonaniem;
+    \item dostępny cały zestaw reporterów, zarówno wbudowanych, takich jak `json-stream`, `markdown`, `progress`, `xunit`, `html reporter`, jak i opcji innych firm. Nie działają one dobrze z testami równoległymi, ponieważ oczekują, że Mocha będzie wiedzieć, ile testów planuje się uruchomić przed ich wykonaniem;
     \item obsługa globalnej konfiguracji za pomocą `mochaGlobalSetup`;
     \item obsługa globalnego usuwania środowiska za pomocą `mochaGlobalTeardown`;
     \item obsługa zarówno modułów ES, jak i CommonJS, z zastrzeżeniem, że moduły ES nie są obsługiwane przez tryb watch. To samo dotyczy niestandardowych raporterów i niestandardowego interfejsu;
@@ -409,10 +424,10 @@ Zespół zdecydował się na framework testowy Jest, ponieważ nie wymaga wielu 
 Plusy oraz minusy takiej decyzji są następujące:
 \begin{itemize}
     \item testy będą tworzone przy użyciu dobrze ugruntowanych reguł;
-    \item paczka ,,jest-plugin`` będzie musiała zostać dodana do pliku `.eslintrc` i `package.json`.
-    \item jest ma olbrzymią społeczność z dużą ilością ekspertów, którzy go używają i otwarcie dzielą się wiedzą.
-    \item ilość matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności.
-    \item jest z uwagi na ilość dostępnych możliwości, jak i kompatybilność wsteczną, jest obecnie jednym z najwolniejszych frameworków testowych, co znacznie zwiększy czas potrzebny do wykonania testów.
+    \item paczka ,,jest-plugin`` będzie musiała zostać dodana do pliku `.eslintrc` i `package.json`;
+    \item jest ma olbrzymią społeczność z dużą ilością ekspertów, którzy go używają i otwarcie dzielą się wiedzą;
+    \item ilość matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności;
+    \item Jest z uwagi na ilość dostępnych możliwości, jak i kompatybilność wsteczną, jest obecnie jednym z najwolniejszych frameworków testowych, co znacznie zwiększy czas potrzebny do wykonania testów.
 \end{itemize}
 
 \paragraph{Dobór bazy danych}
@@ -427,35 +442,35 @@ Przedkładają one dostępność nad spójność.
 Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL (niektóre obsługują SQL), można go dokładnie podsumować jako ,,nie tylko SQL``.
 Rodzaje nierelacyjnych struktur baz danych to:
 \begin{enumerate}[label=--]
-    \item Key-value store - jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość.
-    Klucz może być podobny do tego, co znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika.
+    \item Key-value store -- jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość.
+    Klucz może być podobny do tego, jaki znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika.
     Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji.
     Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz.
     Przykładami takich baz danych są Redis, Memcached, KeyDB, czy DragonflyDB\footnote{S. 5 - 19; Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.}.
-    \item Document store - jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów.
+    \item Document store -- jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów.
     Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON.
     Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji.
     Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych.
     Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników.
     Przykładem bazy danych zorientowanej na dokumenty jest MongoDB\footnote{S. 337; Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.}.
-    \item Wide-column store - informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci.
+    \item Wide-column store -- informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci.
     Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach.
     Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn.
     Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data.
     Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych.
     Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym\footnote{S. 118-122; K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.}.
-    \item Graph store - zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości.
+    \item Graph store -- zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości.
     Węzłem może być dowolny obiekt, miejsce lub osoba.
     Krawędź definiuje relację między węzłami.
     Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu.
-    Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source, w której użytkownicy mogą kupować licencje na tworzenie kopii zapasowych online i rozszerzenia wysokiej dostępności lub licencjonowaną wersję wstępną z kopią zapasową i rozszerzeniami\footnote{S. 1548-1552; I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia}.
+    Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source\footnote{S. 1548-1552; I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia}.
 \end{enumerate}
 
 \textbf{Teoria CAP} \\
-Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź, nawet jeżeli ma przekazać przestarzałe dane. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund - być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.\footnote{S. 10-18; Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.}
+Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź, nawet jeżeli ma przekazać przestarzałe dane. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund -- być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.\footnote{S. 10-18; Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.}
 
 \textbf{SQL\\}
-Wynaleziony przez Dona Chamberlina i Raya Boyce'a w IBM, SQL jest standardowym językiem programowania do interakcji z systemami zarządzania relacyjnymi bazami danych \footnote{S. 79; Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r}.
+SQL jest ustandaryzowanym językiem programowania służącym do interakcji z systemami zarządzania relacyjnymi bazami danych. Stworzony został przez Dona Chamberlina i Raya Boyce'a w IBM \footnote{S. 79; Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r}.
 Pierwotnie znany jako SEQUEL, został później uproszczony do SQL, ze względu na kwestię znaku towarowego.
 Jest to de facto standard relacyjnych systemów baz danych.
 Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost między bazą danych a użytkownikami.
@@ -472,10 +487,10 @@ Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami da
 Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu\footnote{S. 1079-1112; Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.}.\\
 Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID\footnote{S. 1; Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.}:
 \begin{enumerate}[label=--]
-    \item \textbf{Atomiczność (eng. Atomicity)} - wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
-    \item \textbf{Spójność (eng. Consistency)} - dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
-    \item \textbf{Izolacja (eng. Isolation)} - stan pośredni transakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
-    \item \textbf{Trwałość (eng. Durability)} - po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
+    \item Atomiczność (eng. Atomicity) - wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
+    \item Spójność (eng. Consistency) - dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
+    \item Izolacja (eng. Isolation) - stan pośredni transakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
+    \item Trwałość (eng. Durability) - po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
 \end{enumerate}
 
 \textbf{Decyzja}\\
@@ -492,7 +507,7 @@ Plusy oraz minusy takiej decyzji są następujące:
 % TODO: Delete if necessaryX
 \newpage
 \paragraph{Warstwa komunikacji z bazą danych}
-\subparagraph{Mapowanie obiektowo-relacyjne, Mapowanie obiektowo-dokumentowe i Budowniczy Kwerend\\}
+\subparagraph{Mapowanie obiektowo-relacyjne, mapowanie obiektowo-dokumentowe i budowniczy kwerend\\}
 Mapery obiektowo-relacyjne, obiektowo-dokumentowe czy budowniczy kwerend są niezbędnymi narzędziami do utrzymywania deklaratywnego podejścia do komunikacji z systemem bazo-danowym.
 Na rynku dostępnych jest wiele bibliotek oferujących konkurujące rozwiązania.
 Zespół postanowił zbadać możliwość wykorzystania każdego z kategorii abstrakcji, celem wyłonienia najbardziej dopasowanego do potrzeb rozwiązania.
@@ -514,11 +529,11 @@ W środowisku node.js pojawiło się takowych wiele, między innymi:
 
 \textbf{Mapowanie obiektowo-dokumentowe\\}
 Mapowanie obiektowo-dokumentowe powstało wraz z bazami NoSQL, których to system często nie posiada schematów danych.
-Tak samo jak w przypadku mapowania obiektowo-relacyjnego, ma ono na celu uproszczenie interakcji pomiędzy aplikacją, a bazą danych. Powstało ono w celu wyabstrakcjonowania procesu zarządznia i mapowania obiektów z ich natywnej dla bazy danych struktury, do takiej zrozumiałej przez język programowania, jak również utrzymującej konwencje programowania obiektowego.\footnote{S. 59130-59131; Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania}
+Tak samo jak w przypadku mapowania obiektowo-relacyjnego, ma ono na celu uproszczenie interakcji pomiędzy aplikacją a bazą danych. Powstało ono w celu wyabstrakcjonowania procesu zarządznia i mapowania obiektów z ich natywnej dla bazy danych struktury, do takiej zrozumiałej przez język programowania, jak również utrzymującej konwencje programowania obiektowego.\footnote{S. 59130-59131; Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania}
 
-W środowisku node.js na przestreni lat powstały między innymi następujące mapery obiektowo-dokumentowe:
+W środowisku node.js na przestrzeni lat powstały między innymi następujące mapery obiektowo-dokumentowe:
 \begin{enumerate}[label=--]
-    \item mongoose - dedykowany dla bazy MongoDB mapper obiektowo-dokumentowy. Posiada wiele funkcjonalności związane z procesem hydracji POJO (eng. plain-old-javascript-object), ktore zapewniają walidację obiektów, dodawanie pól wirtualnych i inne.
+    \item mongoose - dedykowany dla bazy MongoDB mapper obiektowo-dokumentowy. Posiada wiele funkcjonalności związane z procesem wzbogacania POJO (eng. plain-old-javascript-object), ktore zapewniają walidację obiektów, dodawanie pól wirtualnych i inne.
     \item prisma - wcześniej wymieniony ORM, który posiada wsparcie dla MongoDB i funkcjonuje w trybie wymuszonej transakcyjności danych na bazie tzw. zbiorów replik (eng. replica set).
 \end{enumerate}
 
@@ -535,17 +550,17 @@ Plusy oraz minusy takiej decyzji są następujące:
     \item wszystkie typy danych natywne dla MongoDB będą łatwo dostępne pod ręką z intuicyjnym, przewidywalnym zachowaniem;
     \item wbudowana walidacja zmniejszy ilość wymaganego kodu standardowego;
     \item nie będzie żadnych, narzuconych przez bibliotekę, ograniczeń dotyczących samej konfiguracji bazy danych;
-    \item wszystkie funkcje MongoDB będą dostępne i wyabstraktoowane za pośrednictwem interfejsów API Mongoose;
+    \item wszystkie funkcje MongoDB będą dostępne i ukryte za interfejsami API Mongoose;
     \item polecenia będą buforowane na wypadek awarii lub ponownego uruchomienia bazy danych;
     \item bezpieczeństwo typów będzie trudniejsze do utrzymania;
     \item dogłębna znajomość tego narzędzia będzie niezbędna, celem pełnego wykorzystania jego możliwości;
-    \item brak wbudowanego GUI, służącego jako swoisty debugger - złagodzone za pomocą MongoDB Atlas;
+    \item brak wbudowanego GUI, służącego jako swoisty debugger -- złagodzone za pomocą MongoDB Atlas.
 \end{enumerate}
 
 \subsubsection{Aplikacja mobilna}
 
-\subparagraph{Wybór technologii}
-Jako zespół programistów stanęliśmy przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji musimy wziąć pod uwagę nasze umiejętności, okres czasu, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
+\subparagraph{Wybór technologii\\}
+Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres czasu, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 
 \textbf{Javascript -- Ionic 6\\}
 Ionic 6 to framework typu open-source do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty UI oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji. \footnote{S. 3181 - 3182; Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018}
@@ -575,7 +590,7 @@ Zalety:
     \item szybkie tworzenie aplikacji dzięki wykorzystaniu JavaScript i popularnej biblioteki React;
     \item możliwość tworzenia natywnych aplikacji mobilnych z jedną bazą kodu dla różnych systemów operacyjnych;
     \item łatwa konserwacja i skalowalność aplikacji dzięki wykorzystaniu komponentów UI wielokrotnego użytku, które mogą być używane w różnych systemach operacyjnych;
-    \item dostęp do natywnych funkcji systemu operacyjnego poprzez architekturę "bridge"; \footnote{S. 154; Sreekanth Dekkati, Karu Lal, Harshith Desamsetti, React Native for Android: Cross-Platform Mobile Application Development, Global Disclosure of Economics and Business, 12.2019}
+    \item dostęp do natywnych funkcji systemu operacyjnego poprzez architekturę ,,bridge``; \footnote{S. 154; Sreekanth Dekkati, Karu Lal, Harshith Desamsetti, React Native for Android: Cross-Platform Mobile Application Development, Global Disclosure of Economics and Business, 12.2019}
     \item łatwe wdrażanie aktualizacji i zmian aplikacji bez konieczności weryfikacji w sklepie z aplikacjami, która jest wymagana w przypadku aplikacji natywnych; \footnote{S. 42; Hugo Hutri, COMPARISON OF REACT NATIVE AND EXPO, Finlandia, Lappeenranta–Lahti University of Technology LUT, 2023}
     \item duża społeczność deweloperów i liczne zasoby online, które ułatwiają rozwiązywanie problemów i znajdowanie gotowych rozwiązań. \footnote{Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/react-native}}
 \end{enumerate}
@@ -589,7 +604,7 @@ Wady:
 \end{enumerate}
 
 \textbf{Flutter\\}
-Flutter to otwarto-źródłowy framework do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe. \footnote{S. 6; Wenhao Wu, React Native vs Flutter, cross-platform mobile application frameworks, Finlandia, Metropolia University of Applied Sciences, 01.03.2018}
+Flutter to otwartoźródłowy framework do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe. \footnote{S. 6; Wenhao Wu, React Native vs Flutter, cross-platform mobile application frameworks, Finlandia, Metropolia University of Applied Sciences, 01.03.2018}
     
 Zalety:
 \begin{enumerate}[label=--]
@@ -614,22 +629,22 @@ Zalety:
     \item wysoka wydajność: Aplikacje natywne mają dostęp do pełnych możliwości platformy, co może skutkować szybszym i płynniejszym działaniem w porównaniu do aplikacji zbudowanych przy użyciu wieloplatformowych frameworków; \footnote{S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020}
     \item lepsze doświadczenie użytkownika: Aplikacje natywne mogą wykorzystywać komponenty interfejsu użytkownika specyficzne dla platformy, co zapewnia bardziej dopracowane i płynne wrażenia użytkownika;
     \item dostęp do funkcji urządzenia: Twórcy aplikacji natywnych mają dostęp do funkcji i możliwości specyficznych dla urządzenia, takich jak GPS, kamera i mikrofon, co pozwala im tworzyć aplikacje z zaawansowanymi funkcjami; \footnote{S. 16; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
-    \item solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (eng. IDE), narzędzia do debugowania i struktury do testowania aplikacji.
+    \item solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (eng. IDE), narzędzia do debugowania i struktury do testowania aplikacji;
     \item wykorzystanie zaawansowanych możliwości uczenia maszynowego dzięki integracji z Core ML oraz optymalizacja dla Neural Engine w urządzeniach Apple, co pozwala na wydajne i efektywne wykonywanie zadań związanych z AI, takich jak rozpoznawanie obrazu, przetwarzanie języka naturalnego czy analiza danych. \footnote{ Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml} }
 \end{enumerate}
 
 Wady:
 \begin{enumerate}[label=--]
-    \item dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy. \footnote{S. 26 - 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
-    \item ograniczona przenośność: Aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy.
+    \item dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy; \footnote{S. 26 - 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
+    \item ograniczona przenośność: Aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy;
     \item stroma krzywa uczenia się: Nauka natywnych języków i narzędzi programistycznych może być trudnym i czasochłonnym procesem, szczególnie dla programistów, którzy są nowicjuszami w tworzeniu aplikacji mobilnych.
 \end{enumerate}
 
 \textbf{Decyzja\\}
-Zdecydowaliśmy się na wykorzystanie natywnego dla systemów iOS języka Swift ze względu na wbudowane wsparcie Machine Learning oraz możliwość użycia Neural Engine na urządzeniach mobilnych.
+Zdecydowano się na wykorzystanie natywnego dla systemów iOS języka Swift ze względu na wbudowane wsparcie Machine Learning oraz możliwość użycia Neural Engine na urządzeniach mobilnych.
 
 \textbf{Konsekwencje\\}
-Decyzja o użyciu języka Swifta podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Nasze rozwiązanie będzie dostępne dla urządzeń z systemem IOS. Dzięki wsparciu Machine Learning unikniemy wielu problemów związanych z implementacją rozwiązania.
+Decyzja o użyciu języka Swift podczas tworzenia aplikacji mobilnej będzie miała kilka pozytywnych konsekwencji. Doprowadzi to do bardzo dobrej wydajności naszej aplikacji. Rozwiązanie zespołu będzie dostępne dla urządzeń z systemem IOS. Dzięki wsparciu Machine Learning zespół uniknie wielu problemów związanych z implementacją rozwiązania.
 
 \subsection{Założenia teoretyczne}
 \subsubsection{Model uczenia maszynowego}
@@ -659,7 +674,7 @@ W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby un
 
 %4. Ewaluacja Modelu:
 \textbf{Ewaluacja modelu\\}
-Model został oceniony na zbiorze testowym, a osiągnięte accuracy wyniosło 68\%. 
+Model został oceniony na zbiorze testowym, a osiągnięta dokładność wyniosła 68\%. 
 Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz F1-score, aby dostarczyć kompleksowej oceny skuteczności modelu.
 
 %5. Użyte Technologie:
@@ -683,7 +698,7 @@ Aby zapobiec wprowadzeniu zniekształceń, które nie mają istotnego znaczenia 
 Działa to zarówno na korzyść procesu uczenia, jak i na efektywność modelu.
 
 %4. Konwersja Do Formatu Wejściowego Modelu:
-Model wymagał, aby dane były w odpowiednim formacie, który umożliwiają technologie takie jak CoreML efektywne przetwarzanie.
+Model wymagał, aby dane były w odpowiednim formacie, który umożliwia technologiom takim jak CoreML efektywne ich przetwarzanie.
 Zastosowano konwersję obrazów do formatu zgodnego z wymaganiami modelu.
 
 %5. Etykietowanie Danych:
@@ -696,7 +711,7 @@ W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności gen
 \paragraph{Dobór kluczowych cech szczególnych\\}
 %1. Wykorzystanie Ekstraktora Cech "Image Feature Print V2":
 \textbf{Ekstraktor cech\\}
-W ramach tej pracy inżynierskiej zdecydowano się na skorzystanie z "Image Feature Print V2" jako ekstraktora cech.
+W ramach tej pracy inżynierskiej zdecydowano się na skorzystanie z ,,Image Feature Print V2`` jako ekstraktora cech.
 Ten ekstraktor pozwala na automatyczne wydobycie istotnych cech z obrazów, co jest szczególnie ważne w kontekście uczenia maszynowego.
 
 %2. Analiza Hierarchii Cech:
@@ -737,11 +752,11 @@ Zdecydowano się na technologie takie jak CoreML i Create ML, które są zoptyma
 Umożliwiają one skuteczne implementowanie modeli opartych na algorytmach CNN na urządzeniach mobilnych.
 
 %4. Zastosowanie Feature Extractora "Image Feature Print V2":
-Feature Extractor "Image Feature Print V2" został użyty do automatycznego wydobycia kluczowych cech z obrazów.
+Feature Extractor ,,Image Feature Print V2`` został użyty do automatycznego wydobycia kluczowych cech z obrazów.
 Jego wybór był związany z założeniem, że odpowiednie cechy istotnie wpłyną na skuteczność modelu.
 
 %5. Tunele Hiperparametru:
-Przeprowadzono proces tuneowania hiperparametrów, takich jak współczynniki uczenia, liczba warstw konwolucyjnych, liczba neuronów w warstwach gęstych itp.
+Przeprowadzono proces tunelowania hiperparametrów, takich jak współczynniki uczenia, liczba warstw konwolucyjnych, liczba neuronów w warstwach gęstych itp.
 Optymalizacja hiperparametrów była kluczowym elementem w dostosowaniu modelu do konkretnego zadania.
 
 %6. Ocena Algorytmów Klasyfikacyjnych:
@@ -783,7 +798,7 @@ Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co 
 
 %7. Monitorowanie Skuteczności:
 Podczas procesu nauczania monitorowano skuteczność modelu na zbiorze walidacyjnym.
-Oceniano miary takie jak accuracy, precyzja, recall i F1-score.
+Oceniano miary takie jak dokładność, precyzja, recall i F1-score. %recall i F1-score trzeba będzie jakoś przetłumaczyć
 To pozwalało na ocenę, czy model generalizuje się dobrze na nowe dane.
 
 %8. Ewaluacja i Optymalizacja:
@@ -795,8 +810,9 @@ Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacj
 % TODO: Embed in the mobile section
 \begin{figure}[h]
     \centering
+    \caption{Widoki aplikacji mobilnej w formie diagramu przepływu}
     \includegraphics[width=13.5cm]{./MobileAppFlows.png}
-    \caption{Widoki aplikacji mobilnej w formie diagramu przepływu\\Źródło: Opracowanie własne}
+    \\Źródło: Opracowanie własne
 \end{figure}
 
 \subsection{Badania empiryczne/Inne}
@@ -805,59 +821,36 @@ Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacj
 
 \newpage
 
-\begin{longtable}{ | p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}| }
+\begin{longtblr}[
+    caption = {Zadania w projekcie}
+]{| p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}|}
     \hline
     Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania                                                                                    & Osoby zaangażowane w realizację zadania \\
     \hline
-    \multirow[t]{9}{\linewidth}{Cel 1: Przygotowanie modeli uczenia maszynowego}
-                              & \task{Zadanie 1: Zebranie danych kontekstowych}{1. Kacper Bylicki}{}{}{}
-    \cline{2-3}
-                              & \task{Zadanie 2: Przygotowanie danych treningowych}{1. Kacper Bylicki}{2. Jakub Barczewski}{3. Marek Gerszendorf}{}
-    \cline{2-3}
-                              & \task{Zadanie 3: Dobranie algorytmów uczenia maszynowego}{1. Kacper Bylicki}{}{}{}
-    \cline{2-3}
-                              & \task{Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego}{1. Kacper Bylicki}{2. Jakub Barczewski}{}{}
-    \cline{2-3}
-                              & \task{Zadanie 5: Przeprowadzenie testów i poprawek}{1. Kacper Bylicki}{}{}{}
+    {Cel 1:\\Przygotowanie modeli uczenia maszynowego} & Zadanie 1: Zebranie danych kontekstowych & 1. Kacper Bylicki \\
+    {} & Zadanie 2: Przygotowanie danych treningowych & {1. Kacper Bylicki\\2. Jakub Barczewski\\3. Marek Gerszendorf}\\
+    {} & {Zadanie 3: Dobranie algorytmów uczenia maszynowego\\} & {1. Kacper Bylicki\\2. Jakub Barczewski} \\
+    {} & {Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego\\} & {1. Kacper Bylicki\\2. Jakub Barczewski}\\
+    {} & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Kacper Bylicki}\\
     \hline
-    \newpage
+    {Cel 2:\\Przygotowanie aplikacji serwerowej sterującej algorytmami uczenia maszynowego} & Zadanie 1: Stworzenie diagramu architektury aplikacji & {1. Jakub Barczewski\\2. Kacper Bylicki}\\
+    {} & {Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją serwerową a aplikacją mobilną\\} &{1. Jakub Barczewski}\\
+    {} & {Zadanie 3: Przeprowadzenie testów i poprawek\\} & {1. Jakub Barczewski\\2. Kacper Bylicki\\3. Marek Gerszendorf}\\
+    {} & {Zadanie 4: Dokonanie optymalizacji aplikacji\\ \\} & 1. Jakub Barczewski\\
     \hline
-    \multirow[t]{9}{\linewidth}{Cel 2: Przygotowanie aplikacji serwerowej sterującej algorytmami uczenia maszynowego}
-                              & \task{Zadanie 1: Stworzenie diagramu architektury aplikacji}{1. Jakub Barczewski}{2. Kacper Bylicki}{}{}
-    \cline{2-3}
-                              & \task{Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją serwerową, a aplikacją mobilną}{1. Jakub Barczewski}{}{}{}
-    \cline{2-3}
-                              & \task{Zadanie 3: Przeprowadzenie testów i poprawek}{1. Jakub Barczewski}{2. Kacper Bylicki}{3. Marek Gerszendorf}{}
-    \cline{2-3}
-                              & \task{Zadanie 4: Dokonanie optymalizacji aplikacji}{1. Jakub Barczewski}{}{}{}
+    {Cel 3: Przygotowanie aplikacji mobilnej} & {Zadanie 1: Stworzenie diagramu architektury aplikacji}&{1. Marek Gerszendorf}\\
+    {} & Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    {} & Zadanie 3: Stworzenie prototypu aplikacji & {1. Marek Gerszendorf}\\
+    {} & {Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją a aplikacją serwerową} & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    {} & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Marek Gerszendorf} \\
     \hline
-    \newpage
+    {Cel 4:\\Przygotowanie dokumentacji technicznej projektu} & Zadanie 1: Stworzenie diagramu architektury projektu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    {} & {Zadanie 2: Rozrysowanie wzorca relacji w bazie danych (diagram ERD)}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
+    {} & {Zadanie 3: Przygotowanie diagramu komunikacji aplikacji serwerowej oraz mobilnej}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
+    {} & {Zadanie 4: Przygotowanie diagramu sekwencji do procesów aplikacji}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
+    {} & {Zadanie 5: Stworzenie instrukcji instalacyjnej oraz developerskiej}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
     \hline
-    \multirow[t]{9}{\linewidth}{Cel 3: Przygotowanie aplikacji mobilnej}
-                              & \task{Zadanie 1: Stworzenie diagramu architektury aplikacji}{1. Marek Gerszendorf}{}{}{}
-    \cline{2-3}
-                              & \task{Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
-    \cline{2-3}
-                              & \task{Zadanie 3: Stworzenie prototypu aplikacji}{1. Marek Gerszendorf}{}{}{}
-    \cline{2-3}
-                              & \task{Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją, a aplikacją serwerową}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
-    \cline{2-3}
-                              & \task{Zadanie 5: Przeprowadzenie testów i poprawek}{1. Marek Gerszendorf}{}{}{}
-    \hline
-    \newpage
-    \hline
-    \multirow[t]{9}{\linewidth}{Cel 4: Przygotowanie dokumentacji technicznej projektu}
-                              & \task{Zadanie 1: Stworzenie diagramu architektury projektu}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
-    \cline{2-3}
-                              & \task{Zadanie 2: Rozrysowanie wzorca relacji w bazie danych (diagram ERD)}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
-    \cline{2-3}
-                              & \task{Zadanie 3: Przygotowanie diagramu komunikacji aplikacji serwerowej oraz mobilnej}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
-    \cline{2-3}
-                              & \task{Zadanie 4: Przygotowanie diagramu sekwencji do procesów aplikacji}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
-    \cline{2-3}
-                              & \task{Zadanie 5: Stworzenie instrukcji instalacyjnej oraz developerskiej}{1. Marek Gerszendorf}{2. Kacper Bylicki}{3. Jakub Barczewski}{}
-    \hline
-\end{longtable}
+\end{longtblr}
 
 \section{Efekty realizacji projektu}
 
