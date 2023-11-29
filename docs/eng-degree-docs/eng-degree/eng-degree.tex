@@ -244,7 +244,6 @@ Cele podrzędne:
 
 \section{Opracowanie projektu}
 
-
 \subsection{Założenia teoretyczne}
 
 \subsubsection{Framework aplikacji serwerowej}
@@ -365,7 +364,7 @@ Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne 
     \item konfiguracja może być tylko plikiem CommonJS `.mocharc.js` lub `.mocharc.cjs`.
 \end{enumerate}
 
-\subparagraph{Typy baz danych\\}
+\subsection{Typy baz danych}
 
 \forceindent \textbf{Bazy nierelacyjne (NoSQL)}\\
 \forceindent Bazy danych No-SQL nie mają tak sztywnego schematu bazy danych jak ich relacyjne odpowiedniki.
@@ -426,6 +425,12 @@ Transakcje mają specyficzne właściwości, które są reprezentowane przez akr
     \item Izolacja (eng. \textit{Isolation}) - stan pośredni transakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
     \item Trwałość (eng. \textit{Durability}) - po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
 \end{enumerate}
+
+
+\subsubsection{Komunikacyja między mikroserwisami}
+
+\forceindent \textbf{gRPC\\}
+\forceindent gRPC (eng. \textit{Google Remote Procedure Call}) jest frameworkiem służącym do wydajnej komunikacji pomiędzy aplikacjami za pomocą protokołu HTTP/2. Oparty na technologii protobuforów (eng. \textit{Protocol Buffers}), która to pozwala na komunikacje pomiędzy serwisami za pomocą przesyłu binarnych danych w uporządkowanym strumieniu bajtów.\footnote{S. 2-4; Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico}
 
 \subsubsection{Aplikacja mobilna}
 
@@ -746,7 +751,7 @@ Plusy oraz minusy takiej decyzji są następujące:
 \end{enumerate}
 
 \paragraph{Aplikacja mobilna\\}
-\textbf{Decyzja\\}
+\forceindent \textbf{Decyzja\\}
 \indent Zdecydowano się na wykorzystanie natywnego dla systemów iOS języka Swift ze względu na wbudowane wsparcie Machine Learning oraz możliwość użycia Neural Engine na urządzeniach mobilnych.
 
 \textbf{Konsekwencje\\}
@@ -814,10 +819,6 @@ Plusy oraz minusy takiej decyzji są następujące:
     \item Jest z uwagi na ilość dostępnych możliwości, jak i kompatybilność wsteczną, jest obecnie jednym z najwolniejszych frameworków testowych, co znacznie zwiększy czas potrzebny do wykonania testów.
 \end{itemize}
 
-% TODO: Embed in the mobile section
-
-\subsection{Badania empiryczne/Inne}
-% TODO cały zespół
 \section{Zadania w projekcie}
 
 \begin{longtblr}[
@@ -869,18 +870,21 @@ Plusy oraz minusy takiej decyzji są następujące:
 
 \begin{figure}[H]
     \textbf{\caption{Diagram pobierania danych śmietników}}
+    \vspace{0.55em}
     \includegraphics[width=16cm]{./static/diagrams/diagram-pobierania-danych-smietniczkow.png}\\
     \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \begin{figure}[H]
     \textbf{\caption{Diagram rejestracji użytkownika}}
-    \centering\includegraphics[width=16cm]{./static/diagrams/diagram-rejestracji.png}\\
+    \vspace{0.55em}
+    \centering\includegraphics[width=12cm]{./static/diagrams/diagram-rejestracji.png}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \begin{figure}[H]
     \textbf{\caption{Diagram resetu hasła użytkownika}}
+    \vspace{0.55em}
     \includegraphics[width=16cm]{./static/diagrams/diagram-resetu-hasla.png}\\
     \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -889,8 +893,8 @@ Plusy oraz minusy takiej decyzji są następujące:
 \begin{figure}[H]
     \centering
     \textbf{\caption{Widoki aplikacji mobilnej w formie diagramu przepływu}}
-    \includegraphics[width=13.5cm]{./MobileAppFlows.png}
-    \scriptsize{Źródło: Opracowanie własne}
+    \includegraphics[width=12.5cm]{./MobileAppFlows.png}
+    \raggedright{\scriptsize{\\Źródło: Opracowanie własne}}
 \end{figure}
 
 \subsection{Zużycie CPU: Flutter vs. Aplikacje Natywne}
@@ -911,6 +915,8 @@ Finalnie, aplikacja serwerowa podzielona jest na cztery mikroserwisy, odpowiedni
 \begin{itemize}[label=--]
     \item mikroserwis kont użytkownika -- odpowiedzialny za wszystkie operacje związane z zarządzaniem kontem, zmianą hasła, adresu email oraz autoryzację użytkowników;
     \item mikroserwis śmietników -- zajmujący się agregacją oraz komunikacją z bazą danych pod kątem wyszukiwania śmietników;
+    \item mikroserwis emailowy -- jego jedynym zadaniem jest obsługa wysyłania wiadomośći email;
+    \item bramka interfejsu aplikacji (eng. \textit{api gateway}) - służąca za punkt dostępu do interfejsu, w której odbywa się komunikacja między mikroserwisami oraz autoryzacja i autentykacja użytkowników.
 \end{itemize}
 
 \subsection{Aplikacja mobilna}
@@ -965,13 +971,27 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 \subsection{Problemy z realizacją aplikacji mobilnej}
 \forceindent{W trakcie pracy nad projektem aplikacji mobilnej, który był realizowany w grupie, napotkaliśmy kilka istotnych problemów. Pierwszym z nich był problem z wyświetlaniem punktów na mapie, gdzie główną trudnością było skomunikowanie aplikacji z danymi geolokacyjnymi, które były aktualizowane w czasie rzeczywistym w modelu. To spowodowało wyzwania związane z odpowiednim pobieraniem i wyświetlaniem tych danych na interfejsie użytkownika. Kolejnym problemem była efektywność wyszukiwania punktów na mapie, które miało być dynamiczne i responsywne. Jednak napotkaliśmy trudności związane z aktualizacją koordynatów punktów w modelu oraz ich odwzorowaniem na mapie. To wymagało starannej synchronizacji między danymi w modelu a ich reprezentacją na mapie.}
 
+Całość komunikacji pomiędzy bramką interfejsu aplikacji, a mikroserwisami, oparta jest na technologi gRPC. Wiadomości wysyłane są za pomocą protobuforów, a komunikacja z klientem oparta jest na protokole HTTPS.
+
+W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
+
 \section{Użyteczność projektu}
+
+\forceindent Projekt \topic bazowany jest na zaawansowanych narzędziach programistycznych, dostarczając intuincyjny interfejs użytkownika, co pozwala na szybkie zrozumienie dostępnych funkcjonalności przez nowych użytkowników.
+
+Aplikacja będąca wynikiem tego projektu, zwiększa efektywność w segregacji odpadów, a dzięki funkcji kategoryzacji pojemników na odpady opartej na uczeniu maszynowym, użytkownicy mogą łatwo i szybko zidentyfikować, do jakiego pojemnika powinni wyrzucić dany rodzaj odpadu. Poprawia to efektywność procesu segregacji odpadów oraz wspiera inicjatywy związane z recyklingiem.
+
+Funkcja geolokalizacji umożliwia użytkownikom łatwe odnalezienie istniejących pojemników na odpady w ich okolicy.
+Dodatkowo, możliwość dodawania nowych pojemników poprzez przesłanie zdjęcia i analizę przez model uczenia maszynowego sprawia, że aplikacja może być aktualizowana na bieżąco, dostarczając informacje o nowych punktach zbiórki odpadów.
+
+Aplikacja zwiększa świadomość ekologiczną użytkowników, będąc swoistego rodzaju narzędziem edukacyjnym. Pomaga użytkownikom zrozumieć, dlaczego segregacja odpadów jest istotna dla środowiska.
+Poprzez dostarczanie informacji na temat różnych rodzajów odpadów i ich właściwej kategorii, aplikacja może przyczynić się do zwiększenia świadomości ekologicznej społeczeństwa.
+
+Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo dostępna dla szerokiego grona użytkowników, co zwiększa jej dostępność.
 
 \section{Autoewaluacja zespołu projektowego}
 
 \section{Wykorzystane materiały i bibliografia związana z realizacją projektu}
-
-%Załączniki - mają być generowane automatycznie, do ogarnięcia :)
 
 \begin{thebibliography}{9}
     \bibitem{gus} Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022r.
@@ -1016,6 +1036,6 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \bibitem{flutter-native-performance} Thanh Tran, Flutter Native Performance and Expressive UI/UX, Finlandia, Metropolia University of Applied Sciences, 04.04.2023
     \bibitem{comparison-between-flutter-and-native-applications} Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020
     \bibitem{apple-documentation} Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml}
-    
+    \bibitem{gRPC-performance} Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico
     \end{thebibliography}
 \end{document}
