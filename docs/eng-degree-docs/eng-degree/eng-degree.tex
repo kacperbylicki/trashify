@@ -893,6 +893,15 @@ Plusy oraz minusy takiej decyzji są następujące:
     \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
+\subsection{Zużycie CPU: Flutter vs. Aplikacje Natywne}
+\begin{figure}[H]
+    \centering
+    \textbf{\caption{Porównanie Zużycia CPU: Flutter vs. Aplikacje Natywne na iOS i Android.}}
+    \vspace{0.8em}
+    \includegraphics[width=13.5cm]{./static/CPU-Usage-Comparison-Flutter-vs-Native-iOS-Android.png}
+    \raggedright\scriptsize{\\Źródło: S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
+\end{figure}
+
 \subsection{Aplikacja serwerowa}
 
 \forceindent Aplikacja serwerowa oparta jest na frameworku NestJS, który to zapewnia dużą ilość gotowych rozwiązań. Niestety, nie są one w pełni intuicyjne, ani pozbawione błędów.
@@ -903,6 +912,58 @@ Finalnie, aplikacja serwerowa podzielona jest na cztery mikroserwisy, odpowiedni
     \item mikroserwis kont użytkownika -- odpowiedzialny za wszystkie operacje związane z zarządzaniem kontem, zmianą hasła, adresu email oraz autoryzację użytkowników;
     \item mikroserwis śmietników -- zajmujący się agregacją oraz komunikacją z bazą danych pod kątem wyszukiwania śmietników;
 \end{itemize}
+
+\subsection{Aplikacja mobilna}
+
+\forceindent Implementując naszą aplikację mobilną w języku Swift, wybraliśmy ten język ze względu na jego wydajność i elastyczność. Jednak podczas procesu tworzenia napotkaliśmy wiele wyzwań, które były spowodowane zarówno architekturą aplikacji, jak i wbudowanymi rozwiązaniami dostępnymi w języku Swift. Podobnie jak w przypadku frameworka NestJS w naszej aplikacji serwerowej, Swift dostarcza wiele gotowych rozwiązań i narzędzi, ale często są one mało intuicyjne lub mogą zawierać błędy. Nasz zespół musiał się zmierzyć z tymi problemami i dostosować te rozwiązania do naszych potrzeb. Jednocześnie stworzyliśmy własne komponenty i moduły, które integrowaliśmy z istniejącym kodem, aby zapewnić płynność działania i najlepsze wrażenia z użytkowania naszej aplikacji.
+
+Aplikację mona podzielić na cztery moduły, które obejmują:
+
+\begin{itemize}
+    \item Moduł Autoryzacji
+        \begin{itemize}
+            \item Użytkownik ma możliwość zalogowania się do aplikacji, podając swój adres e-mail i hasło.
+            \item Tworzenie konta polega na dostarczeniu danych użytkownika oraz potwierdzeniu konta poprzez link wysłany na podany adres e-mail.
+            \item Istnieje również opcja odzyskiwania zapomnianego hasła, gdzie użytkownik może podać swój adres e-mail i przejść przez proces resetowania hasła za pośrednictwem linku wysłanego na jego e-mail.
+        \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item Moduł Dodawania Śmietników
+        \begin{itemize}
+            \item Aby dodać nowy śmietnik, użytkownik przechodzi do dedykowanego panelu dostępnego na stronie głównej.
+            \item Po dodaniu zdjęcia, model uczenia maszynowego rozpoznaje rodzaj śmietnika na zdjęciu.
+            \item Użytkownik ma możliwość edytowania tej informacji oraz podania dokładnego adresu.
+            \item Po wprowadzeniu danych, punkt zostaje zaznaczony na mapie.
+        \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item Strona Główna
+        \begin{itemize}
+            \item Na stronie głównej znajduje się mapa, na której widoczne są oznaczone śmietniki.
+            \item Mapę można przeszukiwać za pomocą wbudowanej wyszukiwarki znajdującej się w górnej części aplikacji.
+            \item Po kliknięciu na oznaczenie, użytkownik otrzymuje informacje dotyczące wybranego śmietnika.
+        \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item Panel Użytkownika
+        \begin{itemize}
+            \item W panelu użytkownika użytkownik może zarządzać swoimi danymi, które można edytować.
+            \item Istnieje przycisk przekierowujący użytkownika do ustawień aplikacji.
+            \item Użytkownik ma możliwość zmiany motywu aplikacji na jasny lub ciemny.
+            \item Możliwość wylogowania.
+        \end{itemize}
+\end{itemize}
+
+\subsection{Stylowanie Interfejsu Użytkownika}
+\forceindent Stylowanie interfejsu użytkownika było istotnym aspektem projektu. Dzięki SwiftUI, możliwe było zdefiniowanie wyglądu i stylu poszczególnych widoków w sposób deklaratywny. Przykładowo, używając modifiaktorów takich jak .font(), .foregroundColor(), czy .background(), można było łatwo dostosować czcionki, kolory i tła elementów interfejsu użytkownika.
+
+Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizowanych widoków oraz dostosowywania przycisków i ikon. Stylowanie było przemyślane tak, aby spełnić oczekiwania użytkowników i zachować spójność z wytycznymi projektu.
+
+\subsection{Problemy z realizacją aplikacji mobilnej}
+\forceindent{W trakcie pracy nad projektem aplikacji mobilnej, który był realizowany w grupie, napotkaliśmy kilka istotnych problemów. Pierwszym z nich był problem z wyświetlaniem punktów na mapie, gdzie główną trudnością było skomunikowanie aplikacji z danymi geolokacyjnymi, które były aktualizowane w czasie rzeczywistym w modelu. To spowodowało wyzwania związane z odpowiednim pobieraniem i wyświetlaniem tych danych na interfejsie użytkownika. Kolejnym problemem była efektywność wyszukiwania punktów na mapie, które miało być dynamiczne i responsywne. Jednak napotkaliśmy trudności związane z aktualizacją koordynatów punktów w modelu oraz ich odwzorowaniem na mapie. To wymagało starannej synchronizacji między danymi w modelu a ich reprezentacją na mapie.}
 
 \section{Użyteczność projektu}
 
