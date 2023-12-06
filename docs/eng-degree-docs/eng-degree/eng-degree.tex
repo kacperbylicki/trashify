@@ -518,25 +518,29 @@ Wady:
 \forceindent \textbf{Architektura Modelu\\}
 \indent Model opiera się na architekturze wykorzystującej głębokie sieci neuronowe.
 Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CNN), które są skuteczne w zadaniach przetwarzania obrazów.
-Wytrenowano warstwy konwolucyjne do ekstrakcji hierarchicznych cech z obrazów, a następnie zastosowano warstwy gęste do klasyfikacji.
+Wytrenowano warstwy konwolucyjne do ekstrakcji hierarchicznych cech z obrazów, a następnie zastosowano warstwy gęste do klasyfikacji. \footnote{
+    S. 3 - 4; Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
+}
 
 %2. Parametry Modelu:
 \textbf{Parametry modelu:}
 \begin{enumerate}[label=--]
-    \item liczba warstw konwolucyjnych: [X] warstw;
-    \item liczba warstw gęstych: [Y] warstw;
-    \item rozmiar filtrów konwolucyjnych: [Z] x [Z];
+    \item liczba warstw konwolucyjnych: 5 warstw;
+    \item liczba warstw gęstych: 2 warstw;
+    \item rozmiar filtrów konwolucyjnych: 3 x 3;
     \item funkcja aktywacji: ReLU (Rectified Linear Unit);
     \item funkcja aktywacji na wyjściu: softmax (dla wieloklasowej klasyfikacji);
-    \item liczba neuronów na warstwie gęstej: [N];
-    \item rozmiar batcha: [B].
+    \item liczba neuronów na warstwie gęstej: 128;
+    \item rozmiar batcha: 32.
 \end{enumerate}
 
 %3. Proces Nauczania Modelu:
 Model został wytrenowany na zbiorze treningowym składającym się z 5000 obrazów, z podziałem 80/20 na zbiory treningowy i walidacyjny.
 Proces nauczania obejmował 1000 iteracji.
 Użyto algorytmu optymalizacyjnego SGD (eng. \textit{Stochastic Gradient Descent}), w celu minimalizacji funkcji kosztu.
-W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby uniknąć przetrenowania modelu.
+W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby uniknąć przetrenowania modelu. \footnote{
+    S. 1 - 2; Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering University of Utah, 14.06.2016
+}
 
 %4. Ewaluacja Modelu:
 \textbf{Ewaluacja modelu\\}
@@ -546,7 +550,7 @@ Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności
 %5. Użyte Technologie:
 \textbf{Użyte technologie\\}
 \forceindent Do implementacji modelu wykorzystano technologie takie jak CoreML i Create ML, a jako ekstraktor cech użyto ,,Image Feature Print V2``. 
-Te technologie umożliwiają efektywną implementację modelu na platformach Apple.
+Te technologie umożliwiają efektywną implementację modelu na platformach Apple. \footnote{Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}}
 
 \paragraph{Preprocesowanie danych\\}
 %1. Normalizacja Danych:
@@ -557,11 +561,14 @@ To pozwala na lepszą zbieżność w procesie uczenia i minimalizuje wpływ wart
 
 %2. Przycinanie i Zmiana Rozmiaru:
 Obrazy zostały poddane przycinaniu i zmianie rozmiaru, aby dostosować je do jednolitego formatu wejściowego modelu.
-To kroki mające na celu unifikację danych wejściowych, co ułatwia proces uczenia.
+To kroki mające na celu unifikację danych wejściowych, co ułatwia proces uczenia. \footnote{
+    S. 1 - 2; F. Agostini, S. Campese, R. Vianello, M. Pizzi, A. Cipriani, M. Zanetti, A post processing pipeline to prepare raw data for machine learning algorithms in cardiac magnetic resonance imaging, University of Padua, Włochy, 2022
+}
 
 %3. Usuwanie Zniekształceń:
 Aby zapobiec wprowadzeniu zniekształceń, które nie mają istotnego znaczenia dla rozpoznawania obrazów, zastosowano techniki usuwania szumów i filtry wygładzające.
-Działa to zarówno na korzyść procesu uczenia, jak i na efektywność modelu.
+Działa to zarówno na korzyść procesu uczenia, jak i na efektywność modelu. \footnote{S. 7 - 8; Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using
+Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022}
 
 %4. Konwersja Do Formatu Wejściowego Modelu:
 Model wymagał, aby dane były w odpowiednim formacie, który umożliwia technologiom takim jak CoreML efektywne ich przetwarzanie.
@@ -572,104 +579,71 @@ Ważnym krokiem było przypisanie etykiet do obrazów, co umożliwiło modelowi 
 Etykiety były integralną częścią zbioru danych treningowych.
 
 %6. Augmentacja Danych:
-W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności generalizacji modelu, zastosowano techniki augmentacji danych, takie jak obracanie, odbijanie lustrzane czy zmiana jasności.
+W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności generalizacji modelu, zastosowano techniki augmentacji danych, takie jak obracanie, odbijanie lustrzane czy zmiana jasności. \footnote{ S. 1 - 2, S. 4 - 5; Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022 }
 
 \paragraph{Dobór kluczowych cech szczególnych\\}
 %1. Wykorzystanie Ekstraktora Cech "Image Feature Print V2":
 \forceindent \textbf{ Ekstraktor cech\\}
 \indent W ramach tej pracy inżynierskiej zdecydowano się na skorzystanie z ,,Image Feature Print V2`` jako ekstraktora cech.
-Ten ekstraktor pozwala na automatyczne wydobycie istotnych cech z obrazów, co jest szczególnie ważne w kontekście uczenia maszynowego.
+Ten ekstraktor pozwala na automatyczne wydobycie istotnych cech z obrazów, co jest szczególnie ważne w kontekście uczenia maszynowego. \footnote{}
 
 %2. Analiza Hierarchii Cech:
 Przed rozpoczęciem procesu uczenia modelu, przeprowadzono analizę hierarchii cech w ramach ekstraktora.
-Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zaczynając od prostych, takich jak krawędzie, a kończąc na bardziej abstrakcyjnych, reprezentujących bardziej złożone struktury.
+Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zaczynając od prostych, takich jak krawędzie, a kończąc na bardziej abstrakcyjnych, reprezentujących bardziej złożone struktury. \footnote{}
 
 %3. Selekcja Istotnych Regionów:
 Dobór kluczowych cech obejmował także selekcję istotnych regionów na obrazach.
 Zidentyfikowano obszary, które są szczególnie ważne dla rozpoznawania określonych klas obiektów.
-To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu.
+To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu. \footnote{}
 
 %4. Redukcja Wymiarowości:
 W celu efektywnego przetwarzania danych, zastosowano techniki redukcji wymiarowości, takie jak PCA (Principal Component Analysis).
-Pozwoliło to na zachowanie istotnych informacji przy jednoczesnej redukcji liczby cech, co było szczególnie korzystne dla wydajności modelu.
+Pozwoliło to na zachowanie istotnych informacji przy jednoczesnej redukcji liczby cech, co było szczególnie korzystne dla wydajności modelu. \footnote{}
 
 %5. Ocena Wpływu Cech na Model:
 Przeprowadzono analizę wpływu poszczególnych cech na skuteczność modelu.
-Cechy, które nie przynosiły znaczącego wkładu w proces rozpoznawania, były poddawane selekcji lub odrzucane, co pozwalało na zoptymalizowanie zestawu cech.
+Cechy, które nie przynosiły znaczącego wkładu w proces rozpoznawania, były poddawane selekcji lub odrzucane, co pozwalało na zoptymalizowanie zestawu cech. \footnote{}
 
 %6. Adaptacja do Specyfiki Problemu:
 Dobór cech był dostosowany do specyfiki problemu rozpoznawania obrazów.
-Na przykład, w przypadku konkretnego zadania, kluczowe mogą być kształty, tekstury lub charakterystyczne punkty na obiektach.
+Na przykład, w przypadku konkretnego zadania, kluczowe mogą być kształty, tekstury lub charakterystyczne punkty na obiektach. \footnote{}
 
 %7. Ocena Stabilności Cech:
-Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilności. Stabilne cechy mają tendencję do lepszego generalizowania się na nowe dane, co wpływa na zdolność modelu do skutecznego rozpoznawania obrazów spoza zbioru treningowego.
+Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilności. Stabilne cechy mają tendencję do lepszego generalizowania się na nowe dane, co wpływa na zdolność modelu do skutecznego rozpoznawania obrazów spoza zbioru treningowego. \footnote{}
 
 \paragraph{Dobór algorytmów uczenia maszynowego\\}
 %1. Analiza Zadania i Danych:
 \forceindent Przed dokonaniem wyboru algorytmów, dokonano analizy samego zadania rozpoznawania obrazów oraz charakterystyki zbioru danych.
-Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności.
+Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności. \footnote{}
 
 %2. Wybór Algorytmów Konwolucyjnych:
 Ze względu na specyfikę zadania rozpoznawania obrazów, zdecydowano się na wykorzystanie algorytmów konwolucyjnych (CNN).
-Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych.
+Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych. \footnote{}
 
 %3. Wykorzystanie CoreML i Create ML:
 Zdecydowano się na technologie takie jak CoreML i Create ML, które są zoptymalizowane pod kątem platform Apple.
-Umożliwiają one skuteczne implementowanie modeli opartych na algorytmach CNN na urządzeniach mobilnych.
+Umożliwiają one skuteczne implementowanie modeli opartych na algorytmach CNN na urządzeniach mobilnych. \footnote{}
 
 %4. Zastosowanie Feature Extractora "Image Feature Print V2":
 Feature Extractor ,,Image Feature Print V2`` został użyty do automatycznego wydobycia kluczowych cech z obrazów.
-Jego wybór był związany z założeniem, że odpowiednie cechy istotnie wpłyną na skuteczność modelu.
+Jego wybór był związany z założeniem, że odpowiednie cechy istotnie wpłyną na skuteczność modelu. \footnote{}
 
 %5. Tunele Hiperparametru:
 Przeprowadzono proces tunelowania hiperparametrów, takich jak współczynniki uczenia, liczba warstw konwolucyjnych, liczba neuronów w warstwach gęstych itp.
-Optymalizacja hiperparametrów była kluczowym elementem w dostosowaniu modelu do konkretnego zadania.
+Optymalizacja hiperparametrów była kluczowym elementem w dostosowaniu modelu do konkretnego zadania. \footnote{}
 
 %6. Ocena Algorytmów Klasyfikacyjnych:
 W ramach analizy wydajności algorytmów, dokonano oceny różnych modeli klasyfikacyjnych dostępnych w bibliotekach machine learning.
-Oceniano ich zdolność do radzenia sobie z danymi treningowymi i walidacyjnymi oraz ich skuteczność w rozpoznawaniu różnych klas.
+Oceniano ich zdolność do radzenia sobie z danymi treningowymi i walidacyjnymi oraz ich skuteczność w rozpoznawaniu różnych klas. \footnote{}
 
 %7. Rozważanie Wersji Ensemble:
 Rozważono również użycie technik Ensemble, takich jak połączenie wielu modeli w celu poprawy ogólnej skuteczności.
-Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów.
+Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów. \footnote{}
 
 %8. Analiza Wydajności na Platformie Apple:
 Ponieważ model miał być implementowany na platformie Apple, uwzględniono specyfiki tego środowiska.
 Sprawdzono, czy wybrane algorytmy i technologie są zoptymalizowane pod kątem wydajności na urządzeniach 
-mobilnych.
-
-\paragraph{Proces nauczania modelu\\}
-%1. Podział Danych:
-\forceindent Zbiór danych został podzielony na zbiór treningowy i zbiór walidacyjny w proporcji 80/20.
-Zbiór treningowy posłużył do nauczania modelu, podczas gdy zbiór walidacyjny był wykorzystywany do monitorowania jego skuteczności na danych nieuczonych.
-
-%2. Inicjalizacja Modelu:
-Model został zainicjowany zgodnie z wybraną architekturą. W przypadku algorytmów konwolucyjnych, wagi są zazwyczaj losowo inicjowane, a następnie dostosowywane w trakcie procesu uczenia.
-
-%3. Definicja Funkcji Kosztu:
-Funkcja kosztu została zdefiniowana, oceniając różnicę między prognozami modelu a rzeczywistymi etykietami w zbiorze treningowym.
-Wartość tej funkcji jest minimalizowana w trakcie procesu optymalizacji.
-
-%4. Wybór Algorytmu Optymalizacyjnego:
-Algorytm optymalizacyjny, tak jak SGD (Stochastic Gradient Descent), został wybrany do minimalizacji funkcji kosztu.
-Dobór współczynnika uczenia był przedmiotem optymalizacji, aby zapewnić szybkie, ale stabilne dostosowanie wag modelu.
-
-%5. Przeprowadzenie Iteracji:
-Proces uczenia składał się z iteracji, gdzie dla każdego batcha danych model aktualizował wagi, aby lepiej dopasować się do charakterystyki zbioru treningowego.
-Liczba iteracji była ustalona na 1000, co pozwalało na wystarczającą liczbę aktualizacji.
-
-%6. Techniki Regularyzacji:
-Zastosowano techniki regularyzacji, takie jak dropout, które pomagały w zapobieganiu przetrenowaniu modelu.
-Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co poprawia zdolność generalizacji modelu.
-
-%7. Monitorowanie Skuteczności:
-Podczas procesu nauczania monitorowano skuteczność modelu na zbiorze walidacyjnym.
-Oceniano miary takie jak dokładność, precyzja, recall i F1-score. %recall i F1-score trzeba będzie jakoś przetłumaczyć
-To pozwalało na ocenę, czy model generalizuje się dobrze na nowe dane.
-
-%8. Ewaluacja i Optymalizacja:
-Po zakończeniu procesu nauczania, model został oceniony na zbiorze testowym. Analizowano wyniki, identyfikując obszary poprawy.
-Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacji modelu.
+mobilnych. \footnote{}
 
 \subsection{Problemy architektoniczne}
 
@@ -721,6 +695,39 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
 \forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres czasu, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 
 \subsection{Opis sytuacji faktycznej}
+
+\subsubsection{Proces nauczania modelu\\}
+%1. Podział Danych:
+\forceindent Zbiór danych został podzielony na zbiór treningowy i zbiór walidacyjny w proporcji 80/20.
+Zbiór treningowy posłużył do nauczania modelu, podczas gdy zbiór walidacyjny był wykorzystywany do monitorowania jego skuteczności na danych nieuczonych.
+
+%2. Inicjalizacja Modelu:
+Model został zainicjowany zgodnie z wybraną architekturą. W przypadku algorytmów konwolucyjnych, wagi są zazwyczaj losowo inicjowane, a następnie dostosowywane w trakcie procesu uczenia.
+
+%3. Definicja Funkcji Kosztu:
+Funkcja kosztu została zdefiniowana, oceniając różnicę między prognozami modelu a rzeczywistymi etykietami w zbiorze treningowym.
+Wartość tej funkcji jest minimalizowana w trakcie procesu optymalizacji.
+
+%4. Wybór Algorytmu Optymalizacyjnego:
+Algorytm optymalizacyjny, tak jak SGD (Stochastic Gradient Descent), został wybrany do minimalizacji funkcji kosztu.
+Dobór współczynnika uczenia był przedmiotem optymalizacji, aby zapewnić szybkie, ale stabilne dostosowanie wag modelu.
+
+%5. Przeprowadzenie Iteracji:
+Proces uczenia składał się z iteracji, gdzie dla każdego batcha danych model aktualizował wagi, aby lepiej dopasować się do charakterystyki zbioru treningowego.
+Liczba iteracji była ustalona na 1000, co pozwalało na wystarczającą liczbę aktualizacji.
+
+%6. Techniki Regularyzacji:
+Zastosowano techniki regularyzacji, takie jak dropout, które pomagały w zapobieganiu przetrenowaniu modelu.
+Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co poprawia zdolność generalizacji modelu.
+
+%7. Monitorowanie Skuteczności:
+Podczas procesu nauczania monitorowano skuteczność modelu na zbiorze walidacyjnym.
+Oceniano miary takie jak dokładność, precyzja, recall i F1-score. %recall i F1-score trzeba będzie jakoś przetłumaczyć
+To pozwalało na ocenę, czy model generalizuje się dobrze na nowe dane.
+
+%8. Ewaluacja i Optymalizacja:
+Po zakończeniu procesu nauczania, model został oceniony na zbiorze testowym. Analizowano wyniki, identyfikując obszary poprawy.
+Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacji modelu.
 
 \subsubsection{Decyzje architektoniczne}
 
@@ -971,7 +978,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 \subsection{Problemy z realizacją aplikacji mobilnej}
 \forceindent{W trakcie pracy nad projektem aplikacji mobilnej, który był realizowany w grupie, napotkaliśmy kilka istotnych problemów. Pierwszym z nich był problem z wyświetlaniem punktów na mapie, gdzie główną trudnością było skomunikowanie aplikacji z danymi geolokacyjnymi, które były aktualizowane w czasie rzeczywistym w modelu. To spowodowało wyzwania związane z odpowiednim pobieraniem i wyświetlaniem tych danych na interfejsie użytkownika. Kolejnym problemem była efektywność wyszukiwania punktów na mapie, które miało być dynamiczne i responsywne. Jednak napotkaliśmy trudności związane z aktualizacją koordynatów punktów w modelu oraz ich odwzorowaniem na mapie. To wymagało starannej synchronizacji między danymi w modelu a ich reprezentacją na mapie.}
 
-Całość komunikacji pomiędzy bramką interfejsu aplikacji, a mikroserwisami, oparta jest na technologi gRPC. Wiadomości wysyłane są za pomocą protobuforów, a komunikacja z klientem oparta jest na protokole HTTPS.
+Całość komunikacji pomiędzy bramką interfejsu aplikacji, a mikroserwisami, oparta jest na protokole gRPC. Wiadomości wysyłane są za pomocą protobuforów, a komunikacja z klientem oparta jest na protokole HTTPS.
 
 W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
 
@@ -1036,6 +1043,12 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
     \bibitem{flutter-native-performance} Thanh Tran, Flutter Native Performance and Expressive UI/UX, Finlandia, Metropolia University of Applied Sciences, 04.04.2023
     \bibitem{comparison-between-flutter-and-native-applications} Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020
     \bibitem{apple-documentation} Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml}
+    \bibitem{image-classification-cnn} Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
+    \bibitem{image-recognition-cnn-algorithms-overview} Genevieve Sapijaszko, W. Mikhael, An Overview of Recent Convolutional Neural Network Algorithms for Image Recognition, IEEE, 01.08.2018
+    \bibitem{image-recognition-class-hierarchy} Zhen Yu, Toan N. Nguyen, Y. Gal, Lie Ju, S. Chandra, Lei Zhang, Paul Bonnington, V. Mar, Zhiyong Wang, Z. Ge, Skin Lesion Recognition with Class-Hierarchy Regularized Hyperbolic Embeddings, Medical Image Computing and Computer Assisted Intervention – MICCAI 2022, 16.09.2022
+    \bibitem{image-recognition-target-region-selection} Wu Hao, R. Bie, Junqi Guo, Xin Meng, Shenling Wang, Optimized CNN Based Image Recognition Through Target Region Selection, College of Information Science and Technology, Chiny, 16.12.2017
+    \bibitem{image-classification-create-ml} Tianyun Wang, Yanzhang Zhu, The CreateML-based compared to the AutoML-based approach to animal image classification, International Conference on Cloud Computing, Performance Computing, and Deep Learning (CCPCDL 2022), Wuhan, Chiny, 13.10.2022
+    \bibitem{image-classification-data-augumentation} Jingyuan He, Bailong Yang, Fine-grained Image Recognition Method using Discriminative Region-based Data Augmentation, Frontiers in Computing and Intelligent Systems, 10.2022
     \bibitem{gRPC-performance} Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico
     \end{thebibliography}
 \end{document}
