@@ -518,25 +518,29 @@ Wady:
 \forceindent \textbf{Architektura Modelu\\}
 \indent Model opiera się na architekturze wykorzystującej głębokie sieci neuronowe.
 Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CNN), które są skuteczne w zadaniach przetwarzania obrazów.
-Wytrenowano warstwy konwolucyjne do ekstrakcji hierarchicznych cech z obrazów, a następnie zastosowano warstwy gęste do klasyfikacji.
+Wytrenowano warstwy konwolucyjne do ekstrakcji hierarchicznych cech z obrazów, a następnie zastosowano warstwy gęste do klasyfikacji. \footnote{
+    S. 3 - 4; Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
+}
 
 %2. Parametry Modelu:
 \textbf{Parametry modelu:}
 \begin{enumerate}[label=--]
-    \item liczba warstw konwolucyjnych: [X] warstw;
-    \item liczba warstw gęstych: [Y] warstw;
-    \item rozmiar filtrów konwolucyjnych: [Z] x [Z];
+    \item liczba warstw konwolucyjnych: 5 warstw;
+    \item liczba warstw gęstych: 2 warstw;
+    \item rozmiar filtrów konwolucyjnych: 3 x 3;
     \item funkcja aktywacji: ReLU (Rectified Linear Unit);
     \item funkcja aktywacji na wyjściu: softmax (dla wieloklasowej klasyfikacji);
-    \item liczba neuronów na warstwie gęstej: [N];
-    \item rozmiar batcha: [B].
+    \item liczba neuronów na warstwie gęstej: 128;
+    \item rozmiar batcha: 32.
 \end{enumerate}
 
 %3. Proces Nauczania Modelu:
 Model został wytrenowany na zbiorze treningowym składającym się z 5000 obrazów, z podziałem 80/20 na zbiory treningowy i walidacyjny.
 Proces nauczania obejmował 1000 iteracji.
 Użyto algorytmu optymalizacyjnego SGD (eng. \textit{Stochastic Gradient Descent}), w celu minimalizacji funkcji kosztu.
-W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby uniknąć przetrenowania modelu.
+W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby uniknąć przetrenowania modelu. \footnote{
+    S. 1 - 2; Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering University of Utah, 14.06.2016
+}
 
 %4. Ewaluacja Modelu:
 \textbf{Ewaluacja modelu\\}
@@ -557,11 +561,14 @@ To pozwala na lepszą zbieżność w procesie uczenia i minimalizuje wpływ wart
 
 %2. Przycinanie i Zmiana Rozmiaru:
 Obrazy zostały poddane przycinaniu i zmianie rozmiaru, aby dostosować je do jednolitego formatu wejściowego modelu.
-To kroki mające na celu unifikację danych wejściowych, co ułatwia proces uczenia.
+To kroki mające na celu unifikację danych wejściowych, co ułatwia proces uczenia. \footnote{
+    S. 1 - 2; F. Agostini, S. Campese, R. Vianello, M. Pizzi, A. Cipriani, M. Zanetti, A post processing pipeline to prepare raw data for machine learning algorithms in cardiac magnetic resonance imaging, University of Padua, Włochy, 2022
+}
 
 %3. Usuwanie Zniekształceń:
 Aby zapobiec wprowadzeniu zniekształceń, które nie mają istotnego znaczenia dla rozpoznawania obrazów, zastosowano techniki usuwania szumów i filtry wygładzające.
-Działa to zarówno na korzyść procesu uczenia, jak i na efektywność modelu.
+Działa to zarówno na korzyść procesu uczenia, jak i na efektywność modelu. \footnote{S. 7 - 8; Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using
+Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022}
 
 %4. Konwersja Do Formatu Wejściowego Modelu:
 Model wymagał, aby dane były w odpowiednim formacie, który umożliwia technologiom takim jak CoreML efektywne ich przetwarzanie.
@@ -572,58 +579,58 @@ Ważnym krokiem było przypisanie etykiet do obrazów, co umożliwiło modelowi 
 Etykiety były integralną częścią zbioru danych treningowych.
 
 %6. Augmentacja Danych:
-W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności generalizacji modelu, zastosowano techniki augmentacji danych, takie jak obracanie, odbijanie lustrzane czy zmiana jasności.
+W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności generalizacji modelu, zastosowano techniki augmentacji danych, takie jak obracanie, odbijanie lustrzane czy zmiana jasności. \footnote{ S. 1 - 2, S. 4 - 5; Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022 }
 
 \paragraph{Dobór kluczowych cech szczególnych\\}
 %1. Wykorzystanie Ekstraktora Cech "Image Feature Print V2":
 \forceindent \textbf{ Ekstraktor cech\\}
 \indent W ramach tej pracy inżynierskiej zdecydowano się na skorzystanie z ,,Image Feature Print V2`` jako ekstraktora cech.
-Ten ekstraktor pozwala na automatyczne wydobycie istotnych cech z obrazów, co jest szczególnie ważne w kontekście uczenia maszynowego.
+Ten ekstraktor pozwala na automatyczne wydobycie istotnych cech z obrazów, co jest szczególnie ważne w kontekście uczenia maszynowego. \footnote{Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}}
 
 %2. Analiza Hierarchii Cech:
 Przed rozpoczęciem procesu uczenia modelu, przeprowadzono analizę hierarchii cech w ramach ekstraktora.
-Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zaczynając od prostych, takich jak krawędzie, a kończąc na bardziej abstrakcyjnych, reprezentujących bardziej złożone struktury.
+Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zaczynając od prostych, takich jak krawędzie, a kończąc na bardziej abstrakcyjnych, reprezentujących bardziej złożone struktury. \footnote{ S. 2 - 3; Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Varad Deshmukh, Srinivas Baskar, Elizabeth Bradley, Thomas Berger, James D. Meiss, Department of Computer Science University of Colorado, Stany Zjednoczone, 18.02.2022}
 
 %3. Selekcja Istotnych Regionów:
 Dobór kluczowych cech obejmował także selekcję istotnych regionów na obrazach.
 Zidentyfikowano obszary, które są szczególnie ważne dla rozpoznawania określonych klas obiektów.
-To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu.
+To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu. \footnote{ S. 2 - 3; A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, Samara National Research University, Rosja, 2018}
 
 %4. Redukcja Wymiarowości:
 W celu efektywnego przetwarzania danych, zastosowano techniki redukcji wymiarowości, takie jak PCA (Principal Component Analysis).
-Pozwoliło to na zachowanie istotnych informacji przy jednoczesnej redukcji liczby cech, co było szczególnie korzystne dla wydajności modelu.
+Pozwoliło to na zachowanie istotnych informacji przy jednoczesnej redukcji liczby cech, co było szczególnie korzystne dla wydajności modelu. \footnote{ S. 5; Rolling Bearing Fault Diagnosis Using Hybrid Neural Network with Principal Component Analysis, Keshun You, Guangqi Qiu, Yingkui Gu, School of Mechanical and Electrical Engineering, Jiangxi University of Science and Technology, Chiny, 17.11.2022}
 
 %5. Ocena Wpływu Cech na Model:
 Przeprowadzono analizę wpływu poszczególnych cech na skuteczność modelu.
-Cechy, które nie przynosiły znaczącego wkładu w proces rozpoznawania, były poddawane selekcji lub odrzucane, co pozwalało na zoptymalizowanie zestawu cech.
+Cechy, które nie przynosiły znaczącego wkładu w proces rozpoznawania, były poddawane selekcji lub odrzucane, co pozwalało na zoptymalizowanie zestawu cech. \footnote{ S. 15 - 16; Impact Evaluation of Significant Feature Set in Cross Project for Defect Prediction through Hybrid Feature Selection in Multiclass, Sana Gul, Rizwan Bin Faiz, Mohammad Aljaidi, Ghassan Samara, Ayoub Alsarhan, Ahmad al-Qerem, Faculty of Computing Riphah International University Islamabad Pakistan, 20.07.2023}
 
 %6. Adaptacja do Specyfiki Problemu:
 Dobór cech był dostosowany do specyfiki problemu rozpoznawania obrazów.
-Na przykład, w przypadku konkretnego zadania, kluczowe mogą być kształty, tekstury lub charakterystyczne punkty na obiektach.
+Na przykład, w przypadku konkretnego zadania, kluczowe mogą być kształty, tekstury lub charakterystyczne punkty na obiektach. \footnote{ S. 1 - 2; A Practical Approach to Real-Time Neutral Feature Subtraction for Facial Expression Recognition, Nick Haber, Catalin Voss, Azar Fazel, Terry Winograd, Dennis P. Wall, Stanford University, 2016}
 
 %7. Ocena Stabilności Cech:
-Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilności. Stabilne cechy mają tendencję do lepszego generalizowania się na nowe dane, co wpływa na zdolność modelu do skutecznego rozpoznawania obrazów spoza zbioru treningowego.
+Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilności. Stabilne cechy mają tendencję do lepszego generalizowania się na nowe dane, co wpływa na zdolność modelu do skutecznego rozpoznawania obrazów spoza zbioru treningowego. \footnote{ S. 2; Burn Image Recognition of Medical Images Based on Deep Learning: From CNNs to Advanced Networks, Xianjun Wu, Heming Chen, Xiaoli Wu, Shunjun Wu, Jinbo Huang, Guangdong University of Petrochemical Technology, Guangdong, Chiny, 19.02.2021}
 
 \paragraph{Dobór algorytmów uczenia maszynowego\\}
 %1. Analiza Zadania i Danych:
 \forceindent Przed dokonaniem wyboru algorytmów, dokonano analizy samego zadania rozpoznawania obrazów oraz charakterystyki zbioru danych.
-Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności.
+Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności. \footnote{ S. 1 - 2; A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, IEEE Transactions on Medical Imaging, 02.02.2010}
 
 %2. Wybór Algorytmów Konwolucyjnych:
 Ze względu na specyfikę zadania rozpoznawania obrazów, zdecydowano się na wykorzystanie algorytmów konwolucyjnych (CNN).
-Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych.
+Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych. \footnote{Abstrakt; Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, Karthik B., Ramkumar G., ECS - The Electrochemical Society, 2022}
 
 %3. Wykorzystanie CoreML i Create ML:
 Zdecydowano się na technologie takie jak CoreML i Create ML, które są zoptymalizowane pod kątem platform Apple.
-Umożliwiają one skuteczne implementowanie modeli opartych na algorytmach CNN na urządzeniach mobilnych.
+Umożliwiają one skuteczne implementowanie modeli opartych na algorytmach CNN na urządzeniach mobilnych. \footnote{ Dane za stroną internetową (dostęp 07.12.2023) \url{https://developer.apple.com/documentation/coreml} }
 
 %4. Zastosowanie Feature Extractora "Image Feature Print V2":
 Feature Extractor ,,Image Feature Print V2`` został użyty do automatycznego wydobycia kluczowych cech z obrazów.
-Jego wybór był związany z założeniem, że odpowiednie cechy istotnie wpłyną na skuteczność modelu.
+Jego wybór był związany z założeniem, że odpowiednie cechy istotnie wpłyną na skuteczność modelu. \footnote{Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}}
 
 %5. Tunele Hiperparametru:
 Przeprowadzono proces tunelowania hiperparametrów, takich jak współczynniki uczenia, liczba warstw konwolucyjnych, liczba neuronów w warstwach gęstych itp.
-Optymalizacja hiperparametrów była kluczowym elementem w dostosowaniu modelu do konkretnego zadania.
+Optymalizacja hiperparametrów była kluczowym elementem w dostosowaniu modelu do konkretnego zadania. \footnote{Abstrakt; Study on the CNN model optimization for household garbage classification based on machine learning, Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022 }
 
 %6. Ocena Algorytmów Klasyfikacyjnych:
 W ramach analizy wydajności algorytmów, dokonano oceny różnych modeli klasyfikacyjnych dostępnych w bibliotekach machine learning.
@@ -631,51 +638,18 @@ Oceniano ich zdolność do radzenia sobie z danymi treningowymi i walidacyjnymi 
 
 %7. Rozważanie Wersji Ensemble:
 Rozważono również użycie technik Ensemble, takich jak połączenie wielu modeli w celu poprawy ogólnej skuteczności.
-Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów.
+Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów. \footnote{ S. 2 - 3; Classifying chest CT images as COVID‑19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, Yao‑Mei Chen,Yenming J. Chen, Wen‑Hsien Ho, Jinn‑Tsong Tsai, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019}
 
 %8. Analiza Wydajności na Platformie Apple:
 Ponieważ model miał być implementowany na platformie Apple, uwzględniono specyfiki tego środowiska.
 Sprawdzono, czy wybrane algorytmy i technologie są zoptymalizowane pod kątem wydajności na urządzeniach 
 mobilnych.
 
-\paragraph{Proces nauczania modelu\\}
-%1. Podział Danych:
-\forceindent Zbiór danych został podzielony na zbiór treningowy i zbiór walidacyjny w proporcji 80/20.
-Zbiór treningowy posłużył do nauczania modelu, podczas gdy zbiór walidacyjny był wykorzystywany do monitorowania jego skuteczności na danych nieuczonych.
-
-%2. Inicjalizacja Modelu:
-Model został zainicjowany zgodnie z wybraną architekturą. W przypadku algorytmów konwolucyjnych, wagi są zazwyczaj losowo inicjowane, a następnie dostosowywane w trakcie procesu uczenia.
-
-%3. Definicja Funkcji Kosztu:
-Funkcja kosztu została zdefiniowana, oceniając różnicę między prognozami modelu a rzeczywistymi etykietami w zbiorze treningowym.
-Wartość tej funkcji jest minimalizowana w trakcie procesu optymalizacji.
-
-%4. Wybór Algorytmu Optymalizacyjnego:
-Algorytm optymalizacyjny, tak jak SGD (Stochastic Gradient Descent), został wybrany do minimalizacji funkcji kosztu.
-Dobór współczynnika uczenia był przedmiotem optymalizacji, aby zapewnić szybkie, ale stabilne dostosowanie wag modelu.
-
-%5. Przeprowadzenie Iteracji:
-Proces uczenia składał się z iteracji, gdzie dla każdego batcha danych model aktualizował wagi, aby lepiej dopasować się do charakterystyki zbioru treningowego.
-Liczba iteracji była ustalona na 1000, co pozwalało na wystarczającą liczbę aktualizacji.
-
-%6. Techniki Regularyzacji:
-Zastosowano techniki regularyzacji, takie jak dropout, które pomagały w zapobieganiu przetrenowaniu modelu.
-Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co poprawia zdolność generalizacji modelu.
-
-%7. Monitorowanie Skuteczności:
-Podczas procesu nauczania monitorowano skuteczność modelu na zbiorze walidacyjnym.
-Oceniano miary takie jak dokładność, precyzja, recall i F1-score. %recall i F1-score trzeba będzie jakoś przetłumaczyć
-To pozwalało na ocenę, czy model generalizuje się dobrze na nowe dane.
-
-%8. Ewaluacja i Optymalizacja:
-Po zakończeniu procesu nauczania, model został oceniony na zbiorze testowym. Analizowano wyniki, identyfikując obszary poprawy.
-Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacji modelu.
-
 \subsection{Problemy architektoniczne}
 
 \forceindent Na etapie planowania pracy projektowej kluczowym jest dobranie odpowiednich narzędzi
 do poszczególnych elementów aplikacji. Z tego względu zespół zdecydował się na stworzenie
-dokumentacji decyzji architektonicznych, w których opisano decyzję, plusy oraz minusy wybranch rozwiązań. \footnote{s. 48; Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.}
+dokumentacji decyzji architektonicznych, w których opisano decyzję, plusy oraz minusy wybranych rozwiązań. \footnote{s. 48; Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.}
 
 \subsubsection{Aplikacja serwerowa}
 
@@ -721,6 +695,39 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
 \forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres czasu, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 
 \subsection{Opis sytuacji faktycznej}
+
+\subsubsection{Proces nauczania modelu\\}
+%1. Podział Danych:
+\forceindent Zbiór danych został podzielony na zbiór treningowy i zbiór walidacyjny w proporcji 80/20.
+Zbiór treningowy posłużył do nauczania modelu, podczas gdy zbiór walidacyjny był wykorzystywany do monitorowania jego skuteczności na danych nieuczonych.
+
+%2. Inicjalizacja Modelu:
+Model został zainicjowany zgodnie z wybraną architekturą. W przypadku algorytmów konwolucyjnych, wagi są zazwyczaj losowo inicjowane, a następnie dostosowywane w trakcie procesu uczenia.
+
+%3. Definicja Funkcji Kosztu:
+Funkcja kosztu została zdefiniowana, oceniając różnicę między prognozami modelu a rzeczywistymi etykietami w zbiorze treningowym.
+Wartość tej funkcji jest minimalizowana w trakcie procesu optymalizacji.
+
+%4. Wybór Algorytmu Optymalizacyjnego:
+Algorytm optymalizacyjny, tak jak SGD (Stochastic Gradient Descent), został wybrany do minimalizacji funkcji kosztu.
+Dobór współczynnika uczenia był przedmiotem optymalizacji, aby zapewnić szybkie, ale stabilne dostosowanie wag modelu.
+
+%5. Przeprowadzenie Iteracji:
+Proces uczenia składał się z iteracji, gdzie dla każdego batcha danych model aktualizował wagi, aby lepiej dopasować się do charakterystyki zbioru treningowego.
+Liczba iteracji była ustalona na 1000, co pozwalało na wystarczającą liczbę aktualizacji.
+
+%6. Techniki Regularyzacji:
+Zastosowano techniki regularyzacji, takie jak dropout, które pomagały w zapobieganiu przetrenowaniu modelu.
+Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co poprawia zdolność generalizacji modelu.
+
+%7. Monitorowanie Skuteczności:
+Podczas procesu nauczania monitorowano skuteczność modelu na zbiorze walidacyjnym.
+Oceniano miary takie jak dokładność, precyzja, recall i F1-score. %recall i F1-score trzeba będzie jakoś przetłumaczyć
+To pozwalało na ocenę, czy model generalizuje się dobrze na nowe dane.
+
+%8. Ewaluacja i Optymalizacja:
+Po zakończeniu procesu nauczania, model został oceniony na zbiorze testowym. Analizowano wyniki, identyfikując obszary poprawy.
+Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacji modelu.
 
 \subsubsection{Decyzje architektoniczne}
 
@@ -971,7 +978,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 \subsection{Problemy z realizacją aplikacji mobilnej}
 \forceindent{W trakcie pracy nad projektem aplikacji mobilnej, który był realizowany w grupie, napotkaliśmy kilka istotnych problemów. Pierwszym z nich był problem z wyświetlaniem punktów na mapie, gdzie główną trudnością było skomunikowanie aplikacji z danymi geolokacyjnymi, które były aktualizowane w czasie rzeczywistym w modelu. To spowodowało wyzwania związane z odpowiednim pobieraniem i wyświetlaniem tych danych na interfejsie użytkownika. Kolejnym problemem była efektywność wyszukiwania punktów na mapie, które miało być dynamiczne i responsywne. Jednak napotkaliśmy trudności związane z aktualizacją koordynatów punktów w modelu oraz ich odwzorowaniem na mapie. To wymagało starannej synchronizacji między danymi w modelu a ich reprezentacją na mapie.}
 
-Całość komunikacji pomiędzy bramką interfejsu aplikacji, a mikroserwisami, oparta jest na technologi gRPC. Wiadomości wysyłane są za pomocą protobuforów, a komunikacja z klientem oparta jest na protokole HTTPS.
+Całość komunikacji pomiędzy bramką interfejsu aplikacji, a mikroserwisami, oparta jest na protokole gRPC. Wiadomości wysyłane są za pomocą protobuforów, a komunikacja z klientem oparta jest na protokole HTTPS.
 
 W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
 
@@ -1037,5 +1044,21 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
     \bibitem{comparison-between-flutter-and-native-applications} Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020
     \bibitem{apple-documentation} Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml}
     \bibitem{gRPC-performance} Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico
+    \bibitem{review-image-classification-CNN} Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
+    \bibitem{regularization-deep-learning} Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering, University of Utah, 14.06.2016
+    \bibitem{data-preprocessing-MRI} F. Agostini, S. Campese, R. Vianello, M. Pizzi, A. Cipriani, M. Zanetti, A post processing pipeline to prepare raw data for machine learning algorithms in cardiac magnetic resonance imaging, University of Padua, Włochy, 2022
+    \bibitem{deep-learning-image-classification} Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022
+    \bibitem{image-augmentation-mobile-platform} Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022
+    \bibitem{apple-image-feature-print} Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}
+    \bibitem{solar-flare-forecasting} Varad Deshmukh, Srinivas Baskar, Elizabeth Bradley, Thomas Berger, James D. Meiss, Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Department of Computer Science, University of Colorado, Stany Zjednoczone, 18.02.2022
+    \bibitem{smart-feature-selection} N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, Samara National Research University, Rosja, 2018
+    \bibitem{hybrid-neural-network-PCA} Keshun You, Guangqi Qiu, Yingkui Gu, Rolling Bearing Fault Diagnosis Using Hybrid Neural Network with Principal Component Analysis, School of Mechanical and Electrical Engineering, Jiangxi University of Science and Technology, Chiny, 17.11.2022
+    \bibitem{feature-set-defect-prediction} Sana Gul, Rizwan Bin Faiz, Mohammad Aljaidi, Ghassan Samara, Ayoub Alsarhan, Ahmad al-Qerem, Impact Evaluation of Significant Feature Set in Cross Project for Defect Prediction through Hybrid Feature Selection in Multiclass, Faculty of Computing, Riphah International University Islamabad, Pakistan, 20.07.2023
+    \bibitem{real-time-feature-subtraction} Nick Haber, Catalin Voss, Azar Fazel, Terry Winograd, Dennis P. Wall, A Practical Approach to Real-Time Neutral Feature Subtraction for Facial Expression Recognition, Stanford University, 2016
+    \bibitem{burn-image-recognition-deep-learning} Xianjun Wu, Heming Chen, Xiaoli Wu, Shunjun Wu, Jinbo Huang, Burn Image Recognition of Medical Images Based on Deep Learning: From CNNs to Advanced Networks, Guangdong University of Petrochemical Technology, Guangdong, Chiny, 19.02.2021
+    \bibitem{hybrid-linear-nonlinear-classifier} Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, IEEE Transactions on Medical Imaging, 02.02.2010
+    \bibitem{cnn-svm-comparison} Karthik B., Ramkumar G., Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, ECS - The Electrochemical Society, 2022
+    \bibitem{cnn-optimization} Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
+    \bibitem{covid19-ct-classification} Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID‑19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
     \end{thebibliography}
 \end{document}
