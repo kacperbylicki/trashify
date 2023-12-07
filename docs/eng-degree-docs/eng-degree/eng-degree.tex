@@ -550,7 +550,7 @@ Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności
 %5. Użyte Technologie:
 \textbf{Użyte technologie\\}
 \forceindent Do implementacji modelu wykorzystano technologie takie jak CoreML i Create ML, a jako ekstraktor cech użyto ,,Image Feature Print V2``. 
-Te technologie umożliwiają efektywną implementację modelu na platformach Apple. \footnote{Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}}
+Te technologie umożliwiają efektywną implementację modelu na platformach Apple.
 
 \paragraph{Preprocesowanie danych\\}
 %1. Normalizacja Danych:
@@ -585,65 +585,65 @@ W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności gen
 %1. Wykorzystanie Ekstraktora Cech "Image Feature Print V2":
 \forceindent \textbf{ Ekstraktor cech\\}
 \indent W ramach tej pracy inżynierskiej zdecydowano się na skorzystanie z ,,Image Feature Print V2`` jako ekstraktora cech.
-Ten ekstraktor pozwala na automatyczne wydobycie istotnych cech z obrazów, co jest szczególnie ważne w kontekście uczenia maszynowego. \footnote{}
+Ten ekstraktor pozwala na automatyczne wydobycie istotnych cech z obrazów, co jest szczególnie ważne w kontekście uczenia maszynowego. \footnote{Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}}
 
 %2. Analiza Hierarchii Cech:
 Przed rozpoczęciem procesu uczenia modelu, przeprowadzono analizę hierarchii cech w ramach ekstraktora.
-Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zaczynając od prostych, takich jak krawędzie, a kończąc na bardziej abstrakcyjnych, reprezentujących bardziej złożone struktury. \footnote{}
+Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zaczynając od prostych, takich jak krawędzie, a kończąc na bardziej abstrakcyjnych, reprezentujących bardziej złożone struktury. \footnote{ S. 2 - 3; Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Varad Deshmukh, Srinivas Baskar, Elizabeth Bradley, Thomas Berger, James D. Meiss, Department of Computer Science University of Colorado, Stany Zjednoczone, 18.02.2022}
 
 %3. Selekcja Istotnych Regionów:
 Dobór kluczowych cech obejmował także selekcję istotnych regionów na obrazach.
 Zidentyfikowano obszary, które są szczególnie ważne dla rozpoznawania określonych klas obiektów.
-To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu. \footnote{}
+To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu. \footnote{ S. 2 - 3; A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, Samara National Research University, Rosja, 2018}
 
 %4. Redukcja Wymiarowości:
 W celu efektywnego przetwarzania danych, zastosowano techniki redukcji wymiarowości, takie jak PCA (Principal Component Analysis).
-Pozwoliło to na zachowanie istotnych informacji przy jednoczesnej redukcji liczby cech, co było szczególnie korzystne dla wydajności modelu. \footnote{}
+Pozwoliło to na zachowanie istotnych informacji przy jednoczesnej redukcji liczby cech, co było szczególnie korzystne dla wydajności modelu. \footnote{ S. 5; Rolling Bearing Fault Diagnosis Using Hybrid Neural Network with Principal Component Analysis, Keshun You, Guangqi Qiu, Yingkui Gu, School of Mechanical and Electrical Engineering, Jiangxi University of Science and Technology, Chiny, 17.11.2022}
 
 %5. Ocena Wpływu Cech na Model:
 Przeprowadzono analizę wpływu poszczególnych cech na skuteczność modelu.
-Cechy, które nie przynosiły znaczącego wkładu w proces rozpoznawania, były poddawane selekcji lub odrzucane, co pozwalało na zoptymalizowanie zestawu cech. \footnote{}
+Cechy, które nie przynosiły znaczącego wkładu w proces rozpoznawania, były poddawane selekcji lub odrzucane, co pozwalało na zoptymalizowanie zestawu cech. \footnote{ S. 15 - 16; Impact Evaluation of Significant Feature Set in Cross Project for Defect Prediction through Hybrid Feature Selection in Multiclass, Sana Gul, Rizwan Bin Faiz, Mohammad Aljaidi, Ghassan Samara, Ayoub Alsarhan, Ahmad al-Qerem, Faculty of Computing Riphah International University Islamabad Pakistan, 20.07.2023}
 
 %6. Adaptacja do Specyfiki Problemu:
 Dobór cech był dostosowany do specyfiki problemu rozpoznawania obrazów.
-Na przykład, w przypadku konkretnego zadania, kluczowe mogą być kształty, tekstury lub charakterystyczne punkty na obiektach. \footnote{}
+Na przykład, w przypadku konkretnego zadania, kluczowe mogą być kształty, tekstury lub charakterystyczne punkty na obiektach. \footnote{ S. 1 - 2; A Practical Approach to Real-Time Neutral Feature Subtraction for Facial Expression Recognition, Nick Haber, Catalin Voss, Azar Fazel, Terry Winograd, Dennis P. Wall, Stanford University, 2016}
 
 %7. Ocena Stabilności Cech:
-Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilności. Stabilne cechy mają tendencję do lepszego generalizowania się na nowe dane, co wpływa na zdolność modelu do skutecznego rozpoznawania obrazów spoza zbioru treningowego. \footnote{}
+Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilności. Stabilne cechy mają tendencję do lepszego generalizowania się na nowe dane, co wpływa na zdolność modelu do skutecznego rozpoznawania obrazów spoza zbioru treningowego. \footnote{ S. 2; Burn Image Recognition of Medical Images Based on Deep Learning: From CNNs to Advanced Networks, Xianjun Wu, Heming Chen, Xiaoli Wu, Shunjun Wu, Jinbo Huang, Guangdong University of Petrochemical Technology, Guangdong, Chiny, 19.02.2021}
 
 \paragraph{Dobór algorytmów uczenia maszynowego\\}
 %1. Analiza Zadania i Danych:
 \forceindent Przed dokonaniem wyboru algorytmów, dokonano analizy samego zadania rozpoznawania obrazów oraz charakterystyki zbioru danych.
-Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności. \footnote{}
+Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności. \footnote{ S. 1 - 2; A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, IEEE Transactions on Medical Imaging, 02.02.2010}
 
 %2. Wybór Algorytmów Konwolucyjnych:
 Ze względu na specyfikę zadania rozpoznawania obrazów, zdecydowano się na wykorzystanie algorytmów konwolucyjnych (CNN).
-Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych. \footnote{}
+Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych. \footnote{Abstrakt; Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, Karthik B., Ramkumar G., ECS - The Electrochemical Society, 2022}
 
 %3. Wykorzystanie CoreML i Create ML:
 Zdecydowano się na technologie takie jak CoreML i Create ML, które są zoptymalizowane pod kątem platform Apple.
-Umożliwiają one skuteczne implementowanie modeli opartych na algorytmach CNN na urządzeniach mobilnych. \footnote{}
+Umożliwiają one skuteczne implementowanie modeli opartych na algorytmach CNN na urządzeniach mobilnych. \footnote{ Dane za stroną internetową (dostęp 07.12.2023) \url{https://developer.apple.com/documentation/coreml} }
 
 %4. Zastosowanie Feature Extractora "Image Feature Print V2":
 Feature Extractor ,,Image Feature Print V2`` został użyty do automatycznego wydobycia kluczowych cech z obrazów.
-Jego wybór był związany z założeniem, że odpowiednie cechy istotnie wpłyną na skuteczność modelu. \footnote{}
+Jego wybór był związany z założeniem, że odpowiednie cechy istotnie wpłyną na skuteczność modelu. \footnote{Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}}
 
 %5. Tunele Hiperparametru:
 Przeprowadzono proces tunelowania hiperparametrów, takich jak współczynniki uczenia, liczba warstw konwolucyjnych, liczba neuronów w warstwach gęstych itp.
-Optymalizacja hiperparametrów była kluczowym elementem w dostosowaniu modelu do konkretnego zadania. \footnote{}
+Optymalizacja hiperparametrów była kluczowym elementem w dostosowaniu modelu do konkretnego zadania. \footnote{Abstrakt; Study on the CNN model optimization for household garbage classification based on machine learning, Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022 }
 
 %6. Ocena Algorytmów Klasyfikacyjnych:
 W ramach analizy wydajności algorytmów, dokonano oceny różnych modeli klasyfikacyjnych dostępnych w bibliotekach machine learning.
-Oceniano ich zdolność do radzenia sobie z danymi treningowymi i walidacyjnymi oraz ich skuteczność w rozpoznawaniu różnych klas. \footnote{}
+Oceniano ich zdolność do radzenia sobie z danymi treningowymi i walidacyjnymi oraz ich skuteczność w rozpoznawaniu różnych klas.
 
 %7. Rozważanie Wersji Ensemble:
 Rozważono również użycie technik Ensemble, takich jak połączenie wielu modeli w celu poprawy ogólnej skuteczności.
-Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów. \footnote{}
+Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów. \footnote{ S. 2 - 3; Classifying chest CT images as COVID‑19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, Yao‑Mei Chen,Yenming J. Chen, Wen‑Hsien Ho, Jinn‑Tsong Tsai, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019}
 
 %8. Analiza Wydajności na Platformie Apple:
 Ponieważ model miał być implementowany na platformie Apple, uwzględniono specyfiki tego środowiska.
 Sprawdzono, czy wybrane algorytmy i technologie są zoptymalizowane pod kątem wydajności na urządzeniach 
-mobilnych. \footnote{}
+mobilnych.
 
 \subsection{Problemy architektoniczne}
 
@@ -1043,12 +1043,22 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
     \bibitem{flutter-native-performance} Thanh Tran, Flutter Native Performance and Expressive UI/UX, Finlandia, Metropolia University of Applied Sciences, 04.04.2023
     \bibitem{comparison-between-flutter-and-native-applications} Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020
     \bibitem{apple-documentation} Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml}
-    \bibitem{image-classification-cnn} Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
-    \bibitem{image-recognition-cnn-algorithms-overview} Genevieve Sapijaszko, W. Mikhael, An Overview of Recent Convolutional Neural Network Algorithms for Image Recognition, IEEE, 01.08.2018
-    \bibitem{image-recognition-class-hierarchy} Zhen Yu, Toan N. Nguyen, Y. Gal, Lie Ju, S. Chandra, Lei Zhang, Paul Bonnington, V. Mar, Zhiyong Wang, Z. Ge, Skin Lesion Recognition with Class-Hierarchy Regularized Hyperbolic Embeddings, Medical Image Computing and Computer Assisted Intervention – MICCAI 2022, 16.09.2022
-    \bibitem{image-recognition-target-region-selection} Wu Hao, R. Bie, Junqi Guo, Xin Meng, Shenling Wang, Optimized CNN Based Image Recognition Through Target Region Selection, College of Information Science and Technology, Chiny, 16.12.2017
-    \bibitem{image-classification-create-ml} Tianyun Wang, Yanzhang Zhu, The CreateML-based compared to the AutoML-based approach to animal image classification, International Conference on Cloud Computing, Performance Computing, and Deep Learning (CCPCDL 2022), Wuhan, Chiny, 13.10.2022
-    \bibitem{image-classification-data-augumentation} Jingyuan He, Bailong Yang, Fine-grained Image Recognition Method using Discriminative Region-based Data Augmentation, Frontiers in Computing and Intelligent Systems, 10.2022
     \bibitem{gRPC-performance} Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico
+    \bibitem{review-image-classification-CNN} Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
+    \bibitem{regularization-deep-learning} Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering, University of Utah, 14.06.2016
+    \bibitem{data-preprocessing-MRI} F. Agostini, S. Campese, R. Vianello, M. Pizzi, A. Cipriani, M. Zanetti, A post processing pipeline to prepare raw data for machine learning algorithms in cardiac magnetic resonance imaging, University of Padua, Włochy, 2022
+    \bibitem{deep-learning-image-classification} Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022
+    \bibitem{image-augmentation-mobile-platform} Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022
+    \bibitem{apple-image-feature-print} Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}
+    \bibitem{solar-flare-forecasting} Varad Deshmukh, Srinivas Baskar, Elizabeth Bradley, Thomas Berger, James D. Meiss, Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Department of Computer Science, University of Colorado, Stany Zjednoczone, 18.02.2022
+    \bibitem{smart-feature-selection} N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, Samara National Research University, Rosja, 2018
+    \bibitem{hybrid-neural-network-PCA} Keshun You, Guangqi Qiu, Yingkui Gu, Rolling Bearing Fault Diagnosis Using Hybrid Neural Network with Principal Component Analysis, School of Mechanical and Electrical Engineering, Jiangxi University of Science and Technology, Chiny, 17.11.2022
+    \bibitem{feature-set-defect-prediction} Sana Gul, Rizwan Bin Faiz, Mohammad Aljaidi, Ghassan Samara, Ayoub Alsarhan, Ahmad al-Qerem, Impact Evaluation of Significant Feature Set in Cross Project for Defect Prediction through Hybrid Feature Selection in Multiclass, Faculty of Computing, Riphah International University Islamabad, Pakistan, 20.07.2023
+    \bibitem{real-time-feature-subtraction} Nick Haber, Catalin Voss, Azar Fazel, Terry Winograd, Dennis P. Wall, A Practical Approach to Real-Time Neutral Feature Subtraction for Facial Expression Recognition, Stanford University, 2016
+    \bibitem{burn-image-recognition-deep-learning} Xianjun Wu, Heming Chen, Xiaoli Wu, Shunjun Wu, Jinbo Huang, Burn Image Recognition of Medical Images Based on Deep Learning: From CNNs to Advanced Networks, Guangdong University of Petrochemical Technology, Guangdong, Chiny, 19.02.2021
+    \bibitem{hybrid-linear-nonlinear-classifier} Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, IEEE Transactions on Medical Imaging, 02.02.2010
+    \bibitem{cnn-svm-comparison} Karthik B., Ramkumar G., Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, ECS - The Electrochemical Society, 2022
+    \bibitem{cnn-optimization} Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
+    \bibitem{covid19-ct-classification} Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID‑19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
     \end{thebibliography}
 \end{document}
