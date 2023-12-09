@@ -1,0 +1,40 @@
+name: 'production-trash-microservice-pull-request-checks'
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "apps/trash-service/**"
+      - ".github/workflows/production-trash-microservice-pull-request-checks.yml"
+
+defaults:
+  run:
+    working-directory: ./apps/trash-service
+
+jobs:
+  pull-request-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        cache: 'yarn'
+        cache-dependency-path: yarn.lock
+
+    - name: Install dependencies
+      run: yarn install --silent --frozen-lockfile
+
+    - name: Build packages
+      run: yarn turbo run build
+
+    - name: Run tests
+      run: yarn turbo run --scope=@trashify/trash-service test:ci

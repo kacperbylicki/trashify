@@ -1,0 +1,64 @@
+name: 'production-trash-microservice-deployment'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/trash-service/**"
+      - ".github/workflows/production-trash-microservice-deployment.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "build"
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to registry
+      uses: docker/login-action@v1
+      with:
+        registry: https://crtrashifyproduction.azurecr.io/
+        username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
+        password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
+
+    - name: Build and push container image to registry
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-trash-service:${{ github.sha }}
+        file: ./apps/trash-service/Dockerfile
+        target: production
+        build-args: |
+          NPM_READ_TOKEN=${{ secrets.NPM_READ_TOKEN }}
+      env:
+        NODE_ENV: production
+        TRASH_SERVICE_URL: ${{ secrets.TRASH_SERVICE_URL }}
+
+  deploy:
+    name: "deploy"
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'app-trashify-trash-service-production'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.TRASH_SERVICE_PUBLISH_PROFILE }}
+        images: 'crtrashifyproduction.azurecr.io/${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}/trashify-trash-service:${{ github.sha }}'
