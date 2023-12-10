@@ -3,6 +3,11 @@ output "accounts_service_host" {
   description = "The accounts service host."
 }
 
+output "trash_service_host" {
+  value       = module.trash-service.application_url
+  description = "The trash service host."
+}
+
 output "mailing_service_host" {
   value       = module.mailing-service.application_url
   description = "The mailing service host."

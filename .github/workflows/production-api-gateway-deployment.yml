@@ -44,6 +44,7 @@ jobs:
       env:
         NODE_ENV: production
         ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
+        TRASH_SERVICE_URL: ${{ secrets.TRASH_SERVICE_URL }}
         MAILING_SERVICE_URL: ${{ secrets.MAILING_SERVICE_URL }}
 
   deploy:

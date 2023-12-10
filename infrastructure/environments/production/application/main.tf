@@ -68,11 +68,11 @@ resource "azurerm_service_plan" "application" {
 }
 
 module "trash-service-application-insights" {
-  source = "../../../modules/application-insights"
-  resource_group = azurerm_resource_group.main.name
+  source           = "../../../modules/application-insights"
+  resource_group   = azurerm_resource_group.main.name
   application_name = "${var.application_name}-trash-service"
-  environment = var.environment
-  location = var.location
+  environment      = var.environment
+  location         = var.location
 }
 
 module "trash-service" {
@@ -192,6 +192,7 @@ module "api-gateway-service" {
   vault_id = module.key-vault.vault_id
 
   accounts_service_host = module.accounts-service.application_url
+  trash_service_host    = module.trash-service.application_url
   mailing_service_host  = module.mailing-service.application_url
   application_port      = 50000
 }
