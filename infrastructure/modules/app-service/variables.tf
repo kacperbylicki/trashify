@@ -112,6 +112,12 @@ variable "mailing_service_host" {
   default     = ""
 }
 
+variable "api_gateway_service_host" {
+  type        = string
+  description = "The host of the API Gateway Service"
+  default     = ""
+}
+
 variable "docker_registry_name" {
   type        = string
   description = "The name of the container registry"

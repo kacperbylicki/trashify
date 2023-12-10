@@ -50,6 +50,7 @@ resource "azurerm_linux_web_app" "application" {
     "ACCOUNTS_SERVICE_URL"                = var.accounts_service_host
     "TRASH_SERVICE_URL"                   = var.trash_service_host
     "MAILING_SERVICE_URL"                 = var.mailing_service_host
+    "API_GATEWAY_URL"                     = var.api_gateway_service_host
 
     # Monitoring with Azure Application Insights
     "APPINSIGHTS_INSTRUMENTATIONKEY"           = var.azure_application_insights_instrumentation_key
