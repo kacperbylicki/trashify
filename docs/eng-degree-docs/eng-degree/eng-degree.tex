@@ -23,6 +23,7 @@
 \usepackage{url}
 \usepackage{tabularray}
 \usepackage{float}
+\usepackage{listings}
 
 \import{../}{commands.tex}
 
@@ -745,7 +746,7 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     \item łatwiejsza obsługa błędów po stronie klienta i debugowanie aplikacji serwerowej w porównaniu do środowiska GraphQL;
     \item większa ilość tzw. ,,boilerplate'u`` do napisania -- interfejsy ,,RESTful`` zwykle wymagają więcej standardowego kodu niż ich odpowiedniki GraphQL;
     \item możliwość niedostatecznego i nadmiernego pobierania danych -- zostanie to złagodzone dzięki zastosowaniu schematu JSON;
-    \item aplikacja po stronie klienta może być mniej reaktywna ze względu na mnogość wywołań do serwera - zostanie to złagodzone dzięki wykorzystaniu schematu JSON i rozbudowanemu buforowaniu zarówno po stronie klienta, jak i serwera;
+    \item aplikacja po stronie klienta może być mniej reaktywna ze względu na mnogość wywołań do serwera -- zostanie to złagodzone dzięki wykorzystaniu schematu JSON i rozbudowanemu buforowaniu zarówno po stronie klienta, jak i serwera;
     \item paginacja musi zostać zaimplementowana przez deweloperów;
     \item wersjonowanie API będzie musiało być spójne.
 \end{enumerate}
@@ -832,9 +833,32 @@ Finalnie, aplikacja serwerowa podzielona jest na cztery mikroserwisy, odpowiedni
     \item bramka interfejsu aplikacji (eng. \textit{api gateway}) - służąca za punkt dostępu do interfejsu, w której odbywa się komunikacja między mikroserwisami oraz autoryzacja i autentykacja użytkowników.
 \end{itemize}
 
+
+\subsection{Bazy danych}
+
+\forceindent Aplikacja posiada dwie bazy danych MongoDB, po jednej dla mikroserwisu kont użytkownika oraz mikroserwisu pojemników na śmieci.
+Diagram relacji encji w bazie dedykowanej dla mikroserwisu kont użytkownika przedstawiony został na rysunku 3.1, a ten dedykowany mikroserwisowi pojemników na śmieci na rysunku 3.2.
+
+Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników oraz wydajnością aplikacji. Serwisy te podatne są na zmienne ilości dziennych żądań, a czas odpowiedzi na żądania rzędu więcej niż 300ms są niedopuszczalne w środowiskach produkcyjnych.
+
+\begin{figure}[h]
+    \textbf{\caption{Diagram relacji encji w bazie danych mikroserwisu użytkownika}}
+    \vspace{0.55em}
+    \centering \includegraphics[width=12cm]{static/diagrams/erd-baza-danych-użytkownika.png}
+    \\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+\begin{figure}
+    \textbf{\caption{Diagram relacji encji w bazie danych mikroserwisu pojemników na śmieci}}
+    \centering \includegraphics[width=12cm]{static/diagrams/erd-baza-danych-śmietników.png}
+    \\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
 \subsection{Diagramy sekwencji}
 
-Diagramy sekwencji przedstawiają istniejące w aplikacji serwerowej procesy, umożliwiające z niej użytkowanie.
+\forceindent Diagramy sekwencji przedstawiają istniejące w aplikacji serwerowej procesy, umożliwiające z niej użytkowanie.
 
 \begin{figure}[h]
     \textbf{\caption{Diagram logowania użytkownika}}
@@ -847,7 +871,7 @@ Można owy proces podzielić na następujące odnogi:
 \begin{itemize}[label=--]
     \item podanie błędnego hasła bądź adresu email -- odrzucenie żądania;
     \item brak potwierdzonego adresu email -- odrzucenie żądania;
-    \item podanie poprawnych danych i potwierdzony adres email -- zwrócenie tokenów autoryzacyjnych.
+    \item poprawne dane -- zwrócenie tokenów autoryzacyjnych.
 \end{itemize}
 
 \begin{figure}[h]
@@ -893,21 +917,47 @@ Rysunek 3.4 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formul
     \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\subsection{Diagram widoków aplikacji}
+\subsection{Testy automatyczne aplikacji serwerowej}
+\forceindent Aplikacja serwerowa została przetestowana za pomocą testów jednostkowych, integracyjnych oraz testów obciążaniowych.
+
+W przypadku testów jednostkowych, nie pobrano pomiarów związanych z pokryciem kodu źródłowego, z uwagi na małą ich miarodajność. Aplikacja została w przeważającej mierze przetestowana za pomocą testów integracyjnych, z uwagi na małą ilość ścieżek decyzjnych w kodzie.
+
+Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co przedstawione jest na rysunku 3.8, oraz 9 testów integracyjnych. Przekłada się to na wysoką odporność na potencjalne błędy.
+
 \begin{figure}[H]
-    \centering
-    \textbf{\caption{Widoki aplikacji mobilnej w formie diagramu przepływu}}
-    \includegraphics[width=12.5cm]{./MobileAppFlows.png}
-    \raggedright{\scriptsize{\\Źródło: Opracowanie własne}}
+    \textbf{\caption{Wyniki testów jednostkowych mikroserwisu pojemników na śmieci}}
+    \vspace{0.55em}
+    \includegraphics[width=12cm]{./static/trash-unit.png}
+    \\
+    \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\subsection{Zużycie CPU: Flutter vs. Aplikacje Natywne}
 \begin{figure}[H]
-    \centering
-    \textbf{\caption{Porównanie zużycia CPU: Flutter vs. aplikacje natywne na systemy iOS i Android.}}
-    \vspace{0.8em}
-    \includegraphics[width=13.5cm]{./static/CPU-Usage-Comparison-Flutter-vs-Native-iOS-Android.png}
-    \raggedright\scriptsize{\\Źródło: S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
+    \textbf{\caption{Wyniki testów integracyjnych mikroserwisu pojemników na śmieci}}
+    \vspace{0.55em}
+    \includegraphics[width=12cm]{./static/trash-integration-tests.png}
+    \\
+    \raggedright \scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+Mikroserwis kont użytkownika posiada łącznie 8 testów jednostkowych oraz 43 testy integracyjne.
+Przetestowane zostały ścieżki związane z logowaniem, rejestracją oraz zmianami w danych konta użytkowika.
+Jest to zdecydowanie część pracy najbogatsza w ścieżki decyzyjne.
+
+\begin{figure}[H]
+    \textbf{\caption{Wyniki testów jednostkowych mikroserwisu konta użytkownika}}
+    \vspace{0.55em}
+    \includegraphics[width=12cm]{./static/accounts-unit.png}
+    \\
+    \raggedright \scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+\begin{figure}[H]
+    \textbf{\caption{Wyniki testów integracyjnych mikroserwisu kont użytkownika}}
+    \vspace{0.55em}
+    \includegraphics[width=12cm]{./static/accounts-integration-tests.png}
+    \\
+    \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \subsection{Aplikacja mobilna}
@@ -966,6 +1016,46 @@ Całość komunikacji pomiędzy bramką interfejsu aplikacji, a mikroserwisami, 
 
 W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
 
+\subsection{Instalacja aplikacji przez użytkownika}
+
+\forceindent Aplikacja mobilna 
+
+\subsection{Instrukcja developerska}
+
+\forceindent Celem odpalenia lokalnej instancji aplikacji serwerowej, użytkownik potrzebuje następujących narzędzi:
+\begin{itemize}[label=--]
+    \item środowiska rozruchomieniowego Node.js w wersj 20.9 bądź nowszej;
+    \item menedżera paczek yarn w wersji 1.22.19;
+    \item silnika konteneryzacji Docker w wersji 4.24 lub wyżej (w przypadku korzystania z systemu Windows bądź MacOS niezbędną jest aplikacja Docker Desktop);
+    \item minimum 8GB pamięci RAM;
+    \item minimum 40GB wolnej przestrzeni na dysku twardym;
+    \item opcjonalnie, konto na platformie Azure;
+    \item opcjonalnie, stworzona usługa Azure Communication Services do obsługi wiadomości email.
+\end{itemize}
+
+Po rozpakowaniu kodu źródłowego, należy zainstalować wymagane przez projekt paczki za pomocą komendy:
+\begin{lstlisting}
+    yarn install
+\end{lstlisting}
+
+Następnie, dokonać transpilacji kodu z języka Typescript na Javascript i ponownie zainstalować paczki za pomocą komendy:
+\begin{lstlisting}
+    yarn build && yarn install
+\end{lstlisting}
+
+Po tej operacji, należy zbudować i odpalić kontenery za pomocą komendy:
+\begin{lstlisting}
+    docker compose up
+\end{lstlisting}
+
+Kod źródłowy mikroserwisów znajduje się w folderze apps, podzielony na poszczególne mikroserwisy. Odpowiednio:
+\begin{itemize}
+    \item accounts-service -- mikroserwis kont użytkownika;
+    \item api-gateway -- bramka interfejsu aplikacji;
+    \item mailing-service -- mikroserwis wiadomości email;
+    \item trash-service -- mikroserwis pojemników na śmieci.
+\end{itemize}
+
 \section{Użyteczność projektu}
 
 \forceindent Projekt \topic bazowany jest na zaawansowanych narzędziach programistycznych, dostarczając intuincyjny interfejs użytkownika, co pozwala na szybkie zrozumienie dostępnych funkcjonalności przez nowych użytkowników.
@@ -984,61 +1074,72 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
 
 \section{Wykorzystane materiały i bibliografia związana z realizacją projektu}
 
-\begin{thebibliography}{9}
-    \bibitem{gus} Główny Urząd Statystyczny -- Ochrona środowiska 2022, Warszawa, 2022r.
-    \bibitem{eea-waste} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling?size=n_10_n&filters%5B0%5D%5Bfield%5D=readingTime&filters%5B0%5D%5Btype%5D=any&filters%5B0%5D%5Bvalues%5D%5B0%5D%5Bname%5D=All&filters%5B0%5D%5Bvalues%5D%5B0%5D%5BrangeType%5D=fixed&filters%5B1%5D%5Bfield%5D=issued.date&filters%5B1%5D%5Btype%5D=any&filters%5B1%5D%5Bvalues%5D%5B0%5D=Last%205%20years&filters%5B2%5D%5Bfield%5D=language&filters%5B2%5D%5Btype%5D=any&filters%5B2%5D%5Bvalues%5D%5B0%5D=en}
-    \bibitem{eea-municipal} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/data-and-maps/daviz/municipal-waste-recycled-and-composted-6#tab-chart_7}
-    \bibitem{markdown-arch-dec-rec} Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.
-    \bibitem{architectural-styles-and-design} Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000
-    \bibitem{migrating-to-graphql} Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019r.
-    \bibitem{rfc-standards} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}
-    \bibitem{authorization-rest-web-services} Bojan Suzic, Bernd Prünster, Dominik Ziegler, On the structure and authorization management of RESTful web services, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.
-    \bibitem{early-history-of-sequel} Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r.
-    \bibitem{survey-and-comparison-of-relational} Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.
-    \bibitem{elements-of-relational-database-theory} Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.
-    \bibitem{base-analysis-of-nosql-database} Deka Ganesha Chandra, BASE Analysis of NoSQL Database, Regional Vocational Training Instutite for Women, Tura, Meghalaya, India, 19.11.2012r.
-    \bibitem{key-value-store-a-practical-overview} Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.
-    \bibitem{no-sql-evaluation-a-use-case-oriented-survey} Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.
-    \bibitem{modern-column-stores-for-big-data-processing} K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.
-    \bibitem{towards-robust-distributed-systems} Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.
-    \bibitem{citekey}I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia
-    \bibitem{software-testing} Jiantao Pan, Software Testing, Carnegie Mellon University, Stany Zjednoczone Ameryki, Wiosna 1999
-    \bibitem{jest-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://jestjs.io/docs/api}
-    \bibitem{mocha-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://mochajs.org/}
-    \bibitem{chai-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://www.chaijs.com/api/}
-    \bibitem{efficiency-evaluation-nodejs-web-server-frameworks} Danil Demashov, Ilya Gosudarve, Efficiency Evaluation of Node.js Web-Server Frameworks, Uniwersytet ITMO, Petersburg, Rosja, 2020r.
-    \bibitem{nestjs-documentation} Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://docs.nestjs.com/}
-    \bibitem{sequelize-npm-page} Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}
-    \bibitem{mikro-orm} Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}
-    \bibitem{a-model-driven-approach-odms} Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania
-    \bibitem{patterns-solutions-object-relational-mapping} Alexandre Torres [i inni] Twenty years of object-relational mapping: A survey on patterns, solutions, and their implications on application design, 28.09.2016r.
-    \bibitem{query-builder-paradigm}Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}
-    \bibitem{ionic-framework} Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018
-    \bibitem{ionic-npm} Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/@ionic/cli}
-    \bibitem{react-native-application-development} William Danielsson, React Native application development – A comparison between native Android and React Native, Szwecja, Linköpings universitet, 2016
-    \bibitem{bridge-react-native} Sreekanth Dekkati, Karu Lal, Harshith Desamsetti, React Native for Android: Cross-Platform Mobile Application Development, Global Disclosure of Economics and Business, 12.2019
-    \bibitem{comparison-react-native-and-expo} Hugo Hutri, COMPARISON OF REACT NATIVE AND EXPO, Finlandia, Lappeenranta–Lahti University of Technology LUT, 2023
-    \bibitem{react-native-npm} Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/react-native}
-    \bibitem{react-native-vs-flutter} Wenhao Wu, React Native vs Flutter, cross-platform mobile application frameworks, Finlandia, Metropolia University of Applied Sciences, 01.03.2018
-    \bibitem{flutter-native-performance} Thanh Tran, Flutter Native Performance and Expressive UI/UX, Finlandia, Metropolia University of Applied Sciences, 04.04.2023
-    \bibitem{comparison-between-flutter-and-native-applications} Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020
-    \bibitem{apple-documentation} Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml}
-    \bibitem{gRPC-performance} Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico
-    \bibitem{review-image-classification-CNN} Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
-    \bibitem{regularization-deep-learning} Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering, University of Utah, 14.06.2016
-    \bibitem{data-preprocessing-MRI} F. Agostini, S. Campese, R. Vianello, M. Pizzi, A. Cipriani, M. Zanetti, A post processing pipeline to prepare raw data for machine learning algorithms in cardiac magnetic resonance imaging, University of Padua, Włochy, 2022
-    \bibitem{deep-learning-image-classification} Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022
-    \bibitem{image-augmentation-mobile-platform} Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022
-    \bibitem{apple-image-feature-print} Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}
-    \bibitem{solar-flare-forecasting} Varad Deshmukh, Srinivas Baskar, Elizabeth Bradley, Thomas Berger, James D. Meiss, Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Department of Computer Science, University of Colorado, Stany Zjednoczone, 18.02.2022
-    \bibitem{smart-feature-selection} N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, Samara National Research University, Rosja, 2018
-    \bibitem{hybrid-neural-network-PCA} Keshun You, Guangqi Qiu, Yingkui Gu, Rolling Bearing Fault Diagnosis Using Hybrid Neural Network with Principal Component Analysis, School of Mechanical and Electrical Engineering, Jiangxi University of Science and Technology, Chiny, 17.11.2022
-    \bibitem{feature-set-defect-prediction} Sana Gul, Rizwan Bin Faiz, Mohammad Aljaidi, Ghassan Samara, Ayoub Alsarhan, Ahmad al-Qerem, Impact Evaluation of Significant Feature Set in Cross Project for Defect Prediction through Hybrid Feature Selection in Multiclass, Faculty of Computing, Riphah International University Islamabad, Pakistan, 20.07.2023
-    \bibitem{real-time-feature-subtraction} Nick Haber, Catalin Voss, Azar Fazel, Terry Winograd, Dennis P. Wall, A Practical Approach to Real-Time Neutral Feature Subtraction for Facial Expression Recognition, Stanford University, 2016
-    \bibitem{burn-image-recognition-deep-learning} Xianjun Wu, Heming Chen, Xiaoli Wu, Shunjun Wu, Jinbo Huang, Burn Image Recognition of Medical Images Based on Deep Learning: From CNNs to Advanced Networks, Guangdong University of Petrochemical Technology, Guangdong, Chiny, 19.02.2021
-    \bibitem{hybrid-linear-nonlinear-classifier} Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, IEEE Transactions on Medical Imaging, 02.02.2010
-    \bibitem{cnn-svm-comparison} Karthik B., Ramkumar G., Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, ECS - The Electrochemical Society, 2022
-    \bibitem{cnn-optimization} Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
-    \bibitem{covid19-ct-classification} Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID‑19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
-    \end{thebibliography}
+\subsection{Załączniki}
+
+-- Aplikacja serwerowa
+
+-- Aplikacja mobilna
+
+???
+
+\subsection{Bibliografia}
+
+\begin{enumerate}[label={[}\arabic*{]}]
+    \item Główny Urząd Statystyczny -- Ochrona środowiska 2022, Warszawa, 2022r.
+    \item Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling?size=n_10_n&filters%5B0%5D%5Bfield%5D=readingTime&filters%5B0%5D%5Btype%5D=any&filters%5B0%5D%5Bvalues%5D%5B0%5D%5Bname%5D=All&filters%5B0%5D%5Bvalues%5D%5B0%5D%5BrangeType%5D=fixed&filters%5B1%5D%5Bfield%5D=issued.date&filters%5B1%5D%5Btype%5D=any&filters%5B1%5D%5Bvalues%5D%5B0%5D=Last%205%20years&filters%5B2%5D%5Bfield%5D=language&filters%5B2%5D%5Btype%5D=any&filters%5B2%5D%5Bvalues%5D%5B0%5D=en}
+    \item Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/data-and-maps/daviz/municipal-waste-recycled-and-composted-6#tab-chart_7}
+    \item Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.
+    \item Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000
+    \item Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019r.
+    \item Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}
+    \item Bojan Suzic, Bernd Prünster, Dominik Ziegler, On the structure and authorization management of RESTful web services, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.
+    \item Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r.
+    \item Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.
+    \item Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.
+    \item Deka Ganesha Chandra, BASE Analysis of NoSQL Database, Regional Vocational Training Instutite for Women, Tura, Meghalaya, India, 19.11.2012r.
+    \item Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.
+    \item Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.
+    \item K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.
+    \item Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.
+    \item I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia
+    \item Jiantao Pan, Software Testing, Carnegie Mellon University, Stany Zjednoczone Ameryki, Wiosna 1999
+    \item Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://jestjs.io/docs/api}
+    \item Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://mochajs.org/}
+    \item Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://www.chaijs.com/api/}
+    \item Danil Demashov, Ilya Gosudarve, Efficiency Evaluation of Node.js Web-Server Frameworks, Uniwersytet ITMO, Petersburg, Rosja, 2020r.
+    \item Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://docs.nestjs.com/}
+    \item Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}
+    \item Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}
+    \item Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania
+    \item Alexandre Torres [i inni] Twenty years of object-relational mapping: A survey on patterns, solutions, and their implications on application design, 28.09.2016r.
+    \item Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}
+    \item Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018
+    \item Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/@ionic/cli}
+    \item William Danielsson, React Native application development – A comparison between native Android and React Native, Szwecja, Linköpings universitet, 2016
+    \item Sreekanth Dekkati, Karu Lal, Harshith Desamsetti, React Native for Android: Cross-Platform Mobile Application Development, Global Disclosure of Economics and Business, 12.2019
+    \item Hugo Hutri, COMPARISON OF REACT NATIVE AND EXPO, Finlandia, Lappeenranta–Lahti University of Technology LUT, 2023
+    \item Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/react-native}
+    \item Wenhao Wu, React Native vs Flutter, cross-platform mobile application frameworks, Finlandia, Metropolia University of Applied Sciences, 01.03.2018
+    \item Thanh Tran, Flutter Native Performance and Expressive UI/UX, Finlandia, Metropolia University of Applied Sciences, 04.04.2023
+    \item Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020
+    \item Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml}
+    \item Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico
+    \item Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
+    \item Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering, University of Utah, 14.06.2016
+    \item F. Agostini, S. Campese, R. Vianello, M. Pizzi, A. Cipriani, M. Zanetti, A post processing pipeline to prepare raw data for machine learning algorithms in cardiac magnetic resonance imaging, University of Padua, Włochy, 2022
+    \item Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022
+    \item Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022
+    \item Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}
+    \item Varad Deshmukh, Srinivas Baskar, Elizabeth Bradley, Thomas Berger, James D. Meiss, Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Department of Computer Science, University of Colorado, Stany Zjednoczone, 18.02.2022
+    \item N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, Samara National Research University, Rosja, 2018
+    \item Keshun You, Guangqi Qiu, Yingkui Gu, Rolling Bearing Fault Diagnosis Using Hybrid Neural Network with Principal Component Analysis, School of Mechanical and Electrical Engineering, Jiangxi University of Science and Technology, Chiny, 17.11.2022
+    \item Sana Gul, Rizwan Bin Faiz, Mohammad Aljaidi, Ghassan Samara, Ayoub Alsarhan, Ahmad al-Qerem, Impact Evaluation of Significant Feature Set in Cross Project for Defect Prediction through Hybrid Feature Selection in Multiclass, Faculty of Computing, Riphah International University Islamabad, Pakistan, 20.07.2023
+    \item Nick Haber, Catalin Voss, Azar Fazel, Terry Winograd, Dennis P. Wall, A Practical Approach to Real-Time Neutral Feature Subtraction for Facial Expression Recognition, Stanford University, 2016
+    \item Xianjun Wu, Heming Chen, Xiaoli Wu, Shunjun Wu, Jinbo Huang, Burn Image Recognition of Medical Images Based on Deep Learning: From CNNs to Advanced Networks, Guangdong University of Petrochemical Technology, Guangdong, Chiny, 19.02.2021
+    \item Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, IEEE Transactions on Medical Imaging, 02.02.2010
+    \item Karthik B., Ramkumar G., Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, ECS - The Electrochemical Society, 2022
+    \item Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
+    \item Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID ‑- 19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
+\end{enumerate}
+
 \end{document}
