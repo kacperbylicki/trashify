@@ -41,9 +41,9 @@ jobs:
         target: production
         build-args: |
           NPM_READ_TOKEN=${{ secrets.NPM_READ_TOKEN }}
+          ACCOUNTS_SERVICE_URL=${{ secrets.ACCOUNTS_SERVICE_URL }}
       env:
         NODE_ENV: production
-        ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
 
   deploy:
     name: "deploy"

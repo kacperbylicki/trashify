@@ -32,7 +32,7 @@ jobs:
         username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
         password: ${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}
 
-    - name: Build and push container image to registry
+    - name: Build and Push Container Image
       uses: docker/build-push-action@v2
       with:
         push: true
@@ -41,12 +41,12 @@ jobs:
         target: production
         build-args: |
           NPM_READ_TOKEN=${{ secrets.NPM_READ_TOKEN }}
+          ACCOUNTS_SERVICE_URL=${{ secrets.ACCOUNTS_SERVICE_URL }}
+          TRASH_SERVICE_URL=${{ secrets.TRASH_SERVICE_URL }}
+          MAILING_SERVICE_URL=${{ secrets.MAILING_SERVICE_URL }}
+          API_GATEWAY_URL=${{ secrets.API_GATEWAY_URL }}
       env:
         NODE_ENV: production
-        ACCOUNTS_SERVICE_URL: ${{ secrets.ACCOUNTS_SERVICE_URL }}
-        TRASH_SERVICE_URL: ${{ secrets.TRASH_SERVICE_URL }}
-        MAILING_SERVICE_URL: ${{ secrets.MAILING_SERVICE_URL }}
-        API_GATEWAY_URL: ${{ secrets.API_GATEWAY_URL }}
 
   deploy:
     name: "deploy"

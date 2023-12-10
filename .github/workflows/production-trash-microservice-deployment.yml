@@ -41,9 +41,9 @@ jobs:
         target: production
         build-args: |
           NPM_READ_TOKEN=${{ secrets.NPM_READ_TOKEN }}
+          TRASH_SERVICE_URL=${{ secrets.TRASH_SERVICE_URL }}
       env:
         NODE_ENV: production
-        TRASH_SERVICE_URL: ${{ secrets.TRASH_SERVICE_URL }}
 
   deploy:
     name: "deploy"
