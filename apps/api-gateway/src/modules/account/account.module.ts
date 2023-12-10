@@ -6,12 +6,12 @@ import {
   MAILING_SERVICE_NAME,
   MailingServiceClient,
 } from '@trashify/transport';
-import { API_GATEWAY_URL_TOKEN, EMAILS_FEATURE_FLAG } from './symbols';
 import { AccountController } from './controllers';
 import { AppConfig } from '@/config';
 import { ClientGrpc, ClientProvider, ClientsModule, Transport } from '@nestjs/microservices';
 import { Config } from '@unifig/core';
 import { ConfigModule, getConfigContainerToken } from '@unifig/nest';
+import { EMAILS_FEATURE_FLAG } from './symbols';
 import { JwtService } from './services';
 import { Module } from '@nestjs/common';
 import { join } from 'path';
@@ -73,15 +73,14 @@ import { join } from 'path';
       inject: [MAILING_SERVICE_NAME],
     },
     JwtService,
-    {
-      provide: API_GATEWAY_URL_TOKEN,
-      useFactory: (): string => {
-        const { apiGatewayUrl } = Config.getValues(AppConfig);
-        console.log('apiGatewayUrl', apiGatewayUrl);
-        return apiGatewayUrl;
-      },
-      inject: [getConfigContainerToken(AppConfig)],
-    },
+    // {
+    //   provide: API_GATEWAY_URL_TOKEN,
+    //   useFactory: (): string => {
+    //     const { apiGatewayUrl } = Config.getValues(AppConfig);
+    //     return apiGatewayUrl;
+    //   },
+    //   inject: [getConfigContainerToken(AppConfig)],
+    // },
     {
       provide: EMAILS_FEATURE_FLAG,
       useFactory: (): boolean => {

@@ -1,4 +1,3 @@
-import { API_GATEWAY_URL_TOKEN, EMAILS_FEATURE_FLAG } from '../../src/modules/account/symbols';
 import { AccountController, LoginRequestDto, RegisterRequestDto } from '@/modules';
 import {
   AccountServiceClient,
@@ -8,6 +7,7 @@ import {
   RefreshTokenResponse,
   RegisterResponse,
 } from '@trashify/transport';
+import { EMAILS_FEATURE_FLAG } from '../../src/modules/account/symbols';
 import { Observable, map, of } from 'rxjs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { createMock as autoMocker } from '@golevelup/ts-jest';
@@ -16,16 +16,20 @@ describe('AccountController', () => {
   let controller: AccountController;
   let client: AccountServiceClient;
 
+  beforeAll(() => {
+    process.env.API_GATEWAY_URL = 'dummy-url';
+  });
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AccountController],
       providers: [
-        {
-          provide: API_GATEWAY_URL_TOKEN,
-          useFactory: (): string => {
-            return 'dummy-url';
-          },
-        },
+        // {
+        //   provide: API_GATEWAY_URL_TOKEN,
+        //   useFactory: (): string => {
+        //     return 'dummy-url';
+        //   },
+        // },
         {
           provide: EMAILS_FEATURE_FLAG,
           useFactory: (): boolean => {

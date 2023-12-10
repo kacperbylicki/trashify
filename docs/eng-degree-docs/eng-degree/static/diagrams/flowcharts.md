@@ -1,9 +1,9 @@
-
 Diagram sekwencji logowania
+
 ```mermaid
 graph LR
     Start((Start)) -- Login --> Walidacja{Walidacja danych}
-    Walidacja -- Błędne hasło\nbądź email --> Odrzuć[Odrzuć żądanie] --> End((Stop)) 
+    Walidacja -- Błędne hasło\nbądź email --> Odrzuć[Odrzuć żądanie] --> End((Stop))
     Walidacja -- Email nie potwierdzony --> Odrzuć --> End
     Walidacja -- Dane poprawne --> Email{Email potwierdzony}
     Email -- Nie --> Odrzuć --> End
@@ -12,6 +12,7 @@ graph LR
 ```
 
 Diagram sekwencji zmiany adresu email
+
 ```mermaid
 graph LR
     Start((Start)) --> Formularz{Formularz zmiany\nadresu email}
@@ -23,6 +24,7 @@ graph LR
 ```
 
 Diagram sekwencji resetu hasła
+
 ```mermaid
 graph TD
     Start((Start)) --> Formularz{Formularz resetu\n hasła użytkownika}
@@ -37,6 +39,7 @@ graph TD
 ```
 
 Diagram sekwencji rejestracji użytkownika
+
 ```mermaid
 graph TD
     Start((Start)) --> Formularz{Formularz rejestracji}
@@ -57,5 +60,3 @@ graph LR
     Autoryzacja -- Tak --> Pobieranie[Pobierz dane z bazy danych]
     Pobieranie --> Zwrotka[Zwróć dane] --> End
 ```
-
-

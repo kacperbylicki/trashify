@@ -1,4 +1,3 @@
-import { API_GATEWAY_URL_TOKEN, EMAILS_FEATURE_FLAG } from '../symbols';
 import {
   AccountServiceClient,
   GetAccountResponse,
@@ -55,6 +54,7 @@ import {
   ResetPasswordDto,
   ResetPasswordResponseDto,
 } from '../dtos';
+import { EMAILS_FEATURE_FLAG } from '../symbols';
 import {
   HttpStatusInterceptor,
   JwtAuthGuard,
@@ -83,16 +83,16 @@ import {
 @UseInterceptors(TimeoutInterceptor, HttpStatusInterceptor)
 export class AccountController {
   private logger: Logger;
+  private baseUrl: string;
 
   public constructor(
     private readonly accountsClient: AccountServiceClient,
     private readonly mailingClient: MailingServiceClient,
-    @Inject(API_GATEWAY_URL_TOKEN)
-    private readonly baseUrl: string,
     @Inject(EMAILS_FEATURE_FLAG)
     private readonly emailsFeatureFlag: boolean,
   ) {
     this.logger = new Logger(AccountController.name);
+    this.baseUrl = process.env.API_GATEWAY_URL as string;
   }
 
   @UseGuards(JwtAuthGuard)
