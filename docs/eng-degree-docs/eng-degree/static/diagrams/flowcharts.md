@@ -42,10 +42,9 @@ graph TD
     Start((Start)) --> Formularz{Formularz rejestracji}
     Formularz -- Adres email istnieje --> Odrzuć[Odrzuć żądanie] --> End((Stop))
     Formularz -- Powtórzone hasło jest niepoprawne --> Odrzuć[Odrzuć żądanie]
-    Formularz -- Dane są poprawne --> Wiadomość{Wyślij wiadomość\nemail na potwierdzenie}
-    Wiadomość -- Czas na potwierdzenie minął --> Wy[Wyślij ponownie]
+    Formularz -- Dane są poprawne --> Wiadomość[Wyślij wiadomość\nemail na potwierdzenie]
     Wy --> Wiadomość
-    Wiadomość -- Czas na potwierdzenie nie minął --> Potwierdź[Email potwierdzony]
+    Wiadomość --> Potwierdź[Email potwierdzony]
     Potwierdź --> End
 ```
 
