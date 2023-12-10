@@ -92,14 +92,14 @@
 
         \vspace{5cm}
 
-        \begin{Large} \textbf{\topic} \end{Large}
+        \begin{Large} \textbf{Trashify – rozpoznawanie pojemników na odpady za pomocą algorytmów uczenia maszynowego} \end{Large}
 
         \vspace{5cm}
 
         PROJEKT DYPLOMOWY
 
         \vfill
-        Poznań 2023
+        Poznań 2024
 
     \end{center}
 \end{titlepage}
@@ -126,18 +126,11 @@
 
 % Example table and figure formatting
 \section{Wprowadzenie}
-\forceindent W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń - rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \footnote{s. 149; Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022r.}.
+\forceindent W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń -- rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \footnote{s. 149; Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022r.}.
 
 Jednym z kluczowych aspektów tego wyzwania jest efektywne segregowanie i recykling odpadów, co przyczynia się nie tylko do ochrony środowiska naturalnego, ale także do potencjalnych oszczędności. Jak podaje EEA (Europejska Agencja Ochrony Środowiska), na obywatela Unii Europejskiej przypada średnio 4,8 ton odpadów komunalnych, z czego 49\% jest recyklingowanych \footnote{Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling}}. Recykling może przynieść znaczące korzyści gospodarcze i środowiskowe, w tym zmniejszenie emisji gazów cieplarnianych, ograniczenie zużycia surowców naturalnych oraz tworzenie miejsc pracy. W samej Polsce, między latami 2004 i 2020, procent recyklingu odpadów komunalnych wzrósł z poziomu 4,9 do 38.7\%.
 
-\begin{figure}[h]
-    \textbf{\caption{Poziom recyklingu odpadów komunalnych w krajach Unii Europejskiej.}}
-    \centering\includegraphics[width=16cm]{./static/Municipal waste recycling rates in Europe by country.png}\\
-    \raggedright\scriptsize{Źródło: Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling}}
-\end{figure}
-
-% TODO: Znaleźć badania na ten temat, zacytować - @kuba
-Jednakże, aby skutecznie promować segregację odpadów i recykling, niezbędne jest zrozumienie ludzkiego zachowania oraz eliminacja "tarcia" związanego ze znalezieniem odpowiedniego pojemnika na odpady. Projekt oferujący łatwy dostęp do informacji o pojemnikach na odpady oraz lokalizacji najbliższego odpowiedniego kontenera usuwa bariery, które często zniechęcają do segregacji. Behawioryka sugeruje, że ludzie są podatni na wpływ norm społecznych i nacisku społeczności lokalnej, co stanowi kolejny argument za promowaniem proekologicznych norm i społecznego zaangażowania.
+Jednakże, aby skutecznie promować segregację odpadów i recykling, niezbędne jest zrozumienie ludzkiego zachowania oraz eliminacja ,,tarcia`` związanego ze znalezieniem odpowiedniego pojemnika na odpady. Projekt oferujący łatwy dostęp do informacji o pojemnikach na odpady oraz lokalizacji najbliższego odpowiedniego kontenera usuwa bariery, które często zniechęcają do segregacji.
 
 Niniejsza praca inżynierska skupia się na rozwiązaniu tego wyzwania poprzez wykorzystanie zaawansowanych technologii, takich jak sztuczna inteligencja, uczenie maszynowe, technologie wizyjne oraz geolokalizacja, w celu stworzenia systemu automatycznej klasyfikacji pojemników na odpady oraz aplikacji mobilnej, która umożliwia łatwiejsze lokalizowanie pojemników na śmieci w najbliższej okolicy. Naszym celem jest nie tylko zwiększenie efektywności gospodarki odpadami, ale także kształtowanie proekologicznego zachowania i eliminacja barier, które utrudniają segregację odpadów.
 
@@ -198,7 +191,7 @@ Cele podrzędne:
 \subsection{Zakres podmiotowy, przedmiotowy, czasowy i przestrzenny}
 
 \begin{itemize}
-    \item Zakres podmiotowy projektu \topic  obejmuje badanie i opracowanie aplikacji mobilnej oraz algorytmów uczenia maszynowego, które umożliwią rozpoznawanie pojemników na odpady. Podmiotem badania jest zatem aplikacja mobilna Trashify oraz modele uczenia maszynowego, które będą umożliwiać rozpoznawanie pojemników na odpady.
+    \item Zakres podmiotowy projektu \topic  obejmuje opracowanie aplikacji mobilnej oraz badanie algorytmów uczenia maszynowego, które umożliwią rozpoznawanie pojemników na odpady. Podmiotem badania jest zatem użyteczność aplikacji mobilnej Trashify oraz modele uczenia maszynowego, które będą umożliwiać rozpoznawanie pojemników na odpady.
     \item Zakres przedmiotowy obejmuje badanie możliwości rozpoznawania różnych typów pojemników na odpady (np. pojemnik na papier, szkło, plastik, odpady organiczne itp.) oraz opracowanie algorytmów uczenia maszynowego, które umożliwią ich poprawną identyfikację. W ramach projektu będzie również opracowana aplikacja mobilna, która będzie integrować te algorytmy oraz udostępniać użytkownikom informacje o pojemnikach na odpady oraz umożliwiać im łatwe i szybkie ich zlokalizowanie.
     \item Zakres czasowy projektu obejmuje okres od 01.04.2023 aż do 01.12.2023.
     \item Zakres przestrzenny projektu obejmuje miejsce, w którym aplikacja Trashify będzie wykorzystywana, czyli przede wszystkim Polska. Projekt ogranicza się do konkretnego obszaru geograficznego, ponieważ algorytmy uczenia maszynowego, które zostaną opracowane w ramach projektu, będą skupiały się na pojemnikach na odpady spotykanych w Polsce. W ramach projektu nie będzie prowadzona analiza pojemników spotykanych w innych krajach.
@@ -246,42 +239,6 @@ Cele podrzędne:
 
 \subsection{Założenia teoretyczne}
 
-\subsubsection{Framework aplikacji serwerowej}
-
-\forceindent Framework jest zestawem dopasowanych narzędzi do stworzenia konkretnego rozwiązania programistycznego.\footnote{s. 1; Server-Centric Web Frameworks: An Overview; Iwan Vosloo and Derrick G. Kourie, University of Pretoria, ACM Computing Surveys, Vol. 40, No. 2, Artykuł 4, 2008r.}
-Rozwiązaniem tym może być aplikacja serwerowa, mobilna, czy narzędzia wiersza poleceń.
-
-\textbf{Express} -- jeden z pierwszych frameworków dla środowiska Node.js, powstały w roku 2010.
-Jest on dojrzałym, niezwykle lubianym przez społeczność rozwiązaniem, oferującym
-minimalistyczny interfejs, bezstronny względem wzorców projektowych. Posiada bogaty ekosystem
-oprogramowań pośredniczących tworzonych i wspieranych przez społeczność.\footnote{Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://expressjs.com/en/4x/api.html}}
-Jest on pobierany średnio 30 milionów razy w tygodniu \footnote{Dane za stroną internetową (dostęp: 12.11.2023r.) \url{https://www.npmjs.com/package/express}}, co czyni go liderem w popularności.
-
-\textbf{Fastify} -- framework zainspirowany Express oraz Hapi. Tak jak w przypadku Expressa,
-jest on minimalistyczny, jednakże wprowadza kilka usprawnień oraz rozszerzeń do
-konceptów w nim prezentowanych. Głównym wzorcem tego frameworka jest bogaty system
-wtyczek, które zaimplementowane są na podstawie skierowanego grafu acyklicznego\footnote{Dane za stroną internetową (dostęp 14.11.2023r.)\url{https://fastify.dev/docs/latest/Guides/}}.
-Każda ścieżka żądania HTTP, dekoratory, haki są traktowane jako wtyczki.
-Pozwala to na pełną enkapsulację logiki oraz zwiększa bezpieczeństwo aplikacji.
-Dodatkowo jest on jednym z najszybszych frameworków serwerowych w ekosystemie node.js\footnote{S. 7; Danil Demashov, Ilya Gosudarve, Efficiency Evaluation of Node.js Web-Server Frameworks, Uniwersytet ITMO, Petersburg, Rosja, 2020r.}
-
-\begin{figure}[h]
-    \textbf{\caption{Reprezentacja skierowanego grafu acyklicznego}}
-    \includegraphics[width=6cm]{./static/ADG.png}
-    \centering
-    \label{fig:ADG}
-\end{figure}
-
-\textbf{NestJS} -- to framework opiniowany i jako taki wymusza na użytkowniku stosowanie określonych wzorców.
-Wykorzystuje bieżące zmiany w języku JavaScript (ECMAScript), został zbudowany przy użyciu i w pełni obsługuje TypeScript oraz zawiera w sobie fragmenty
-programowania obiektowego, funkcyjnego i reaktywnego programowania funkcyjnego.
-W przypadku aplikacji internetowych Nest bazowo używa Express jako sterownika HTTP,
-z możliwością wykorzystania Fastify, co wiąże się z dodatkowymi mankamentami. Niejako próbuje naśladować frameworki pokroju Laravela,
-.NET, czy Spring, wykorzystując dekoratory niemal do każdej części aplikacji związanej z architekturą. Wprowadza to dużo abstrakcji, natomiast interfejsy API są w pełni udostępnione programistom, zapewniając uncję wolności.
-Posiada dedykowany interfejs terminalowy, którego można użyć do uruchomienia projektu,
-utworzenia nowego z zainstalowanymi wszystkimi zależnościami, generowania zasobów HTTP,
-kontrolerów, usług, obiektów transferu danych i innych\footnote{Dane za stroną internetową (14.11.2023r.) \url{https://docs.nestjs.com/}}.
-
 \subsubsection{Interfejs aplikacji}
 
 \forceindent \textbf{GraphQL}\\
@@ -312,36 +269,37 @@ W kontekście baz danych, mapowanie obiektowo-relacyjne można uznać za najwyż
 
 W środowisku node.js pojawiło się takowych wiele, między innymi:
 \begin{enumerate}[label=--]
-    \item TypeORM - wykorzystujący eksperymentalne dekoratory w języku Typescript celem deklarowania schematu encji w bazie danych. Zdecydowana większość operacji jest w nim dostępna za ich pomocą.
+    \item TypeORM -- wykorzystujący eksperymentalne dekoratory w języku Typescript celem deklarowania schematu encji w bazie danych. Zdecydowana większość operacji jest w nim dostępna za ich pomocą.
     \item Sequelize - najstarszy na tej liście, pierwsze wzmianki na witrynie StackOverflow sięgają roku 2011. Jest on dojrzałym, pełnym funkcjonalności maperem, którego popularność odzwierciedlona jest w 1,5 miliona tygodniowych pobrań\footnote{Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}}.
-    \item Prisma - kontrowersyjny maper, którego operacje łączenia (eng. \textit{join}) wykonywane są w sposób wirtualny, to znaczy poprzez wysłanie kilku kwerend do bazy danych i połączeniu ich wedle instrukcji użytkownika w ,,Prisma Engine``, który napisany został przy pomocy języka Rust, co zapewnia relatywne bezpieczeństwo oraz wysoką wydajność takiego rozwiązania\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.)\url{https://www.prisma.io/}}.
-    \item Drizzle - maper obiecujący pełne typowanie, syntax podobny do tego znanego z SQLa oraz automatyczną generację schematów za pomocą biblioteki Zod.
-    \item Mikro-ORM - oparty na domniemanych transakcjach, automatycznym grupowaniu kwerend za pomocą wzorca jednostki pracy (eng. \textit{Unit of Work}). Wzorowany jest na Hibernate, znanym z języka Java oraz Doctrine z PHP.\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}}
+    \item Prisma -- kontrowersyjny maper, którego operacje łączenia (eng. \textit{join}) wykonywane są w sposób wirtualny, to znaczy poprzez wysłanie kilku kwerend do bazy danych i połączeniu ich wedle instrukcji użytkownika w ,,Prisma Engine``, który napisany został przy pomocy języka Rust, co zapewnia relatywne bezpieczeństwo oraz wysoką wydajność takiego rozwiązania\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.)\url{https://www.prisma.io/}}.
+    \item Drizzle -- maper obiecujący pełne typowanie, syntax podobny do tego znanego z SQLa oraz automatyczną generację schematów za pomocą biblioteki Zod.
+    \item Mikro-ORM -- oparty na domniemanych transakcjach, automatycznym grupowaniu kwerend za pomocą wzorca jednostki pracy (eng. \textit{Unit of Work}). Wzorowany jest na Hibernate, znanym z języka Java oraz Doctrine z PHP.\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}}
 \end{enumerate}
 
+\newpage
 \textbf{Mapowanie obiektowo-dokumentowe\\}
 \forceindent Mapowanie obiektowo-dokumentowe powstało wraz z bazami NoSQL, których to system często nie posiada schematów danych.
-Tak samo jak w przypadku mapowania obiektowo-relacyjnego, ma ono na celu uproszczenie interakcji pomiędzy aplikacją a bazą danych. Powstało ono w celu wyabstrakcjonowania procesu zarządznia i mapowania obiektów z ich natywnej dla bazy danych struktury, do takiej zrozumiałej przez język programowania, jak również utrzymującej konwencje programowania obiektowego.\footnote{S. 59130-59131; Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania}
+Tak samo jak w przypadku mapowania obiektowo-relacyjnego, ma ono na celu uproszczenie interakcji pomiędzy aplikacją a bazą danych. Powstało ono w celu wyabstrakcjonowania procesu zarządzania i mapowania obiektów z ich natywnej dla bazy danych struktury, do takiej zrozumiałej przez język programowania, jak również utrzymującej konwencje programowania obiektowego.\footnote{S. 59130-59131; Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania}
 
 W środowisku node.js na przestrzeni lat powstały między innymi następujące mapery obiektowo-dokumentowe:
 \begin{enumerate}[label=--]
-    \item mongoose - dedykowany dla bazy MongoDB mapper obiektowo-dokumentowy. Posiada wiele funkcjonalności związane z procesem wzbogacania POJO (eng. \textit{plain-old-javascript-object}), ktore zapewniają walidację obiektów, dodawanie pól wirtualnych i inne.
-    \item prisma - wcześniej wymieniony ORM, który posiada wsparcie dla MongoDB i funkcjonuje w trybie wymuszonej transakcyjności danych na bazie tzw. zbiorów replik (eng. \textit{replica set}).
+    \item mongoose -- dedykowany dla bazy MongoDB mapper obiektowo-dokumentowy. Posiada wiele funkcjonalności związane z procesem wzbogacania POJO (eng. \textit{plain-old-javascript-object}), ktore zapewniają walidację obiektów, dodawanie pól wirtualnych i inne.
+    \item prisma -- wcześniej wymieniony ORM, który posiada wsparcie dla MongoDB i funkcjonuje w trybie wymuszonej transakcyjności danych na bazie tzw. zbiorów replik (eng. \textit{replica set}).
 \end{enumerate}
 
 \textbf{Budowniczy kwerend\\}
 \forceindent  Budowniczy kwerend stanowią abstrakcję na język SQL w wybranym języku programowania.
 Pozwalają one na deklaratywne tworzenie kwerend za pomocą operacji takich jak: select, insert, join, delete, update, with, where, not, etc.
-Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne wsparcie intellisense w danym jęzku programowania oraz rozwiązują popularne problemy związane z cyberbezpieczeństwem przeprowadzania operacji na bazie danych, czego najpopularniejszym przykładem są operacje wstrzykiwania SQL`a (eng. \textit{SQL Injection})\footnote{Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}}.
+Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne wsparcie intellisense w danym języku programowania oraz rozwiązują popularne problemy związane z cyberbezpieczeństwem przeprowadzania operacji na bazie danych, czego najpopularniejszym przykładem są operacje wstrzykiwania SQL`a (eng. \textit{SQL Injection})\footnote{Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}}.
 
 \subsection{Testowanie aplikacji}
 \forceindent \textbf{Jest} -- popularny i pełen wbudowanych funkcjonalności framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://jestjs.io/docs/api}}:
 \begin{enumerate}[label=--]
     \item łatwa konfiguracja -- w pliku `package.json`, `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
-    \item obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem bilbioteki supertest i testów migawkowych;
+    \item obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem biblioteki supertest i testów migawkowych;
     \item mocking -- z wysokim stopniem dostosowania, w tym mockowanie wartości zwracanych (zarówno w funkcjach synchronicznych, jak i asynchronicznych). Są one przechowywane i mogą być walidowane;
     \item pokrycie kodu -- wbudowane narzędzie do raportowania pokrycia kodu źródłowego;
-    \item testowanie równoległe - zwiększenie szybkości testowania, zwłaszcza gdy testy są w pełni niezależne i nie mutują wspólnego zestawu danych;
+    \item testowanie równoległe -- zwiększenie szybkości testowania, zwłaszcza gdy testy są w pełni niezależne i nie mutują wspólnego zestawu danych;
     \item tryb watch -- uruchamianie testów w tle wraz ze zmianami w kodzie źródłowym i/lub samych testach;
     \item test matchers -- wbudowany zestaw matcherów, które pozwalają na szybkie i wygodne sprawdzanie wyników funkcji i/lub komponentów. Obejmują one między innymi: `toEqual`, `toHaveLength`, `toContain`, `toBeTruthy`, `toBeDefined`;
     \item konfiguracja globalna -- możliwość zadeklarowania zestawu akcji lub manipulacji przed wszystkimi testami (lub określonym ich podzbiorem). Pozwala to programiście na zbudowanie konkretnego, czasochłonnego modułu lub funkcjonalności raz i operowanie na nim we wszystkich testach. Haki zadeklarowane w konfiguracji globalnej zostaną zastosowane do wszystkich zestawów testów;
@@ -420,17 +378,17 @@ Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami da
 Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu\footnote{S. 1079-1112; Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.}.\\
 Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID\footnote{S. 1; Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.}:
 \begin{enumerate}[label=--]
-    \item Atomiczność (eng. \textit{Atomicity}) - wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
-    \item Spójność (eng. \textit{Consistency}) - dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
-    \item Izolacja (eng. \textit{Isolation}) - stan pośredni transakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
-    \item Trwałość (eng. \textit{Durability}) - po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
+    \item Atomiczność (eng. \textit{Atomicity}) -- wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
+    \item Spójność (eng. \textit{Consistency}) -- dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
+    \item Izolacja (eng. \textit{Isolation}) -- stan pośredni tranzakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
+    \item Trwałość (eng. \textit{Durability}) -- po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
 \end{enumerate}
 
 
 \subsubsection{Komunikacyja między mikroserwisami}
 
 \forceindent \textbf{gRPC\\}
-\forceindent gRPC (eng. \textit{Google Remote Procedure Call}) jest frameworkiem służącym do wydajnej komunikacji pomiędzy aplikacjami za pomocą protokołu HTTP/2. Oparty na technologii protobuforów (eng. \textit{Protocol Buffers}), która to pozwala na komunikacje pomiędzy serwisami za pomocą przesyłu binarnych danych w uporządkowanym strumieniu bajtów.\footnote{S. 2-4; Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico}
+\forceindent gRPC (eng. \textit{Google Remote Procedure Call}) jest frameworkiem służącym do wydajnej komunikacji pomiędzy aplikacjami za pomocą protokołu HTTP/2. Oparty na technologii protobuforów (eng. \textit{Protocol Buffers}), która to pozwala na komunikację pomiędzy serwisami za pomocą przesyłu binarnych danych w uporządkowanym strumieniu bajtów.\footnote{S. 2-4; Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico}
 
 \subsubsection{Aplikacja mobilna}
 
@@ -654,7 +612,7 @@ dokumentacji decyzji architektonicznych, w których opisano decyzję, plusy oraz
 \subsubsection{Aplikacja serwerowa}
 
 \forceindent Aplikacja serwerowa jest kluczowym elementem niemalże każdego projektu aplikacji
-internetowej, czy mobilnej. Służy ona jako bezpieczne środowisko do przechowywania danych
+internetowej czy mobilnej. Służy ona jako bezpieczne środowisko do przechowywania danych
 użytkowników oraz przeprowadzania skomplikowanych operacji zbyt wymagających i/lub
 niebezpiecznych dla środowisk klienckich.
 
@@ -758,7 +716,7 @@ Plusy oraz minusy takiej decyzji są następujące:
 \end{enumerate}
 
 \paragraph{Aplikacja mobilna\\}
-\forceindent \textbf{Decyzja\\}
+\forceindent \textbf{Decyzja\\}m
 \indent Zdecydowano się na wykorzystanie natywnego dla systemów iOS języka Swift ze względu na wbudowane wsparcie Machine Learning oraz możliwość użycia Neural Engine na urządzeniach mobilnych.
 
 \textbf{Konsekwencje\\}
@@ -785,7 +743,7 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     \item możliwość zwracania odpowiedzi w wielu formatach;
     \item prostota implementacji precyzyjnej autoryzacji użytkowników;
     \item łatwiejsza obsługa błędów po stronie klienta i debugowanie aplikacji serwerowej w porównaniu do środowiska GraphQL;
-    \item większa ilość tzw. ,,boilerplate'u`` do napisania - interfejsy ,,RESTful`` zwykle wymagają więcej standardowego kodu niż ich odpowiedniki GraphQL;
+    \item większa ilość tzw. ,,boilerplate'u`` do napisania -- interfejsy ,,RESTful`` zwykle wymagają więcej standardowego kodu niż ich odpowiedniki GraphQL;
     \item możliwość niedostatecznego i nadmiernego pobierania danych -- zostanie to złagodzone dzięki zastosowaniu schematu JSON;
     \item aplikacja po stronie klienta może być mniej reaktywna ze względu na mnogość wywołań do serwera - zostanie to złagodzone dzięki wykorzystaniu schematu JSON i rozbudowanemu buforowaniu zarówno po stronie klienta, jak i serwera;
     \item paginacja musi zostać zaimplementowana przez deweloperów;
@@ -821,8 +779,8 @@ Plusy oraz minusy takiej decyzji są następujące:
 \begin{itemize}
     \item testy będą tworzone przy użyciu dobrze ugruntowanych reguł;
     \item paczka ,,jest-plugin`` będzie musiała zostać dodana do pliku `.eslintrc` i `package.json`;
-    \item jest ma olbrzymią społeczność z dużą ilością ekspertów, którzy go używają i otwarcie dzielą się wiedzą;
-    \item ilość matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności;
+    \item Jest ma olbrzymią społeczność z dużą liczbą ekspertów, którzy go używają i otwarcie dzielą się wiedzą;
+    \item liczba matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności;
     \item Jest z uwagi na ilość dostępnych możliwości, jak i kompatybilność wsteczną, jest obecnie jednym z najwolniejszych frameworków testowych, co znacznie zwiększy czas potrzebny do wykonania testów.
 \end{itemize}
 
@@ -834,7 +792,7 @@ Plusy oraz minusy takiej decyzji są następujące:
     \hline
     Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania                                                                                    & Osoby zaangażowane w realizację zadania \\
     \hline
-    {Cel 1:\\Przygotowanie modeli uczenia maszynowego} & Zadanie 1: Zebranie danych kontekstowych & 1. Kacper Bylicki \\
+    {Cel 1:\\Przygotowanie modeli uczenia maszynowego} & Zadanie 1: Zebranie danych kontekstowych & {1. Kacper Bylicki}\\
     {} & Zadanie 2: Przygotowanie danych treningowych & {1. Kacper Bylicki\\2. Jakub Barczewski\\3. Marek Gerszendorf}\\
     {} & {Zadanie 3: Dobranie algorytmów uczenia maszynowego\\} & {1. Kacper Bylicki\\2. Jakub Barczewski} \\
     {} & {Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego\\} & {1. Kacper Bylicki\\2. Jakub Barczewski}\\
@@ -843,56 +801,95 @@ Plusy oraz minusy takiej decyzji są następujące:
     {Cel 2:\\Przygotowanie aplikacji serwerowej sterującej algorytmami uczenia maszynowego} & Zadanie 1: Stworzenie diagramu architektury aplikacji & {1. Jakub Barczewski\\2. Kacper Bylicki}\\
     {} & {Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją serwerową a aplikacją mobilną\\} &{1. Jakub Barczewski}\\
     {} & {Zadanie 3: Przeprowadzenie testów i poprawek\\} & {1. Jakub Barczewski\\2. Kacper Bylicki\\3. Marek Gerszendorf}\\
-    {} & {Zadanie 4: Dokonanie optymalizacji aplikacji\\ \\} & 1. Jakub Barczewski\\
+    {} & {Zadanie 4: Dokonanie optymalizacji aplikacji\\} & {1. Jakub Barczewski}\\
     \hline
     {Cel 3:\\Przygotowanie aplikacji mobilnej} & {Zadanie 1: Stworzenie diagramu architektury aplikacji}&{1. Marek Gerszendorf}\\
     {} & Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
     {} & Zadanie 3: Stworzenie prototypu aplikacji & {1. Marek Gerszendorf}\\
     {} & {Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją a aplikacją serwerową} & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-    {} & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Marek Gerszendorf} \\
+    {} & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Marek Gerszendorf}\\
     \hline
     {Cel 4:\\Przygotowanie dokumentacji technicznej projektu} & Zadanie 1: Stworzenie diagramu architektury projektu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
     {} & {Zadanie 2: Rozrysowanie wzorca relacji w bazie danych (diagram ERD)}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
     {} & {Zadanie 3: Przygotowanie diagramu komunikacji aplikacji serwerowej oraz mobilnej}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
     {} & {Zadanie 4: Przygotowanie diagramu sekwencji do procesów aplikacji}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
-    {} & {Zadanie 5: Stworzenie instrukcji instalacyjnej oraz developerskiej}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
+    {} & {Zadanie 5: Stworzenie instrukcji instalacyjnej oraz developerskiej}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}
     \hline
 \end{longtblr}
 
 \section{Efekty realizacji projektu}
 
+\subsection{Aplikacja serwerowa}
+
+\forceindent Aplikacja serwerowa oparta jest na frameworku NestJS, który to zapewnia dużą ilość gotowych rozwiązań. Niestety, nie są one w pełni intuicyjne, ani pozbawione błędów.
+W trakcie prac projektowych, zespół zetknął się z wieloma problemami wywołanymi przez architekturę oraz wbudowane rozwiązania frameworka.
+
+Finalnie, aplikacja serwerowa podzielona jest na cztery mikroserwisy, odpowiednio:
+\begin{itemize}[label=--]
+    \item mikroserwis kont użytkownika -- odpowiedzialny za wszystkie operacje związane z zarządzaniem kontem, zmianą hasła, adresu email oraz autoryzację użytkowników;
+    \item mikroserwis śmietników -- zajmujący się agregacją oraz komunikacją z bazą danych pod kątem wyszukiwania śmietników;
+    \item mikroserwis emailowy -- jego jedynym zadaniem jest obsługa wysyłania wiadomośći email;
+    \item bramka interfejsu aplikacji (eng. \textit{api gateway}) - służąca za punkt dostępu do interfejsu, w której odbywa się komunikacja między mikroserwisami oraz autoryzacja i autentykacja użytkowników.
+\end{itemize}
+
 \subsection{Diagramy sekwencji}
 
-\begin{figure}[H]
+Diagramy sekwencji przedstawiają istniejące w aplikacji serwerowej procesy, umożliwiające z niej użytkowanie.
+
+\begin{figure}[h]
     \textbf{\caption{Diagram logowania użytkownika}}
-    \centering{\includegraphics[width=16cm]{./static/diagrams/diagram-logowania.png}}\\
+    \centering{\includegraphics[width=15cm]{./static/diagrams/diagram-logowania.png}}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\begin{figure}[H]
+Rysunek 3.1 przedstawia diagram procesu logowania użykownika wraz z drzewami decyzyjnymi.
+Można owy proces podzielić na następujące odnogi:
+\begin{itemize}[label=--]
+    \item podanie błędnego hasła bądź adresu email -- odrzucenie żądania;
+    \item brak potwierdzonego adresu email -- odrzucenie żądania;
+    \item podanie poprawnych danych i potwierdzony adres email -- zwrócenie tokenów autoryzacyjnych.
+\end{itemize}
+
+\begin{figure}[h]
     \textbf{\caption{Diagram zmiany adresu email}}
-    \includegraphics[width=16cm]{./static/diagrams/diagram-zmiany-adresu-email.png}\\
+    \includegraphics[width=15cm]{./static/diagrams/diagram-zmiany-adresu-email.png}\\
     \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\begin{figure}[H]
+Rysunek 3.2 przedstawia diagram zmiany adresu email.
+W ramach tego procesu wysyłana jest wiadomość na wskazany adres, w której to zawarty jest link do zmiany hasła.
+Tenże link zawiera w sobie token o żywotności rzędu 24 godzin w postaci parametry kwerendy.
+Odnogi decyzyjne w tym procesie można podzielić na następujące:
+\begin{itemize}[label=--]
+    \item adres email jest już zajęty -- odrzucenie żądania;
+    \item token wygasł -- odrzucenie żądania;
+    \item po kliknięciu na link adres email jest zmieniany.
+\end{itemize}
+
+\begin{figure}[h]
     \textbf{\caption{Diagram pobierania danych śmietników}}
     \vspace{0.55em}
-    \includegraphics[width=16cm]{./static/diagrams/diagram-pobierania-danych-smietniczkow.png}\\
-    \scriptsize{Źródło: Opracowanie własne}
-\end{figure}
-
-\begin{figure}[H]
-    \textbf{\caption{Diagram rejestracji użytkownika}}
-    \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/diagrams/diagram-rejestracji.png}\\
+    \centering\includegraphics[width=15cm]{./static/diagrams/diagram-pobierania-danych-smietniczkow.png}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\begin{figure}[H]
+Rysunek 3.3 przedstawia diagram pobierania danych śmietników.
+Jego proces posiada jedno drzewko decyzyjne, którego wymogiem jest uwierzytelniony użytkownik.
+
+\begin{figure}[h]
+    \textbf{\caption{Diagram rejestracji użytkownika}}
+    \vspace{0.55em}
+    \centering\includegraphics[width=15cm]{./static/diagrams/naprawiony-diagram-rejestracji.png}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+Rysunek 3.4 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formularzu rejestracji użytkownik otrzymuje wiadomość email pod wskazanym adresem wraz z linkiem do potwierdzenia rejestracji. Po wejściu na witrynę do której prowadzi link, konto użytkownika jest potwierdzone i może rozpocząć on korzystanie z aplikacji.
+
+
+\begin{figure}[h]
     \textbf{\caption{Diagram resetu hasła użytkownika}}
     \vspace{0.55em}
-    \includegraphics[width=16cm]{./static/diagrams/diagram-resetu-hasla.png}\\
+    \includegraphics[width=13cm]{./static/diagrams/diagram-resetu-hasla.png}\\
     \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -907,24 +904,11 @@ Plusy oraz minusy takiej decyzji są następujące:
 \subsection{Zużycie CPU: Flutter vs. Aplikacje Natywne}
 \begin{figure}[H]
     \centering
-    \textbf{\caption{Porównanie Zużycia CPU: Flutter vs. Aplikacje Natywne na iOS i Android.}}
+    \textbf{\caption{Porównanie zużycia CPU: Flutter vs. aplikacje natywne na systemy iOS i Android.}}
     \vspace{0.8em}
     \includegraphics[width=13.5cm]{./static/CPU-Usage-Comparison-Flutter-vs-Native-iOS-Android.png}
     \raggedright\scriptsize{\\Źródło: S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
 \end{figure}
-
-\subsection{Aplikacja serwerowa}
-
-\forceindent Aplikacja serwerowa oparta jest na frameworku NestJS, który to zapewnia dużą ilość gotowych rozwiązań. Niestety, nie są one w pełni intuicyjne, ani pozbawione błędów.
-W trakcie prac projektowych, zespół zetknął się z wieloma problemami wywołanymi przez architekturę oraz wbudowane rozwiązania frameworka.
-
-Finalnie, aplikacja serwerowa podzielona jest na cztery mikroserwisy, odpowiednio:
-\begin{itemize}[label=--]
-    \item mikroserwis kont użytkownika -- odpowiedzialny za wszystkie operacje związane z zarządzaniem kontem, zmianą hasła, adresu email oraz autoryzację użytkowników;
-    \item mikroserwis śmietników -- zajmujący się agregacją oraz komunikacją z bazą danych pod kątem wyszukiwania śmietników;
-    \item mikroserwis emailowy -- jego jedynym zadaniem jest obsługa wysyłania wiadomośći email;
-    \item bramka interfejsu aplikacji (eng. \textit{api gateway}) - służąca za punkt dostępu do interfejsu, w której odbywa się komunikacja między mikroserwisami oraz autoryzacja i autentykacja użytkowników.
-\end{itemize}
 
 \subsection{Aplikacja mobilna}
 
@@ -970,8 +954,8 @@ Aplikację mona podzielić na cztery moduły, które obejmują:
         \end{itemize}
 \end{itemize}
 
-\subsection{Stylowanie Interfejsu Użytkownika}
-\forceindent Stylowanie interfejsu użytkownika było istotnym aspektem projektu. Dzięki SwiftUI, możliwe było zdefiniowanie wyglądu i stylu poszczególnych widoków w sposób deklaratywny. Przykładowo, używając modifiaktorów takich jak .font(), .foregroundColor(), czy .background(), można było łatwo dostosować czcionki, kolory i tła elementów interfejsu użytkownika.
+\subsection{Stylowanie iterfejsu użytkownika}
+\forceindent Stylowanie interfejsu użytkownika było istotnym aspektem projektu. Dzięki SwiftUI, możliwe było zdefiniowanie wyglądu i stylu poszczególnych widoków w sposób deklaratywny. Przykładowo, używając modyfikatorów takich jak .font(), .foregroundColor(), czy .background(), można było łatwo dostosować czcionki, kolory i tła elementów interfejsu użytkownika.
 
 Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizowanych widoków oraz dostosowywania przycisków i ikon. Stylowanie było przemyślane tak, aby spełnić oczekiwania użytkowników i zachować spójność z wytycznymi projektu.
 
@@ -1001,12 +985,10 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
 \section{Wykorzystane materiały i bibliografia związana z realizacją projektu}
 
 \begin{thebibliography}{9}
-    \bibitem{gus} Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022r.
+    \bibitem{gus} Główny Urząd Statystyczny -- Ochrona środowiska 2022, Warszawa, 2022r.
     \bibitem{eea-waste} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling?size=n_10_n&filters%5B0%5D%5Bfield%5D=readingTime&filters%5B0%5D%5Btype%5D=any&filters%5B0%5D%5Bvalues%5D%5B0%5D%5Bname%5D=All&filters%5B0%5D%5Bvalues%5D%5B0%5D%5BrangeType%5D=fixed&filters%5B1%5D%5Bfield%5D=issued.date&filters%5B1%5D%5Btype%5D=any&filters%5B1%5D%5Bvalues%5D%5B0%5D=Last%205%20years&filters%5B2%5D%5Bfield%5D=language&filters%5B2%5D%5Btype%5D=any&filters%5B2%5D%5Bvalues%5D%5B0%5D=en}
     \bibitem{eea-municipal} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/data-and-maps/daviz/municipal-waste-recycled-and-composted-6#tab-chart_7}
     \bibitem{markdown-arch-dec-rec} Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.
-    \bibitem{server-centric-web-frameworks} Server-Centric Web Frameworks: An Overview; Iwan Vosloo and Derrick G. Kourie, University of Pretoria, ACM Computing Surveys, Vol. 40, No. 2, Artykuł 4, 2008r.
-    \bibitem{express-npm-lib} Dane za stroną internetową (dostęp: 12.11.2023r.) \url{https://www.npmjs.com/package/express}
     \bibitem{architectural-styles-and-design} Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000
     \bibitem{migrating-to-graphql} Gleison Brito, Thais Mombach, Marco Tulio Valente, Migrating to GraphQL: A Practical Assessment, ASERG Group, Department of Computer Science, Federal University of Minas Gerais, Brazil, 18.02.2019r.
     \bibitem{rfc-standards} Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}
@@ -1025,8 +1007,6 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
     \bibitem{mocha-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://mochajs.org/}
     \bibitem{chai-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://www.chaijs.com/api/}
     \bibitem{efficiency-evaluation-nodejs-web-server-frameworks} Danil Demashov, Ilya Gosudarve, Efficiency Evaluation of Node.js Web-Server Frameworks, Uniwersytet ITMO, Petersburg, Rosja, 2020r.
-    \bibitem{fastify-documentation} Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://fastify.dev/docs/latest/Guides/}
-    \bibitem{express-documentation} Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://expressjs.com/en/4x/api.html}
     \bibitem{nestjs-documentation} Dane za stroną internetową (dostęp: 14.11.2023r.) \url{https://docs.nestjs.com/}
     \bibitem{sequelize-npm-page} Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}
     \bibitem{mikro-orm} Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}
