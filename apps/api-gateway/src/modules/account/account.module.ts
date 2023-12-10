@@ -77,7 +77,7 @@ import { join } from 'path';
       provide: API_GATEWAY_URL_TOKEN,
       useFactory: (): string => {
         const { apiGatewayUrl } = Config.getValues(AppConfig);
-
+        console.log('apiGatewayUrl', apiGatewayUrl);
         return apiGatewayUrl;
       },
       inject: [getConfigContainerToken(AppConfig)],
@@ -86,7 +86,6 @@ import { join } from 'path';
       provide: EMAILS_FEATURE_FLAG,
       useFactory: (): boolean => {
         const { emailsFeatureFlag } = Config.getValues(AppConfig);
-
         return emailsFeatureFlag;
       },
       inject: [getConfigContainerToken(AppConfig)],
