@@ -100,6 +100,12 @@ variable "accounts_service_host" {
   default     = ""
 }
 
+variable "trash_service_host" {
+  type        = string
+  description = "The host of the Trash Service"
+  default     = ""
+}
+
 variable "mailing_service_host" {
   type        = string
   description = "The host of the Mailing Service"

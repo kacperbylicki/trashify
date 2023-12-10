@@ -48,6 +48,7 @@ resource "azurerm_linux_web_app" "application" {
     "PORT"                                = var.application_port
     "WEBSITES_PORT"                       = var.application_port
     "ACCOUNTS_SERVICE_URL"                = var.accounts_service_host
+    "TRASH_SERVICE_URL"                   = var.trash_service_host
     "MAILING_SERVICE_URL"                 = var.mailing_service_host
 
     # Monitoring with Azure Application Insights
