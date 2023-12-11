@@ -1,0 +1,36 @@
+config:
+  target: "http://localhost:50010"
+  phases:
+    - duration: 30
+      arrivalRate: 2
+      rampTo: 20
+      name: Warm up phase
+    - duration: 120
+      arrivalRate: 7
+      rampTo: 32
+      name: Ramp up load
+    - duration: 45
+      arrivalRate: 15
+      rampTo: 40
+      name: Spike phase
+  payload:
+    path: "test-users-data.csv"
+    fields:
+      - "email"
+      - "password"
+    loadAll: true
+    name: auth
+ 
+scenarios:
+  - flow:
+    - log: "Get auth token"
+    - loop:
+      - post:
+          url: "/api/v1/accounts/login"
+          json:
+            email: "{{ $loopElement.email }}"
+            password: "{{ $loopElement.password }}"
+          capture:
+            - json: $.id_token
+              as: token
+        over: auth
