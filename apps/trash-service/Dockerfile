@@ -36,7 +36,6 @@ RUN apk add jq
 WORKDIR /app
 COPY --from=builder /app/out/json/apps/trash-service .
 COPY --from=builder /app/out/json/yarn.lock ./yarn.lock
-COPY --from=builder /app/out/json/.npmrc ./.npmrc
 # Create .npmrc file with the provided NPM token
 RUN echo "@trashify:registry=https://registry.npmjs.org/" > .npmrc && \
     echo "//registry.npmjs.org/:_authToken=${NPM_READ_TOKEN}" >> .npmrc && \

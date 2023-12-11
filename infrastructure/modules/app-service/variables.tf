@@ -72,9 +72,9 @@ variable "jwt_access_token_secret" {
 }
 
 variable "jwt_access_token_ttl" {
-  type        = string
+  type        = number
   description = "The TTL of the JWT access token"
-  default     = "15m"
+  default     = "900"
 }
 
 variable "jwt_refresh_token_secret" {
@@ -84,9 +84,9 @@ variable "jwt_refresh_token_secret" {
 }
 
 variable "jwt_refresh_token_ttl" {
-  type        = string
+  type        = number
   description = "The TTL of the JWT refresh token"
-  default     = "7d"
+  default     = "604800"
 }
 
 variable "application_port" {
