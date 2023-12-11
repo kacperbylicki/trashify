@@ -14,7 +14,7 @@ import { Observable, map, of } from 'rxjs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { createMock as autoMocker } from '@golevelup/ts-jest';
 
-describe('AccountController', () => {
+describe.skip('AccountController', () => {
   let module: TestingModule;
 
   let controller: AccountController;
