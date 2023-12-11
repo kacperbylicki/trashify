@@ -4,39 +4,38 @@ import {
   GetAccountResponse,
   LoginResponse,
   LogoutResponse,
+  MailingServiceClient,
   RefreshTokenResponse,
   RegisterResponse,
 } from '@trashify/transport';
-import { EMAILS_FEATURE_FLAG } from '../../src/modules/account/symbols';
+import { AppConfig } from '@/config';
+import { Config, PlainConfigAdapter } from '@unifig/core';
 import { Observable, map, of } from 'rxjs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { createMock as autoMocker } from '@golevelup/ts-jest';
 
 describe('AccountController', () => {
+  let module: TestingModule;
+
   let controller: AccountController;
   let client: AccountServiceClient;
 
-  beforeAll(() => {
-    process.env.API_GATEWAY_URL = 'dummy-url';
-  });
+  beforeAll(async () => {
+    Config.registerSync({
+      template: AppConfig,
+      adapter: new PlainConfigAdapter({
+        NODE_ENV: 'test',
+        PORT: 3000,
+        ACCOUNTS_SERVICE_URL: 'accounts_service_url',
+        TRASH_SERVICE_URL: 'trash_service_url',
+        MAILING_SERVICE_URL: 'mailing_service_url',
+        API_GATEWAY_URL: 'api_gateway_url',
+        EMAILS_FEATURE_FLAG: false,
+      }),
+    });
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    module = await Test.createTestingModule({
       controllers: [AccountController],
-      providers: [
-        // {
-        //   provide: API_GATEWAY_URL_TOKEN,
-        //   useFactory: (): string => {
-        //     return 'dummy-url';
-        //   },
-        // },
-        {
-          provide: EMAILS_FEATURE_FLAG,
-          useFactory: (): boolean => {
-            return false;
-          },
-        },
-      ],
     })
       .useMocker(autoMocker)
       .compile();
@@ -45,8 +44,12 @@ describe('AccountController', () => {
     client = module.get<AccountServiceClient>(AccountServiceClient);
   });
 
-  afterAll(() => {
+  afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  afterAll(async () => {
+    await module.close();
   });
 
   describe('currentAccount', () => {
