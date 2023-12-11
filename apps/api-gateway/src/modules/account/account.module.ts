@@ -6,7 +6,6 @@ import {
   MAILING_SERVICE_NAME,
   MailingServiceClient,
 } from '@trashify/transport';
-import { API_GATEWAY_URL_TOKEN, EMAILS_FEATURE_FLAG } from './symbols';
 import { AccountController } from './controllers';
 import { AppConfig } from '@/config';
 import { ClientGrpc, ClientProvider, ClientsModule, Transport } from '@nestjs/microservices';
@@ -73,23 +72,6 @@ import { join } from 'path';
       inject: [MAILING_SERVICE_NAME],
     },
     JwtService,
-    {
-      provide: API_GATEWAY_URL_TOKEN,
-      useFactory: (): string => {
-        const { apiGatewayUrl } = Config.getValues(AppConfig);
-        console.log('apiGatewayUrl', apiGatewayUrl);
-        return apiGatewayUrl;
-      },
-      inject: [getConfigContainerToken(AppConfig)],
-    },
-    {
-      provide: EMAILS_FEATURE_FLAG,
-      useFactory: (): boolean => {
-        const { emailsFeatureFlag } = Config.getValues(AppConfig);
-        return emailsFeatureFlag;
-      },
-      inject: [getConfigContainerToken(AppConfig)],
-    },
   ],
   exports: [JwtService],
 })

@@ -1,6 +1,6 @@
 {
   "name": "@trashify/transport",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Kacper Bylicki & Marek Gerszendorf & Jakub Barczewski",
   "license": "ISC",
   "description": "Library used for communication between microservices",

@@ -3,6 +3,9 @@
   "globalDependencies": [
     "**/.env"
   ],
+  "globalEnv": [
+    "API_GATEWAY_URL"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": [

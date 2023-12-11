@@ -43,7 +43,7 @@ export class TrashController {
   })
   @ApiBearerAuth()
   @Get()
-  private async getAll(): Promise<Observable<GetAllTrashResponseDto>> {
+  async getAll(): Promise<Observable<GetAllTrashResponseDto>> {
     return this.client.getAllTrash({});
   }
 
@@ -59,7 +59,7 @@ export class TrashController {
   })
   @ApiBearerAuth()
   @Get('tags/:tags')
-  private async getByTags(
+  async getByTags(
     @Query('tags') tags: TrashTagsEnum[],
   ): Promise<Observable<GetTrashByTagsResponseDto>> {
     return this.client.getTrashByTags({ tags });
@@ -72,7 +72,7 @@ export class TrashController {
   })
   @ApiBearerAuth()
   @Get('distance')
-  private async getInDistance(
+  async getInDistance(
     @Query() queryParams: GetTrashInDistanceQueryParamsDto,
   ): Promise<Observable<GetTrashInDistanceResponseDto>> {
     const { latitude, longitude, maxDistance, minDistance } = queryParams;
@@ -95,7 +95,7 @@ export class TrashController {
   })
   @ApiBearerAuth()
   @Post()
-  private async create(
+  async create(
     @Body() request: CreateTrashRequestDto,
   ): Promise<Observable<CreateTrashResponseDto>> {
     return this.client.createTrash({
@@ -110,7 +110,7 @@ export class TrashController {
   })
   @ApiBearerAuth()
   @Patch(':uuid')
-  private async update(
+  async update(
     @Param('uuid') uuid: string,
     @Body() request: UpdateTrashRequestDto,
   ): Promise<Observable<unknown>> {

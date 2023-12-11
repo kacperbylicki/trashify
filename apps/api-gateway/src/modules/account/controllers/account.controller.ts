@@ -1,4 +1,3 @@
-import { API_GATEWAY_URL_TOKEN, EMAILS_FEATURE_FLAG } from '../symbols';
 import {
   AccountServiceClient,
   GetAccountResponse,
@@ -17,6 +16,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { AppConfig } from '@/config';
 import {
   Body,
   Controller,
@@ -55,6 +55,7 @@ import {
   ResetPasswordDto,
   ResetPasswordResponseDto,
 } from '../dtos';
+import { ConfigContainer } from '@unifig/core';
 import {
   HttpStatusInterceptor,
   JwtAuthGuard,
@@ -64,6 +65,7 @@ import {
   RequestRefreshToken,
   TimeoutInterceptor,
 } from '@/common';
+import { InjectConfig } from '@unifig/nest';
 import { Observable, first, map, of } from 'rxjs';
 import { SendHtmlResponseInterceptor } from '../../../common/interceptors/send-html-response.interceptor';
 import {
@@ -82,17 +84,18 @@ import {
 @ApiTags(AccountController.name)
 @UseInterceptors(TimeoutInterceptor, HttpStatusInterceptor)
 export class AccountController {
-  private logger: Logger;
+  private logger: Logger = new Logger(AccountController.name);
+
+  private baseUrl: string;
+  private emailsFeatureFlag = false;
 
   public constructor(
+    @InjectConfig() private config: ConfigContainer<AppConfig>,
     private readonly accountsClient: AccountServiceClient,
     private readonly mailingClient: MailingServiceClient,
-    @Inject(API_GATEWAY_URL_TOKEN)
-    private readonly baseUrl: string,
-    @Inject(EMAILS_FEATURE_FLAG)
-    private readonly emailsFeatureFlag: boolean,
   ) {
-    this.logger = new Logger(AccountController.name);
+    this.baseUrl = this.config.values.apiGatewayUrl;
+    this.emailsFeatureFlag = this.config.values.emailsFeatureFlag;
   }
 
   @UseGuards(JwtAuthGuard)

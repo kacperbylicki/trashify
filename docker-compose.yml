@@ -85,7 +85,7 @@ services:
     restart: unless-stopped
     networks:
       - trash
-    ports: 
+    ports:
       - ${MONGODB_TRASH_PORT}:${MONGODB_TRASH_PORT}
     expose:
       - ${MONGODB_TRASH_PORT}
@@ -107,7 +107,7 @@ services:
 
   mailing-service:
     container_name: trashify-mailing-service
-    build: 
+    build:
       context: .
       dockerfile: ./apps/mailing-service/Dockerfile
       target: development

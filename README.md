@@ -4,4 +4,3 @@
 2. [Architectural Decision Records](./docs/adrs/index.md)
 3. [Frontend Modules Documentation](./docs/frontend/)
 4. [Backend Modules Documentation](./docs/backend/)
-

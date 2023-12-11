@@ -9,7 +9,6 @@ import { TrashController } from './controllers/trash.controller';
 import { join } from 'path';
 
 @Module({
-  controllers: [TrashController],
   imports: [
     AccountModule,
     ClientsModule.registerAsync([
@@ -32,6 +31,7 @@ import { join } from 'path';
       },
     ]),
   ],
+  controllers: [TrashController],
   providers: [
     {
       provide: TrashServiceClient,
