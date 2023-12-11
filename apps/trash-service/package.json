@@ -28,7 +28,7 @@
     "@nestjs/microservices": "^9.3.9",
     "@nestjs/mongoose": "^9.2.1",
     "@nestjs/platform-express": "^9.3.9",
-    "@trashify/transport": "^1.0.0",
+    "@trashify/transport": "^1.0.1",
     "@unifig/adapter-env": "^0.13.0",
     "@unifig/core": "^0.13.0",
     "@unifig/nest": "^0.13.0",
