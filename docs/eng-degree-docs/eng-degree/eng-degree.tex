@@ -788,34 +788,43 @@ Plusy oraz minusy takiej decyzji są następujące:
 \section{Zadania w projekcie}
 
 \begin{longtblr}[
-    caption = {Zadania w projekcie}
-]{| p{0.2\textwidth}| p{0.4\textwidth}| p{0.3\textwidth}|}
-    \hline
-    Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania                                                                                    & Osoby zaangażowane w realizację zadania \\
-    \hline
-    {Cel 1:\\Przygotowanie modeli uczenia maszynowego} & Zadanie 1: Zebranie danych kontekstowych & {1. Kacper Bylicki}\\
-    {} & Zadanie 2: Przygotowanie danych treningowych & {1. Kacper Bylicki\\2. Jakub Barczewski\\3. Marek Gerszendorf}\\
-    {} & {Zadanie 3: Dobranie algorytmów uczenia maszynowego\\} & {1. Kacper Bylicki\\2. Jakub Barczewski} \\
-    {} & {Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego\\} & {1. Kacper Bylicki\\2. Jakub Barczewski}\\
-    {} & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Kacper Bylicki}\\
-    \hline
-    {Cel 2:\\Przygotowanie aplikacji serwerowej sterującej algorytmami uczenia maszynowego} & Zadanie 1: Stworzenie diagramu architektury aplikacji & {1. Jakub Barczewski\\2. Kacper Bylicki}\\
-    {} & {Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją serwerową a aplikacją mobilną\\} &{1. Jakub Barczewski}\\
-    {} & {Zadanie 3: Przeprowadzenie testów i poprawek\\} & {1. Jakub Barczewski\\2. Kacper Bylicki\\3. Marek Gerszendorf}\\
-    {} & {Zadanie 4: Dokonanie optymalizacji aplikacji\\} & {1. Jakub Barczewski}\\
-    \hline
-    {Cel 3:\\Przygotowanie aplikacji mobilnej} & {Zadanie 1: Stworzenie diagramu architektury aplikacji}&{1. Marek Gerszendorf}\\
-    {} & Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-    {} & Zadanie 3: Stworzenie prototypu aplikacji & {1. Marek Gerszendorf}\\
-    {} & {Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją a aplikacją serwerową} & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-    {} & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Marek Gerszendorf}\\
-    \hline
-    {Cel 4:\\Przygotowanie dokumentacji technicznej projektu} & Zadanie 1: Stworzenie diagramu architektury projektu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-    {} & {Zadanie 2: Rozrysowanie wzorca relacji w bazie danych (diagram ERD)}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
-    {} & {Zadanie 3: Przygotowanie diagramu komunikacji aplikacji serwerowej oraz mobilnej}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
-    {} & {Zadanie 4: Przygotowanie diagramu sekwencji do procesów aplikacji}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}\\
-    {} & {Zadanie 5: Stworzenie instrukcji instalacyjnej oraz developerskiej}&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski\\}
-    \hline
+    caption = {Zadania w projekcie},
+]{
+    colspec = {
+        X[0.2,l]
+        X[0.4,l]
+        X[0.3,l]
+    },
+    hlines,
+    vlines,
+    colsep=1em,
+    }
+    Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania & Osoby zaangażowane w realizację zadania \\
+    \SetCell[r=5]{h} Cel 1: Przygotowanie modeli uczenia maszynowego
+        & Zadanie 1: Zebranie danych kontekstowych & 1. Kacper Bylicki \\
+        & Zadanie 2: Przygotowanie danych treningowych & {1. Kacper Bylicki\\2. Jakub Barczewski\\3. Marek Gerszendorf} \\
+        & Zadanie 3: Dobranie algorytmów uczenia maszynowego & {1. Kacper Bylicki\\2. Jakub Barczewski} \\
+        & Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego & 1. Kacper Bylicki \\
+        & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Kacper Bylicki} \\
+    \pagebreak
+    \SetCell[r=4]{h} Cel 2: Przygotowanie aplikacji serwerowej sterującej algorytmami uczenia maszynowego 
+        & Zadanie 1: Stworzenie diagramu architektury aplikacji & {1. Jakub Barczewski\\2. Kacper Bylicki} \\
+        & Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją serwerową a aplikacją mobilną &{1. Jakub Barczewski} \\
+        & Zadanie 3: Przeprowadzenie testów i poprawek & {1. Jakub Barczewski\\2. Kacper Bylicki\\3. Marek Gerszendorf} \\
+        & Zadanie 4: Dokonanie optymalizacji aplikacji & {1. Jakub Barczewski} \\
+    \SetCell[r=5]{h} Cel 3: Przygotowanie aplikacji mobilnej
+        & Zadanie 1: Stworzenie diagramu architektury aplikacji&{1. Marek Gerszendorf}\\
+        & Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+        & Zadanie 3: Stworzenie prototypu aplikacji & {1. Marek Gerszendorf}\\
+        & Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją a aplikacją serwerową & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+        & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Marek Gerszendorf}\\
+    \pagebreak
+    \SetCell[r=5]{h} Cel 4: Przygotowanie dokumentacji technicznej projektu 
+        & Zadanie 1: Stworzenie diagramu architektury projektu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+        & Zadanie 2: Rozrysowanie wzorca relacji w bazie danych (diagram ERD)&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+        & Zadanie 3: Przygotowanie diagramu komunikacji aplikacji serwerowej oraz mobilnej&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+        & Zadanie 4: Przygotowanie diagramu sekwencji do procesów aplikacji&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+        & Zadanie 5: Stworzenie instrukcji instalacyjnej oraz developerskiej&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
 \end{longtblr}
 
 \section{Efekty realizacji projektu}
@@ -866,7 +875,7 @@ Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników o
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Rysunek 3.1 przedstawia diagram procesu logowania użykownika wraz z drzewami decyzyjnymi.
+Rysunek 3.3 przedstawia diagram procesu logowania użykownika wraz z drzewami decyzyjnymi.
 Można owy proces podzielić na następujące odnogi:
 \begin{itemize}[label=--]
     \item podanie błędnego hasła bądź adresu email -- odrzucenie żądania;
@@ -880,7 +889,7 @@ Można owy proces podzielić na następujące odnogi:
     \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Rysunek 3.2 przedstawia diagram zmiany adresu email.
+Rysunek 3.4 przedstawia diagram zmiany adresu email.
 W ramach tego procesu wysyłana jest wiadomość na wskazany adres, w której to zawarty jest link do zmiany hasła.
 Tenże link zawiera w sobie token o żywotności rzędu 24 godzin w postaci parametry kwerendy.
 Odnogi decyzyjne w tym procesie można podzielić na następujące:
@@ -897,7 +906,7 @@ Odnogi decyzyjne w tym procesie można podzielić na następujące:
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Rysunek 3.3 przedstawia diagram pobierania danych śmietników.
+Rysunek 3.5 przedstawia diagram pobierania danych śmietników.
 Jego proces posiada jedno drzewko decyzyjne, którego wymogiem jest uwierzytelniony użytkownik.
 
 \begin{figure}[h]
@@ -907,14 +916,14 @@ Jego proces posiada jedno drzewko decyzyjne, którego wymogiem jest uwierzytelni
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Rysunek 3.4 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formularzu rejestracji użytkownik otrzymuje wiadomość email pod wskazanym adresem wraz z linkiem do potwierdzenia rejestracji. Po wejściu na witrynę do której prowadzi link, konto użytkownika jest potwierdzone i może rozpocząć on korzystanie z aplikacji.
+Rysunek 3.6 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formularzu rejestracji użytkownik otrzymuje wiadomość email pod wskazanym adresem wraz z linkiem do potwierdzenia rejestracji. Po wejściu na witrynę do której prowadzi link, konto użytkownika jest potwierdzone i może rozpocząć on korzystanie z aplikacji.
 
 
 \begin{figure}[h]
     \textbf{\caption{Diagram resetu hasła użytkownika}}
     \vspace{0.55em}
-    \includegraphics[width=13cm]{./static/diagrams/diagram-resetu-hasla.png}\\
-    \scriptsize{Źródło: Opracowanie własne}
+    \centering\includegraphics[width=12cm]{./static/diagrams/diagram-resetu-hasła.png}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \subsection{Testy automatyczne aplikacji serwerowej}
@@ -927,7 +936,7 @@ Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co
 \begin{figure}[H]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu pojemników na śmieci}}
     \vspace{0.55em}
-    \includegraphics[width=12cm]{./static/trash-unit.png}
+    \centering\includegraphics[width=12cm]{./static/trash-unit.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -935,7 +944,7 @@ Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co
 \begin{figure}[H]
     \textbf{\caption{Wyniki testów integracyjnych mikroserwisu pojemników na śmieci}}
     \vspace{0.55em}
-    \includegraphics[width=12cm]{./static/trash-integration-tests.png}
+    \centering\includegraphics[width=12cm]{./static/trash-integration-tests.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -947,7 +956,7 @@ Jest to zdecydowanie część pracy najbogatsza w ścieżki decyzyjne.
 \begin{figure}[H]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu konta użytkownika}}
     \vspace{0.55em}
-    \includegraphics[width=12cm]{./static/accounts-unit.png}
+    \centering\includegraphics[width=12cm]{./static/accounts-unit.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -955,7 +964,7 @@ Jest to zdecydowanie część pracy najbogatsza w ścieżki decyzyjne.
 \begin{figure}[H]
     \textbf{\caption{Wyniki testów integracyjnych mikroserwisu kont użytkownika}}
     \vspace{0.55em}
-    \includegraphics[width=12cm]{./static/accounts-integration-tests.png}
+    \centering\includegraphics[width=12cm]{./static/accounts-integration-tests.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -964,10 +973,10 @@ Jest to zdecydowanie część pracy najbogatsza w ścieżki decyzyjne.
 
 \forceindent Implementując naszą aplikację mobilną w języku Swift, wybraliśmy ten język ze względu na jego wydajność i elastyczność. Jednak podczas procesu tworzenia napotkaliśmy wiele wyzwań, które były spowodowane zarówno architekturą aplikacji, jak i wbudowanymi rozwiązaniami dostępnymi w języku Swift. Podobnie jak w przypadku frameworka NestJS w naszej aplikacji serwerowej, Swift dostarcza wiele gotowych rozwiązań i narzędzi, ale często są one mało intuicyjne lub mogą zawierać błędy. Nasz zespół musiał się zmierzyć z tymi problemami i dostosować te rozwiązania do naszych potrzeb. Jednocześnie stworzyliśmy własne komponenty i moduły, które integrowaliśmy z istniejącym kodem, aby zapewnić płynność działania i najlepsze wrażenia z użytkowania naszej aplikacji.
 
-Aplikację mona podzielić na cztery moduły, które obejmują:
+Aplikację można podzielić na cztery moduły, które obejmują:
 
 \begin{itemize}
-    \item Moduł Autoryzacji
+    \item Moduł Autoryzacji:
         \begin{itemize}
             \item Użytkownik ma możliwość zalogowania się do aplikacji, podając swój adres e-mail i hasło.
             \item Tworzenie konta polega na dostarczeniu danych użytkownika oraz potwierdzeniu konta poprzez link wysłany na podany adres e-mail.
@@ -976,7 +985,7 @@ Aplikację mona podzielić na cztery moduły, które obejmują:
 \end{itemize}
 
 \begin{itemize}
-    \item Moduł Dodawania Śmietników
+    \item Moduł Dodawania Śmietników:
         \begin{itemize}
             \item Aby dodać nowy śmietnik, użytkownik przechodzi do dedykowanego panelu dostępnego na stronie głównej.
             \item Po dodaniu zdjęcia, model uczenia maszynowego rozpoznaje rodzaj śmietnika na zdjęciu.
@@ -986,7 +995,7 @@ Aplikację mona podzielić na cztery moduły, które obejmują:
 \end{itemize}
 
 \begin{itemize}
-    \item Strona Główna
+    \item Strona Główna:
         \begin{itemize}
             \item Na stronie głównej znajduje się mapa, na której widoczne są oznaczone śmietniki.
             \item Mapę można przeszukiwać za pomocą wbudowanej wyszukiwarki znajdującej się w górnej części aplikacji.
@@ -995,7 +1004,7 @@ Aplikację mona podzielić na cztery moduły, które obejmują:
 \end{itemize}
 
 \begin{itemize}
-    \item Panel Użytkownika
+    \item Panel Użytkownika:
         \begin{itemize}
             \item W panelu użytkownika użytkownik może zarządzać swoimi danymi, które można edytować.
             \item Istnieje przycisk przekierowujący użytkownika do ustawień aplikacji.
@@ -1043,10 +1052,17 @@ Następnie, dokonać transpilacji kodu z języka Typescript na Javascript i pono
     yarn build && yarn install
 \end{lstlisting}
 
+Przed rozpoczęciem procesu budowy kontenerów niezbędnym jest stworzenie pliku ,,.env``, który to zostanie przekazany do kontenerów jako źródło konfiguracji. W tym celu należy użyć następującej komendy:
+\begin{lstlisting}
+    cp ./.env.example ./.env
+\end{lstlisting}
+
 Po tej operacji, należy zbudować i odpalić kontenery za pomocą komendy:
 \begin{lstlisting}
     docker compose up
 \end{lstlisting}
+
+Dostęp do pełnego spisu ścieżek żądań oraz odpowiedzi na żądania dostępny jest bazowo pod adresem \url{http://localhost:50010/docs} oraz w załączniku nr. 3.
 
 Kod źródłowy mikroserwisów znajduje się w folderze apps, podzielony na poszczególne mikroserwisy. Odpowiednio:
 \begin{itemize}
@@ -1076,11 +1092,11 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
 
 \subsection{Załączniki}
 
--- Aplikacja serwerowa
-
--- Aplikacja mobilna
-
-???
+\begin{enumerate}
+    \item Aplikacja serwerowa;
+    \item Aplikacja mobilna;
+    \item Dokumentacja ścieżek aplikacji.
+\end{enumerate}
 
 \subsection{Bibliografia}
 
