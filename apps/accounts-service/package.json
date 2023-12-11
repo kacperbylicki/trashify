@@ -22,6 +22,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
+    "@trashify/transport": "^1.0.1",
     "@grpc/grpc-js": "^1.9.4",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
@@ -29,7 +30,6 @@
     "@nestjs/microservices": "^9.3.9",
     "@nestjs/mongoose": "^9.2.1",
     "@nestjs/platform-express": "^9.3.9",
-    "@trashify/transport": "^1.0.1",
     "@unifig/adapter-env": "^0.13.0",
     "@unifig/core": "^0.13.0",
     "@unifig/nest": "^0.13.0",
