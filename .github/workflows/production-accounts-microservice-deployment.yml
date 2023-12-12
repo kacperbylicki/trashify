@@ -41,8 +41,6 @@ jobs:
         target: production
         build-args: |
           NPM_READ_TOKEN=${{ secrets.NPM_READ_TOKEN }}
-      env:
-        NODE_ENV: production
 
   deploy:
     name: "deploy"
