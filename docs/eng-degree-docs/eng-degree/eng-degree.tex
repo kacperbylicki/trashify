@@ -838,8 +838,8 @@ Finalnie, aplikacja serwerowa podzielona jest na cztery mikroserwisy, odpowiedni
 \begin{itemize}[label=--]
     \item mikroserwis kont użytkownika -- odpowiedzialny za wszystkie operacje związane z zarządzaniem kontem, zmianą hasła, adresu email oraz autoryzację użytkowników;
     \item mikroserwis śmietników -- zajmujący się agregacją oraz komunikacją z bazą danych pod kątem wyszukiwania śmietników;
-    \item mikroserwis emailowy -- jego jedynym zadaniem jest obsługa wysyłania wiadomośći email;
-    \item bramka interfejsu aplikacji (eng. \textit{api gateway}) - służąca za punkt dostępu do interfejsu, w której odbywa się komunikacja między mikroserwisami oraz autoryzacja i autentykacja użytkowników.
+    \item mikroserwis emailowy -- jego jedynym zadaniem jest obsługa wysyłania wiadomości email;
+    \item bramka interfejsu aplikacji (eng. \textit{api gateway}) służąca za punkt dostępu do interfejsu, w której odbywa się komunikacja między mikroserwisami oraz autoryzacja i uwierzytelnianie użytkowników.
 \end{itemize}
 
 
@@ -969,6 +969,16 @@ Jest to zdecydowanie część pracy najbogatsza w ścieżki decyzyjne.
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
+\subsection{Zużycie CPU: Flutter vs. aplikacje natywne}
+\begin{figure}[H]
+    \centering
+    \textbf{\caption{Porównanie zużycia CPU: Flutter vs. aplikacje natywne na systemy iOS i Android}}
+    \vspace{0.8em}
+    \includegraphics[width=13.5cm]{./static/CPU-Usage-Comparison-Flutter-vs-Native-iOS-Android.png}
+    \raggedright\scriptsize{\\Źródło: S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
+\end{figure}
+
+W badaniu porównano wydajność Fluttera z aplikacjami natywnymi na Androidzie i iOS pod kątem zużycia CPU. Stwierdzono, że aplikacje na iOS miały początkowo wyższe zużycie CPU, podczas gdy aplikacje na Androidzie miały podobne wyniki, z nieco lepszą wydajnością maksymalnego zużycia CPU dla Fluttera, ale niższą średnią dla aplikacji natywnych.
 \subsection{Aplikacja mobilna}
 
 \forceindent Implementując naszą aplikację mobilną w języku Swift, wybraliśmy ten język ze względu na jego wydajność i elastyczność. Jednak podczas procesu tworzenia napotkaliśmy wiele wyzwań, które były spowodowane zarówno architekturą aplikacji, jak i wbudowanymi rozwiązaniami dostępnymi w języku Swift. Podobnie jak w przypadku frameworka NestJS w naszej aplikacji serwerowej, Swift dostarcza wiele gotowych rozwiązań i narzędzi, ale często są one mało intuicyjne lub mogą zawierać błędy. Nasz zespół musiał się zmierzyć z tymi problemami i dostosować te rozwiązania do naszych potrzeb. Jednocześnie stworzyliśmy własne komponenty i moduły, które integrowaliśmy z istniejącym kodem, aby zapewnić płynność działania i najlepsze wrażenia z użytkowania naszej aplikacji.
@@ -1014,26 +1024,129 @@ Aplikację można podzielić na cztery moduły, które obejmują:
 \end{itemize}
 
 \subsection{Stylowanie iterfejsu użytkownika}
-\forceindent Stylowanie interfejsu użytkownika było istotnym aspektem projektu. Dzięki SwiftUI, możliwe było zdefiniowanie wyglądu i stylu poszczególnych widoków w sposób deklaratywny. Przykładowo, używając modyfikatorów takich jak .font(), .foregroundColor(), czy .background(), można było łatwo dostosować czcionki, kolory i tła elementów interfejsu użytkownika.
+\forceindent{Stylowanie interfejsu użytkownika było istotnym aspektem projektu. Dzięki SwiftUI, możliwe było zdefiniowanie wyglądu i stylu poszczególnych widoków w sposób deklaratywny. Przykładowo, używając atrybutów takich jak .font(), .foregroundColor() czy .background(), można było łatwo dostosować czcionki, kolory i tła elementów interfejsu użytkownika.}
 
 Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizowanych widoków oraz dostosowywania przycisków i ikon. Stylowanie było przemyślane tak, aby spełnić oczekiwania użytkowników i zachować spójność z wytycznymi projektu.
+
+\subsection{Widoku aplikacji mobilnej}
+Ekran startowy 
+
+\forceindent{Umożliwia przejście do procesu rejestracji poprzez przycisk „Dołącz teraz” (eng. \textit{Join Now}) oraz do ekranu logowania przez kliknięcie w przycisk „Zaloguj się” (eng. \textit{Login}). }
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{./static/mobile/home-page.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+Rejestracja 
+
+\forceindent{Użytkownik może założyć konto, podając nazwę użytkownika, adres e-mail oraz hasło. W celu dodatkowej walidacji, hasło należy wprowadzić dwa razy. Po prawidłowym wpisaniu danych, należy kliknąć przycisk „Zarejestruj się” (eng. \textit{Register}). Z ekranu rejestracji istnieje możliwość łatwego przejścia do ekranu logowania poprzez kliknięcie w napis „Zaloguj się” (eng. \textit{Login}).}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{./static/mobile/register.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+Logowanie
+
+\forceindent{Aby zalogować się do aplikacji, użytkownik musi podać swój adres email oraz hasło. Proces logowania zatwierdza się, klikając przycisk „Zaloguj się” (eng. \textit{Login}). Z ekranu logowania istnieje również możliwość przejścia do panelu odzyskiwania hasła poprzez kliknięcie w napis „Zapomniałeś hasła?” (eng. \textit{Forgot password?}) oraz do ekranu rejestracji przez kliknięcie w „Zarejestruj się” (eng. \textit{Register}).}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{./static/mobile/login.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+Panel odzyskiwania hasła
+
+\forceindent{W celu odzyskania hasła, użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (eng. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{./static/mobile/forgot-password.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+Strona główna 
+
+\forceindent{Strona główna prezentuje mapę z oznaczonymi lokalizacjami śmietników. Każdy typ śmietnika jest reprezentowany przez unikalny kolor i ikonę. Kliknięcie na tag śmietnika wyświetla dodatkowe informacje o danym punkcie. Na górze strony znajduje się pole tekstowe umożliwiające wyszukiwanie określonych lokalizacji. Po wpisaniu początku nazwy miasta, automatycznie pojawia się lista sugerowanych pasujących miejsc. Użytkownik może wybrać interesującą go lokalizację z tej listy. Na dole strony umieszczono menu nawigacyjne, dzięki któremu można łatwo poruszać się po aplikacji.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{./static/mobile/home-page.jpg}\\
+    \scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+Panel dodawania punktów
+
+\forceindent{Aby dodać nowy punkt na mapie, użytkownik powinien wybrać ikonę plusa w menu. Po otwarciu panelu, pierwszym krokiem jest dodanie zdjęcia. Zastosowany model uczenia maszynowego automatycznie rozpozna typ śmietnika. Jeśli rozpoznanie jest błędne, użytkownik ma możliwość ręcznej zmiany typu. Następnie, po weryfikacji typu śmietnika i lokalizacji, operację dodania punktu zatwierdza się przyciskiem „Zapisz” (eng. \textit{Save}).}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{./static/mobile/add-trash.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+Panel użytkownika
+
+\forceindent{Umożliwia edycję nazwy użytkownika oraz adresu email. Proces edycji rozpoczyna się od kliknięcia w przycisk „Edytuj” (eng. \textit{Edit}), co przekierowuje do odpowiedniego panelu edycyjnego. Funkcja „Ustawienia dostępu” (eng. \textit{Access settings}) pozwala na przeniesienie do sekcji ustawień, gdzie użytkownik może konfigurować uprawnienia aplikacji. Za pomocą suwaka trybu ciemnego (eng. \textit{dark mode}) istnieje możliwość zmiany wyglądu aplikacji z jasnego na ciemny i odwrotnie. Opcja „Wyloguj się” (eng. \textit{Sign out}) umożliwia bezpieczne wylogowanie się z konta.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{./static/mobile/user-panel.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+Panele edycji nazwy użytkownika i adresu email
+
+\forceindent{Aby edytować nazwę użytkownika, należy wpisać nową nazwę, na którą chcemy ją zmienić, a następnie zatwierdzić zmianę, klikając przycisk „Zapisz” (eng. \textit{Save}). Proces zmiany adresu email przebiega w identyczny sposób: użytkownik wpisuje nowy adres email i zatwierdza zmianę za pomocą tego samego przycisku „Zapisz” (eng. \textit{Save}).}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{./static/mobile/update-email.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{./static/mobile/update-password.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
 
 \subsection{Problemy z realizacją aplikacji mobilnej}
 \forceindent{W trakcie pracy nad projektem aplikacji mobilnej, który był realizowany w grupie, napotkaliśmy kilka istotnych problemów. Pierwszym z nich był problem z wyświetlaniem punktów na mapie, gdzie główną trudnością było skomunikowanie aplikacji z danymi geolokacyjnymi, które były aktualizowane w czasie rzeczywistym w modelu. To spowodowało wyzwania związane z odpowiednim pobieraniem i wyświetlaniem tych danych na interfejsie użytkownika. Kolejnym problemem była efektywność wyszukiwania punktów na mapie, które miało być dynamiczne i responsywne. Jednak napotkaliśmy trudności związane z aktualizacją koordynatów punktów w modelu oraz ich odwzorowaniem na mapie. To wymagało starannej synchronizacji między danymi w modelu a ich reprezentacją na mapie.}
 
-Całość komunikacji pomiędzy bramką interfejsu aplikacji, a mikroserwisami, oparta jest na protokole gRPC. Wiadomości wysyłane są za pomocą protobuforów, a komunikacja z klientem oparta jest na protokole HTTPS.
+Całość komunikacji pomiędzy bramką interfejsu aplikacji a mikroserwisami, oparta jest na protokole gRPC. Wiadomości wysyłane są za pomocą protobuforów, a komunikacja z klientem oparta jest na protokole HTTPS.
 
 W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
 
-\subsection{Instalacja aplikacji przez użytkownika}
+\subsection{Wymagania sprzętowe i oprogramowania dla aplikacji mobilnej}
+\begin{itemize}
+    \item Komputer z systemem operacyjnym macOS Sonoma lub nowszym
+    \item Oprogramowanie Xcode 15 lub nowsze, dostępne do pobrania z App Store
+\end{itemize}
 
-\forceindent Aplikacja mobilna 
+\subsection{Instalacja aplikacji}
+
+\subsubsection{Otwieranie projektu w Xcode }
+\begin{itemize}
+    \item Otwórz Xcode.
+    \item Wybierz File > Open i znajdź sklonowany katalog projektu.
+    \item Wybierz plik .xcodeproj i kliknij Open
+\end{itemize}
+
+\subsubsection{Uruchomienie projektu}
+\begin{itemize}
+    \item Wybierz urządzenie docelowe w Xcode.
+    \item Kliknij przycisk Run lub użyj skrótu Cmd + R, aby uruchomić aplikację.
+\end{itemize}
 
 \subsection{Instrukcja developerska}
 
 \forceindent Celem odpalenia lokalnej instancji aplikacji serwerowej, użytkownik potrzebuje następujących narzędzi:
 \begin{itemize}[label=--]
-    \item środowiska rozruchomieniowego Node.js w wersj 20.9 bądź nowszej;
+    \item środowiska rozruchomieniowego Node.js w wersji 20.9 bądź nowszej;
     \item menedżera paczek yarn w wersji 1.22.19;
     \item silnika konteneryzacji Docker w wersji 4.24 lub wyżej (w przypadku korzystania z systemu Windows bądź MacOS niezbędną jest aplikacja Docker Desktop);
     \item minimum 8GB pamięci RAM;
@@ -1101,7 +1214,7 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
 \subsection{Bibliografia}
 
 \begin{enumerate}[label={[}\arabic*{]}]
-    \item Główny Urząd Statystyczny -- Ochrona środowiska 2022, Warszawa, 2022r.
+    \item Główny Urząd Statystyczny Ochrona środowiska 2022, Warszawa, 2022r.
     \item Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling?size=n_10_n&filters%5B0%5D%5Bfield%5D=readingTime&filters%5B0%5D%5Btype%5D=any&filters%5B0%5D%5Bvalues%5D%5B0%5D%5Bname%5D=All&filters%5B0%5D%5Bvalues%5D%5B0%5D%5BrangeType%5D=fixed&filters%5B1%5D%5Bfield%5D=issued.date&filters%5B1%5D%5Btype%5D=any&filters%5B1%5D%5Bvalues%5D%5B0%5D=Last%205%20years&filters%5B2%5D%5Bfield%5D=language&filters%5B2%5D%5Btype%5D=any&filters%5B2%5D%5Bvalues%5D%5B0%5D=en}
     \item Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/data-and-maps/daviz/municipal-waste-recycled-and-composted-6#tab-chart_7}
     \item Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.
