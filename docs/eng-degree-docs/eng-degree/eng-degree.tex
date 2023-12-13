@@ -481,6 +481,13 @@ Wytrenowano warstwy konwolucyjne do ekstrakcji hierarchicznych cech z obrazów, 
     S. 3 - 4; Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
 }
 
+Ważnymi metrykami dla tej architektury uczenia maszynowego są:
+\begin{itemize}[label=--]
+    \item precyzja -- ta metryka mierzy dokładność pozytywnych przewidywań. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do całkowitej liczby przewidywanych pozytywnych obserwacji;
+    \item czułość (\textit{eng. Recall}) -- mierzy zdolność modelu do znajdowania wszystkich istotnych instancji w zbiorze danych. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do wszystkich obserwacji w rzeczywistej klasie;
+    \item miara F1 -- miara F1 jest miarą dokładności modelu, która uwzględnia zarówno precyzję, jak i wycofanie. Jest to średnia harmoniczna precyzji i wycofania, zapewniająca równowagę między tymi dwoma wskaźnikami. Wynik F1 osiąga najlepszą wartość przy 1 (idealna precyzja i wycofanie), a najgorszą przy 0.
+\end{itemize}
+
 %2. Parametry Modelu:
 \textbf{Parametry modelu:}
 \begin{enumerate}[label=--]
@@ -751,40 +758,7 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     \item wersjonowanie API będzie musiało być spójne.
 \end{enumerate}
 
-\paragraph{Framework serwerowy\\}
-\forceindent \textbf{Decyzja\\}
-\forceindent Zespół projektowy zdecydował się na wykorzystanie frameworka NestJS z wykorzystaniem
-Fastify jako sterownika HTTP z uwagi na znaczną różnicę w wydajności względem sterownika Express.
-
-Plusy oraz minusy takiej decyzji są następujące:
-
-\begin{itemize}
-    \item gotowa do wykorzystania architektura aplikacji;
-    \item olbrzymia społeczność, od której można czerpać wiedzę na temat rozwiązań 
-    oraz korzystać z gotowych rozwiązań popularnych problemów;
-    \item mniejsza ilość kodu bazowego do napisania;
-    \item prostsza separacja logiki biznesowej;
-    \item ułatwione testowanie jednostkowe oraz integracyjne za pomocą wstrzykiwania
-    zależności oraz dzięki wbudowanym narzędziom testowym;
-    \item problematyczna implementacja rozwiązań nieprzewidzianych przez twórców
-    frameworka;
-    \item niski poziom kontroli nad cyklem życia żądań HTTP oraz samej architektury;
-    \item komunikaty błędów mogą niewiele mówić programiście, co utrudnia proces debuggowania.
-\end{itemize}
-
-\paragraph{Testowanie aplikacji serwerowej\\}
-\forceindent \textbf{Decyzja\\}
-\forceindent Zespół zdecydował się na framework testowy Jest, ponieważ nie wymaga wielu dodatkowych wtyczek do spełnienia potrzeb zespołu. Ponadto ma lepsze wsparcie dla testów równoległych i posiada potężny zestaw funkcji, które umożliwią szybsze tworzenie pakietów testowych.
-
-Plusy oraz minusy takiej decyzji są następujące:
-\begin{itemize}
-    \item testy będą tworzone przy użyciu dobrze ugruntowanych reguł;
-    \item paczka ,,jest-plugin`` będzie musiała zostać dodana do pliku `.eslintrc` i `package.json`;
-    \item Jest ma olbrzymią społeczność z dużą liczbą ekspertów, którzy go używają i otwarcie dzielą się wiedzą;
-    \item liczba matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności;
-    \item Jest z uwagi na ilość dostępnych możliwości, jak i kompatybilność wsteczną, jest obecnie jednym z najwolniejszych frameworków testowych, co znacznie zwiększy czas potrzebny do wykonania testów.
-\end{itemize}
-
+\newpage
 \section{Zadania w projekcie}
 
 \begin{longtblr}[
@@ -1121,28 +1095,91 @@ Całość komunikacji pomiędzy bramką interfejsu aplikacji a mikroserwisami, o
 
 W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
 
+\subsection{Algorytmy i techniki wykorzystane do nauki modelu uczenia maszynowego}
+\forceindent \subsection{Konwolucyjne sieci neuronowe}
+\forceindent W ramach badania zastosowaliśmy konwolucyjne sieci neuronowe (\textit{eng. Convolutional neural network - CNN}) do efektywnego przetwarzania i analizy danych obrazu w kontekście naszego projektu. Nasze podejście opierało się na praktycznym wykorzystaniu architektury CNN, specjalnie dostosowanej do rozpoznawania istotnych wzorców wizualnych bezpośrednio z pikseli obrazów, minimalizując konieczność skomplikowanego przetwarzania wstępnego.
+
+W praktyce nasza architektura CNN składała się z zestawu warstw konwolucyjnych, które zastosowano do naszych danych wejściowych. Każda z tych warstw korzystała z różnych filtrów, umożliwiających automatyczne wykrywanie i uczenie się przestrzennych hierarchii cech. To podejście pozwoliło nam skoncentrować się na identyfikacji niskopoziomowych krawędzi i tekstur, aż po wysokopoziomowe wzorce specyficzne dla naszej dziedziny, takie jak charakterystyczne cechy różnych typów pojemników.
+
+Dodatkowo, po warstwach konwolucyjnych zaimplementowaliśmy warstwy łączące, które skutecznie zmniejszały przestrzenny rozmiar reprezentacji. To nie tylko kontrolowało liczbę parametrów i obliczeń w naszej sieci, ale także zapobiegało nadmiernemu dopasowaniu. Takie praktyczne zastosowanie architektury CNN umożliwiło nam skuteczne przetwarzanie danych obrazowych z uwzględnieniem specyfiki naszego projektu, prowadząc do precyzyjnego rozpoznawania i klasyfikacji istotnych elementów, takich jak różne typy pojemników.
+
+\subsection{Uczenie nadzorowane}
+\forceindent W ramach naszej pracy zastosowaliśmy uczenie nadzorowane, opierając się na oznaczonym zbiorze danych, aby skutecznie szkolić nasz model. Każdy obraz w tym zbiorze danych został precyzyjnie oznaczony etykietą identyfikującą konkretny typ kontenera. W trakcie treningu nasza konwolucyjna sieć neuronowa przeszła proces nauki, podczas którego zapoznawała się z charakterystycznymi cechami i wzorcami obrazów, a następnie łączyła je z odpowiadającymi etykietami. Ten proces umożliwił modelowi skuteczne przyswajanie cech definiujących każdy rodzaj kontenera.
+
+W celu oceny wydajności naszego modelu korzystaliśmy z różnych miar, takich jak dokładność, precyzja, przywołanie, czułość i miara F1. Te wskaźniki dostarczały nam istotnych informacji na temat zdolności modelu do poprawnego identyfikowania poszczególnych typów kontenerów. Praktyczne zastosowanie tych miar pozwoliło nam szczegółowo analizować skuteczność naszego modelu w kontekście naszego konkretnego zadania, co było kluczowe dla oceny jego przydatności i precyzji w identyfikacji różnorodnych kontenerów.
+
+\subsection{Proces szkolenia}
+\forceindent Proces szkoleniowy obejmował dostarczanie dużej liczby oznaczonych obrazów do sieci CNN. Sieć przetworzyła te obrazy przez swoje warstwy, dostosowując swoje wewnętrzne parametry (wagi i odchylenia) na podstawie błędu pomiędzy prognozami a rzeczywistymi etykietami (propagacja wsteczna).
+Ten iteracyjny proces trwa, dopóki model nie osiągnie zadowalającego poziomu dokładności, wskazującego na jego zdolność do dokładnej klasyfikacji nowych, niewidzianych obrazów.
+
+\subsection{Wyzwania i rozważania}
+\forceindent Kluczowym wyzwaniem w szkoleniu CNN do zadań klasyfikacji obrazów, takich jak to, jest zapewnienie wystarczająco dużego i zróżnicowanego zbioru danych, aby zapobiec nadmiernemu dopasowaniu i poprawić zdolność modelu do uogólniania.
+Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięcia nierównowagi klas, która mogłaby skłaniać model w kierunku częściej występujących klas. Zespół projektowy zwrócił na to szczególną uwagę, aby zapewnić, że model będzie w stanie rozpoznawać wszystkie typy kontenerów z wysoką dokładnością.
+
+\subsection{Analiza wydajności modelu klasyfikacji pojemników}
+
+\subsubsection{Pojemniki plastikowe}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 55\% co oznacza, że nas model prawidłowo rozpoznaje 55\% pojemników plastikowych przez model, co wskazuje na rzadkie błędne klasyfikacje innych rodzajów pojemników jako plastikowych;
+    \item osiągnięta czułość to 70\%, a więc model efektywnie identyfikuje 70\% rzeczywistych plastikowych pojemników, co świadczy o jego zdolności do wykrywania plastikowych pojemników wśród różnorodnych danych;
+    \item miara F1 wyniosła 0,616 -- jest to wysoki wynik, który podkreśla równowagę między precyzją a czułością, minimalizując błędne klasyfikacje.
+\end{itemize}
+
+\subsubsection{Pojemniki papierowe}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 74\%, co oznacza że 74\% zidentyfikowanych przez model pojemników papierowych faktycznie takimi jest, świadcząc o wysokiej skuteczności modelu;
+    \item osiągnięta czułość to 64\%, a więc model identyfikuje 64\% wszystkich istniejących pojemników papierowych, co wskazuje na jego zdolność do wykrywania pojemników papierowych;
+    \item miara F1 wyniosła 0,686 -- jest to wynik sygnalizujący dobrą równowagę między precyzją a czułością, co jest kluczowe w dokładnej klasyfikacji pojemników papierowych.
+\end{itemize}
+
+\subsubsection{Pojemniki na odpady mieszane}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 60\%, co oznacza że model wykazuje umiarkowaną zdolność do poprawnego identyfikowania pojemników na odpady mieszane;
+    \item osiągnięta czułość to 59\%, a więc model rozpoznaje 59\% rzeczywistych przypadków pojemników na odpady mieszane;
+    \item miara F1 wyniosła 0.595 -- jest to wynik umiarkowany, wskazujący na możliwości poprawy w precyzji oraz czułości.
+\end{itemize}
+
+\subsubsection{Pojemniki na szkło}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 72\%: co oznacza, że 72\% obrazów są efektywnie identyfikowane jako pojemniki szklane, z minimalną liczbą błędnych identyfikacji;
+    \item osiągnięta czułość to 55\% -- wskazuje to na istnienie ryzyka, że model może przeoczyć pewne obrazy pojemników szklanych;
+    \item miara F1 wyniosła 0,624 -- jest to wynik wskazujący umiarkowaną równowagę między precyzją a czułością w klasyfikacji pojemników szklanych.
+\end{itemize}
+
+\subsubsection{Pojemniki na odpady biodegradowalne}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 65\% -- około dwóch trzecich obrazów sklasyfikowanych jako pojemniki na odpady biodegradowalne jest poprawnie zidentyfikowanych;
+    \item osiągnięta czułość to 65\% -- model efektywnie wykrywa 65\% rzeczywistych pojemników biodegradowalnych;
+    \item miara F1 wyniosła 0,65 -- model wykazuje dobrą równowagę między precyzją a czułością, co jest pozytywne dla klasyfikacji pojemników biodegradowalnych.
+\end{itemize}
+
 \subsection{Wymagania sprzętowe i oprogramowania dla aplikacji mobilnej}
-\begin{itemize}
+\begin{itemize}[label=--]
     \item Komputer z systemem operacyjnym macOS Sonoma lub nowszym
     \item Oprogramowanie Xcode 15 lub nowsze, dostępne do pobrania z App Store
 \end{itemize}
 
-\subsection{Instalacja aplikacji}
+\subsection{Instalacja aplikacji mobilnej}
 
 \subsubsection{Otwieranie projektu w Xcode }
-\begin{itemize}
+\begin{itemize}[label=--]
     \item Otwórz Xcode.
     \item Wybierz File > Open i znajdź sklonowany katalog projektu.
     \item Wybierz plik .xcodeproj i kliknij Open
 \end{itemize}
 
-\subsubsection{Uruchomienie projektu}
+\subsubsection{Uruchomienie projektu aplikacji mobilnej}
 \begin{itemize}
     \item Wybierz urządzenie docelowe w Xcode.
     \item Kliknij przycisk Run lub użyj skrótu Cmd + R, aby uruchomić aplikację.
 \end{itemize}
 
-\subsection{Instrukcja developerska}
+\subsection{Instrukcja developerska aplikacji serwerowej}
 
 \forceindent Celem odpalenia lokalnej instancji aplikacji serwerowej, użytkownik potrzebuje następujących narzędzi:
 \begin{itemize}[label=--]
