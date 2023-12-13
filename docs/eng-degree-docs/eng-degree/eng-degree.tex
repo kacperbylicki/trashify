@@ -24,6 +24,7 @@
 \usepackage{tabularray}
 \usepackage{float}
 \usepackage{listings}
+\usepackage{calc}
 
 \import{../}{commands.tex}
 
@@ -33,6 +34,10 @@
     \fancyhead[C]{\uniimage}
     \fancyfoot[LE,RO]{\thepage}
 }
+
+\newlength\imgth
+\setlength\imgth{\textwidth}
+\addtolength\imgth{-0.3\textwidth}
 
 % Wymogi edycyjne: https://moodle2.e-wsb.pl/pluginfile.php/7505508/mod_resource/content/2/Wymogi%20edycyjne_praca%20dyplomowa.pdf
 
@@ -824,17 +829,17 @@ Diagram relacji encji w bazie dedykowanej dla mikroserwisu kont użytkownika prz
 
 Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników oraz wydajnością aplikacji. Serwisy te podatne są na zmienne ilości dziennych żądań, a czas odpowiedzi na żądania rzędu więcej niż 300ms są niedopuszczalne w środowiskach produkcyjnych.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram relacji encji w bazie danych mikroserwisu użytkownika}}
     \vspace{0.55em}
-    \centering \includegraphics[width=12cm]{static/diagrams/erd-baza-danych-użytkownika.png}
+    \centering \includegraphics[width=12cm,height={\imgth}, keepaspectratio]{static/diagrams/erd-baza-danych-użytkownika.png}
     \\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
     \textbf{\caption{Diagram relacji encji w bazie danych mikroserwisu pojemników na śmieci}}
-    \centering \includegraphics[width=12cm]{static/diagrams/erd-baza-danych-śmietników.png}
+    \centering \includegraphics[width=12cm, height={\imgth}, keepaspectratio]{static/diagrams/erd-baza-danych-śmietników.png}
     \\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -843,9 +848,9 @@ Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników o
 
 \forceindent Diagramy sekwencji przedstawiają istniejące w aplikacji serwerowej procesy, umożliwiające z niej użytkowanie.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram logowania użytkownika}}
-    \centering{\includegraphics[width=15cm]{./static/diagrams/diagram-logowania.png}}\\
+    \centering{\includegraphics[width=15cm, height={\imgth}, keepaspectratio]{./static/diagrams/diagram-logowania.png}}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -857,9 +862,9 @@ Można owy proces podzielić na następujące odnogi:
     \item poprawne dane -- zwrócenie tokenów autoryzacyjnych.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram zmiany adresu email}}
-    \includegraphics[width=15cm]{./static/diagrams/diagram-zmiany-adresu-email.png}\\
+    \includegraphics[width=15cm,height={\imgth}, keepaspectratio]{./static/diagrams/diagram-zmiany-adresu-email.png}\\
     \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -873,31 +878,31 @@ Odnogi decyzyjne w tym procesie można podzielić na następujące:
     \item po kliknięciu na link adres email jest zmieniany.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram pobierania danych śmietników}}
     \vspace{0.55em}
-    \centering\includegraphics[width=15cm]{./static/diagrams/diagram-pobierania-danych-smietniczkow.png}\\
+    \centering\includegraphics[width=15cm,height={\imgth}, keepaspectratio]{./static/diagrams/diagram-pobierania-danych-smietniczkow.png}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 Rysunek 3.5 przedstawia diagram pobierania danych śmietników.
 Jego proces posiada jedno drzewko decyzyjne, którego wymogiem jest uwierzytelniony użytkownik.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram rejestracji użytkownika}}
     \vspace{0.55em}
-    \centering\includegraphics[width=15cm]{./static/diagrams/naprawiony-diagram-rejestracji.png}\\
+    \centering\includegraphics[width=15cm,height={\imgth}, keepaspectratio]{./static/diagrams/naprawiony-diagram-rejestracji.png}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 Rysunek 3.6 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formularzu rejestracji użytkownik otrzymuje wiadomość email pod wskazanym adresem wraz z linkiem do potwierdzenia rejestracji. Po wejściu na witrynę do której prowadzi link, konto użytkownika jest potwierdzone i może rozpocząć on korzystanie z aplikacji.
 
-\begin{figure}[h]
-    \textbf{\caption{Diagram resetu hasła użytkownika}}
-    \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/diagrams/diagram-resetu-hasła.png}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
-\end{figure}
+% \begin{figure}[h]
+%     \textbf{\caption{Diagram resetu hasła użytkownika}}
+%     \vspace{0.55em}
+%     \centering\includegraphics[width=12cm,height={\imgth}, keepaspectratio]{./static/diagrams/diagram-resetu-hasła.png}\\
+%     \raggedright\scriptsize{Źródło: Opracowanie własne}
+% \end{figure}
 
 \subsection{Diagram komunikacji między aplikacją serwerową i mobilną}
 
@@ -918,18 +923,18 @@ W przypadku testów jednostkowych, nie pobrano pomiarów związanych z pokryciem
 
 Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co przedstawione jest na rysunku 3.8, oraz 9 testów integracyjnych. Przekłada się to na wysoką odporność na potencjalne błędy.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu pojemników na śmieci}}
     \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/trash-unit.png}
+    \centering\includegraphics[width=12cm,height={\imgth}, keepaspectratio]{./static/trash-unit.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \textbf{\caption{Wyniki testów integracyjnych mikroserwisu pojemników na śmieci}}
     \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/trash-integration-tests.png}
+    \centering\includegraphics[width=12cm,height={\imgth}, keepaspectratio]{./static/trash-integration-tests.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -938,28 +943,28 @@ Mikroserwis kont użytkownika posiada łącznie 8 testów jednostkowych oraz 43 
 Przetestowane zostały ścieżki związane z logowaniem, rejestracją oraz zmianami w danych konta użytkowika.
 Jest to zdecydowanie część pracy najbogatsza w ścieżki decyzyjne.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu konta użytkownika}}
     \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/accounts-unit.png}
+    \centering\includegraphics[width=12cm,height={\imgth}, keepaspectratio]{./static/accounts-unit.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \textbf{\caption{Wyniki testów integracyjnych mikroserwisu kont użytkownika}}
     \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/accounts-integration-tests.png}
+    \centering\includegraphics[width=12cm,height={\imgth}, keepaspectratio]{./static/accounts-integration-tests.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \subsection{Zużycie CPU: Flutter vs. aplikacje natywne}
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \textbf{\caption{Porównanie zużycia CPU: Flutter vs. aplikacje natywne na systemy iOS i Android}}
     \vspace{0.8em}
-    \includegraphics[width=13.5cm]{./static/CPU-Usage-Comparison-Flutter-vs-Native-iOS-Android.png}
+    \includegraphics[width=13.5cm, height={\imgth}, keepaspectratio]{./static/CPU-Usage-Comparison-Flutter-vs-Native-iOS-Android.png}
     \raggedright\scriptsize{\\Źródło: S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
 \end{figure}
 
@@ -1017,47 +1022,46 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 
 \forceindent{Na rysunku 3.13 widoczny jest ekran startowy aplikacji mobilnej. Umożliwia on przejście do procesu rejestracji poprzez przycisk „Dołącz teraz” (eng. \textit{Join Now}) oraz do ekranu logowania przez kliknięcie w przycisk „Zaloguj się” (eng. \textit{Login}). }
 
-\begin{figure}[H]
+\begin{figure}[h]
     \textbf{\caption{Ekran startowy aplikacji mobilnej}}
     \centering
-    \includegraphics[width=8cm, height={\textheight}, keepaspectratio]{./static/mobile/start-page.jpg}\\
+    \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/start-page.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \forceindent{Rysunek 3.14 przedstawia widok rejestracji, dzięki któremu użytkownik może założyć konto, podając nazwę użytkownika, adres e-mail oraz hasło. W celu dodatkowej walidacji, hasło należy wprowadzić dwa razy. Po prawidłowym wpisaniu danych, należy kliknąć przycisk „Zarejestruj się” (eng. \textit{Register}). Z ekranu rejestracji istnieje możliwość łatwego przejścia do ekranu logowania poprzez kliknięcie w napis „Zaloguj się” (eng. \textit{Login}).}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \textbf{\caption{Widok rejestracji}}
     \centering
-    \includegraphics[width=8cm, height={\textheight}, keepaspectratio]{./static/mobile/register.jpg}\\
+    \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/register.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \forceindent{Aby zalogować się do aplikacji, użytkownik musi podać swój adres email oraz hasło, co widoczne jest na rysunku 3.15. Proces logowania zatwierdza się, klikając przycisk „Zaloguj się” (eng. \textit{Login}). Z ekranu logowania istnieje również możliwość przejścia do panelu odzyskiwania hasła poprzez kliknięcie w napis „Zapomniałeś hasła?” (eng. \textit{Forgot password?}) oraz do ekranu rejestracji przez kliknięcie w „Zarejestruj się” (eng. \textit{Register}).}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \textbf{\caption{Ekran logowania}}
     \centering
-    \includegraphics[width=8cm, height={\textheight}, keepaspectratio]{./static/mobile/login.jpg}\\
+    \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/login.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-
 \forceindent{Rysunek 3.16 przedstawia panel odzyskiwania hasła, który to wykorzystywane jest przez użytkowników w celu odzyskania hasła. Użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (eng. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \textbf{\caption{Panel odzyskiwania hasła}}
     \centering
-    \includegraphics[width=8cm, height={\textheight}, keepaspectratio]{./static/mobile/forgot-password.jpg}\\
+    \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/forgot-password.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \forceindent{Strona główna (rysunek 3.17) prezentuje mapę z oznaczonymi lokalizacjami śmietników. Każdy typ śmietnika jest reprezentowany przez unikalny kolor i ikonę. Kliknięcie na tag śmietnika wyświetla dodatkowe informacje o danym punkcie. Na górze strony znajduje się pole tekstowe umożliwiające wyszukiwanie określonych lokalizacji. Po wpisaniu początku nazwy miasta, automatycznie pojawia się lista sugerowanych pasujących miejsc. Użytkownik może wybrać interesującą go lokalizację z tej listy. Na dole strony umieszczono menu nawigacyjne, dzięki któremu można łatwo poruszać się po aplikacji.}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \textbf{\caption{Strona główna}}
     \centering
-    \includegraphics[width=8cm, height={\textheight}, keepaspectratio]{./static/mobile/home-page.jpg}\\
+    \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/home-page.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -1066,7 +1070,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 \begin{figure}[h]
     \textbf{\caption{Panel dodawania punktów}}
     \centering
-    \includegraphics[width=8cm,height={\textheight},keepaspectratio]{./static/mobile/add-trash.jpg}\\
+    \includegraphics[width=8cm,height={\imgth},keepaspectratio]{./static/mobile/add-trash.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -1076,7 +1080,7 @@ Panel użytkownika
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=8cm, height={\textheight}, keepaspectratio]{./static/mobile/add-trash.jpg}{./static/mobile/user-panel.jpg}\\
+    \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/user-panel.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -1086,12 +1090,12 @@ Panele edycji nazwy użytkownika i adresu email
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=8cm, height={\textheight}, keepaspectratio]{./static/mobile/add-trash.jpg}{./static/mobile/update-email.jpg}\\
+    \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/update-email.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=8cm, height={\textheight}, keepaspectratio]{./static/mobile/add-trash.jpg}{./static/mobile/update-password.jpg}\\
+    \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/update-password.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
