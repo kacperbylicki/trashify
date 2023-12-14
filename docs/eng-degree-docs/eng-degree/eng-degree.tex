@@ -481,8 +481,7 @@ Wady:
 %1. Architektura Modelu:
 \forceindent \textbf{Architektura Modelu\\}
 \indent Model opiera się na architekturze wykorzystującej głębokie sieci neuronowe.
-Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CNN), które są skuteczne w zadaniach przetwarzania obrazów.
-Wytrenowano warstwy konwolucyjne do ekstrakcji hierarchicznych cech z obrazów, a następnie zastosowano warstwy gęste do klasyfikacji. \footnote{
+Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CNN), które są skuteczne w zadaniach przetwarzania obrazów. \footnote{
     S. 3 - 4; Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
 }
 
@@ -516,7 +515,7 @@ W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby un
 %4. Ewaluacja Modelu:
 \textbf{Ewaluacja modelu\\}
 \forceindent Model został oceniony na zbiorze testowym, a osiągnięta dokładność wyniosła 68\%. 
-Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz F1-score, aby dostarczyć kompleksowej oceny skuteczności modelu.
+Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz miary F1, aby dostarczyć kompleksowej oceny skuteczności modelu.
 
 %5. Użyte Technologie:
 \textbf{Użyte technologie\\}
@@ -693,7 +692,7 @@ Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co 
 
 %7. Monitorowanie Skuteczności:
 Podczas procesu nauczania monitorowano skuteczność modelu na zbiorze walidacyjnym.
-Oceniano miary takie jak dokładność, precyzja, recall i F1-score. %recall i F1-score trzeba będzie jakoś przetłumaczyć
+Oceniano miary takie jak dokładność, precyzja, czułość i miara F1.
 To pozwalało na ocenę, czy model generalizuje się dobrze na nowe dane.
 
 %8. Ewaluacja i Optymalizacja:
@@ -1108,16 +1107,16 @@ W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z
 
 \subsection{Algorytmy i techniki wykorzystane do nauki modelu uczenia maszynowego}
 \forceindent \subsection{Konwolucyjne sieci neuronowe}
-\forceindent W ramach badania zastosowaliśmy konwolucyjne sieci neuronowe (\textit{eng. Convolutional neural network - CNN}) do efektywnego przetwarzania i analizy danych obrazu w kontekście naszego projektu. Nasze podejście opierało się na praktycznym wykorzystaniu architektury CNN, specjalnie dostosowanej do rozpoznawania istotnych wzorców wizualnych bezpośrednio z pikseli obrazów, minimalizując konieczność skomplikowanego przetwarzania wstępnego.
+\forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (\textit{eng. Convolutional neural network - CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
 
-W praktyce nasza architektura CNN składała się z zestawu warstw konwolucyjnych, które zastosowano do naszych danych wejściowych. Każda z tych warstw korzystała z różnych filtrów, umożliwiających automatyczne wykrywanie i uczenie się przestrzennych hierarchii cech. To podejście pozwoliło nam skoncentrować się na identyfikacji niskopoziomowych krawędzi i tekstur, aż po wysokopoziomowe wzorce specyficzne dla naszej dziedziny, takie jak charakterystyczne cechy różnych typów pojemników.
+Image Feature Print V2 jest narzędziem w CreateML, które znacznie usprawnia proces ekstrakcji cech. Wykorzystując je wraz ze wstępnie wytrenowaną CNN, skutecznie dostosowaliśmy sieć do unikalnych cech naszego zbioru danych. Ta kombinacja pozwoliła na zniuansowaną analizę cech przestrzennych, kluczową dla identyfikacji określonych wzorców na naszych obrazach, takich jak rozróżnianie kolorów, oznaczeń, kształtów pojemników.
 
-Dodatkowo, po warstwach konwolucyjnych zaimplementowaliśmy warstwy łączące, które skutecznie zmniejszały przestrzenny rozmiar reprezentacji. To nie tylko kontrolowało liczbę parametrów i obliczeń w naszej sieci, ale także zapobiegało nadmiernemu dopasowaniu. Takie praktyczne zastosowanie architektury CNN umożliwiło nam skuteczne przetwarzanie danych obrazowych z uwzględnieniem specyfiki naszego projektu, prowadząc do precyzyjnego rozpoznawania i klasyfikacji istotnych elementów, takich jak różne typy pojemników.
+Nasza metoda polegała na dostrojeniu wstępnie wytrenowanego modelu do naszego zbioru danych, co jest procesem zarówno efektywnym czasowo, jak i skutecznym. To dostrojenie było niezbędne do dostosowania możliwości modelu do konkretnych celów naszego projektu w zakresie rozpoznawania i klasyfikacji obrazów.
 
 \subsection{Uczenie nadzorowane}
 \forceindent W ramach naszej pracy zastosowaliśmy uczenie nadzorowane, opierając się na oznaczonym zbiorze danych, aby skutecznie szkolić nasz model. Każdy obraz w tym zbiorze danych został precyzyjnie oznaczony etykietą identyfikującą konkretny typ kontenera. W trakcie treningu nasza konwolucyjna sieć neuronowa przeszła proces nauki, podczas którego zapoznawała się z charakterystycznymi cechami i wzorcami obrazów, a następnie łączyła je z odpowiadającymi etykietami. Ten proces umożliwił modelowi skuteczne przyswajanie cech definiujących każdy rodzaj kontenera.
 
-W celu oceny wydajności naszego modelu korzystaliśmy z różnych miar, takich jak dokładność, precyzja, przywołanie, czułość i miara F1. Te wskaźniki dostarczały nam istotnych informacji na temat zdolności modelu do poprawnego identyfikowania poszczególnych typów kontenerów. Praktyczne zastosowanie tych miar pozwoliło nam szczegółowo analizować skuteczność naszego modelu w kontekście naszego konkretnego zadania, co było kluczowe dla oceny jego przydatności i precyzji w identyfikacji różnorodnych kontenerów.
+W celu oceny wydajności naszego modelu korzystaliśmy z różnych miar, takich jak dokładność, precyzja, przywołanie, czułość i miara F1. Te wskaźniki dostarczały nam istotnych informacji na temat zdolności modelu do poprawnego identyfikowania poszczególnych typów kontenerów. Praktyczne zastosowanie tych miar pozwoliło nam szczegółowo analizować skuteczność naszego modelu w kontekście naszego konkretnego zadania, co było kluczowe dla oceny jego przydatności i precyzji w identyfikacji różnorodnych kontenerów. \footnote{}
 
 \subsection{Proces szkolenia}
 \forceindent Proces szkoleniowy obejmował dostarczanie dużej liczby oznaczonych obrazów do sieci CNN. Sieć przetworzyła te obrazy przez swoje warstwy, dostosowując swoje wewnętrzne parametry (wagi i odchylenia) na podstawie błędu pomiędzy prognozami a rzeczywistymi etykietami (propagacja wsteczna).
@@ -1129,7 +1128,7 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
 
 \subsection{Analiza wydajności modelu klasyfikacji pojemników}
 
-\subsubsection{Pojemniki plastikowe}
+\subsubsection{Pojemniki na plastik}
 
 \begin{itemize}[label=--]
     \item uzyskana precyzja wyniosła 55\% co oznacza, że nas model prawidłowo rozpoznaje 55\% pojemników plastikowych przez model, co wskazuje na rzadkie błędne klasyfikacje innych rodzajów pojemników jako plastikowych;
@@ -1137,7 +1136,7 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
     \item miara F1 wyniosła 0,616 -- jest to wysoki wynik, który podkreśla równowagę między precyzją a czułością, minimalizując błędne klasyfikacje.
 \end{itemize}
 
-\subsubsection{Pojemniki papierowe}
+\subsubsection{Pojemniki na papier}
 
 \begin{itemize}[label=--]
     \item uzyskana precyzja wyniosła 74\%, co oznacza że 74\% zidentyfikowanych przez model pojemników papierowych faktycznie takimi jest, świadcząc o wysokiej skuteczności modelu;
