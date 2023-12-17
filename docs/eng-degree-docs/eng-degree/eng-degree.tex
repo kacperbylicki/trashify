@@ -137,7 +137,7 @@
 
 % Example table and figure formatting
 \section{Wprowadzenie}
-\forceindent W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń -- rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \footnote{s. 149; Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022r.}.
+\forceindent W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń -- rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \footnote{s. 149; Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022r.}
 
 Jednym z kluczowych aspektów tego wyzwania jest efektywne segregowanie i recykling odpadów, co przyczynia się nie tylko do ochrony środowiska naturalnego, ale także do potencjalnych oszczędności. Jak podaje EEA (Europejska Agencja Ochrony Środowiska), na obywatela Unii Europejskiej przypada średnio 4,8 ton odpadów komunalnych, z czego 49\% jest recyklingowanych \footnote{Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling}}. Recykling może przynieść znaczące korzyści gospodarcze i środowiskowe, w tym zmniejszenie emisji gazów cieplarnianych, ograniczenie zużycia surowców naturalnych oraz tworzenie miejsc pracy. W samej Polsce, między latami 2004 i 2020, procent recyklingu odpadów komunalnych wzrósł z poziomu 4,9 do 38.7\%.
 
@@ -949,16 +949,6 @@ Jest to zdecydowanie część pracy najbogatsza w ścieżki decyzyjne.
 
 \newpage
 
-\subsection{Zużycie CPU: Flutter vs. aplikacje natywne}
-\begin{figure}[htbp]
-    \centering
-    \textbf{\caption{Porównanie zużycia CPU: Flutter vs. aplikacje natywne na systemy iOS i Android}}
-    \vspace{0.8em}
-    \includegraphics[width=13.5cm, height={\imgth}, keepaspectratio]{./static/CPU-Usage-Comparison-Flutter-vs-Native-iOS-Android.png}
-    \raggedright\scriptsize{\\Źródło: S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
-\end{figure}
-
-W badaniu porównano wydajność Fluttera z aplikacjami natywnymi na Androidzie i iOS pod kątem zużycia CPU. Stwierdzono, że aplikacje na iOS miały początkowo wyższe zużycie CPU, podczas gdy aplikacje na Androidzie miały podobne wyniki, z nieco lepszą wydajnością maksymalnego zużycia CPU dla Fluttera, ale niższą średnią dla aplikacji natywnych.
 \subsection{Aplikacja mobilna}
 
 \forceindent Implementując naszą aplikację mobilną w języku Swift, wybraliśmy ten język ze względu na jego wydajność i elastyczność. Jednak podczas procesu tworzenia napotkaliśmy wiele wyzwań, które były spowodowane zarówno architekturą aplikacji, jak i wbudowanymi rozwiązaniami dostępnymi w języku Swift. Podobnie jak w przypadku frameworka NestJS w naszej aplikacji serwerowej, Swift dostarcza wiele gotowych rozwiązań i narzędzi, ale często są one mało intuicyjne lub mogą zawierać błędy. Nasz zespół musiał się zmierzyć z tymi problemami i dostosować te rozwiązania do naszych potrzeb. Jednocześnie stworzyliśmy własne komponenty i moduły, które integrowaliśmy z istniejącym kodem, aby zapewnić płynność działania i najlepsze wrażenia z użytkowania naszej aplikacji.
@@ -1008,35 +998,19 @@ Aplikację można podzielić na cztery moduły, które obejmują:
 
 Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizowanych widoków oraz dostosowywania przycisków i ikon. Stylowanie było przemyślane tak, aby spełnić oczekiwania użytkowników i zachować spójność z wytycznymi projektu.
 
-\subsection{Widoku aplikacji mobilnej}
+\subsection{Widoki aplikacji mobilnej}
 
-\forceindent{Na rysunku 3.13 widoczny jest ekran startowy aplikacji mobilnej. Umożliwia on przejście do procesu rejestracji poprzez przycisk „Dołącz teraz” (eng. \textit{Join Now}) oraz do ekranu logowania przez kliknięcie w przycisk „Zaloguj się” (eng. \textit{Login}). }
+\forceindent{Na rysunku 3.12 widoczny jest ekran startowy aplikacji mobilnej. Umożliwia on przejście do procesu rejestracji poprzez przycisk „Dołącz teraz” (eng. \textit{Join Now}) oraz do ekranu logowania przez kliknięcie w przycisk „Zaloguj się” (eng. \textit{Login}). }
 
 \begin{figure}[H]
     \textbf{\caption{Ekran startowy aplikacji mobilnej}}
     \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/start-page.jpg}\\
+    \includegraphics[width=8cm, height=12cm, keepaspectratio]{./static/mobile/start-page.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-% \begin{figure}[h]
-%     \centering
-%     \begin{subfigure}{\halflinewidth}%[position][height][inner pos]{width}
-%         \textbf{\caption{Ekran startowy aplikacji mobilnej}}
-%         \centering
-%         \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/start-page.jpg}\\
-%         \raggedright\scriptsize{Źródło: Opracowanie własne}
-%     \end{subfigure}
-%     \begin{subfigure}{\halflinewidth}
-%         \textbf{\caption{Widok rejestracji}}
-%         \centering
-%         \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/register.jpg}\\
-%         \raggedright\scriptsize{Źródło: Opracowanie własne}
-%     \end{subfigure}
-% \end{figure}
-
-\forceindent{Rysunek 3.14 przedstawia widok rejestracji, dzięki któremu użytkownik może założyć konto, podając nazwę użytkownika, adres e-mail oraz hasło. W celu dodatkowej walidacji, hasło należy wprowadzić dwa razy. Po prawidłowym wpisaniu danych, należy kliknąć przycisk „Zarejestruj się” (eng. \textit{Register}). Z ekranu rejestracji istnieje możliwość łatwego przejścia do ekranu logowania poprzez kliknięcie w napis „Zaloguj się” (eng. \textit{Login}).}
+\forceindent{Rysunek 3.13 przedstawia widok rejestracji, dzięki któremu użytkownik może założyć konto, podając nazwę użytkownika, adres e-mail oraz hasło. W celu dodatkowej walidacji, hasło należy wprowadzić dwa razy. Po prawidłowym wpisaniu danych, należy kliknąć przycisk „Zarejestruj się” (eng. \textit{Register}). Z ekranu rejestracji istnieje możliwość łatwego przejścia do ekranu logowania poprzez kliknięcie w napis „Zaloguj się” (eng. \textit{Login}).}
 
 \begin{figure}[H]
     \textbf{\caption{Widok rejestracji}}
@@ -1046,7 +1020,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Aby zalogować się do aplikacji, użytkownik musi podać swój adres email oraz hasło, co widoczne jest na rysunku 3.15. Proces logowania zatwierdza się, klikając przycisk „Zaloguj się” (eng. \textit{Login}). Z ekranu logowania istnieje również możliwość przejścia do panelu odzyskiwania hasła poprzez kliknięcie w napis „Zapomniałeś hasła?” (eng. \textit{Forgot password?}) oraz do ekranu rejestracji przez kliknięcie w „Zarejestruj się” (eng. \textit{Register}).}
+\forceindent{Aby zalogować się do aplikacji, użytkownik musi podać swój adres email oraz hasło, co widoczne jest na rysunku 3.14. Proces logowania zatwierdza się, klikając przycisk „Zaloguj się” (eng. \textit{Login}). Z ekranu logowania istnieje również możliwość przejścia do panelu odzyskiwania hasła poprzez kliknięcie w napis „Zapomniałeś hasła?” (eng. \textit{Forgot password?}) oraz do ekranu rejestracji przez kliknięcie w „Zarejestruj się” (eng. \textit{Register}).}
 
 \begin{figure}[H]
     \textbf{\caption{Ekran logowania}}
@@ -1056,7 +1030,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Rysunek 3.16 przedstawia panel odzyskiwania hasła, który to wykorzystywane jest przez użytkowników w celu odzyskania hasła. Użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (eng. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
+\forceindent{Rysunek 3.15 przedstawia panel odzyskiwania hasła, który to wykorzystywane jest przez użytkowników w celu odzyskania hasła. Użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (eng. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
 
 \begin{figure}[H]
     \textbf{\caption{Panel odzyskiwania hasła}}
@@ -1067,7 +1041,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 \end{figure}
 
 \newpage
-\forceindent{Strona główna (rysunek 3.17) prezentuje mapę z oznaczonymi lokalizacjami śmietników. Każdy typ śmietnika jest reprezentowany przez unikalny kolor i ikonę. Kliknięcie na tag śmietnika wyświetla dodatkowe informacje o danym punkcie. Na górze strony znajduje się pole tekstowe umożliwiające wyszukiwanie określonych lokalizacji. Po wpisaniu początku nazwy miasta, automatycznie pojawia się lista sugerowanych pasujących miejsc. Użytkownik może wybrać interesującą go lokalizację z tej listy. Na dole strony umieszczono menu nawigacyjne, dzięki któremu można łatwo poruszać się po aplikacji.}
+\forceindent{Strona główna (rysunek 3.16) prezentuje mapę z oznaczonymi lokalizacjami śmietników. Każdy typ śmietnika jest reprezentowany przez unikalny kolor i ikonę. Kliknięcie na tag śmietnika wyświetla dodatkowe informacje o danym punkcie. Na górze strony znajduje się pole tekstowe umożliwiające wyszukiwanie określonych lokalizacji. Po wpisaniu początku nazwy miasta, automatycznie pojawia się lista sugerowanych pasujących miejsc. Użytkownik może wybrać interesującą go lokalizację z tej listy. Na dole strony umieszczono menu nawigacyjne, dzięki któremu można łatwo poruszać się po aplikacji.}
 
 \begin{figure}[H]
     \textbf{\caption{Strona główna}}
@@ -1077,7 +1051,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Rysunek 3.18 przedstawia panel dodawnia punktów na mapie. Celem dodania nowego punktu na mapie, użytkownik powinien wybrać ikonę plusa w menu. Po otwarciu panelu, pierwszym krokiem jest dodanie zdjęcia. Zastosowany model uczenia maszynowego automatycznie rozpozna typ śmietnika. Jeśli rozpoznanie jest błędne, użytkownik ma możliwość ręcznej zmiany typu. Następnie, po weryfikacji typu śmietnika i lokalizacji, operację dodania punktu zatwierdza się przyciskiem „Zapisz” (eng. \textit{Save}).}
+\forceindent{Rysunek 3.17 przedstawia panel dodawnia punktów na mapie. Celem dodania nowego punktu na mapie, użytkownik powinien wybrać ikonę plusa w menu. Po otwarciu panelu, pierwszym krokiem jest dodanie zdjęcia. Zastosowany model uczenia maszynowego automatycznie rozpozna typ śmietnika. Jeśli rozpoznanie jest błędne, użytkownik ma możliwość ręcznej zmiany typu. Następnie, po weryfikacji typu śmietnika i lokalizacji, operację dodania punktu zatwierdza się przyciskiem „Zapisz” (eng. \textit{Save}).}
 
 \begin{figure}[H]
     \textbf{\caption{Panel dodawania punktów}}
@@ -1089,7 +1063,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 
 \newpage
 
-\forceindent{Panel użytkownika (rysunek 3.19) umożliwia edycję nazwy użytkownika oraz adresu email. Proces edycji rozpoczyna się od kliknięcia w przycisk „Edytuj” (eng. \textit{Edit}), co przekierowuje do odpowiedniego panelu edycyjnego. Funkcja „Ustawienia dostępu” (eng. \textit{Access settings}) pozwala na przeniesienie do sekcji ustawień, gdzie użytkownik może konfigurować uprawnienia aplikacji. Za pomocą suwaka trybu ciemnego (eng. \textit{dark mode}) istnieje możliwość zmiany wyglądu aplikacji z jasnego na ciemny i odwrotnie. Opcja „Wyloguj się” (eng. \textit{Sign out}) umożliwia bezpieczne wylogowanie się z konta.}
+\forceindent{Panel użytkownika (rysunek 3.18) umożliwia edycję nazwy użytkownika oraz adresu email. Proces edycji rozpoczyna się od kliknięcia w przycisk „Edytuj” (eng. \textit{Edit}), co przekierowuje do odpowiedniego panelu edycyjnego. Funkcja „Ustawienia dostępu” (eng. \textit{Access settings}) pozwala na przeniesienie do sekcji ustawień, gdzie użytkownik może konfigurować uprawnienia aplikacji. Za pomocą suwaka trybu ciemnego (eng. \textit{dark mode}) istnieje możliwość zmiany wyglądu aplikacji z jasnego na ciemny i odwrotnie. Opcja „Wyloguj się” (eng. \textit{Sign out}) umożliwia bezpieczne wylogowanie się z konta.}
 
 \begin{figure}[H]
     \textbf{\caption{Panel użytkownika}}
@@ -1099,7 +1073,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Panele edycji nazwy użytkownika i adresu email widoczne są odpowiednio na rysunkach 3.20 oraz 3.21. Celem edycji nazwy użytkownika, należy wpisać nową nazwę, a następnie zatwierdzić zmianę, klikając przycisk „Zapisz” (eng. \textit{Save}). Proces zmiany adresu email przebiega w identyczny sposób: użytkownik wpisuje nowy adres email i zatwierdza zmianę za pomocą tego samego przycisku „Zapisz” (eng. \textit{Save}).}
+\forceindent{Panele edycji nazwy użytkownika i adresu email widoczne są odpowiednio na rysunkach 3.19 oraz 3.20. Celem edycji nazwy użytkownika, należy wpisać nową nazwę, a następnie zatwierdzić zmianę, klikając przycisk „Zapisz” (eng. \textit{Save}). Proces zmiany adresu email przebiega w identyczny sposób: użytkownik wpisuje nowy adres email i zatwierdza zmianę za pomocą tego samego przycisku „Zapisz” (eng. \textit{Save}).}
 
 \begin{figure}[H]
     \textbf{\caption{Widok aktualizowania adresu email}}
@@ -1300,7 +1274,8 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
 \begin{enumerate}
     \item Kod źródłowy aplikacji serwerowej;
     \item Kod źródłowy aplikacji mobilnej;
-    \item Dokumentacja ścieżek żądań aplikacji serwerowej;
+    \item Dokumentacja ścieżek żądań aplikacji serwerowej w postaci archiwum zip;
+    \item Prezentacja audio-wizualna aplikacji mobilnej w formacie mp4.
 \end{enumerate}
 
 \subsection{Bibliografia}
