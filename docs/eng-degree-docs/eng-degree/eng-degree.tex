@@ -298,36 +298,6 @@ W środowisku node.js na przestrzeni lat powstały między innymi następujące 
 Pozwalają one na deklaratywne tworzenie kwerend za pomocą operacji takich jak: select, insert, join, delete, update, with, where, not, etc.
 Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne wsparcie intellisense w danym języku programowania oraz rozwiązują popularne problemy związane z cyberbezpieczeństwem przeprowadzania operacji na bazie danych, czego najpopularniejszym przykładem są operacje wstrzykiwania SQL`a (eng. \textit{SQL Injection})\footnote{Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}}.
 
-\subsection{Testowanie aplikacji}
-\forceindent \textbf{Jest} -- popularny i pełen wbudowanych funkcjonalności framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://jestjs.io/docs/api}}:
-\begin{enumerate}[label=--]
-    \item łatwa konfiguracja -- w pliku `package.json`, `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
-    \item obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem biblioteki supertest i testów migawkowych;
-    \item mocking -- z wysokim stopniem dostosowania, w tym mockowanie wartości zwracanych (zarówno w funkcjach synchronicznych, jak i asynchronicznych). Są one przechowywane i mogą być walidowane;
-    \item pokrycie kodu -- wbudowane narzędzie do raportowania pokrycia kodu źródłowego;
-    \item testowanie równoległe -- zwiększenie szybkości testowania, zwłaszcza gdy testy są w pełni niezależne i nie mutują wspólnego zestawu danych;
-    \item tryb watch -- uruchamianie testów w tle wraz ze zmianami w kodzie źródłowym i/lub samych testach;
-    \item test matchers -- wbudowany zestaw matcherów, które pozwalają na szybkie i wygodne sprawdzanie wyników funkcji i/lub komponentów. Obejmują one między innymi: `toEqual`, `toHaveLength`, `toContain`, `toBeTruthy`, `toBeDefined`;
-    \item konfiguracja globalna -- możliwość zadeklarowania zestawu akcji lub manipulacji przed wszystkimi testami (lub określonym ich podzbiorem). Pozwala to programiście na zbudowanie konkretnego, czasochłonnego modułu lub funkcjonalności raz i operowanie na nim we wszystkich testach. Haki zadeklarowane w konfiguracji globalnej zostaną zastosowane do wszystkich zestawów testów;
-    \item obsługa globalnego usuwania środowiska;
-    \item haki cyklu życia testów -- są to `beforeEach()`, `beforeAll()`, `afterEach()` i `afterAll()`, które pozwalają na wykonywanie akcji w określonych punktach uruchomionych testów. Pozwala to programistom zadeklarować takie akcje raz i zastosować je do wszystkich przypadków;
-    \item wsparcie dla środowisk testowych Node.js i przeglądarki;
-    \item jednoczesne uruchamianie testów w danej przestrzeni (funkcja eksperymentalna).
-\end{enumerate}
-
-\textbf{Mocha z Chai} -- framework testowy Mocha\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://mochajs.org/}} z biblioteką do asercji Chai \footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://www.chaijs.com/api/}}:
-\begin{enumerate}[label=--]
-    \item wyczerpujące i czytelne dla człowieka asercje;
-    \item używane głównie w BDD (Behavior-Driven Development);
-    \item obsługa haków cyklu życia `before`, `after`, `beforeEach` i `afterEach`;
-    \item testowanie równoległe ma swoje dobrze zdefiniowane ograniczenia, takie jak użycie `it.only` lub `describe.only`, które są niedostępne. Testowanie równoległe jest dostępne tylko w środowisku Node.js. Haki zadeklarowane na poziomie root nie są globalne w przypadku testowania równoległego;
-    \item dostępny cały zestaw reporterów, zarówno wbudowanych, takich jak `json-stream`, `markdown`, `progress`, `xunit`, `html reporter`, jak i opcji innych firm. Nie działają one dobrze z testami równoległymi, ponieważ oczekują, że Mocha będzie wiedzieć, ile testów planuje się uruchomić przed ich wykonaniem;
-    \item obsługa globalnej konfiguracji za pomocą `mochaGlobalSetup`;
-    \item obsługa globalnego usuwania środowiska za pomocą `mochaGlobalTeardown`;
-    \item obsługa zarówno modułów ES, jak i CommonJS, z zastrzeżeniem, że moduły ES nie są obsługiwane przez tryb watch. To samo dotyczy niestandardowych raporterów i niestandardowego interfejsu;
-    \item konfiguracja może być tylko plikiem CommonJS `.mocharc.js` lub `.mocharc.cjs`.
-\end{enumerate}
-
 \subsection{Typy baz danych}
 
 \forceindent \textbf{Bazy nierelacyjne (NoSQL)}\\
@@ -686,7 +656,7 @@ Funkcja kosztu została zdefiniowana, oceniając różnicę między prognozami m
 Wartość tej funkcji jest minimalizowana w trakcie procesu optymalizacji.
 
 %4. Wybór Algorytmu Optymalizacyjnego:
-Algorytm optymalizacyjny, tak jak SGD (Stochastic Gradient Descent), został wybrany do minimalizacji funkcji kosztu.
+Algorytm optymalizacyjny, tak jak SGD (\textit{eng. Stochastic Gradient Descent}), został wybrany do minimalizacji funkcji kosztu.
 Dobór współczynnika uczenia był przedmiotem optymalizacji, aby zapewnić szybkie, ale stabilne dostosowanie wag modelu.
 
 %5. Przeprowadzenie Iteracji:
@@ -735,7 +705,7 @@ Plusy oraz minusy takiej decyzji są następujące:
 \end{enumerate}
 
 \paragraph{Aplikacja mobilna\\}
-\forceindent \textbf{Decyzja\\}m
+\forceindent \textbf{Decyzja\\}
 \indent Zdecydowano się na wykorzystanie natywnego dla systemów iOS języka Swift ze względu na wbudowane wsparcie Machine Learning oraz możliwość użycia Neural Engine na urządzeniach mobilnych.
 
 \textbf{Konsekwencje\\}
