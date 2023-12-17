@@ -137,7 +137,7 @@
 
 % Example table and figure formatting
 \section{Wprowadzenie}
-\forceindent W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń -- rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \footnote{s. 149; Główny Urząd Statystyczny - Ochrona środowiska 2022, Warszawa, 2022r.}
+\forceindent W dzisiejszym świecie, kiedy problem zanieczyszczenia środowiska staje się coraz bardziej palący, zarządzanie odpadami staje się kluczowym aspektem naszego życia. Statystyki nie pozostawiają złudzeń -- rosnąca produkcja odpadów na skalę globalną stawia przed nami istotne wyzwania. Na całym świecie rocznie wytwarza się ogromne ilości odpadów, z których część jest nadal nieefektywnie zagospodarowana, co prowadzi do negatywnego wpływu na środowisko naturalne. W samej Polsce, roczna produkcja odpadów na rok 2021 wyniosła 121 milionów ton, z czego 11.3\% stanowiły odpady komunalne. \footnote{S. 149; Główny Urząd Statystyczny -- Ochrona środowiska 2022, Warszawa, 2022r.}
 
 Jednym z kluczowych aspektów tego wyzwania jest efektywne segregowanie i recykling odpadów, co przyczynia się nie tylko do ochrony środowiska naturalnego, ale także do potencjalnych oszczędności. Jak podaje EEA (Europejska Agencja Ochrony Środowiska), na obywatela Unii Europejskiej przypada średnio 4,8 ton odpadów komunalnych, z czego 49\% jest recyklingowanych \footnote{Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling}}. Recykling może przynieść znaczące korzyści gospodarcze i środowiskowe, w tym zmniejszenie emisji gazów cieplarnianych, ograniczenie zużycia surowców naturalnych oraz tworzenie miejsc pracy. W samej Polsce, między latami 2004 i 2020, procent recyklingu odpadów komunalnych wzrósł z poziomu 4,9 do 38.7\%.
 
@@ -281,7 +281,7 @@ W kontekście baz danych, mapowanie obiektowo-relacyjne można uznać za najwyż
 W środowisku node.js pojawiło się takowych wiele, między innymi:
 \begin{enumerate}[label=--]
     \item TypeORM -- wykorzystujący eksperymentalne dekoratory w języku Typescript celem deklarowania schematu encji w bazie danych. Zdecydowana większość operacji jest w nim dostępna za ich pomocą.
-    \item Sequelize - najstarszy na tej liście, pierwsze wzmianki na witrynie StackOverflow sięgają roku 2011. Jest on dojrzałym, pełnym funkcjonalności maperem, którego popularność odzwierciedlona jest w 1,5 miliona tygodniowych pobrań\footnote{Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}}.
+    \item Sequelize -- najstarszy na tej liście, pierwsze wzmianki na witrynie StackOverflow sięgają roku 2011. Jest on dojrzałym, pełnym funkcjonalności maperem, którego popularność odzwierciedlona jest w 1,5 miliona tygodniowych pobrań\footnote{Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}}.
     \item Prisma -- kontrowersyjny maper, którego operacje łączenia (eng. \textit{join}) wykonywane są w sposób wirtualny, to znaczy poprzez wysłanie kilku kwerend do bazy danych i połączeniu ich wedle instrukcji użytkownika w ,,Prisma Engine``, który napisany został przy pomocy języka Rust, co zapewnia relatywne bezpieczeństwo oraz wysoką wydajność takiego rozwiązania\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.)\url{https://www.prisma.io/}}.
     \item Drizzle -- maper obiecujący pełne typowanie, syntax podobny do tego znanego z SQLa oraz automatyczną generację schematów za pomocą biblioteki Zod.
     \item Mikro-ORM -- oparty na domniemanych transakcjach, automatycznym grupowaniu kwerend za pomocą wzorca jednostki pracy (eng. \textit{Unit of Work}). Wzorowany jest na Hibernate, znanym z języka Java oraz Doctrine z PHP.\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}}
@@ -318,7 +318,7 @@ Rodzaje nierelacyjnych struktur baz danych to:
     Klucz może być podobny do tego, jaki znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika.
     Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji.
     Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz.
-    Przykładami takich baz danych są Redis, Memcached, KeyDB, czy DragonflyDB\footnote{S. 5 - 19; Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.}.
+    Przykładami takich baz danych są Redis, Memcached, KeyDB, czy DragonflyDB\footnote{S. 5 -- 19; Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.}.
     \item Document store -- jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów.
     Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON.
     Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji.
@@ -330,16 +330,16 @@ Rodzaje nierelacyjnych struktur baz danych to:
     Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn.
     Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data.
     Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych.
-    Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym\footnote{S. 118-122; K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.}.
+    Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym\footnote{S. 118 -- 122; K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.}.
     \item Graph store -- zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości.
     Węzłem może być dowolny obiekt, miejsce lub osoba.
     Krawędź definiuje relację między węzłami.
     Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu.
-    Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source\footnote{S. 1548-1552; I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia}.
+    Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source\footnote{S. 1548 -- 1552; I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia}.
 \end{enumerate}
 
 \textbf{Teoria CAP} \\
-\forceindent Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź, nawet jeżeli ma przekazać przestarzałe dane. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund -- być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.\footnote{S. 10-18; Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.}
+\forceindent Tak zwana ,,teoria CAP`` oznacza spójność, dostępność lub tolerancję partycji. Relacyjne bazy danych zapewniają, że informacje są zawsze zsynchronizowane i spójne. Nie jest tak w przypadku baz danych takich jak Redis, ponieważ wolą one zawsze zapewniać odpowiedź, nawet jeżeli ma przekazać przestarzałe dane. Oznacza to, że informacje otrzymane z zapytania mogą być nieprawidłowe o kilka sekund -- być może nawet do pół minuty. Większość baz danych NoSQL pozostaje zgodna z ,,twierdzeniem CAP``, a nawet jest zgodna z ACID.\footnote{S. 10 -- 18; Eric A. Brewer, Towards Robust Distributed Systems, PODC, 16.07.2000 r.}
 
 \textbf{SQL\\}
 \forceindent SQL jest ustandaryzowanym językiem programowania służącym do interakcji z systemami zarządzania relacyjnymi bazami danych. Stworzony został przez Dona Chamberlina i Raya Boyce'a w IBM \footnote{S. 79; Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r}.
@@ -369,12 +369,12 @@ Transakcje mają specyficzne właściwości, które są reprezentowane przez akr
 \subsubsection{Komunikacyja między mikroserwisami}
 
 \forceindent \textbf{gRPC\\}
-\forceindent gRPC (eng. \textit{Google Remote Procedure Call}) jest frameworkiem służącym do wydajnej komunikacji pomiędzy aplikacjami za pomocą protokołu HTTP/2. Oparty na technologii protobuforów (eng. \textit{Protocol Buffers}), która to pozwala na komunikację pomiędzy serwisami za pomocą przesyłu binarnych danych w uporządkowanym strumieniu bajtów.\footnote{S. 2-4; Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico}
+\forceindent gRPC (eng. \textit{Google Remote Procedure Call}) jest frameworkiem służącym do wydajnej komunikacji pomiędzy aplikacjami za pomocą protokołu HTTP/2. Oparty na technologii protobuforów (eng. \textit{Protocol Buffers}), która to pozwala na komunikację pomiędzy serwisami za pomocą przesyłu binarnych danych w uporządkowanym strumieniu bajtów.\footnote{S. 2-4; Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry -- Paris-Saclay University, Jan 2020, Cancún, Mexico}
 
 \subsubsection{Aplikacja mobilna}
 
 \forceindent \textbf{Javascript -- Ionic 6\\}
-\indent Ionic 6 to framework typu open-source do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty UI oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji. \footnote{S. 3181 - 3182; Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018}
+\indent Ionic 6 to framework typu open-source do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty UI oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji. \footnote{S. 3181 -- 3182; Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018}
 Zalety:
 \begin{enumerate}[label=--]
     \item łatwość i szybkość tworzenia aplikacji dzięki wykorzystaniu języków programowania webowego, takich jak HTML, CSS i JavaScript;
@@ -394,7 +394,7 @@ Wady:
 \textbf{Javascript -- React Native\\}
 \indent React Native to oparty na JavaScript framework do tworzenia aplikacji mobilnych, który umożliwia programistom tworzenie natywnych aplikacji mobilnych na platformy iOS i Android przy użyciu jednej bazy kodu.
 Opiera się on na bibliotece ReactJS i wykorzystuje kombinację JavaScript i natywnego kodu do tworzenia wysokowydajnych aplikacji mobilnych.
-React Native pozwala programistom na ponowne wykorzystanie kodu na różnych platformach, co pomaga zaoszczędzić czas i zasoby. \footnote{S. 10 - 11; William Danielsson, React Native application development – A comparison between native Android and React Native, Szwecja, Linköpings universitet, 2016}
+React Native pozwala programistom na ponowne wykorzystanie kodu na różnych platformach, co pomaga zaoszczędzić czas i zasoby. \footnote{S. 10 -- 11; William Danielsson, React Native application development –- A comparison between native Android and React Native, Szwecja, Linköpings universitet, 2016}
 
 Zalety:
 \begin{enumerate}[label=--]
@@ -446,7 +446,7 @@ Zalety:
 
 Wady:
 \begin{enumerate}[label=--]
-    \item dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy; \footnote{S. 26 - 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
+    \item dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy; \footnote{S. 26 -- 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
     \item ograniczona przenośność: Aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy;
     \item stroma krzywa uczenia się: Nauka natywnych języków i narzędzi programistycznych może być trudnym i czasochłonnym procesem, szczególnie dla programistów, którzy są nowicjuszami w tworzeniu aplikacji mobilnych.
 \end{enumerate}
@@ -457,7 +457,7 @@ Wady:
 \forceindent \textbf{Architektura Modelu\\}
 \indent Model opiera się na architekturze wykorzystującej głębokie sieci neuronowe.
 Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CNN), które są skuteczne w zadaniach przetwarzania obrazów. \footnote{
-    S. 3 - 4; Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
+    S. 3 -- 4; Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
 }
 
 Ważnymi metrykami dla tej architektury uczenia maszynowego są:
@@ -484,7 +484,7 @@ Model został wytrenowany na zbiorze treningowym składającym się z 5000 obraz
 Proces nauczania obejmował 1000 iteracji.
 Użyto algorytmu optymalizacyjnego SGD (eng. \textit{Stochastic Gradient Descent}), w celu minimalizacji funkcji kosztu.
 W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby uniknąć przetrenowania modelu. \footnote{
-    S. 1 - 2; Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering University of Utah, 14.06.2016
+    S. 1 -- 2; Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering University of Utah, 14.06.2016
 }
 
 %4. Ewaluacja Modelu:
@@ -507,12 +507,12 @@ To pozwala na lepszą zbieżność w procesie uczenia i minimalizuje wpływ wart
 %2. Przycinanie i Zmiana Rozmiaru:
 Obrazy zostały poddane przycinaniu i zmianie rozmiaru, aby dostosować je do jednolitego formatu wejściowego modelu.
 To kroki mające na celu unifikację danych wejściowych, co ułatwia proces uczenia. \footnote{
-    S. 1 - 2; F. Agostini, S. Campese, R. Vianello, M. Pizzi, A. Cipriani, M. Zanetti, A post processing pipeline to prepare raw data for machine learning algorithms in cardiac magnetic resonance imaging, University of Padua, Włochy, 2022
+    S. 1 -- 2; F. Agostini, S. Campese, R. Vianello, M. Pizzi, A. Cipriani, M. Zanetti, A post processing pipeline to prepare raw data for machine learning algorithms in cardiac magnetic resonance imaging, University of Padua, Włochy, 2022
 }
 
 %3. Usuwanie Zniekształceń:
 Aby zapobiec wprowadzeniu zniekształceń, które nie mają istotnego znaczenia dla rozpoznawania obrazów, zastosowano techniki usuwania szumów i filtry wygładzające.
-Działa to zarówno na korzyść procesu uczenia, jak i na efektywność modelu. \footnote{S. 7 - 8; Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using
+Działa to zarówno na korzyść procesu uczenia, jak i na efektywność modelu. \footnote{S. 7 -- 8; Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using
 Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022}
 
 %4. Konwersja Do Formatu Wejściowego Modelu:
@@ -524,7 +524,7 @@ Ważnym krokiem było przypisanie etykiet do obrazów, co umożliwiło modelowi 
 Etykiety były integralną częścią zbioru danych treningowych.
 
 %6. Augmentacja Danych:
-W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności generalizacji modelu, zastosowano techniki augmentacji danych, takie jak obracanie, odbijanie lustrzane czy zmiana jasności. \footnote{ S. 1 - 2, S. 4 - 5; Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022 }
+W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności generalizacji modelu, zastosowano techniki augmentacji danych, takie jak obracanie, odbijanie lustrzane czy zmiana jasności. \footnote{ S. 1 -- 2, S. 4 -- 5; Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022 }
 
 \paragraph{Dobór kluczowych cech szczególnych\\}
 %1. Wykorzystanie Ekstraktora Cech "Image Feature Print V2":
@@ -534,12 +534,12 @@ Ten ekstraktor pozwala na automatyczne wydobycie istotnych cech z obrazów, co j
 
 %2. Analiza Hierarchii Cech:
 Przed rozpoczęciem procesu uczenia modelu, przeprowadzono analizę hierarchii cech w ramach ekstraktora.
-Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zaczynając od prostych, takich jak krawędzie, a kończąc na bardziej abstrakcyjnych, reprezentujących bardziej złożone struktury. \footnote{ S. 2 - 3; Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Varad Deshmukh, Srinivas Baskar, Elizabeth Bradley, Thomas Berger, James D. Meiss, Department of Computer Science University of Colorado, Stany Zjednoczone, 18.02.2022}
+Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zaczynając od prostych, takich jak krawędzie, a kończąc na bardziej abstrakcyjnych, reprezentujących bardziej złożone struktury. \footnote{ S. 2 -- 3; Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Varad Deshmukh, Srinivas Baskar, Elizabeth Bradley, Thomas Berger, James D. Meiss, Department of Computer Science University of Colorado, Stany Zjednoczone, 18.02.2022}
 
 %3. Selekcja Istotnych Regionów:
 Dobór kluczowych cech obejmował także selekcję istotnych regionów na obrazach.
 Zidentyfikowano obszary, które są szczególnie ważne dla rozpoznawania określonych klas obiektów.
-To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu. \footnote{ S. 2 - 3; A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, Samara National Research University, Rosja, 2018}
+To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu. \footnote{ S. 2 -- 3; A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, Samara National Research University, Rosja, 2018}
 
 %4. Redukcja Wymiarowości:
 W celu efektywnego przetwarzania danych, zastosowano techniki redukcji wymiarowości, takie jak PCA (Principal Component Analysis).
@@ -547,11 +547,11 @@ Pozwoliło to na zachowanie istotnych informacji przy jednoczesnej redukcji licz
 
 %5. Ocena Wpływu Cech na Model:
 Przeprowadzono analizę wpływu poszczególnych cech na skuteczność modelu.
-Cechy, które nie przynosiły znaczącego wkładu w proces rozpoznawania, były poddawane selekcji lub odrzucane, co pozwalało na zoptymalizowanie zestawu cech. \footnote{ S. 15 - 16; Impact Evaluation of Significant Feature Set in Cross Project for Defect Prediction through Hybrid Feature Selection in Multiclass, Sana Gul, Rizwan Bin Faiz, Mohammad Aljaidi, Ghassan Samara, Ayoub Alsarhan, Ahmad al-Qerem, Faculty of Computing Riphah International University Islamabad Pakistan, 20.07.2023}
+Cechy, które nie przynosiły znaczącego wkładu w proces rozpoznawania, były poddawane selekcji lub odrzucane, co pozwalało na zoptymalizowanie zestawu cech. \footnote{ S. 15 -- 16; Impact Evaluation of Significant Feature Set in Cross Project for Defect Prediction through Hybrid Feature Selection in Multiclass, Sana Gul, Rizwan Bin Faiz, Mohammad Aljaidi, Ghassan Samara, Ayoub Alsarhan, Ahmad al-Qerem, Faculty of Computing Riphah International University Islamabad Pakistan, 20.07.2023}
 
 %6. Adaptacja do Specyfiki Problemu:
 Dobór cech był dostosowany do specyfiki problemu rozpoznawania obrazów.
-Na przykład, w przypadku konkretnego zadania, kluczowe mogą być kształty, tekstury lub charakterystyczne punkty na obiektach. \footnote{ S. 1 - 2; A Practical Approach to Real-Time Neutral Feature Subtraction for Facial Expression Recognition, Nick Haber, Catalin Voss, Azar Fazel, Terry Winograd, Dennis P. Wall, Stanford University, 2016}
+Na przykład, w przypadku konkretnego zadania, kluczowe mogą być kształty, tekstury lub charakterystyczne punkty na obiektach. \footnote{ S. 1 -- 2; A Practical Approach to Real-Time Neutral Feature Subtraction for Facial Expression Recognition, Nick Haber, Catalin Voss, Azar Fazel, Terry Winograd, Dennis P. Wall, Stanford University, 2016}
 
 %7. Ocena Stabilności Cech:
 Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilności. Stabilne cechy mają tendencję do lepszego generalizowania się na nowe dane, co wpływa na zdolność modelu do skutecznego rozpoznawania obrazów spoza zbioru treningowego. \footnote{ S. 2; Burn Image Recognition of Medical Images Based on Deep Learning: From CNNs to Advanced Networks, Xianjun Wu, Heming Chen, Xiaoli Wu, Shunjun Wu, Jinbo Huang, Guangdong University of Petrochemical Technology, Guangdong, Chiny, 19.02.2021}
@@ -559,17 +559,17 @@ Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilnośc
 \paragraph{Dobór algorytmów uczenia maszynowego\\}
 %1. Analiza Zadania i Danych:
 \forceindent Przed dokonaniem wyboru algorytmów, dokonano analizy samego zadania rozpoznawania obrazów oraz charakterystyki zbioru danych.
-Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności. \footnote{ S. 1 - 2; A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, IEEE Transactions on Medical Imaging, 02.02.2010}
+Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności. \footnote{ S. 1 -- 2; A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, IEEE Transactions on Medical Imaging, 02.02.2010}
 
 %2. Wybór Algorytmów Konwolucyjnych:
 Ze względu na specyfikę zadania rozpoznawania obrazów, zdecydowano się na wykorzystanie algorytmów konwolucyjnych (\textit{convolutional neural network}).
-Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych. \footnote{Abstrakt; Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, Karthik B., Ramkumar G., ECS - The Electrochemical Society, 2022}
+Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych. \footnote{Abstrakt; Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, Karthik B., Ramkumar G., ECS -- The Electrochemical Society, 2022}
 
 W przypadku modelów rozpoznawania obrazów, kluczowymi są następujące wartości będące wynikiem procesu uczenia:
 \begin{itemize}
     \item wagi -- każdy neuron w sieci ma powiązaną wagę z każdym połączeniem z poprzednią warstwą. Wagi te działają jak filtry, pomagając modelowi w identyfikacji różnych cech obrazu, takich jak krawędzie, tekstury lub określone kształty. Na przykład w początkowych warstwach wagi mogą pomóc w wykrywaniu prostych krawędzi, podczas gdy w głębszych warstwach mogą pomóc w rozpoznawaniu bardziej złożonych cech, takich jak części obiektów lub nawet całe obiekty\footnote{S. 2; Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Ceredigion, Anglia, 12.2015};
     \item odchylenia -- pomagają neuronom być aktywowanym lub uruchamianym w obecności konkretnej cechy, nawet jeśli ważona suma wejść jest niska\footnote{S. 7; Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks...};
-    \item propagacja wsteczna -- jest kluczową częścią szkolenia sieci neuronowych. Podczas przejścia do przodu obraz jest przetwarzany przez sieć warstwa po warstwie, od wejścia do wyjścia, co skutkuje przewidywaną klasyfikacją. Dane wyjściowe są następnie porównywane z rzeczywistą etykietą obrazu i obliczany jest błąd (strata). Propagacja wsteczna to proces przekazywania tego błędu z powrotem przez sieć, z warstwy wyjściowej do warstwy wejściowej, w celu dostosowania wag i uprzedzeń. Regulacja ta odbywa się w sposób minimalizujący błąd, dzięki czemu sieć lepiej klasyfikuje obrazy. Algorytm oblicza gradient funkcji straty w odniesieniu do wag i uprzedzeń i wykorzystuje techniki optymalizacji, takie jak zejście gradientowe, do aktualizacji tych parametrów. \footnote{S. 541-543; Y. LeCun [i inni], Backpropagation Applied to Handwritten Zip Code Recognition, AT\&T 3ell Laboratories, Holmdei, NJ 07733 Stany Zjednoczone Ameryki, 12.1989}
+    \item propagacja wsteczna -- jest kluczową częścią szkolenia sieci neuronowych. Podczas przejścia do przodu obraz jest przetwarzany przez sieć warstwa po warstwie, od wejścia do wyjścia, co skutkuje przewidywaną klasyfikacją. Dane wyjściowe są następnie porównywane z rzeczywistą etykietą obrazu i obliczany jest błąd (strata). Propagacja wsteczna to proces przekazywania tego błędu z powrotem przez sieć, z warstwy wyjściowej do warstwy wejściowej, w celu dostosowania wag i uprzedzeń. Regulacja ta odbywa się w sposób minimalizujący błąd, dzięki czemu sieć lepiej klasyfikuje obrazy. Algorytm oblicza gradient funkcji straty w odniesieniu do wag i uprzedzeń i wykorzystuje techniki optymalizacji, takie jak zejście gradientowe, do aktualizacji tych parametrów. \footnote{S. 541 -- 543; Y. LeCun [i inni], Backpropagation Applied to Handwritten Zip Code Recognition, AT\&T 3ell Laboratories, Holmdei, NJ 07733 Stany Zjednoczone Ameryki, 12.1989}
 \end{itemize}
 
 %3. Wykorzystanie CoreML i Create ML:
@@ -590,7 +590,7 @@ Oceniano ich zdolność do radzenia sobie z danymi treningowymi i walidacyjnymi 
 
 %7. Rozważanie Wersji Ensemble:
 Rozważono również użycie technik Ensemble, takich jak połączenie wielu modeli w celu poprawy ogólnej skuteczności.
-Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów. \footnote{ S. 2 - 3; Classifying chest CT images as COVID‑19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, Yao‑Mei Chen,Yenming J. Chen, Wen‑Hsien Ho, Jinn‑Tsong Tsai, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019}
+Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów. \footnote{ S. 2 -- 3; Classifying chest CT images as COVID‑19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, Yao‑Mei Chen,Yenming J. Chen, Wen‑Hsien Ho, Jinn‑Tsong Tsai, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019}
 
 %8. Analiza Wydajności na Platformie Apple:
 Ponieważ model miał być implementowany na platformie Apple, uwzględniono specyfiki tego środowiska.
@@ -601,7 +601,7 @@ mobilnych.
 
 \forceindent Na etapie planowania pracy projektowej kluczowym jest dobranie odpowiednich narzędzi
 do poszczególnych elementów aplikacji. Z tego względu zespół zdecydował się na stworzenie
-dokumentacji decyzji architektonicznych, w których opisano decyzję, plusy oraz minusy wybranych rozwiązań. \footnote{s. 48; Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.}
+dokumentacji decyzji architektonicznych, w których opisano decyzję, plusy oraz minusy wybranych rozwiązań. \footnote{S. 48; Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.}
 
 \subsubsection{Aplikacja serwerowa}
 
@@ -640,7 +640,7 @@ W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL
 
 \paragraph{Dobór frameworka do testowania automatycznego\\}
 \forceindent Testowanie aplikacji jest kluczową decyzją dla zespołu programistów.
-Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności)\footnote{S. 1-4; Jiantao Pan, Software Testing, Carnegie Mellon University, Stany Zjednoczone Ameryki, Wiosna 1999}.
+Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności)\footnote{S. 1 -- 4; Jiantao Pan, Software Testing, Carnegie Mellon University, Stany Zjednoczone Ameryki, Wiosna 1999}.
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
 \paragraph{Aplikacja mobilna\\}
@@ -723,7 +723,7 @@ Plusy oraz minusy takiej decyzji są następujące:
     \item ustalone normy i dużą społeczność ekspertów, od których można się uczyć;
     \item możliwość łatwego przesyłania plików, co będzie kluczowe w kontekście tej aplikacji;
     \item różnorodność dostępnych formatów wyjściowych; \footnote{Dane za stroną internetową \url{https://www.rfc-editor.org/rfc/rfc9110#field.content-type} (dostęp: 12.11.2023 r.)}
-    \item możliwość kontrolowania szczegółowych uprawnień w ramach autoryzacji; \footnote{S. 1719-1722; Bojan Suzic, Bernd Prünster, Dominik Ziegler, On the structure and authorization management of RESTful web services, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.}
+    \item możliwość kontrolowania szczegółowych uprawnień w ramach autoryzacji; \footnote{S. 1719 -- 1722; Bojan Suzic, Bernd Prünster, Dominik Ziegler, On the structure and authorization management of RESTful web services, Graz Univeristy of Technology, Institue for Applied Information Processing and Communicationts, Graz, Austria, 2018r.}
     \item ekspresywne kody statusu odpowiedzi. \footnote{Dane za stroną internetową \url{https://www.rfc-editor.org/rfc/rfc9110#name-status-codes}}
 \end{enumerate}
 
@@ -1275,7 +1275,7 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Kod źródłowy aplikacji serwerowej;
     \item Kod źródłowy aplikacji mobilnej;
     \item Dokumentacja ścieżek żądań aplikacji serwerowej w postaci archiwum zip;
-    \item Prezentacja audio-wizualna aplikacji mobilnej w formacie mp4.
+    \item Prezentacja audio-wizualna aplikacji mobilnej w formacie mp4 -- link: \url{https://drive.google.com/file/d/1TcejX7UCXHLbCm9ELwwNFnNJALqdSroy/view}
 \end{enumerate}
 
 \subsection{Bibliografia}
