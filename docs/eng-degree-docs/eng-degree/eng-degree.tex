@@ -24,6 +24,8 @@
 \usepackage{tabularray}
 \usepackage{float}
 \usepackage{listings}
+\usepackage{calc}
+\usepackage{rotating}
 
 \import{../}{commands.tex}
 
@@ -33,6 +35,14 @@
     \fancyhead[C]{\uniimage}
     \fancyfoot[LE,RO]{\thepage}
 }
+
+\newlength\imgth
+\setlength\imgth{\textwidth}
+\addtolength\imgth{-0.3\textwidth}
+
+\newlength\fittingimage
+\setlength\fittingimage{\textheight}
+\addtolength\fittingimage{-0.15\textheight}
 
 % Wymogi edycyjne: https://moodle2.e-wsb.pl/pluginfile.php/7505508/mod_resource/content/2/Wymogi%20edycyjne_praca%20dyplomowa.pdf
 
@@ -293,36 +303,6 @@ W środowisku node.js na przestrzeni lat powstały między innymi następujące 
 Pozwalają one na deklaratywne tworzenie kwerend za pomocą operacji takich jak: select, insert, join, delete, update, with, where, not, etc.
 Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne wsparcie intellisense w danym języku programowania oraz rozwiązują popularne problemy związane z cyberbezpieczeństwem przeprowadzania operacji na bazie danych, czego najpopularniejszym przykładem są operacje wstrzykiwania SQL`a (eng. \textit{SQL Injection})\footnote{Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}}.
 
-\subsection{Testowanie aplikacji}
-\forceindent \textbf{Jest} -- popularny i pełen wbudowanych funkcjonalności framework testowy JavaScript używany głównie do testów jednostkowych stworzony przez firmę Facebook (obecnie Meta). Główne możliwości Jesta są następujące\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://jestjs.io/docs/api}}:
-\begin{enumerate}[label=--]
-    \item łatwa konfiguracja -- w pliku `package.json`, `.jest` lub `jest.js`. Dodatkowo, konfiguracje mogą być dostosowane do konkretnych scenariuszy i stosowane dynamicznie przez program uruchamiający testy;
-    \item obsługa różnych typów testów, takich jak testy jednostkowe, integracyjne, e2e z dodatkiem biblioteki supertest i testów migawkowych;
-    \item mocking -- z wysokim stopniem dostosowania, w tym mockowanie wartości zwracanych (zarówno w funkcjach synchronicznych, jak i asynchronicznych). Są one przechowywane i mogą być walidowane;
-    \item pokrycie kodu -- wbudowane narzędzie do raportowania pokrycia kodu źródłowego;
-    \item testowanie równoległe -- zwiększenie szybkości testowania, zwłaszcza gdy testy są w pełni niezależne i nie mutują wspólnego zestawu danych;
-    \item tryb watch -- uruchamianie testów w tle wraz ze zmianami w kodzie źródłowym i/lub samych testach;
-    \item test matchers -- wbudowany zestaw matcherów, które pozwalają na szybkie i wygodne sprawdzanie wyników funkcji i/lub komponentów. Obejmują one między innymi: `toEqual`, `toHaveLength`, `toContain`, `toBeTruthy`, `toBeDefined`;
-    \item konfiguracja globalna -- możliwość zadeklarowania zestawu akcji lub manipulacji przed wszystkimi testami (lub określonym ich podzbiorem). Pozwala to programiście na zbudowanie konkretnego, czasochłonnego modułu lub funkcjonalności raz i operowanie na nim we wszystkich testach. Haki zadeklarowane w konfiguracji globalnej zostaną zastosowane do wszystkich zestawów testów;
-    \item obsługa globalnego usuwania środowiska;
-    \item haki cyklu życia testów -- są to `beforeEach()`, `beforeAll()`, `afterEach()` i `afterAll()`, które pozwalają na wykonywanie akcji w określonych punktach uruchomionych testów. Pozwala to programistom zadeklarować takie akcje raz i zastosować je do wszystkich przypadków;
-    \item wsparcie dla środowisk testowych Node.js i przeglądarki;
-    \item jednoczesne uruchamianie testów w danej przestrzeni (funkcja eksperymentalna).
-\end{enumerate}
-
-\textbf{Mocha z Chai} -- framework testowy Mocha\footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://mochajs.org/}} z biblioteką do asercji Chai \footnote{Dane za stroną internetową (dostęp 14.11.2023r.) \url{https://www.chaijs.com/api/}}:
-\begin{enumerate}[label=--]
-    \item wyczerpujące i czytelne dla człowieka asercje;
-    \item używane głównie w BDD (Behavior-Driven Development);
-    \item obsługa haków cyklu życia `before`, `after`, `beforeEach` i `afterEach`;
-    \item testowanie równoległe ma swoje dobrze zdefiniowane ograniczenia, takie jak użycie `it.only` lub `describe.only`, które są niedostępne. Testowanie równoległe jest dostępne tylko w środowisku Node.js. Haki zadeklarowane na poziomie root nie są globalne w przypadku testowania równoległego;
-    \item dostępny cały zestaw reporterów, zarówno wbudowanych, takich jak `json-stream`, `markdown`, `progress`, `xunit`, `html reporter`, jak i opcji innych firm. Nie działają one dobrze z testami równoległymi, ponieważ oczekują, że Mocha będzie wiedzieć, ile testów planuje się uruchomić przed ich wykonaniem;
-    \item obsługa globalnej konfiguracji za pomocą `mochaGlobalSetup`;
-    \item obsługa globalnego usuwania środowiska za pomocą `mochaGlobalTeardown`;
-    \item obsługa zarówno modułów ES, jak i CommonJS, z zastrzeżeniem, że moduły ES nie są obsługiwane przez tryb watch. To samo dotyczy niestandardowych raporterów i niestandardowego interfejsu;
-    \item konfiguracja może być tylko plikiem CommonJS `.mocharc.js` lub `.mocharc.cjs`.
-\end{enumerate}
-
 \subsection{Typy baz danych}
 
 \forceindent \textbf{Bazy nierelacyjne (NoSQL)}\\
@@ -476,10 +456,16 @@ Wady:
 %1. Architektura Modelu:
 \forceindent \textbf{Architektura Modelu\\}
 \indent Model opiera się na architekturze wykorzystującej głębokie sieci neuronowe.
-Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CNN), które są skuteczne w zadaniach przetwarzania obrazów.
-Wytrenowano warstwy konwolucyjne do ekstrakcji hierarchicznych cech z obrazów, a następnie zastosowano warstwy gęste do klasyfikacji. \footnote{
+Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CNN), które są skuteczne w zadaniach przetwarzania obrazów. \footnote{
     S. 3 - 4; Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
 }
+
+Ważnymi metrykami dla tej architektury uczenia maszynowego są:
+\begin{itemize}[label=--]
+    \item precyzja -- ta metryka mierzy dokładność pozytywnych przewidywań. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do całkowitej liczby przewidywanych pozytywnych obserwacji;
+    \item czułość (\textit{eng. Recall}) -- mierzy zdolność modelu do znajdowania wszystkich istotnych instancji w zbiorze danych. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do wszystkich obserwacji w rzeczywistej klasie;
+    \item miara F1 -- miara F1 jest miarą dokładności modelu, która uwzględnia zarówno precyzję, jak i wycofanie. Jest to średnia harmoniczna precyzji i wycofania, zapewniająca równowagę między tymi dwoma wskaźnikami. Wynik F1 osiąga najlepszą wartość przy 1 (idealna precyzja i wycofanie), a najgorszą przy 0.
+\end{itemize}
 
 %2. Parametry Modelu:
 \textbf{Parametry modelu:}
@@ -504,7 +490,7 @@ W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby un
 %4. Ewaluacja Modelu:
 \textbf{Ewaluacja modelu\\}
 \forceindent Model został oceniony na zbiorze testowym, a osiągnięta dokładność wyniosła 68\%. 
-Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz F1-score, aby dostarczyć kompleksowej oceny skuteczności modelu.
+Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz miary F1, aby dostarczyć kompleksowej oceny skuteczności modelu.
 
 %5. Użyte Technologie:
 \textbf{Użyte technologie\\}
@@ -576,8 +562,15 @@ Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilnośc
 Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności. \footnote{ S. 1 - 2; A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, IEEE Transactions on Medical Imaging, 02.02.2010}
 
 %2. Wybór Algorytmów Konwolucyjnych:
-Ze względu na specyfikę zadania rozpoznawania obrazów, zdecydowano się na wykorzystanie algorytmów konwolucyjnych (CNN).
+Ze względu na specyfikę zadania rozpoznawania obrazów, zdecydowano się na wykorzystanie algorytmów konwolucyjnych (\textit{convolutional neural network}).
 Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych. \footnote{Abstrakt; Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, Karthik B., Ramkumar G., ECS - The Electrochemical Society, 2022}
+
+W przypadku modelów rozpoznawania obrazów, kluczowymi są następujące wartości będące wynikiem procesu uczenia:
+\begin{itemize}
+    \item wagi -- każdy neuron w sieci ma powiązaną wagę z każdym połączeniem z poprzednią warstwą. Wagi te działają jak filtry, pomagając modelowi w identyfikacji różnych cech obrazu, takich jak krawędzie, tekstury lub określone kształty. Na przykład w początkowych warstwach wagi mogą pomóc w wykrywaniu prostych krawędzi, podczas gdy w głębszych warstwach mogą pomóc w rozpoznawaniu bardziej złożonych cech, takich jak części obiektów lub nawet całe obiekty\footnote{S. 2; Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Ceredigion, Anglia, 12.2015};
+    \item odchylenia -- pomagają neuronom być aktywowanym lub uruchamianym w obecności konkretnej cechy, nawet jeśli ważona suma wejść jest niska\footnote{S. 7; Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks...};
+    \item propagacja wsteczna -- jest kluczową częścią szkolenia sieci neuronowych. Podczas przejścia do przodu obraz jest przetwarzany przez sieć warstwa po warstwie, od wejścia do wyjścia, co skutkuje przewidywaną klasyfikacją. Dane wyjściowe są następnie porównywane z rzeczywistą etykietą obrazu i obliczany jest błąd (strata). Propagacja wsteczna to proces przekazywania tego błędu z powrotem przez sieć, z warstwy wyjściowej do warstwy wejściowej, w celu dostosowania wag i uprzedzeń. Regulacja ta odbywa się w sposób minimalizujący błąd, dzięki czemu sieć lepiej klasyfikuje obrazy. Algorytm oblicza gradient funkcji straty w odniesieniu do wag i uprzedzeń i wykorzystuje techniki optymalizacji, takie jak zejście gradientowe, do aktualizacji tych parametrów. \footnote{S. 541-543; Y. LeCun [i inni], Backpropagation Applied to Handwritten Zip Code Recognition, AT\&T 3ell Laboratories, Holmdei, NJ 07733 Stany Zjednoczone Ameryki, 12.1989}
+\end{itemize}
 
 %3. Wykorzystanie CoreML i Create ML:
 Zdecydowano się na technologie takie jak CoreML i Create ML, które są zoptymalizowane pod kątem platform Apple.
@@ -668,7 +661,7 @@ Funkcja kosztu została zdefiniowana, oceniając różnicę między prognozami m
 Wartość tej funkcji jest minimalizowana w trakcie procesu optymalizacji.
 
 %4. Wybór Algorytmu Optymalizacyjnego:
-Algorytm optymalizacyjny, tak jak SGD (Stochastic Gradient Descent), został wybrany do minimalizacji funkcji kosztu.
+Algorytm optymalizacyjny, tak jak SGD (\textit{eng. Stochastic Gradient Descent}), został wybrany do minimalizacji funkcji kosztu.
 Dobór współczynnika uczenia był przedmiotem optymalizacji, aby zapewnić szybkie, ale stabilne dostosowanie wag modelu.
 
 %5. Przeprowadzenie Iteracji:
@@ -681,7 +674,7 @@ Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co 
 
 %7. Monitorowanie Skuteczności:
 Podczas procesu nauczania monitorowano skuteczność modelu na zbiorze walidacyjnym.
-Oceniano miary takie jak dokładność, precyzja, recall i F1-score. %recall i F1-score trzeba będzie jakoś przetłumaczyć
+Oceniano miary takie jak dokładność, precyzja, czułość i miara F1.
 To pozwalało na ocenę, czy model generalizuje się dobrze na nowe dane.
 
 %8. Ewaluacja i Optymalizacja:
@@ -717,7 +710,7 @@ Plusy oraz minusy takiej decyzji są następujące:
 \end{enumerate}
 
 \paragraph{Aplikacja mobilna\\}
-\forceindent \textbf{Decyzja\\}m
+\forceindent \textbf{Decyzja\\}
 \indent Zdecydowano się na wykorzystanie natywnego dla systemów iOS języka Swift ze względu na wbudowane wsparcie Machine Learning oraz możliwość użycia Neural Engine na urządzeniach mobilnych.
 
 \textbf{Konsekwencje\\}
@@ -751,40 +744,7 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     \item wersjonowanie API będzie musiało być spójne.
 \end{enumerate}
 
-\paragraph{Framework serwerowy\\}
-\forceindent \textbf{Decyzja\\}
-\forceindent Zespół projektowy zdecydował się na wykorzystanie frameworka NestJS z wykorzystaniem
-Fastify jako sterownika HTTP z uwagi na znaczną różnicę w wydajności względem sterownika Express.
-
-Plusy oraz minusy takiej decyzji są następujące:
-
-\begin{itemize}
-    \item gotowa do wykorzystania architektura aplikacji;
-    \item olbrzymia społeczność, od której można czerpać wiedzę na temat rozwiązań 
-    oraz korzystać z gotowych rozwiązań popularnych problemów;
-    \item mniejsza ilość kodu bazowego do napisania;
-    \item prostsza separacja logiki biznesowej;
-    \item ułatwione testowanie jednostkowe oraz integracyjne za pomocą wstrzykiwania
-    zależności oraz dzięki wbudowanym narzędziom testowym;
-    \item problematyczna implementacja rozwiązań nieprzewidzianych przez twórców
-    frameworka;
-    \item niski poziom kontroli nad cyklem życia żądań HTTP oraz samej architektury;
-    \item komunikaty błędów mogą niewiele mówić programiście, co utrudnia proces debuggowania.
-\end{itemize}
-
-\paragraph{Testowanie aplikacji serwerowej\\}
-\forceindent \textbf{Decyzja\\}
-\forceindent Zespół zdecydował się na framework testowy Jest, ponieważ nie wymaga wielu dodatkowych wtyczek do spełnienia potrzeb zespołu. Ponadto ma lepsze wsparcie dla testów równoległych i posiada potężny zestaw funkcji, które umożliwią szybsze tworzenie pakietów testowych.
-
-Plusy oraz minusy takiej decyzji są następujące:
-\begin{itemize}
-    \item testy będą tworzone przy użyciu dobrze ugruntowanych reguł;
-    \item paczka ,,jest-plugin`` będzie musiała zostać dodana do pliku `.eslintrc` i `package.json`;
-    \item Jest ma olbrzymią społeczność z dużą liczbą ekspertów, którzy go używają i otwarcie dzielą się wiedzą;
-    \item liczba matcherów i funkcjonalności może stać się przytłaczająca i prowadzić do mniejszej produktywności;
-    \item Jest z uwagi na ilość dostępnych możliwości, jak i kompatybilność wsteczną, jest obecnie jednym z najwolniejszych frameworków testowych, co znacznie zwiększy czas potrzebny do wykonania testów.
-\end{itemize}
-
+\newpage
 \section{Zadania w projekcie}
 
 \begin{longtblr}[
@@ -850,17 +810,17 @@ Diagram relacji encji w bazie dedykowanej dla mikroserwisu kont użytkownika prz
 
 Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników oraz wydajnością aplikacji. Serwisy te podatne są na zmienne ilości dziennych żądań, a czas odpowiedzi na żądania rzędu więcej niż 300ms są niedopuszczalne w środowiskach produkcyjnych.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram relacji encji w bazie danych mikroserwisu użytkownika}}
     \vspace{0.55em}
-    \centering \includegraphics[width=12cm]{static/diagrams/erd-baza-danych-użytkownika.png}
+    \centering \includegraphics[width=12cm,height={\imgth}, keepaspectratio]{static/diagrams/erd-baza-danych-użytkownika.png}
     \\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
     \textbf{\caption{Diagram relacji encji w bazie danych mikroserwisu pojemników na śmieci}}
-    \centering \includegraphics[width=12cm]{static/diagrams/erd-baza-danych-śmietników.png}
+    \centering \includegraphics[width=12cm, height={\imgth}, keepaspectratio]{static/diagrams/erd-baza-danych-śmietników.png}
     \\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -869,9 +829,9 @@ Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników o
 
 \forceindent Diagramy sekwencji przedstawiają istniejące w aplikacji serwerowej procesy, umożliwiające z niej użytkowanie.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram logowania użytkownika}}
-    \centering{\includegraphics[width=15cm]{./static/diagrams/diagram-logowania.png}}\\
+    \centering{\includegraphics[width=15cm, height={\imgth}, keepaspectratio]{./static/diagrams/diagram-logowania.png}}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -883,9 +843,9 @@ Można owy proces podzielić na następujące odnogi:
     \item poprawne dane -- zwrócenie tokenów autoryzacyjnych.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram zmiany adresu email}}
-    \includegraphics[width=15cm]{./static/diagrams/diagram-zmiany-adresu-email.png}\\
+    \includegraphics[width=15cm,height={\imgth}, keepaspectratio]{./static/diagrams/diagram-zmiany-adresu-email.png}\\
     \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -899,52 +859,70 @@ Odnogi decyzyjne w tym procesie można podzielić na następujące:
     \item po kliknięciu na link adres email jest zmieniany.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram pobierania danych śmietników}}
     \vspace{0.55em}
-    \centering\includegraphics[width=15cm]{./static/diagrams/diagram-pobierania-danych-smietniczkow.png}\\
+    \centering\includegraphics[width=15cm,height={\imgth}, keepaspectratio]{./static/diagrams/diagram-pobierania-danych-smietniczkow.png}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 Rysunek 3.5 przedstawia diagram pobierania danych śmietników.
 Jego proces posiada jedno drzewko decyzyjne, którego wymogiem jest uwierzytelniony użytkownik.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \textbf{\caption{Diagram rejestracji użytkownika}}
     \vspace{0.55em}
-    \centering\includegraphics[width=15cm]{./static/diagrams/naprawiony-diagram-rejestracji.png}\\
+    \centering\includegraphics[width=15cm,height={\imgth}, keepaspectratio]{./static/diagrams/naprawiony-diagram-rejestracji.png}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 Rysunek 3.6 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formularzu rejestracji użytkownik otrzymuje wiadomość email pod wskazanym adresem wraz z linkiem do potwierdzenia rejestracji. Po wejściu na witrynę do której prowadzi link, konto użytkownika jest potwierdzone i może rozpocząć on korzystanie z aplikacji.
 
+% \begin{figure}[h]
+%     \textbf{\caption{Diagram resetu hasła użytkownika}}
+%     \vspace{0.55em}
+%     \centering\includegraphics[width=12cm,height={\imgth}, keepaspectratio]{./static/diagrams/diagram-resetu-hasła.png}\\
+%     \raggedright\scriptsize{Źródło: Opracowanie własne}
+% \end{figure}
 
-\begin{figure}[h]
-    \textbf{\caption{Diagram resetu hasła użytkownika}}
-    \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/diagrams/diagram-resetu-hasła.png}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
-\end{figure}
+\subsection{Diagram komunikacji między aplikacją serwerową i mobilną}
+
+\forceindent Na rysunku 3.7 znajduje się diagram komunikacji między aplikacją serwerową i mobilną.
+Diagram ten ma strukturę przedstawiającą interakcje między różnymi komponentami w systemie w kolejności ich występowania.
+
+Na najwyższym poziomie diagram ilustruje interakcje między użytkownikiem (Użytkownik), aplikacją mobilną (Aplikacja Mobilna) i różnymi usługami zaplecza, w tym bramą API (Bramka API), usługą konta użytkownika (Serwis Konta Użytkownika), usługa zarządzania koszami na śmieci (Serwis Pojemników na Śmieci), repozytorium kont użytkowników (Repozytorium Konta Użytkownika), repozytorium koszy na śmieci (Repozytorium Pojemników na Śmieci) oraz usługa przesyłania wiadomości e-mail (Serwis Wiadomości Email).
+
+Dodatkowo, diagram pokazuje mikrousługę wiadomości e-mail (Mikroserwis Wiadomości Email), która może być wywoływana w celu wysyłania powiadomień lub potwierdzeń do użytkownika. W trakcie całego procesu różne operacje zwracają wyniki (wynik operacji), które są przekazywane z powrotem przez system, ostatecznie dostarczając użytkownikowi widok lub odpowiedź za pośrednictwem aplikacji mobilnej.
+
+Sekwencja interakcji jest asynchroniczna i opiera się na modelu żądanie-odpowiedź, w którym działania użytkownika wyzwalają serię żądań, które przepływają przez system i skutkują serią odpowiedzi.
+
+\begin{sidewaysfigure}
+    \textbf{\caption{Diagram komunikacji}}
+    \vspace{3.5em}
+    \centering\includegraphics[width=\fittingimage, keepaspectratio]{static/diagrams/diagram-komunikacji.jpg}
+    \\
+    \raggedright\scriptsize{Źródło: opracowanie własne}
+\end{sidewaysfigure}
 
 \subsection{Testy automatyczne aplikacji serwerowej}
 \forceindent Aplikacja serwerowa została przetestowana za pomocą testów jednostkowych, integracyjnych oraz testów obciążaniowych.
 
 W przypadku testów jednostkowych, nie pobrano pomiarów związanych z pokryciem kodu źródłowego, z uwagi na małą ich miarodajność. Aplikacja została w przeważającej mierze przetestowana za pomocą testów integracyjnych, z uwagi na małą ilość ścieżek decyzjnych w kodzie.
 
-Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co przedstawione jest na rysunku 3.8, oraz 9 testów integracyjnych. Przekłada się to na wysoką odporność na potencjalne błędy.
+Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co przedstawione jest na rysunku 3.8, oraz 9 testów integracyjnych (rysunek 3.9). Przekłada się to na wysoką odporność na potencjalne błędy.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu pojemników na śmieci}}
     \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/trash-unit.png}
+    \centering\includegraphics[width=10cm,height={\imgth}, keepaspectratio]{./static/trash-unit.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \textbf{\caption{Wyniki testów integracyjnych mikroserwisu pojemników na śmieci}}
     \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/trash-integration-tests.png}
+    \centering\includegraphics[width=10cm,height={\imgth}, keepaspectratio]{./static/trash-integration-tests.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -953,28 +931,30 @@ Mikroserwis kont użytkownika posiada łącznie 8 testów jednostkowych oraz 43 
 Przetestowane zostały ścieżki związane z logowaniem, rejestracją oraz zmianami w danych konta użytkowika.
 Jest to zdecydowanie część pracy najbogatsza w ścieżki decyzyjne.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu konta użytkownika}}
     \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/accounts-unit.png}
+    \centering\includegraphics[width=10cm,height={\imgth}, keepaspectratio]{./static/accounts-unit.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \textbf{\caption{Wyniki testów integracyjnych mikroserwisu kont użytkownika}}
     \vspace{0.55em}
-    \centering\includegraphics[width=12cm]{./static/accounts-integration-tests.png}
+    \centering\includegraphics[width=10cm,height={\imgth}, keepaspectratio]{./static/accounts-integration-tests.png}
     \\
     \raggedright \scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
+\newpage
+
 \subsection{Zużycie CPU: Flutter vs. aplikacje natywne}
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \textbf{\caption{Porównanie zużycia CPU: Flutter vs. aplikacje natywne na systemy iOS i Android}}
     \vspace{0.8em}
-    \includegraphics[width=13.5cm]{./static/CPU-Usage-Comparison-Flutter-vs-Native-iOS-Android.png}
+    \includegraphics[width=13.5cm, height={\imgth}, keepaspectratio]{./static/CPU-Usage-Comparison-Flutter-vs-Native-iOS-Android.png}
     \raggedright\scriptsize{\\Źródło: S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
 \end{figure}
 
@@ -1029,88 +1009,110 @@ Aplikację można podzielić na cztery moduły, które obejmują:
 Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizowanych widoków oraz dostosowywania przycisków i ikon. Stylowanie było przemyślane tak, aby spełnić oczekiwania użytkowników i zachować spójność z wytycznymi projektu.
 
 \subsection{Widoku aplikacji mobilnej}
-Ekran startowy 
 
-\forceindent{Umożliwia przejście do procesu rejestracji poprzez przycisk „Dołącz teraz” (eng. \textit{Join Now}) oraz do ekranu logowania przez kliknięcie w przycisk „Zaloguj się” (eng. \textit{Login}). }
+\forceindent{Na rysunku 3.13 widoczny jest ekran startowy aplikacji mobilnej. Umożliwia on przejście do procesu rejestracji poprzez przycisk „Dołącz teraz” (eng. \textit{Join Now}) oraz do ekranu logowania przez kliknięcie w przycisk „Zaloguj się” (eng. \textit{Login}). }
 
 \begin{figure}[H]
+    \textbf{\caption{Ekran startowy aplikacji mobilnej}}
+    \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm]{./static/mobile/home-page.jpg}\\
+    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/start-page.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Rejestracja 
+% \begin{figure}[h]
+%     \centering
+%     \begin{subfigure}{\halflinewidth}%[position][height][inner pos]{width}
+%         \textbf{\caption{Ekran startowy aplikacji mobilnej}}
+%         \centering
+%         \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/start-page.jpg}\\
+%         \raggedright\scriptsize{Źródło: Opracowanie własne}
+%     \end{subfigure}
+%     \begin{subfigure}{\halflinewidth}
+%         \textbf{\caption{Widok rejestracji}}
+%         \centering
+%         \includegraphics[width=8cm, height={\imgth}, keepaspectratio]{./static/mobile/register.jpg}\\
+%         \raggedright\scriptsize{Źródło: Opracowanie własne}
+%     \end{subfigure}
+% \end{figure}
 
-\forceindent{Użytkownik może założyć konto, podając nazwę użytkownika, adres e-mail oraz hasło. W celu dodatkowej walidacji, hasło należy wprowadzić dwa razy. Po prawidłowym wpisaniu danych, należy kliknąć przycisk „Zarejestruj się” (eng. \textit{Register}). Z ekranu rejestracji istnieje możliwość łatwego przejścia do ekranu logowania poprzez kliknięcie w napis „Zaloguj się” (eng. \textit{Login}).}
+\forceindent{Rysunek 3.14 przedstawia widok rejestracji, dzięki któremu użytkownik może założyć konto, podając nazwę użytkownika, adres e-mail oraz hasło. W celu dodatkowej walidacji, hasło należy wprowadzić dwa razy. Po prawidłowym wpisaniu danych, należy kliknąć przycisk „Zarejestruj się” (eng. \textit{Register}). Z ekranu rejestracji istnieje możliwość łatwego przejścia do ekranu logowania poprzez kliknięcie w napis „Zaloguj się” (eng. \textit{Login}).}
 
 \begin{figure}[H]
+    \textbf{\caption{Widok rejestracji}}
+    \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm]{./static/mobile/register.jpg}\\
+    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/register.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Logowanie
-
-\forceindent{Aby zalogować się do aplikacji, użytkownik musi podać swój adres email oraz hasło. Proces logowania zatwierdza się, klikając przycisk „Zaloguj się” (eng. \textit{Login}). Z ekranu logowania istnieje również możliwość przejścia do panelu odzyskiwania hasła poprzez kliknięcie w napis „Zapomniałeś hasła?” (eng. \textit{Forgot password?}) oraz do ekranu rejestracji przez kliknięcie w „Zarejestruj się” (eng. \textit{Register}).}
+\forceindent{Aby zalogować się do aplikacji, użytkownik musi podać swój adres email oraz hasło, co widoczne jest na rysunku 3.15. Proces logowania zatwierdza się, klikając przycisk „Zaloguj się” (eng. \textit{Login}). Z ekranu logowania istnieje również możliwość przejścia do panelu odzyskiwania hasła poprzez kliknięcie w napis „Zapomniałeś hasła?” (eng. \textit{Forgot password?}) oraz do ekranu rejestracji przez kliknięcie w „Zarejestruj się” (eng. \textit{Register}).}
 
 \begin{figure}[H]
+    \textbf{\caption{Ekran logowania}}
+    \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm]{./static/mobile/login.jpg}\\
+    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/login.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Panel odzyskiwania hasła
-
-\forceindent{W celu odzyskania hasła, użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (eng. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
+\forceindent{Rysunek 3.16 przedstawia panel odzyskiwania hasła, który to wykorzystywane jest przez użytkowników w celu odzyskania hasła. Użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (eng. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
 
 \begin{figure}[H]
+    \textbf{\caption{Panel odzyskiwania hasła}}
+    \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm]{./static/mobile/forgot-password.jpg}\\
+    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/forgot-password.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Strona główna 
-
-\forceindent{Strona główna prezentuje mapę z oznaczonymi lokalizacjami śmietników. Każdy typ śmietnika jest reprezentowany przez unikalny kolor i ikonę. Kliknięcie na tag śmietnika wyświetla dodatkowe informacje o danym punkcie. Na górze strony znajduje się pole tekstowe umożliwiające wyszukiwanie określonych lokalizacji. Po wpisaniu początku nazwy miasta, automatycznie pojawia się lista sugerowanych pasujących miejsc. Użytkownik może wybrać interesującą go lokalizację z tej listy. Na dole strony umieszczono menu nawigacyjne, dzięki któremu można łatwo poruszać się po aplikacji.}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=8cm]{./static/mobile/home-page.jpg}\\
-    \scriptsize{Źródło: Opracowanie własne}
-\end{figure}
-
-Panel dodawania punktów
-
-\forceindent{Aby dodać nowy punkt na mapie, użytkownik powinien wybrać ikonę plusa w menu. Po otwarciu panelu, pierwszym krokiem jest dodanie zdjęcia. Zastosowany model uczenia maszynowego automatycznie rozpozna typ śmietnika. Jeśli rozpoznanie jest błędne, użytkownik ma możliwość ręcznej zmiany typu. Następnie, po weryfikacji typu śmietnika i lokalizacji, operację dodania punktu zatwierdza się przyciskiem „Zapisz” (eng. \textit{Save}).}
+\newpage
+\forceindent{Strona główna (rysunek 3.17) prezentuje mapę z oznaczonymi lokalizacjami śmietników. Każdy typ śmietnika jest reprezentowany przez unikalny kolor i ikonę. Kliknięcie na tag śmietnika wyświetla dodatkowe informacje o danym punkcie. Na górze strony znajduje się pole tekstowe umożliwiające wyszukiwanie określonych lokalizacji. Po wpisaniu początku nazwy miasta, automatycznie pojawia się lista sugerowanych pasujących miejsc. Użytkownik może wybrać interesującą go lokalizację z tej listy. Na dole strony umieszczono menu nawigacyjne, dzięki któremu można łatwo poruszać się po aplikacji.}
 
 \begin{figure}[H]
+    \textbf{\caption{Strona główna}}
+    \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm]{./static/mobile/add-trash.jpg}\\
+    \includegraphics[width=7cm, keepaspectratio]{./static/mobile/home-page.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Panel użytkownika
-
-\forceindent{Umożliwia edycję nazwy użytkownika oraz adresu email. Proces edycji rozpoczyna się od kliknięcia w przycisk „Edytuj” (eng. \textit{Edit}), co przekierowuje do odpowiedniego panelu edycyjnego. Funkcja „Ustawienia dostępu” (eng. \textit{Access settings}) pozwala na przeniesienie do sekcji ustawień, gdzie użytkownik może konfigurować uprawnienia aplikacji. Za pomocą suwaka trybu ciemnego (eng. \textit{dark mode}) istnieje możliwość zmiany wyglądu aplikacji z jasnego na ciemny i odwrotnie. Opcja „Wyloguj się” (eng. \textit{Sign out}) umożliwia bezpieczne wylogowanie się z konta.}
+\forceindent{Rysunek 3.18 przedstawia panel dodawnia punktów na mapie. Celem dodania nowego punktu na mapie, użytkownik powinien wybrać ikonę plusa w menu. Po otwarciu panelu, pierwszym krokiem jest dodanie zdjęcia. Zastosowany model uczenia maszynowego automatycznie rozpozna typ śmietnika. Jeśli rozpoznanie jest błędne, użytkownik ma możliwość ręcznej zmiany typu. Następnie, po weryfikacji typu śmietnika i lokalizacji, operację dodania punktu zatwierdza się przyciskiem „Zapisz” (eng. \textit{Save}).}
 
 \begin{figure}[H]
+    \textbf{\caption{Panel dodawania punktów}}
+    \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm]{./static/mobile/user-panel.jpg}\\
+    \includegraphics[width=7cm,keepaspectratio]{./static/mobile/add-trash.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Panele edycji nazwy użytkownika i adresu email
+\newpage
 
-\forceindent{Aby edytować nazwę użytkownika, należy wpisać nową nazwę, na którą chcemy ją zmienić, a następnie zatwierdzić zmianę, klikając przycisk „Zapisz” (eng. \textit{Save}). Proces zmiany adresu email przebiega w identyczny sposób: użytkownik wpisuje nowy adres email i zatwierdza zmianę za pomocą tego samego przycisku „Zapisz” (eng. \textit{Save}).}
+\forceindent{Panel użytkownika (rysunek 3.19) umożliwia edycję nazwy użytkownika oraz adresu email. Proces edycji rozpoczyna się od kliknięcia w przycisk „Edytuj” (eng. \textit{Edit}), co przekierowuje do odpowiedniego panelu edycyjnego. Funkcja „Ustawienia dostępu” (eng. \textit{Access settings}) pozwala na przeniesienie do sekcji ustawień, gdzie użytkownik może konfigurować uprawnienia aplikacji. Za pomocą suwaka trybu ciemnego (eng. \textit{dark mode}) istnieje możliwość zmiany wyglądu aplikacji z jasnego na ciemny i odwrotnie. Opcja „Wyloguj się” (eng. \textit{Sign out}) umożliwia bezpieczne wylogowanie się z konta.}
 
-\begin{figure}[h]
+\begin{figure}[H]
+    \textbf{\caption{Panel użytkownika}}
+    \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm]{./static/mobile/update-email.jpg}\\
+    \includegraphics[width=7cm, keepaspectratio]{./static/mobile/panel-użytkownika.png}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
-\begin{figure}[h]
+
+\forceindent{Panele edycji nazwy użytkownika i adresu email widoczne są odpowiednio na rysunkach 3.20 oraz 3.21. Celem edycji nazwy użytkownika, należy wpisać nową nazwę, a następnie zatwierdzić zmianę, klikając przycisk „Zapisz” (eng. \textit{Save}). Proces zmiany adresu email przebiega w identyczny sposób: użytkownik wpisuje nowy adres email i zatwierdza zmianę za pomocą tego samego przycisku „Zapisz” (eng. \textit{Save}).}
+
+\begin{figure}[H]
+    \textbf{\caption{Widok aktualizowania adresu email}}
     \centering
-    \includegraphics[width=8cm]{./static/mobile/update-password.jpg}\\
+    \vspace{0.55em}
+    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/update-email.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+\begin{figure}[H]
+    \textbf{\caption{Widok aktualizowania hasła użytkownika}}
+    \centering
+    \vspace{0.55em}
+    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/update-password.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -1121,28 +1123,91 @@ Całość komunikacji pomiędzy bramką interfejsu aplikacji a mikroserwisami, o
 
 W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
 
+\subsection{Algorytmy i techniki wykorzystane do nauki modelu uczenia maszynowego}
+\forceindent \subsection{Konwolucyjne sieci neuronowe}
+\forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (\textit{eng. Convolutional neural network - CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
+
+Image Feature Print V2 jest narzędziem w CreateML, które znacznie usprawnia proces ekstrakcji cech. Wykorzystując je wraz ze wstępnie wytrenowaną CNN, skutecznie dostosowaliśmy sieć do unikalnych cech naszego zbioru danych. Ta kombinacja pozwoliła na zniuansowaną analizę cech przestrzennych, kluczową dla identyfikacji określonych wzorców na naszych obrazach, takich jak rozróżnianie kolorów, oznaczeń, kształtów pojemników.
+
+Nasza metoda polegała na dostrojeniu wstępnie wytrenowanego modelu do naszego zbioru danych, co jest procesem zarówno efektywnym czasowo, jak i skutecznym. To dostrojenie było niezbędne do dostosowania możliwości modelu do konkretnych celów naszego projektu w zakresie rozpoznawania i klasyfikacji obrazów.
+
+\subsection{Uczenie nadzorowane}
+\forceindent W ramach naszej pracy zastosowaliśmy uczenie nadzorowane, opierając się na oznaczonym zbiorze danych, aby skutecznie szkolić nasz model. Każdy obraz w tym zbiorze danych został precyzyjnie oznaczony etykietą identyfikującą konkretny typ kontenera. W trakcie treningu nasza konwolucyjna sieć neuronowa przeszła proces nauki, podczas którego zapoznawała się z charakterystycznymi cechami i wzorcami obrazów, a następnie łączyła je z odpowiadającymi etykietami. Ten proces umożliwił modelowi skuteczne przyswajanie cech definiujących każdy rodzaj kontenera.
+
+W celu oceny wydajności naszego modelu korzystaliśmy z różnych miar, takich jak dokładność, precyzja, przywołanie, czułość i miara F1. Te wskaźniki dostarczały nam istotnych informacji na temat zdolności modelu do poprawnego identyfikowania poszczególnych typów kontenerów. Praktyczne zastosowanie tych miar pozwoliło nam szczegółowo analizować skuteczność naszego modelu w kontekście naszego konkretnego zadania, co było kluczowe dla oceny jego przydatności i precyzji w identyfikacji różnorodnych kontenerów.
+
+\subsection{Proces szkolenia}
+\forceindent Proces szkoleniowy obejmował dostarczanie dużej liczby oznaczonych obrazów do sieci CNN. Sieć przetworzyła te obrazy przez swoje warstwy, dostosowując swoje wewnętrzne parametry (wagi i odchylenia) na podstawie błędu pomiędzy prognozami a rzeczywistymi etykietami (propagacja wsteczna).
+Ten iteracyjny proces trwa, dopóki model nie osiągnie zadowalającego poziomu dokładności, wskazującego na jego zdolność do dokładnej klasyfikacji nowych, niewidzianych obrazów.
+
+\subsection{Wyzwania i rozważania}
+\forceindent Kluczowym wyzwaniem w szkoleniu CNN do zadań klasyfikacji obrazów, takich jak to, jest zapewnienie wystarczająco dużego i zróżnicowanego zbioru danych, aby zapobiec nadmiernemu dopasowaniu i poprawić zdolność modelu do uogólniania.
+Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięcia nierównowagi klas, która mogłaby skłaniać model w kierunku częściej występujących klas. Zespół projektowy zwrócił na to szczególną uwagę, aby zapewnić, że model będzie w stanie rozpoznawać wszystkie typy kontenerów z wysoką dokładnością.
+
+\subsection{Analiza wydajności modelu klasyfikacji pojemników}
+
+\subsubsection{Pojemniki na plastik}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 55\% co oznacza, że nas model prawidłowo rozpoznaje 55\% pojemników plastikowych przez model, co wskazuje na rzadkie błędne klasyfikacje innych rodzajów pojemników jako plastikowych;
+    \item osiągnięta czułość to 70\%, a więc model efektywnie identyfikuje 70\% rzeczywistych plastikowych pojemników, co świadczy o jego zdolności do wykrywania plastikowych pojemników wśród różnorodnych danych;
+    \item miara F1 wyniosła 0,616 -- jest to wysoki wynik, który podkreśla równowagę między precyzją a czułością, minimalizując błędne klasyfikacje.
+\end{itemize}
+
+\subsubsection{Pojemniki na papier}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 74\%, co oznacza że 74\% zidentyfikowanych przez model pojemników papierowych faktycznie takimi jest, świadcząc o wysokiej skuteczności modelu;
+    \item osiągnięta czułość to 64\%, a więc model identyfikuje 64\% wszystkich istniejących pojemników papierowych, co wskazuje na jego zdolność do wykrywania pojemników papierowych;
+    \item miara F1 wyniosła 0,686 -- jest to wynik sygnalizujący dobrą równowagę między precyzją a czułością, co jest kluczowe w dokładnej klasyfikacji pojemników papierowych.
+\end{itemize}
+
+\subsubsection{Pojemniki na odpady mieszane}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 60\%, co oznacza że model wykazuje umiarkowaną zdolność do poprawnego identyfikowania pojemników na odpady mieszane;
+    \item osiągnięta czułość to 59\%, a więc model rozpoznaje 59\% rzeczywistych przypadków pojemników na odpady mieszane;
+    \item miara F1 wyniosła 0.595 -- jest to wynik umiarkowany, wskazujący na możliwości poprawy w precyzji oraz czułości.
+\end{itemize}
+
+\subsubsection{Pojemniki na szkło}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 72\%: co oznacza, że 72\% obrazów są efektywnie identyfikowane jako pojemniki szklane, z minimalną liczbą błędnych identyfikacji;
+    \item osiągnięta czułość to 55\% -- wskazuje to na istnienie ryzyka, że model może przeoczyć pewne obrazy pojemników szklanych;
+    \item miara F1 wyniosła 0,624 -- jest to wynik wskazujący umiarkowaną równowagę między precyzją a czułością w klasyfikacji pojemników szklanych.
+\end{itemize}
+
+\subsubsection{Pojemniki na odpady biodegradowalne}
+
+\begin{itemize}[label=--]
+    \item uzyskana precyzja wyniosła 65\% -- około dwóch trzecich obrazów sklasyfikowanych jako pojemniki na odpady biodegradowalne jest poprawnie zidentyfikowanych;
+    \item osiągnięta czułość to 65\% -- model efektywnie wykrywa 65\% rzeczywistych pojemników biodegradowalnych;
+    \item miara F1 wyniosła 0,65 -- model wykazuje dobrą równowagę między precyzją a czułością, co jest pozytywne dla klasyfikacji pojemników biodegradowalnych.
+\end{itemize}
+
 \subsection{Wymagania sprzętowe i oprogramowania dla aplikacji mobilnej}
-\begin{itemize}
+\begin{itemize}[label=--]
     \item Komputer z systemem operacyjnym macOS Sonoma lub nowszym
     \item Oprogramowanie Xcode 15 lub nowsze, dostępne do pobrania z App Store
 \end{itemize}
 
-\subsection{Instalacja aplikacji}
+\subsection{Instalacja aplikacji mobilnej}
 
 \subsubsection{Otwieranie projektu w Xcode }
-\begin{itemize}
+\begin{itemize}[label=--]
     \item Otwórz Xcode.
     \item Wybierz File > Open i znajdź sklonowany katalog projektu.
     \item Wybierz plik .xcodeproj i kliknij Open
 \end{itemize}
 
-\subsubsection{Uruchomienie projektu}
+\subsubsection{Uruchomienie projektu aplikacji mobilnej}
 \begin{itemize}
     \item Wybierz urządzenie docelowe w Xcode.
     \item Kliknij przycisk Run lub użyj skrótu Cmd + R, aby uruchomić aplikację.
 \end{itemize}
 
-\subsection{Instrukcja developerska}
+\subsection{Instrukcja developerska aplikacji serwerowej}
 
 \forceindent Celem odpalenia lokalnej instancji aplikacji serwerowej, użytkownik potrzebuje następujących narzędzi:
 \begin{itemize}[label=--]
@@ -1206,9 +1271,9 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
 \subsection{Załączniki}
 
 \begin{enumerate}
-    \item Aplikacja serwerowa;
-    \item Aplikacja mobilna;
-    \item Dokumentacja ścieżek aplikacji.
+    \item Kod źródłowy aplikacji serwerowej;
+    \item Kod źródłowy aplikacji mobilnej;
+    \item Dokumentacja ścieżek żądań aplikacji serwerowej;
 \end{enumerate}
 
 \subsection{Bibliografia}
@@ -1269,6 +1334,7 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
     \item Karthik B., Ramkumar G., Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, ECS - The Electrochemical Society, 2022
     \item Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
     \item Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID ‑- 19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
+    \item Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Ceredigion, Anglia, 12.2015
 \end{enumerate}
 
 \end{document}

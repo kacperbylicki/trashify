@@ -1,0 +1,37 @@
+config:
+  target: 'http://localhost:50010'
+  phases:
+    - duration: 10
+      arrivalRate: 1
+    - duration: 30
+      rampTo: 10
+      arrivalRate: 10
+    - duration: 60
+      arrivalRate: 10
+    - duration: 10
+      arrivalRate: 0
+    - duration: 30
+      arrivalRate: 20
+
+scenarios:
+  - flow:
+      - beforeRequest:
+          - log: "Get auth token"
+          - post:
+              url: "/api/v1/trash"
+              json:
+                email: "{{ $randomItem(users).email }}"
+                password: "{{ $randomItem(users).password }}"
+              capture:
+                - json: $.id_token
+                  as: token
+      - request:
+          method: 'GET'
+          url: '/api/v1/trash'
+          params:
+            minimumDistance: "{{ $random(0, 500) }}"
+            maximumDistance: "{{ $random(500, 4000) }}"
+            latitude: 49.882786
+            longitude: 19.493958
+          headers:
+            Authorization: 'Bearer {{ token }}'
