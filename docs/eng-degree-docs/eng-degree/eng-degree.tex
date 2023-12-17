@@ -25,6 +25,7 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{calc}
+\usepackage{rotating}
 
 \import{../}{commands.tex}
 
@@ -38,6 +39,10 @@
 \newlength\imgth
 \setlength\imgth{\textwidth}
 \addtolength\imgth{-0.3\textwidth}
+
+\newlength\fittingimage
+\setlength\fittingimage{\textheight}
+\addtolength\fittingimage{-0.15\textheight}
 
 % Wymogi edycyjne: https://moodle2.e-wsb.pl/pluginfile.php/7505508/mod_resource/content/2/Wymogi%20edycyjne_praca%20dyplomowa.pdf
 
@@ -882,7 +887,7 @@ Rysunek 3.6 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formul
 
 \subsection{Diagram komunikacji między aplikacją serwerową i mobilną}
 
-\forceindent W załączniku nr. 4 do niniejszej pracy dyplomowej znajduje się diagram komunikacji między aplikacją serwerową i mobilną.
+\forceindent Na rysunku 3.7 znajduje się diagram komunikacji między aplikacją serwerową i mobilną.
 Diagram ten ma strukturę przedstawiającą interakcje między różnymi komponentami w systemie w kolejności ich występowania.
 
 Na najwyższym poziomie diagram ilustruje interakcje między użytkownikiem (Użytkownik), aplikacją mobilną (Aplikacja Mobilna) i różnymi usługami zaplecza, w tym bramą API (Bramka API), usługą konta użytkownika (Serwis Konta Użytkownika), usługa zarządzania koszami na śmieci (Serwis Pojemników na Śmieci), repozytorium kont użytkowników (Repozytorium Konta Użytkownika), repozytorium koszy na śmieci (Repozytorium Pojemników na Śmieci) oraz usługa przesyłania wiadomości e-mail (Serwis Wiadomości Email).
@@ -891,13 +896,20 @@ Dodatkowo, diagram pokazuje mikrousługę wiadomości e-mail (Mikroserwis Wiadom
 
 Sekwencja interakcji jest asynchroniczna i opiera się na modelu żądanie-odpowiedź, w którym działania użytkownika wyzwalają serię żądań, które przepływają przez system i skutkują serią odpowiedzi.
 
+\begin{sidewaysfigure}
+    \textbf{\caption{Diagram komunikacji}}
+    \vspace{3.5em}
+    \centering\includegraphics[width=\fittingimage, keepaspectratio]{static/diagrams/diagram-komunikacji.jpg}
+    \\
+    \raggedright\scriptsize{Źródło: opracowanie własne}
+\end{sidewaysfigure}
 
 \subsection{Testy automatyczne aplikacji serwerowej}
 \forceindent Aplikacja serwerowa została przetestowana za pomocą testów jednostkowych, integracyjnych oraz testów obciążaniowych.
 
 W przypadku testów jednostkowych, nie pobrano pomiarów związanych z pokryciem kodu źródłowego, z uwagi na małą ich miarodajność. Aplikacja została w przeważającej mierze przetestowana za pomocą testów integracyjnych, z uwagi na małą ilość ścieżek decyzjnych w kodzie.
 
-Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co przedstawione jest na rysunku 3.8, oraz 9 testów integracyjnych. Przekłada się to na wysoką odporność na potencjalne błędy.
+Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co przedstawione jest na rysunku 3.8, oraz 9 testów integracyjnych (rysunek 3.9). Przekłada się to na wysoką odporność na potencjalne błędy.
 
 \begin{figure}[htbp]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu pojemników na śmieci}}
@@ -1230,10 +1242,9 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
 \subsection{Załączniki}
 
 \begin{enumerate}
-    \item Aplikacja serwerowa;
-    \item Aplikacja mobilna;
-    \item Dokumentacja ścieżek aplikacji;
-    \item Diagram komunikacji między aplikacją serwerową i mobilną.
+    \item Kod źródłowy aplikacji serwerowej;
+    \item Kod źródłowy aplikacji mobilnej;
+    \item Dokumentacja ścieżek żądań aplikacji serwerowej;
 \end{enumerate}
 
 \subsection{Bibliografia}
