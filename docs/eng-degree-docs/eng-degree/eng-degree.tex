@@ -587,8 +587,15 @@ Cechy wybrane do procesu uczenia były również oceniane pod kątem stabilnośc
 Wartościowe informacje obejmowały rodzaj klasyfikacji (binarna, wieloklasowa), rozmiar danych, ich złożoność oraz możliwość istnienia nieliniowych zależności. \footnote{ S. 1 - 2; A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, IEEE Transactions on Medical Imaging, 02.02.2010}
 
 %2. Wybór Algorytmów Konwolucyjnych:
-Ze względu na specyfikę zadania rozpoznawania obrazów, zdecydowano się na wykorzystanie algorytmów konwolucyjnych (CNN).
+Ze względu na specyfikę zadania rozpoznawania obrazów, zdecydowano się na wykorzystanie algorytmów konwolucyjnych (\textit{convolutional neural network}).
 Algorytmy te są efektywne w przetwarzaniu obrazów, zdolne do automatycznego wyodrębniania hierarchicznych cech z danych. \footnote{Abstrakt; Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, Karthik B., Ramkumar G., ECS - The Electrochemical Society, 2022}
+
+W przypadku modelów rozpoznawania obrazów, kluczowymi są następujące wartości będące wynikiem procesu uczenia:
+\begin{itemize}
+    \item wagi -- każdy neuron w sieci ma powiązaną wagę z każdym połączeniem z poprzednią warstwą. Wagi te działają jak filtry, pomagając modelowi w identyfikacji różnych cech obrazu, takich jak krawędzie, tekstury lub określone kształty. Na przykład w początkowych warstwach wagi mogą pomóc w wykrywaniu prostych krawędzi, podczas gdy w głębszych warstwach mogą pomóc w rozpoznawaniu bardziej złożonych cech, takich jak części obiektów lub nawet całe obiekty\footnote{S. 2; Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Ceredigion, Anglia, 12.2015};
+    \item odchylenia -- pomagają neuronom być aktywowanym lub uruchamianym w obecności konkretnej cechy, nawet jeśli ważona suma wejść jest niska\footnote{S. 7; Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks...};
+    \item propagacja wsteczna -- jest kluczową częścią szkolenia sieci neuronowych. Podczas przejścia do przodu obraz jest przetwarzany przez sieć warstwa po warstwie, od wejścia do wyjścia, co skutkuje przewidywaną klasyfikacją. Dane wyjściowe są następnie porównywane z rzeczywistą etykietą obrazu i obliczany jest błąd (strata). Propagacja wsteczna to proces przekazywania tego błędu z powrotem przez sieć, z warstwy wyjściowej do warstwy wejściowej, w celu dostosowania wag i uprzedzeń. Regulacja ta odbywa się w sposób minimalizujący błąd, dzięki czemu sieć lepiej klasyfikuje obrazy. Algorytm oblicza gradient funkcji straty w odniesieniu do wag i uprzedzeń i wykorzystuje techniki optymalizacji, takie jak zejście gradientowe, do aktualizacji tych parametrów. \footnote{S. 541-543; Y. LeCun [i inni], Backpropagation Applied to Handwritten Zip Code Recognition, AT\&T 3ell Laboratories, Holmdei, NJ 07733 Stany Zjednoczone Ameryki, 12.1989}
+\end{itemize}
 
 %3. Wykorzystanie CoreML i Create ML:
 Zdecydowano się na technologie takie jak CoreML i Create ML, które są zoptymalizowane pod kątem platform Apple.
@@ -1317,6 +1324,7 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
     \item Karthik B., Ramkumar G., Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, ECS - The Electrochemical Society, 2022
     \item Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
     \item Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID ‑- 19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
+    \item Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Ceredigion, Anglia, 12.2015
 \end{enumerate}
 
 \end{document}
