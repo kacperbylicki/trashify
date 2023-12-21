@@ -411,7 +411,6 @@ Wady:
     \item niższa wydajność w porównaniu do natywnych aplikacji mobilnych, zwłaszcza w przypadku bardziej złożonych i wymagających aplikacji;
     \item niektóre natywne funkcjonalności mogą być trudne lub niemożliwe do osiągnięcia w React Native, co może wymagać stworzenia dodatkowego natywnego kodu;
     \item potrzeba znajomości natywnych systemów operacyjnych i ich różnic w celu tworzenia zoptymalizowanych aplikacji dla każdej platformy;
-    \item wyższa krzywa uczenia się dla początkujących programistów, którzy muszą nauczyć się zarówno JavaScript, jak i architektury React Native.
 \end{enumerate}
 
 \textbf{Flutter\\}
@@ -463,7 +462,7 @@ Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CN
 Ważnymi metrykami dla tej architektury uczenia maszynowego są:
 \begin{itemize}[label=--]
     \item precyzja -- ta metryka mierzy dokładność pozytywnych przewidywań. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do całkowitej liczby przewidywanych pozytywnych obserwacji;
-    \item czułość (\textit{eng. Recall}) -- mierzy zdolność modelu do znajdowania wszystkich istotnych instancji w zbiorze danych. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do wszystkich obserwacji w rzeczywistej klasie;
+    \item czułość (eng. \textit{Recall}) -- mierzy zdolność modelu do znajdowania wszystkich istotnych instancji w zbiorze danych. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do wszystkich obserwacji w rzeczywistej klasie;
     \item miara F1 -- miara F1 jest miarą dokładności modelu, która uwzględnia zarówno precyzję, jak i wycofanie. Jest to średnia harmoniczna precyzji i wycofania, zapewniająca równowagę między tymi dwoma wskaźnikami. Wynik F1 osiąga najlepszą wartość przy 1 (idealna precyzja i wycofanie), a najgorszą przy 0.
 \end{itemize}
 
@@ -644,7 +643,7 @@ Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewnie
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
 \paragraph{Aplikacja mobilna\\}
-\forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres czasu, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
+\forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 
 \subsection{Opis sytuacji faktycznej}
 
@@ -661,7 +660,7 @@ Funkcja kosztu została zdefiniowana, oceniając różnicę między prognozami m
 Wartość tej funkcji jest minimalizowana w trakcie procesu optymalizacji.
 
 %4. Wybór Algorytmu Optymalizacyjnego:
-Algorytm optymalizacyjny, tak jak SGD (\textit{eng. Stochastic Gradient Descent}), został wybrany do minimalizacji funkcji kosztu.
+Algorytm optymalizacyjny, tak jak SGD (eng. \textit{Stochastic Gradient Descent}), został wybrany do minimalizacji funkcji kosztu.
 Dobór współczynnika uczenia był przedmiotem optymalizacji, aby zapewnić szybkie, ale stabilne dostosowanie wag modelu.
 
 %5. Przeprowadzenie Iteracji:
@@ -989,7 +988,7 @@ Aplikację można podzielić na cztery moduły, które obejmują:
             \item W panelu użytkownika użytkownik może zarządzać swoimi danymi, które można edytować.
             \item Istnieje przycisk przekierowujący użytkownika do ustawień aplikacji.
             \item Użytkownik ma możliwość zmiany motywu aplikacji na jasny lub ciemny.
-            \item Możliwość wylogowania.
+            \item Dostępna jest opcja pełnego wylogowania z aplikacji.
         \end{itemize}
 \end{itemize}
 
@@ -1030,7 +1029,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Rysunek 3.15 przedstawia panel odzyskiwania hasła, który to wykorzystywane jest przez użytkowników w celu odzyskania hasła. Użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (eng. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
+\forceindent{Rysunek 3.15 przedstawia panel odzyskiwania hasła, który to wykorzystywany jest przez użytkowników w celu odzyskania hasła. Użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (eng. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
 
 \begin{figure}[H]
     \textbf{\caption{Panel odzyskiwania hasła}}
@@ -1099,7 +1098,7 @@ W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z
 
 \subsection{Algorytmy i techniki wykorzystane do nauki modelu uczenia maszynowego}
 \forceindent \subsection{Konwolucyjne sieci neuronowe}
-\forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (\textit{eng. Convolutional neural network - CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
+\forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (eng. \textit{Convolutional neural network - CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
 
 Image Feature Print V2 jest narzędziem w CreateML, które znacznie usprawnia proces ekstrakcji cech. Wykorzystując je wraz ze wstępnie wytrenowaną CNN, skutecznie dostosowaliśmy sieć do unikalnych cech naszego zbioru danych. Ta kombinacja pozwoliła na zniuansowaną analizę cech przestrzennych, kluczową dla identyfikacji określonych wzorców na naszych obrazach, takich jak rozróżnianie kolorów, oznaczeń, kształtów pojemników.
 
