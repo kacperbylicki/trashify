@@ -268,7 +268,7 @@ Składa się on z głównych trzech części:
 
 \paragraph{Warstwa komunikacji z bazą danych}
 \subparagraph{Mapowanie obiektowo-relacyjne, mapowanie obiektowo-dokumentowe i budowniczy kwerend\\}
-\forceindent  Mapery obiektowo-relacyjne, obiektowo-dokumentowe czy budowniczy kwerend są niezbędnymi narzędziami do utrzymywania deklaratywnego podejścia do komunikacji z systemem bazo-danowym.
+\forceindent  Mapery obiektowo-relacyjne, obiektowo-dokumentowe czy budowniczy kwerend są niezbędnymi narzędziami do utrzymywania deklaratywnego podejścia do komunikacji z systemem bazodanowym.
 Na rynku dostępnych jest wiele bibliotek oferujących konkurujące rozwiązania.
 Zespół postanowił zbadać możliwość wykorzystania każdego z kategorii abstrakcji, celem wyłonienia najbardziej dopasowanego do potrzeb rozwiązania.
 Wybór ten determinuje ilość złożoności i kodu bazowego, a także wymagania techniczne dotyczące konfiguracji bazy danych.
@@ -357,7 +357,7 @@ Relacje te są zwykle ilustrowane za pomocą różnych typów modeli danych.
 Kolumny są traktowane jako pola przechowujące nazwę danej zmiennej (na przykład identyfikatorUżytkownika) i typ SQL, podczas gdy wiersze przechowują rzeczywiste wartości.
 Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami danych, które uruchamiają polecenia w sekwencji znanej jako transakcja.
 Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu\footnote{S. 1079-1112; Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.}.\\
-Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID\footnote{S. 1; Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.}:
+\forceindent Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID\footnote{S. 1; Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.}:
 \begin{enumerate}[label=--]
     \item Atomiczność (eng. \textit{Atomicity}) -- wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
     \item Spójność (eng. \textit{Consistency}) -- dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
@@ -826,7 +826,7 @@ Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników o
 
 \subsection{Diagramy sekwencji}
 
-\forceindent Diagramy sekwencji przedstawiają istniejące w aplikacji serwerowej procesy, umożliwiające z niej użytkowanie.
+\forceindent Diagramy sekwencji przedstawiają istniejące w aplikacji serwerowej procesy, ścieżki oraz kolejność wykonywania operacji.
 
 \begin{figure}[htbp]
     \textbf{\caption{Diagram logowania użytkownika}}
@@ -850,7 +850,7 @@ Można owy proces podzielić na następujące odnogi:
 
 Rysunek 3.4 przedstawia diagram zmiany adresu email.
 W ramach tego procesu wysyłana jest wiadomość na wskazany adres, w której to zawarty jest link do zmiany hasła.
-Tenże link zawiera w sobie token o żywotności rzędu 24 godzin w postaci parametry kwerendy.
+Tenże link zawiera w sobie token o żywotności rzędu 24 godzin.
 Odnogi decyzyjne w tym procesie można podzielić na następujące:
 \begin{itemize}[label=--]
     \item adres email jest już zajęty -- odrzucenie żądania;
@@ -875,7 +875,7 @@ Jego proces posiada jedno drzewko decyzyjne, którego wymogiem jest uwierzytelni
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-Rysunek 3.6 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formularzu rejestracji użytkownik otrzymuje wiadomość email pod wskazanym adresem wraz z linkiem do potwierdzenia rejestracji. Po wejściu na witrynę do której prowadzi link, konto użytkownika jest potwierdzone i może rozpocząć on korzystanie z aplikacji.
+Rysunek 3.6 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formularzu rejestracji użytkownik otrzymuje wiadomość email pod wskazanym adresem wraz z linkiem do potwierdzenia rejestracji. Po wejściu na witrynę, do której prowadzi link, konto użytkownika zostaje potwierdzone i może rozpocząć on korzystanie z aplikacji.
 
 % \begin{figure}[h]
 %     \textbf{\caption{Diagram resetu hasła użytkownika}}
@@ -889,7 +889,7 @@ Rysunek 3.6 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formul
 \forceindent Na rysunku 3.7 znajduje się diagram komunikacji między aplikacją serwerową i mobilną.
 Diagram ten ma strukturę przedstawiającą interakcje między różnymi komponentami w systemie w kolejności ich występowania.
 
-Na najwyższym poziomie diagram ilustruje interakcje między użytkownikiem (Użytkownik), aplikacją mobilną (Aplikacja Mobilna) i różnymi usługami zaplecza, w tym bramą API (Bramka API), usługą konta użytkownika (Serwis Konta Użytkownika), usługa zarządzania koszami na śmieci (Serwis Pojemników na Śmieci), repozytorium kont użytkowników (Repozytorium Konta Użytkownika), repozytorium koszy na śmieci (Repozytorium Pojemników na Śmieci) oraz usługa przesyłania wiadomości e-mail (Serwis Wiadomości Email).
+Na najwyższym poziomie diagram ilustruje interakcje między użytkownikiem (Użytkownik), aplikacją mobilną (Aplikacja Mobilna) i różnymi usługami zaplecza, w tym bramą API (Bramka API), usługą konta użytkownika (Serwis Konta Użytkownika), usługą zarządzania koszami na śmieci (Serwis Pojemników na Śmieci), repozytorium kont użytkowników (Repozytorium Konta Użytkownika), repozytorium koszy na śmieci (Repozytorium Pojemników na Śmieci) oraz usługą przesyłania wiadomości e-mail (Serwis Wiadomości Email).
 
 Dodatkowo, diagram pokazuje mikrousługę wiadomości e-mail (Mikroserwis Wiadomości Email), która może być wywoływana w celu wysyłania powiadomień lub potwierdzeń do użytkownika. W trakcie całego procesu różne operacje zwracają wyniki (wynik operacji), które są przekazywane z powrotem przez system, ostatecznie dostarczając użytkownikowi widok lub odpowiedź za pośrednictwem aplikacji mobilnej.
 
@@ -1081,11 +1081,11 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \includegraphics[width=8cm, keepaspectratio]{./static/mobile/update-email.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
-\begin{figure}[H]
+\begin{figure}[h]
     \textbf{\caption{Widok aktualizowania hasła użytkownika}}
     \centering
     \vspace{0.55em}
-    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/update-password.jpg}\\
+    \includegraphics[width=6cm, keepaspectratio]{./static/mobile/update-password.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
@@ -1095,10 +1095,9 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 Całość komunikacji pomiędzy bramką interfejsu aplikacji a mikroserwisami, oparta jest na protokole gRPC. Wiadomości wysyłane są za pomocą protobuforów, a komunikacja z klientem oparta jest na protokole HTTPS.
 
 W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
-
 \subsection{Algorytmy i techniki wykorzystane do nauki modelu uczenia maszynowego}
-\forceindent \subsection{Konwolucyjne sieci neuronowe}
-\forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (eng. \textit{Convolutional neural network - CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
+\subsection{Konwolucyjne sieci neuronowe}
+\forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (eng. \textit{Convolutional neural network -- CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
 
 Image Feature Print V2 jest narzędziem w CreateML, które znacznie usprawnia proces ekstrakcji cech. Wykorzystując je wraz ze wstępnie wytrenowaną CNN, skutecznie dostosowaliśmy sieć do unikalnych cech naszego zbioru danych. Ta kombinacja pozwoliła na zniuansowaną analizę cech przestrzennych, kluczową dla identyfikacji określonych wzorców na naszych obrazach, takich jak rozróżnianie kolorów, oznaczeń, kształtów pojemników.
 
@@ -1182,7 +1181,7 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
 
 \subsection{Instrukcja developerska aplikacji serwerowej}
 
-\forceindent Celem odpalenia lokalnej instancji aplikacji serwerowej, użytkownik potrzebuje następujących narzędzi:
+\forceindent Celem uruchomienia lokalnej instancji aplikacji serwerowej, użytkownik potrzebuje następujących narzędzi:
 \begin{itemize}[label=--]
     \item środowiska rozruchomieniowego Node.js w wersji 20.9 bądź nowszej;
     \item menedżera paczek yarn w wersji 1.22.19;
@@ -1208,7 +1207,7 @@ Przed rozpoczęciem procesu budowy kontenerów niezbędnym jest stworzenie pliku
     cp ./.env.example ./.env
 \end{lstlisting}
 
-Po tej operacji, należy zbudować i odpalić kontenery za pomocą komendy:
+Po tej operacji, należy zbudować i uruchomić kontenery za pomocą komendy:
 \begin{lstlisting}
     docker compose up
 \end{lstlisting}
@@ -1267,15 +1266,6 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
 \end{itemize}
 
 \section{Wykorzystane materiały i bibliografia związana z realizacją projektu}
-
-\subsection{Załączniki}
-
-\begin{enumerate}
-    \item Kod źródłowy aplikacji serwerowej;
-    \item Kod źródłowy aplikacji mobilnej;
-    \item Dokumentacja ścieżek żądań aplikacji serwerowej w postaci archiwum zip;
-    \item Prezentacja audio-wizualna aplikacji mobilnej w formacie mp4 -- link: \url{https://drive.google.com/file/d/1TcejX7UCXHLbCm9ELwwNFnNJALqdSroy/view}
-\end{enumerate}
 
 \subsection{Bibliografia}
 
@@ -1336,6 +1326,15 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
     \item Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID ‑- 19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
     \item Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Ceredigion, Anglia, 12.2015
+\end{enumerate}
+
+\subsection{Załączniki}
+
+\begin{enumerate}
+    \item Kod źródłowy aplikacji serwerowej;
+    \item Kod źródłowy aplikacji mobilnej;
+    \item Dokumentacja ścieżek żądań aplikacji serwerowej w postaci archiwum zip;
+    \item Prezentacja audio-wizualna aplikacji mobilnej w formacie mp4 -- link: \url{https://drive.google.com/file/d/1TcejX7UCXHLbCm9ELwwNFnNJALqdSroy/view}
 \end{enumerate}
 
 \end{document}
