@@ -469,32 +469,32 @@ Ważnymi metrykami dla tej architektury uczenia maszynowego są:
 %2. Parametry Modelu:
 \textbf{Parametry modelu:}
 \begin{enumerate}[label=--]
-    \item liczba warstw konwolucyjnych: 5 warstw;
-    \item liczba warstw gęstych: 2 warstw;
-    \item rozmiar filtrów konwolucyjnych: 3 x 3;
-    \item funkcja aktywacji: ReLU (Rectified Linear Unit);
-    \item funkcja aktywacji na wyjściu: softmax (dla wieloklasowej klasyfikacji);
-    \item liczba neuronów na warstwie gęstej: 128;
-    \item rozmiar batcha: 32.
+\item liczba warstw konwolucyjnych: 5;
+\item liczba warstw gęstych: 2;
+\item rozmiar filtrów konwolucyjnych: 3 x 3;
+\item rozmiar batcha: 32.
 \end{enumerate}
+\textit{Uwzględnienie tych parametrów jest zgodne z zaawansowanymi możliwościami konfiguracji sieci neuronowych dostępnymi w CoreML, które pozwalają na szczegółowe dostosowanie architektury modelu do specyfikacji zadania.}
 
 %3. Proces Nauczania Modelu:
-Model został wytrenowany na zbiorze treningowym składającym się z 5000 obrazów, z podziałem 80/20 na zbiory treningowy i walidacyjny.
+\textbf{Proces Nauczania Modelu\\}
+\forceindent Model został wytrenowany na zbiorze treningowym składającym się z 5000 obrazów, z podziałem 80/20 na zbiory treningowy i walidacyjny.
 Proces nauczania obejmował 1000 iteracji.
-Użyto algorytmu optymalizacyjnego SGD (eng. \textit{Stochastic Gradient Descent}), w celu minimalizacji funkcji kosztu.
-W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby uniknąć przetrenowania modelu. \footnote{
+Użyto algorytmu optymalizacyjnego SGD (\textit{Stochastic Gradient Descent}), w celu minimalizacji funkcji kosztu.
+\textit{Wybór SGD jest zgodny z możliwościami optymalizacyjnymi dostępnymi w Create ML i CoreML, które wspierają różnorodne algorytmy optymalizacji dla efektywnego treningu.}
+W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, \textit{co jest krytycznym elementem w zapobieganiu przetrenowaniu modelu, szczególnie w kontekście złożonych architektur sieciowych.} \footnote{
     S. 1 -- 2; Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering University of Utah, 14.06.2016
 }
 
 %4. Ewaluacja Modelu:
 \textbf{Ewaluacja modelu\\}
-\forceindent Model został oceniony na zbiorze testowym, a osiągnięta dokładność wyniosła 68\%. 
-Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz miary F1, aby dostarczyć kompleksowej oceny skuteczności modelu.
+\forceindent Model został oceniony na zbiorze testowym, a osiągnięta dokładność wyniosła 68%.
+\textit{Dokładność ta jest interpretowana w kontekście możliwości ewaluacyjnych dostępnych w CoreML, które pozwalają na szczegółową analizę wydajności modelu na różnych zbiorach danych.}
+Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz miary F1, \textit{które są istotnymi wskaźnikami w ocenie modeli klasyfikacyjnych, szczególnie w kontekście zastosowań medycznych i rozpoznawania obrazów.}
 
 %5. Użyte Technologie:
 \textbf{Użyte technologie\\}
-\forceindent Do implementacji modelu wykorzystano technologie takie jak CoreML i Create ML, a jako ekstraktor cech użyto ,,Image Feature Print V2``. 
-Te technologie umożliwiają efektywną implementację modelu na platformach Apple.
+\forceindent Do implementacji modelu wykorzystano technologie takie jak CoreML i Create ML, a jako ekstraktor cech użyto ,,Image Feature Print V2. \textit{Wybór tych technologii umożliwia efektywną implementację modelu na platformach Apple, dzięki ich natywnej integracji z systemem operacyjnym iOS oraz zoptymalizowanemu wykorzystaniu zasobów sprzętowych urządzeń Apple.} ,,Image Feature Print V2 \textit{jako ekstraktor cech jest zgodny z najnowszymi standardami przetwarzania obrazu i uczenia maszynowego, oferując zaawansowane możliwości w automatycznym wydobywaniu cech z obrazów.} (Rozwinięte w punkcie C3.10.)
 
 \paragraph{Preprocesowanie danych\\}
 %1. Normalizacja Danych:
@@ -516,7 +516,7 @@ Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, S
 
 %4. Konwersja Do Formatu Wejściowego Modelu:
 Model wymagał, aby dane były w odpowiednim formacie, który umożliwia technologiom takim jak CoreML efektywne ich przetwarzanie.
-Zastosowano konwersję obrazów do formatu zgodnego z wymaganiami modelu.
+Zastosowano konwersję obrazów do formatu JPEG zgodnego z wymaganiami modelu.
 
 %5. Etykietowanie Danych:
 Ważnym krokiem było przypisanie etykiet do obrazów, co umożliwiło modelowi uczenie się odnośnie do różnych klas obiektów.
@@ -643,7 +643,7 @@ Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewnie
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
 \paragraph{Aplikacja mobilna\\}
-\forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
+\forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 
 \subsection{Opis sytuacji faktycznej}
 
@@ -668,7 +668,7 @@ Proces uczenia składał się z iteracji, gdzie dla każdego batcha danych model
 Liczba iteracji była ustalona na 1000, co pozwalało na wystarczającą liczbę aktualizacji.
 
 %6. Techniki Regularyzacji:
-Zastosowano techniki regularyzacji, takie jak dropout, które pomagały w zapobieganiu przetrenowaniu modelu.
+Zastosowano techniki regularyzacji, takie jak dropout, które pomagały w zapobieganiu przetrenowania modelu.
 Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co poprawia zdolność generalizacji modelu.
 
 %7. Monitorowanie Skuteczności:
@@ -1096,21 +1096,22 @@ Całość komunikacji pomiędzy bramką interfejsu aplikacji a mikroserwisami, o
 
 W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
 \subsection{Algorytmy i techniki wykorzystane do nauki modelu uczenia maszynowego}
-\subsection{Konwolucyjne sieci neuronowe}
+
+\subsubsection{Konwolucyjne sieci neuronowe}
 \forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (eng. \textit{Convolutional neural network -- CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
 
 Image Feature Print V2 jest narzędziem w CreateML, które znacznie usprawnia proces ekstrakcji cech. Wykorzystując je wraz ze wstępnie wytrenowaną CNN, skutecznie dostosowaliśmy sieć do unikalnych cech naszego zbioru danych. Ta kombinacja pozwoliła na zniuansowaną analizę cech przestrzennych, kluczową dla identyfikacji określonych wzorców na naszych obrazach, takich jak rozróżnianie kolorów, oznaczeń, kształtów pojemników.
 
 Nasza metoda polegała na dostrojeniu wstępnie wytrenowanego modelu do naszego zbioru danych, co jest procesem zarówno efektywnym czasowo, jak i skutecznym. To dostrojenie było niezbędne do dostosowania możliwości modelu do konkretnych celów naszego projektu w zakresie rozpoznawania i klasyfikacji obrazów.
 
-\subsection{Uczenie nadzorowane}
+\subsubsection{Uczenie nadzorowane}
 \forceindent W ramach naszej pracy zastosowaliśmy uczenie nadzorowane, opierając się na oznaczonym zbiorze danych, aby skutecznie szkolić nasz model. Każdy obraz w tym zbiorze danych został precyzyjnie oznaczony etykietą identyfikującą konkretny typ kontenera. W trakcie treningu nasza konwolucyjna sieć neuronowa przeszła proces nauki, podczas którego zapoznawała się z charakterystycznymi cechami i wzorcami obrazów, a następnie łączyła je z odpowiadającymi etykietami. Ten proces umożliwił modelowi skuteczne przyswajanie cech definiujących każdy rodzaj kontenera.
 
 W celu oceny wydajności naszego modelu korzystaliśmy z różnych miar, takich jak dokładność, precyzja, przywołanie, czułość i miara F1. Te wskaźniki dostarczały nam istotnych informacji na temat zdolności modelu do poprawnego identyfikowania poszczególnych typów kontenerów. Praktyczne zastosowanie tych miar pozwoliło nam szczegółowo analizować skuteczność naszego modelu w kontekście naszego konkretnego zadania, co było kluczowe dla oceny jego przydatności i precyzji w identyfikacji różnorodnych kontenerów.
 
 \subsection{Proces szkolenia}
 \forceindent Proces szkoleniowy obejmował dostarczanie dużej liczby oznaczonych obrazów do sieci CNN. Sieć przetworzyła te obrazy przez swoje warstwy, dostosowując swoje wewnętrzne parametry (wagi i odchylenia) na podstawie błędu pomiędzy prognozami a rzeczywistymi etykietami (propagacja wsteczna).
-Ten iteracyjny proces trwa, dopóki model nie osiągnie zadowalającego poziomu dokładności, wskazującego na jego zdolność do dokładnej klasyfikacji nowych, niewidzianych obrazów.
+Ten iteracyjny proces trwał, dopóki model nie osiągnął zadowalającego poziomu dokładności, wskazującego na jego zdolność do dokładnej klasyfikacji nowych, niewidzianych obrazów.
 
 \subsection{Wyzwania i rozważania}
 \forceindent Kluczowym wyzwaniem w szkoleniu CNN do zadań klasyfikacji obrazów, takich jak to, jest zapewnienie wystarczająco dużego i zróżnicowanego zbioru danych, aby zapobiec nadmiernemu dopasowaniu i poprawić zdolność modelu do uogólniania.
@@ -1118,45 +1119,59 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
 
 \subsection{Analiza wydajności modelu klasyfikacji pojemników}
 
-\subsubsection{Pojemniki na plastik}
+Analiza wydajności modelu klasyfikacji pojemników na odpady przeprowadzona została poprzez ocenę trzech kluczowych wskaźników: precyzji, czułości oraz miary F1 dla różnych kategorii pojemników na odpady. W celu ułatwienia interpretacji wyników, wyniki te zostały odniesione do tabeli referencyjnej, która określa granice procentowe dla oceny skuteczności modelu.
 
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 55\% co oznacza, że nas model prawidłowo rozpoznaje 55\% pojemników plastikowych przez model, co wskazuje na rzadkie błędne klasyfikacje innych rodzajów pojemników jako plastikowych;
-    \item osiągnięta czułość to 70\%, a więc model efektywnie identyfikuje 70\% rzeczywistych plastikowych pojemników, co świadczy o jego zdolności do wykrywania plastikowych pojemników wśród różnorodnych danych;
-    \item miara F1 wyniosła 0,616 -- jest to wysoki wynik, który podkreśla równowagę między precyzją a czułością, minimalizując błędne klasyfikacje.
+\subsubsection{Pojemniki na plastik}
+\begin{itemize}
+    \item Uzyskana precyzja wyniosła 55\%, co klasyfikuje się jako umiarkowaną efektywność modelu w identyfikacji pojemników plastikowych.
+    \item Czułość osiągnięta na poziomie 70\% świadczy o zdolności modelu do efektywnego wykrywania plastikowych pojemników.
+    \item Miara F1, wynosząca 0,616, wskazuje na umiarkowaną równowagę między precyzją a czułością.
 \end{itemize}
 
 \subsubsection{Pojemniki na papier}
-
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 74\%, co oznacza że 74\% zidentyfikowanych przez model pojemników papierowych faktycznie takimi jest, świadcząc o wysokiej skuteczności modelu;
-    \item osiągnięta czułość to 64\%, a więc model identyfikuje 64\% wszystkich istniejących pojemników papierowych, co wskazuje na jego zdolność do wykrywania pojemników papierowych;
-    \item miara F1 wyniosła 0,686 -- jest to wynik sygnalizujący dobrą równowagę między precyzją a czułością, co jest kluczowe w dokładnej klasyfikacji pojemników papierowych.
+\begin{itemize}
+    \item Precyzja na poziomie 74\% świadczy o wysokiej skuteczności modelu w identyfikacji pojemników papierowych.
+    \item Czułość wynosząca 64\% wskazuje na dość dobre umiejętności modelu w wykrywaniu pojemników papierowych w zbiorze danych.
+    \item Miara F1, osiągając 0,686, potwierdza dobrą równowagę między precyzją a czułością.
 \end{itemize}
 
 \subsubsection{Pojemniki na odpady mieszane}
-
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 60\%, co oznacza że model wykazuje umiarkowaną zdolność do poprawnego identyfikowania pojemników na odpady mieszane;
-    \item osiągnięta czułość to 59\%, a więc model rozpoznaje 59\% rzeczywistych przypadków pojemników na odpady mieszane;
-    \item miara F1 wyniosła 0.595 -- jest to wynik umiarkowany, wskazujący na możliwości poprawy w precyzji oraz czułości.
+\begin{itemize}
+    \item Precyzja wynosząca 60\% wskazuje na umiarkowaną skuteczność modelu w tej kategorii.
+    \item Czułość na poziomie 59\% również świadczy o umiarkowanej zdolności do wykrywania pojemników na odpady mieszane.
+    \item Miara F1, wynosząca 0.595, odzwierciedla umiarkowaną równowagę między precyzją a czułością.
 \end{itemize}
 
 \subsubsection{Pojemniki na szkło}
-
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 72\%: co oznacza, że 72\% obrazów są efektywnie identyfikowane jako pojemniki szklane, z minimalną liczbą błędnych identyfikacji;
-    \item osiągnięta czułość to 55\% -- wskazuje to na istnienie ryzyka, że model może przeoczyć pewne obrazy pojemników szklanych;
-    \item miara F1 wyniosła 0,624 -- jest to wynik wskazujący umiarkowaną równowagę między precyzją a czułością w klasyfikacji pojemników szklanych.
+\begin{itemize}
+    \item Precyzja na poziomie 72\% wskazuje na dobrą skuteczność modelu w identyfikacji pojemników szklanych.
+    \item Czułość wynosząca 55\% wskazuje na umiarkowane ryzyko przeoczenia obrazów pojemników szklanych.
+    \item Miara F1 na poziomie 0,624 świadczy o umiarkowanej równowadze między precyzją a czułością.
 \end{itemize}
 
 \subsubsection{Pojemniki na odpady biodegradowalne}
-
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 65\% -- około dwóch trzecich obrazów sklasyfikowanych jako pojemniki na odpady biodegradowalne jest poprawnie zidentyfikowanych;
-    \item osiągnięta czułość to 65\% -- model efektywnie wykrywa 65\% rzeczywistych pojemników biodegradowalnych;
-    \item miara F1 wyniosła 0,65 -- model wykazuje dobrą równowagę między precyzją a czułością, co jest pozytywne dla klasyfikacji pojemników biodegradowalnych.
+\begin{itemize}
+    \item Precyzja wynosząca 65\% świadczy o dość dobrej skuteczności modelu w tej kategorii.
+    \item Czułość również na poziomie 65\% wskazuje na zdolność do efektywnego wykrywania pojemników biodegradowalnych.
+    \item Miara F1 wynosząca 0,65 pokazuje dobrą równowagę między precyzją a czułością.
 \end{itemize}
+
+\subsubsection{Punkt odniesienia: Tabela oceny wyników}
+Do oceny wyników modelu została wykorzystana poniższa tabela referencyjna, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Ocena & Precyzja (\%) & Czułość (\%) & Miara F1 \\ \hline
+Niska & < 50 & < 50 & < 0.5 \\ \hline
+Umiarkowana & 50 - 69 & 50 - 69 & 0.5 - 0.69 \\ \hline
+Dobra & 70 - 84 & 70 - 84 & 0.7 - 0.84 \\ \hline
+Bardzo dobra & \textgreater{}= 85 & \textgreater{}= 85 & \textgreater{}= 0.85 \\ \hline
+\end{tabular}
+\caption{Tabela referencyjna do oceny wyników modelu klasyfikacji pojemników}
+\label{tab:my-table}
+\end{table}
 
 \subsection{Wymagania sprzętowe i oprogramowania dla aplikacji mobilnej}
 \begin{itemize}[label=--]
