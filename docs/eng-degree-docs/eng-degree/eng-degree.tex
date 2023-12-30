@@ -53,10 +53,10 @@
     \SetTblrStyle{caption-tag}{red2}
 }
 
-\DefTblrTemplate{contfoot-text}{normal}{}
-\SetTblrTemplate{contfoot-text}{normal}
-\DefTblrTemplate{conthead-text}{normal}{}
-\SetTblrTemplate{conthead-text}{normal}
+\DefTblrTemplate{contfoot-text}{default}{}
+\DefTblrTemplate{conthead-text}{default}{}
+\DefTblrTemplate{conthead}{default}{}
+\DefTblrTemplate{capcont}{default}{}
 
 \newcommand{\forceindent}{\leavevmode{\parindent=1.3em\indent}}
 
@@ -126,7 +126,7 @@
     \hline
     Imię i nazwisko         & Izabela Janicka-Lipska \\
     \hline
-    Stopień / Tytuł naukowy & dr inż.               \\
+    Stopień / Tytuł naukowy & dr inż.                \\
     \hline
     Data i podpis           &                        \\ \hline
 \end{tabular}
@@ -274,7 +274,7 @@ Zespół postanowił zbadać możliwość wykorzystania każdego z kategorii abs
 Wybór ten determinuje ilość złożoności i kodu bazowego, a także wymagania techniczne dotyczące konfiguracji bazy danych.
 
 \textbf{Mapowanie obiektowo-relacyjne\\}
-\forceindent Wykorzystywanie mapowania obiektowo-relacyjnego (eng. \textit{Object Relational Mapping}) to powszechna praktyka w projektach programistycznych.
+\forceindent Wykorzystywanie mapowania obiektowo-relacyjnego (ang. \textit{Object Relational Mapping}) to powszechna praktyka w projektach programistycznych.
 Stanowi ono dodatkową warstwę abstrakcji nad sam język SQL, czy budowniczych kwerend, zapewniając automatyczną konwersję obiektów źródłowych na ich odpowiedniki zrozumiałe dla bazy danych oraz rekordów bazodanowych na obiekty.
 W kontekście baz danych, mapowanie obiektowo-relacyjne można uznać za najwyższą formę abstrakcji dla komunikacji z bazą danych w środowisku serwerowym.\footnote{S. 1-4; Alexandre Torres [i inni] Twenty years of object-relational mapping: A survey on patterns, solutions, and their implications on application design, 28.09.2016r.}
 
@@ -282,9 +282,9 @@ W środowisku node.js pojawiło się takowych wiele, między innymi:
 \begin{enumerate}[label=--]
     \item TypeORM -- wykorzystujący eksperymentalne dekoratory w języku Typescript celem deklarowania schematu encji w bazie danych. Zdecydowana większość operacji jest w nim dostępna za ich pomocą.
     \item Sequelize -- najstarszy na tej liście, pierwsze wzmianki na witrynie StackOverflow sięgają roku 2011. Jest on dojrzałym, pełnym funkcjonalności maperem, którego popularność odzwierciedlona jest w 1,5 miliona tygodniowych pobrań\footnote{Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}}.
-    \item Prisma -- kontrowersyjny maper, którego operacje łączenia (eng. \textit{join}) wykonywane są w sposób wirtualny, to znaczy poprzez wysłanie kilku kwerend do bazy danych i połączeniu ich wedle instrukcji użytkownika w ,,Prisma Engine``, który napisany został przy pomocy języka Rust, co zapewnia relatywne bezpieczeństwo oraz wysoką wydajność takiego rozwiązania\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.)\url{https://www.prisma.io/}}.
+    \item Prisma -- kontrowersyjny maper, którego operacje łączenia (ang. \textit{join}) wykonywane są w sposób wirtualny, to znaczy poprzez wysłanie kilku kwerend do bazy danych i połączeniu ich wedle instrukcji użytkownika w ,,Prisma Engine``, który napisany został przy pomocy języka Rust, co zapewnia relatywne bezpieczeństwo oraz wysoką wydajność takiego rozwiązania\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.)\url{https://www.prisma.io/}}.
     \item Drizzle -- maper obiecujący pełne typowanie, syntax podobny do tego znanego z SQLa oraz automatyczną generację schematów za pomocą biblioteki Zod.
-    \item Mikro-ORM -- oparty na domniemanych transakcjach, automatycznym grupowaniu kwerend za pomocą wzorca jednostki pracy (eng. \textit{Unit of Work}). Wzorowany jest na Hibernate, znanym z języka Java oraz Doctrine z PHP.\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}}
+    \item Mikro-ORM -- oparty na domniemanych transakcjach, automatycznym grupowaniu kwerend za pomocą wzorca jednostki pracy (ang. \textit{Unit of Work}). Wzorowany jest na Hibernate, znanym z języka Java oraz Doctrine z PHP.\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}}
 \end{enumerate}
 
 \newpage
@@ -294,14 +294,14 @@ Tak samo jak w przypadku mapowania obiektowo-relacyjnego, ma ono na celu uproszc
 
 W środowisku node.js na przestrzeni lat powstały między innymi następujące mapery obiektowo-dokumentowe:
 \begin{enumerate}[label=--]
-    \item mongoose -- dedykowany dla bazy MongoDB mapper obiektowo-dokumentowy. Posiada wiele funkcjonalności związane z procesem wzbogacania POJO (eng. \textit{plain-old-javascript-object}), ktore zapewniają walidację obiektów, dodawanie pól wirtualnych i inne.
-    \item prisma -- wcześniej wymieniony ORM, który posiada wsparcie dla MongoDB i funkcjonuje w trybie wymuszonej transakcyjności danych na bazie tzw. zbiorów replik (eng. \textit{replica set}).
+    \item mongoose -- dedykowany dla bazy MongoDB mapper obiektowo-dokumentowy. Posiada wiele funkcjonalności związane z procesem wzbogacania POJO (ang. \textit{plain-old-javascript-object}), ktore zapewniają walidację obiektów, dodawanie pól wirtualnych i inne.
+    \item prisma -- wcześniej wymieniony ORM, który posiada wsparcie dla MongoDB i funkcjonuje w trybie wymuszonej transakcyjności danych na bazie tzw. zbiorów replik (ang. \textit{replica set}).
 \end{enumerate}
 
 \textbf{Budowniczy kwerend\\}
 \forceindent  Budowniczy kwerend stanowią abstrakcję na język SQL w wybranym języku programowania.
 Pozwalają one na deklaratywne tworzenie kwerend za pomocą operacji takich jak: select, insert, join, delete, update, with, where, not, etc.
-Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne wsparcie intellisense w danym języku programowania oraz rozwiązują popularne problemy związane z cyberbezpieczeństwem przeprowadzania operacji na bazie danych, czego najpopularniejszym przykładem są operacje wstrzykiwania SQL`a (eng. \textit{SQL Injection})\footnote{Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}}.
+Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne wsparcie intellisense w danym języku programowania oraz rozwiązują popularne problemy związane z cyberbezpieczeństwem przeprowadzania operacji na bazie danych, czego najpopularniejszym przykładem są operacje wstrzykiwania SQL`a (ang. \textit{SQL Injection})\footnote{Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}}.
 
 \subsection{Typy baz danych}
 
@@ -315,27 +315,27 @@ Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL (niek
 Rodzaje nierelacyjnych struktur baz danych to:
 \begin{enumerate}[label=--]
     \item Key-value store -- jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość.
-    Klucz może być podobny do tego, jaki znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika.
-    Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji.
-    Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz.
-    Przykładami takich baz danych są Redis, Memcached, KeyDB, czy DragonflyDB\footnote{S. 5 -- 19; Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.}.
+          Klucz może być podobny do tego, jaki znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika.
+          Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji.
+          Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz.
+          Przykładami takich baz danych są Redis, Memcached, KeyDB, czy DragonflyDB\footnote{S. 5 -- 19; Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.}.
     \item Document store -- jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów.
-    Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON.
-    Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji.
-    Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych.
-    Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników.
-    Przykładem bazy danych zorientowanej na dokumenty jest MongoDB\footnote{S. 337; Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.}.
+          Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON.
+          Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji.
+          Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych.
+          Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników.
+          Przykładem bazy danych zorientowanej na dokumenty jest MongoDB\footnote{S. 337; Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.}.
     \item Wide-column store -- informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci.
-    Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach.
-    Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn.
-    Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data.
-    Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych.
-    Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym\footnote{S. 118 -- 122; K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.}.
+          Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach.
+          Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn.
+          Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data.
+          Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych.
+          Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym\footnote{S. 118 -- 122; K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.}.
     \item Graph store -- zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości.
-    Węzłem może być dowolny obiekt, miejsce lub osoba.
-    Krawędź definiuje relację między węzłami.
-    Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu.
-    Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source\footnote{S. 1548 -- 1552; I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia}.
+          Węzłem może być dowolny obiekt, miejsce lub osoba.
+          Krawędź definiuje relację między węzłami.
+          Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu.
+          Przykładem takowej jest Neo4j, oparta na grafach usługa bazodanowa oparta na Javie z edycją społecznościową open source\footnote{S. 1548 -- 1552; I.Fosić, K.Šolić, Graph Database Approach for Data Storing, Presentation and Manipulation, 20-24.0.52019, Opatija Croatia}.
 \end{enumerate}
 
 \textbf{Teoria CAP} \\
@@ -359,17 +359,17 @@ Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami da
 Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu\footnote{S. 1079-1112; Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.}.\\
 \forceindent Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID\footnote{S. 1; Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.}:
 \begin{enumerate}[label=--]
-    \item Atomiczność (eng. \textit{Atomicity}) -- wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
-    \item Spójność (eng. \textit{Consistency}) -- dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
-    \item Izolacja (eng. \textit{Isolation}) -- stan pośredni tranzakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
-    \item Trwałość (eng. \textit{Durability}) -- po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
+    \item Atomiczność (ang. \textit{Atomicity}) -- wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
+    \item Spójność (ang. \textit{Consistency}) -- dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
+    \item Izolacja (ang. \textit{Isolation}) -- stan pośredni tranzakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
+    \item Trwałość (ang. \textit{Durability}) -- po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
 \end{enumerate}
 
 
 \subsubsection{Komunikacyja między mikroserwisami}
 
 \forceindent \textbf{gRPC\\}
-\forceindent gRPC (eng. \textit{Google Remote Procedure Call}) jest frameworkiem służącym do wydajnej komunikacji pomiędzy aplikacjami za pomocą protokołu HTTP/2. Oparty na technologii protobuforów (eng. \textit{Protocol Buffers}), która to pozwala na komunikację pomiędzy serwisami za pomocą przesyłu binarnych danych w uporządkowanym strumieniu bajtów.\footnote{S. 2-4; Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry -- Paris-Saclay University, Jan 2020, Cancún, Mexico}
+\forceindent gRPC (ang. \textit{Google Remote Procedure Call}) jest frameworkiem służącym do wydajnej komunikacji pomiędzy aplikacjami za pomocą protokołu HTTP/2. Oparty na technologii protobuforów (ang. \textit{Protocol Buffers}), która to pozwala na komunikację pomiędzy serwisami za pomocą przesyłu binarnych danych w uporządkowanym strumieniu bajtów.\footnote{S. 2-4; Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry -- Paris-Saclay University, Jan 2020, Cancún, Mexico}
 
 \subsubsection{Aplikacja mobilna}
 
@@ -415,7 +415,7 @@ Wady:
 
 \textbf{Flutter\\}
 \indent Flutter to otwartoźródłowy framework do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe. \footnote{S. 6; Wenhao Wu, React Native vs Flutter, cross-platform mobile application frameworks, Finlandia, Metropolia University of Applied Sciences, 01.03.2018}
-    
+
 Zalety:
 \begin{enumerate}[label=--]
     \item możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji webowych i desktopowych;
@@ -426,20 +426,20 @@ Zalety:
 
 Wady:
 \begin{enumerate}[label=--]
- \item mniejsza społeczność deweloperów w porównaniu do innych popularnych frameworków, takich jak React Native czy Ionic;
- \item nieco większe rozmiary plików aplikacji ze względu na wykorzystanie wbudowanych bibliotek i narzędzi;
- \item brak w pełni natywnej wydajności w porównaniu do aplikacji napisanych w językach natywnych, takich jak Java lub Kotlin dla Androida i Objective-C lub Swift dla iOS.
+    \item mniejsza społeczność deweloperów w porównaniu do innych popularnych frameworków, takich jak React Native czy Ionic;
+    \item nieco większe rozmiary plików aplikacji ze względu na wykorzystanie wbudowanych bibliotek i narzędzi;
+    \item brak w pełni natywnej wydajności w porównaniu do aplikacji napisanych w językach natywnych, takich jak Java lub Kotlin dla Androida i Objective-C lub Swift dla iOS.
 \end{enumerate}
 
 \textbf{Języki natywne\\}
 \indent Programowanie aplikacji mobilnych przy użyciu języków natywnych odnosi się do tworzenia aplikacji przy użyciu języków i narzędzi dostarczanych przez platformę, dla której aplikacja jest tworzona. Na przykład aplikacje na iOS mogą być pisane w języku Swift lub Objective-C, podczas gdy aplikacje na Androida mogą być pisane w języku Kotlin lub Java.
-    
+
 Zalety:
 \begin{enumerate}[label=--]
     \item wysoka wydajność: Aplikacje natywne mają dostęp do pełnych możliwości platformy, co może skutkować szybszym i płynniejszym działaniem w porównaniu do aplikacji zbudowanych przy użyciu wieloplatformowych frameworków; \footnote{S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020}
     \item lepsze doświadczenie użytkownika: Aplikacje natywne mogą wykorzystywać komponenty interfejsu użytkownika specyficzne dla platformy, co zapewnia bardziej dopracowane i płynne wrażenia użytkownika;
     \item dostęp do funkcji urządzenia: Twórcy aplikacji natywnych mają dostęp do funkcji i możliwości specyficznych dla urządzenia, takich jak GPS, kamera i mikrofon, co pozwala im tworzyć aplikacje z zaawansowanymi funkcjami; \footnote{S. 16; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
-    \item solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (eng. \textit{IDE}), narzędzia do debugowania i struktury do testowania aplikacji;
+    \item solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (ang. \textit{IDE}), narzędzia do debugowania i struktury do testowania aplikacji;
     \item wykorzystanie zaawansowanych możliwości uczenia maszynowego dzięki integracji z Core ML oraz optymalizacja dla Neural Engine w urządzeniach Apple, co pozwala na wydajne i efektywne wykonywanie zadań związanych z AI, takich jak rozpoznawanie obrazu, przetwarzanie języka naturalnego czy analiza danych. \footnote{ Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml} }
 \end{enumerate}
 
@@ -462,39 +462,39 @@ Szczegółowo, użyto modelu opartego na konwolucyjnych sieciach neuronowych (CN
 Ważnymi metrykami dla tej architektury uczenia maszynowego są:
 \begin{itemize}[label=--]
     \item precyzja -- ta metryka mierzy dokładność pozytywnych przewidywań. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do całkowitej liczby przewidywanych pozytywnych obserwacji;
-    \item czułość (eng. \textit{Recall}) -- mierzy zdolność modelu do znajdowania wszystkich istotnych instancji w zbiorze danych. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do wszystkich obserwacji w rzeczywistej klasie;
+    \item czułość (ang. \textit{Recall}) -- mierzy zdolność modelu do znajdowania wszystkich istotnych instancji w zbiorze danych. Jest to stosunek poprawnie przewidywanych pozytywnych obserwacji do wszystkich obserwacji w rzeczywistej klasie;
     \item miara F1 -- miara F1 jest miarą dokładności modelu, która uwzględnia zarówno precyzję, jak i wycofanie. Jest to średnia harmoniczna precyzji i wycofania, zapewniająca równowagę między tymi dwoma wskaźnikami. Wynik F1 osiąga najlepszą wartość przy 1 (idealna precyzja i wycofanie), a najgorszą przy 0.
 \end{itemize}
 
 %2. Parametry Modelu:
 \textbf{Parametry modelu:}
 \begin{enumerate}[label=--]
-    \item liczba warstw konwolucyjnych: 5 warstw;
-    \item liczba warstw gęstych: 2 warstw;
+    \item liczba warstw konwolucyjnych: 5;
+    \item liczba warstw gęstych: 2;
     \item rozmiar filtrów konwolucyjnych: 3 x 3;
-    \item funkcja aktywacji: ReLU (Rectified Linear Unit);
-    \item funkcja aktywacji na wyjściu: softmax (dla wieloklasowej klasyfikacji);
-    \item liczba neuronów na warstwie gęstej: 128;
     \item rozmiar batcha: 32.
 \end{enumerate}
+\forceindent Uwzględnienie tych parametrów jest zgodne z zaawansowanymi możliwościami konfiguracji sieci neuronowych dostępnymi w CoreML, które pozwalają na szczegółowe dostosowanie architektury modelu do specyfikacji zadania.
 
 %3. Proces Nauczania Modelu:
-Model został wytrenowany na zbiorze treningowym składającym się z 5000 obrazów, z podziałem 80/20 na zbiory treningowy i walidacyjny.
+\textbf{Proces Nauczania Modelu\\}
+\forceindent Model został wytrenowany na zbiorze treningowym składającym się z 5000 obrazów, z podziałem 80/20 na zbiory treningowy i walidacyjny.
 Proces nauczania obejmował 1000 iteracji.
-Użyto algorytmu optymalizacyjnego SGD (eng. \textit{Stochastic Gradient Descent}), w celu minimalizacji funkcji kosztu.
-W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, aby uniknąć przetrenowania modelu. \footnote{
+Użyto algorytmu optymalizacyjnego SGD (ang. \textit{Stochastic Gradient Descent}), w celu minimalizacji funkcji kosztu.
+Wybór SGD jest zgodny z możliwościami optymalizacyjnymi dostępnymi w Create ML i CoreML, które wspierają różnorodne algorytmy optymalizacji dla efektywnego treningu.
+W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, {co jest krytycznym elementem w zapobieganiu przetrenowaniu modelu, szczególnie w kontekście złożonych architektur sieciowych. \footnote{
     S. 1 -- 2; Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering University of Utah, 14.06.2016
 }
 
 %4. Ewaluacja Modelu:
 \textbf{Ewaluacja modelu\\}
-\forceindent Model został oceniony na zbiorze testowym, a osiągnięta dokładność wyniosła 68\%. 
-Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz miary F1, aby dostarczyć kompleksowej oceny skuteczności modelu.
+\forceindent Model został oceniony na zbiorze testowym, a osiągnięta dokładność wyniosła 68\%.
+Dokładność ta jest interpretowana w kontekście możliwości ewaluacyjnych dostępnych w CoreML, które pozwalają na szczegółową analizę wydajności modelu na różnych zbiorach danych.
+Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności oraz miary F1, które są istotnymi wskaźnikami w ocenie modeli klasyfikacyjnych, szczególnie w kontekście zastosowań medycznych i rozpoznawania obrazów.
 
 %5. Użyte Technologie:
 \textbf{Użyte technologie\\}
-\forceindent Do implementacji modelu wykorzystano technologie takie jak CoreML i Create ML, a jako ekstraktor cech użyto ,,Image Feature Print V2``. 
-Te technologie umożliwiają efektywną implementację modelu na platformach Apple.
+\forceindent Do implementacji modelu wykorzystano technologie takie jak CoreML i Create ML, a jako ekstraktor cech użyto ,,Image Feature Print V2. Wybór tych technologii umożliwia efektywną implementację modelu na platformach Apple, dzięki ich natywnej integracji z systemem operacyjnym iOS oraz zoptymalizowanemu wykorzystaniu zasobów sprzętowych urządzeń Apple. ,,Image Feature Print V2 jako ekstraktor cech jest zgodny z najnowszymi standardami przetwarzania obrazu i uczenia maszynowego, oferując zaawansowane możliwości w automatycznym wydobywaniu cech z obrazów. (Rozwinięte w punkcie C3.10.)
 
 \paragraph{Preprocesowanie danych\\}
 %1. Normalizacja Danych:
@@ -512,11 +512,11 @@ To kroki mające na celu unifikację danych wejściowych, co ułatwia proces ucz
 %3. Usuwanie Zniekształceń:
 Aby zapobiec wprowadzeniu zniekształceń, które nie mają istotnego znaczenia dla rozpoznawania obrazów, zastosowano techniki usuwania szumów i filtry wygładzające.
 Działa to zarówno na korzyść procesu uczenia, jak i na efektywność modelu. \footnote{S. 7 -- 8; Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using
-Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022}
+    Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022}
 
 %4. Konwersja Do Formatu Wejściowego Modelu:
 Model wymagał, aby dane były w odpowiednim formacie, który umożliwia technologiom takim jak CoreML efektywne ich przetwarzanie.
-Zastosowano konwersję obrazów do formatu zgodnego z wymaganiami modelu.
+Zastosowano konwersję obrazów do formatu JPEG zgodnego z wymaganiami modelu.
 
 %5. Etykietowanie Danych:
 Ważnym krokiem było przypisanie etykiet do obrazów, co umożliwiło modelowi uczenie się odnośnie do różnych klas obiektów.
@@ -593,7 +593,7 @@ Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmó
 
 %8. Analiza Wydajności na Platformie Apple:
 Ponieważ model miał być implementowany na platformie Apple, uwzględniono specyfiki tego środowiska.
-Sprawdzono, czy wybrane algorytmy i technologie są zoptymalizowane pod kątem wydajności na urządzeniach 
+Sprawdzono, czy wybrane algorytmy i technologie są zoptymalizowane pod kątem wydajności na urządzeniach
 mobilnych.
 
 \subsection{Problemy architektoniczne}
@@ -642,12 +642,12 @@ W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL
 Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności)\footnote{S. 1 -- 4; Jiantao Pan, Software Testing, Carnegie Mellon University, Stany Zjednoczone Ameryki, Wiosna 1999}.
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
+\newpage
 \paragraph{Aplikacja mobilna\\}
-\forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres, w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
-
+\forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 \subsection{Opis sytuacji faktycznej}
 
-\subsubsection{Proces nauczania modelu\\}
+\subsubsection{Proces nauczania modelu}
 %1. Podział Danych:
 \forceindent Zbiór danych został podzielony na zbiór treningowy i zbiór walidacyjny w proporcji 80/20.
 Zbiór treningowy posłużył do nauczania modelu, podczas gdy zbiór walidacyjny był wykorzystywany do monitorowania jego skuteczności na danych nieuczonych.
@@ -660,7 +660,7 @@ Funkcja kosztu została zdefiniowana, oceniając różnicę między prognozami m
 Wartość tej funkcji jest minimalizowana w trakcie procesu optymalizacji.
 
 %4. Wybór Algorytmu Optymalizacyjnego:
-Algorytm optymalizacyjny, tak jak SGD (eng. \textit{Stochastic Gradient Descent}), został wybrany do minimalizacji funkcji kosztu.
+Algorytm optymalizacyjny SGD (ang. \textit{Stochastic Gradient Descent}) został wybrany do minimalizacji funkcji kosztu.
 Dobór współczynnika uczenia był przedmiotem optymalizacji, aby zapewnić szybkie, ale stabilne dostosowanie wag modelu.
 
 %5. Przeprowadzenie Iteracji:
@@ -668,7 +668,7 @@ Proces uczenia składał się z iteracji, gdzie dla każdego batcha danych model
 Liczba iteracji była ustalona na 1000, co pozwalało na wystarczającą liczbę aktualizacji.
 
 %6. Techniki Regularyzacji:
-Zastosowano techniki regularyzacji, takie jak dropout, które pomagały w zapobieganiu przetrenowaniu modelu.
+Zastosowano techniki regularyzacji, takie jak dropout, które pomagały w zapobieganiu przetrenowania modelu.
 Dropout polega na losowym wyłączaniu pewnych neuronów w trakcie treningu, co poprawia zdolność generalizacji modelu.
 
 %7. Monitorowanie Skuteczności:
@@ -747,43 +747,43 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
 \section{Zadania w projekcie}
 
 \begin{longtblr}[
-    caption = {Zadania w projekcie},
-]{
-    colspec = {
-        X[0.2,l]
-        X[0.4,l]
-        X[0.3,l]
-    },
-    hlines,
-    vlines,
-    colsep=1em,
+        caption = {Zadania w projekcie},
+    ]{
+        colspec = {
+                X[0.2,l]
+                X[0.4,l]
+                X[0.3,l]
+            },
+        hlines,
+        vlines,
+        colsep=1em,
     }
     Cele szczegółowe projektu & Zadania w projekcie oraz termin rozpoczęcia i zakończenia realizacji zadania & Osoby zaangażowane w realizację zadania \\
     \SetCell[r=5]{h} Cel 1: Przygotowanie modeli uczenia maszynowego
-        & Zadanie 1: Zebranie danych kontekstowych & 1. Kacper Bylicki \\
-        & Zadanie 2: Przygotowanie danych treningowych & {1. Kacper Bylicki\\2. Jakub Barczewski\\3. Marek Gerszendorf} \\
-        & Zadanie 3: Dobranie algorytmów uczenia maszynowego & {1. Kacper Bylicki\\2. Jakub Barczewski} \\
-        & Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego & 1. Kacper Bylicki \\
-        & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Kacper Bylicki} \\
+    & Zadanie 1: Zebranie danych kontekstowych & 1. Kacper Bylicki \\
+    & Zadanie 2: Przygotowanie danych treningowych & {1. Kacper Bylicki\\2. Jakub Barczewski\\3. Marek Gerszendorf} \\
+    & Zadanie 3: Dobranie algorytmów uczenia maszynowego & {1. Kacper Bylicki\\2. Jakub Barczewski} \\
+    & Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego & 1. Kacper Bylicki \\
+    & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Kacper Bylicki} \\
     \pagebreak
-    \SetCell[r=4]{h} Cel 2: Przygotowanie aplikacji serwerowej sterującej algorytmami uczenia maszynowego 
-        & Zadanie 1: Stworzenie diagramu architektury aplikacji & {1. Jakub Barczewski\\2. Kacper Bylicki} \\
-        & Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją serwerową a aplikacją mobilną &{1. Jakub Barczewski} \\
-        & Zadanie 3: Przeprowadzenie testów i poprawek & {1. Jakub Barczewski\\2. Kacper Bylicki\\3. Marek Gerszendorf} \\
-        & Zadanie 4: Dokonanie optymalizacji aplikacji & {1. Jakub Barczewski} \\
+    \SetCell[r=4]{h} Cel 2: Przygotowanie aplikacji serwerowej sterującej algorytmami uczenia maszynowego
+    & Zadanie 1: Stworzenie diagramu architektury aplikacji & {1. Jakub Barczewski\\2. Kacper Bylicki} \\
+    & Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją serwerową a aplikacją mobilną &{1. Jakub Barczewski} \\
+    & Zadanie 3: Przeprowadzenie testów i poprawek & {1. Jakub Barczewski\\2. Kacper Bylicki\\3. Marek Gerszendorf} \\
+    & Zadanie 4: Dokonanie optymalizacji aplikacji & {1. Jakub Barczewski} \\
     \SetCell[r=5]{h} Cel 3: Przygotowanie aplikacji mobilnej
-        & Zadanie 1: Stworzenie diagramu architektury aplikacji&{1. Marek Gerszendorf}\\
-        & Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-        & Zadanie 3: Stworzenie prototypu aplikacji & {1. Marek Gerszendorf}\\
-        & Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją a aplikacją serwerową & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-        & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Marek Gerszendorf}\\
+    & Zadanie 1: Stworzenie diagramu architektury aplikacji&{1. Marek Gerszendorf}\\
+    & Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    & Zadanie 3: Stworzenie prototypu aplikacji & {1. Marek Gerszendorf}\\
+    & Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją a aplikacją serwerową & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Marek Gerszendorf}\\
     \pagebreak
-    \SetCell[r=5]{h} Cel 4: Przygotowanie dokumentacji technicznej projektu 
-        & Zadanie 1: Stworzenie diagramu architektury projektu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-        & Zadanie 2: Rozrysowanie wzorca relacji w bazie danych (diagram ERD)&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-        & Zadanie 3: Przygotowanie diagramu komunikacji aplikacji serwerowej oraz mobilnej&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-        & Zadanie 4: Przygotowanie diagramu sekwencji do procesów aplikacji&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
-        & Zadanie 5: Stworzenie instrukcji instalacyjnej oraz developerskiej&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    \SetCell[r=5]{h} Cel 4: Przygotowanie dokumentacji technicznej projektu
+    & Zadanie 1: Stworzenie diagramu architektury projektu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    & Zadanie 2: Rozrysowanie wzorca relacji w bazie danych (diagram ERD)&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    & Zadanie 3: Przygotowanie diagramu komunikacji aplikacji serwerowej oraz mobilnej&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    & Zadanie 4: Przygotowanie diagramu sekwencji do procesów aplikacji&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
+    & Zadanie 5: Stworzenie instrukcji instalacyjnej oraz developerskiej&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
 \end{longtblr}
 
 \section{Efekty realizacji projektu}
@@ -798,7 +798,7 @@ Finalnie, aplikacja serwerowa podzielona jest na cztery mikroserwisy, odpowiedni
     \item mikroserwis kont użytkownika -- odpowiedzialny za wszystkie operacje związane z zarządzaniem kontem, zmianą hasła, adresu email oraz autoryzację użytkowników;
     \item mikroserwis śmietników -- zajmujący się agregacją oraz komunikacją z bazą danych pod kątem wyszukiwania śmietników;
     \item mikroserwis emailowy -- jego jedynym zadaniem jest obsługa wysyłania wiadomości email;
-    \item bramka interfejsu aplikacji (eng. \textit{api gateway}) służąca za punkt dostępu do interfejsu, w której odbywa się komunikacja między mikroserwisami oraz autoryzacja i uwierzytelnianie użytkowników.
+    \item bramka interfejsu aplikacji (ang. \textit{api gateway}) służąca za punkt dostępu do interfejsu, w której odbywa się komunikacja między mikroserwisami oraz autoryzacja i uwierzytelnianie użytkowników.
 \end{itemize}
 
 
@@ -956,40 +956,40 @@ Aplikację można podzielić na cztery moduły, które obejmują:
 
 \begin{itemize}
     \item Moduł Autoryzacji:
-        \begin{itemize}
-            \item Użytkownik ma możliwość zalogowania się do aplikacji, podając swój adres e-mail i hasło.
-            \item Tworzenie konta polega na dostarczeniu danych użytkownika oraz potwierdzeniu konta poprzez link wysłany na podany adres e-mail.
-            \item Istnieje również opcja odzyskiwania zapomnianego hasła, gdzie użytkownik może podać swój adres e-mail i przejść przez proces resetowania hasła za pośrednictwem linku wysłanego na jego e-mail.
-        \end{itemize}
+          \begin{itemize}
+              \item Użytkownik ma możliwość zalogowania się do aplikacji, podając swój adres e-mail i hasło.
+              \item Tworzenie konta polega na dostarczeniu danych użytkownika oraz potwierdzeniu konta poprzez link wysłany na podany adres e-mail.
+              \item Istnieje również opcja odzyskiwania zapomnianego hasła, gdzie użytkownik może podać swój adres e-mail i przejść przez proces resetowania hasła za pośrednictwem linku wysłanego na jego e-mail.
+          \end{itemize}
 \end{itemize}
 
 \begin{itemize}
     \item Moduł Dodawania Śmietników:
-        \begin{itemize}
-            \item Aby dodać nowy śmietnik, użytkownik przechodzi do dedykowanego panelu dostępnego na stronie głównej.
-            \item Po dodaniu zdjęcia, model uczenia maszynowego rozpoznaje rodzaj śmietnika na zdjęciu.
-            \item Użytkownik ma możliwość edytowania tej informacji oraz podania dokładnego adresu.
-            \item Po wprowadzeniu danych, punkt zostaje zaznaczony na mapie.
-        \end{itemize}
+          \begin{itemize}
+              \item Aby dodać nowy śmietnik, użytkownik przechodzi do dedykowanego panelu dostępnego na stronie głównej.
+              \item Po dodaniu zdjęcia, model uczenia maszynowego rozpoznaje rodzaj śmietnika na zdjęciu.
+              \item Użytkownik ma możliwość edytowania tej informacji oraz podania dokładnego adresu.
+              \item Po wprowadzeniu danych, punkt zostaje zaznaczony na mapie.
+          \end{itemize}
 \end{itemize}
 
 \begin{itemize}
     \item Strona Główna:
-        \begin{itemize}
-            \item Na stronie głównej znajduje się mapa, na której widoczne są oznaczone śmietniki.
-            \item Mapę można przeszukiwać za pomocą wbudowanej wyszukiwarki znajdującej się w górnej części aplikacji.
-            \item Po kliknięciu na oznaczenie, użytkownik otrzymuje informacje dotyczące wybranego śmietnika.
-        \end{itemize}
+          \begin{itemize}
+              \item Na stronie głównej znajduje się mapa, na której widoczne są oznaczone śmietniki.
+              \item Mapę można przeszukiwać za pomocą wbudowanej wyszukiwarki znajdującej się w górnej części aplikacji.
+              \item Po kliknięciu na oznaczenie, użytkownik otrzymuje informacje dotyczące wybranego śmietnika.
+          \end{itemize}
 \end{itemize}
 
 \begin{itemize}
     \item Panel Użytkownika:
-        \begin{itemize}
-            \item W panelu użytkownika użytkownik może zarządzać swoimi danymi, które można edytować.
-            \item Istnieje przycisk przekierowujący użytkownika do ustawień aplikacji.
-            \item Użytkownik ma możliwość zmiany motywu aplikacji na jasny lub ciemny.
-            \item Dostępna jest opcja pełnego wylogowania z aplikacji.
-        \end{itemize}
+          \begin{itemize}
+              \item W panelu użytkownika użytkownik może zarządzać swoimi danymi, które można edytować.
+              \item Istnieje przycisk przekierowujący użytkownika do ustawień aplikacji.
+              \item Użytkownik ma możliwość zmiany motywu aplikacji na jasny lub ciemny.
+              \item Dostępna jest opcja pełnego wylogowania z aplikacji.
+          \end{itemize}
 \end{itemize}
 
 \subsection{Stylowanie iterfejsu użytkownika}
@@ -999,7 +999,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 
 \subsection{Widoki aplikacji mobilnej}
 
-\forceindent{Na rysunku 3.12 widoczny jest ekran startowy aplikacji mobilnej. Umożliwia on przejście do procesu rejestracji poprzez przycisk „Dołącz teraz” (eng. \textit{Join Now}) oraz do ekranu logowania przez kliknięcie w przycisk „Zaloguj się” (eng. \textit{Login}). }
+\forceindent{Na rysunku 3.12 widoczny jest ekran startowy aplikacji mobilnej. Umożliwia on przejście do procesu rejestracji poprzez przycisk „Dołącz teraz” (ang. \textit{Join Now}) oraz do ekranu logowania przez kliknięcie w przycisk „Zaloguj się” (ang. \textit{Login}). }
 
 \begin{figure}[H]
     \textbf{\caption{Ekran startowy aplikacji mobilnej}}
@@ -1009,7 +1009,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Rysunek 3.13 przedstawia widok rejestracji, dzięki któremu użytkownik może założyć konto, podając nazwę użytkownika, adres e-mail oraz hasło. W celu dodatkowej walidacji, hasło należy wprowadzić dwa razy. Po prawidłowym wpisaniu danych, należy kliknąć przycisk „Zarejestruj się” (eng. \textit{Register}). Z ekranu rejestracji istnieje możliwość łatwego przejścia do ekranu logowania poprzez kliknięcie w napis „Zaloguj się” (eng. \textit{Login}).}
+\forceindent{Rysunek 3.13 przedstawia widok rejestracji, dzięki któremu użytkownik może założyć konto, podając nazwę użytkownika, adres e-mail oraz hasło. W celu dodatkowej walidacji, hasło należy wprowadzić dwa razy. Po prawidłowym wpisaniu danych, należy kliknąć przycisk „Zarejestruj się” (ang. \textit{Register}). Z ekranu rejestracji istnieje możliwość łatwego przejścia do ekranu logowania poprzez kliknięcie w napis „Zaloguj się” (ang. \textit{Login}).}
 
 \begin{figure}[H]
     \textbf{\caption{Widok rejestracji}}
@@ -1019,7 +1019,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Aby zalogować się do aplikacji, użytkownik musi podać swój adres email oraz hasło, co widoczne jest na rysunku 3.14. Proces logowania zatwierdza się, klikając przycisk „Zaloguj się” (eng. \textit{Login}). Z ekranu logowania istnieje również możliwość przejścia do panelu odzyskiwania hasła poprzez kliknięcie w napis „Zapomniałeś hasła?” (eng. \textit{Forgot password?}) oraz do ekranu rejestracji przez kliknięcie w „Zarejestruj się” (eng. \textit{Register}).}
+\forceindent{Aby zalogować się do aplikacji, użytkownik musi podać swój adres email oraz hasło, co widoczne jest na rysunku 3.14. Proces logowania zatwierdza się, klikając przycisk „Zaloguj się” (ang. \textit{Login}). Z ekranu logowania istnieje również możliwość przejścia do panelu odzyskiwania hasła poprzez kliknięcie w napis „Zapomniałeś hasła?” (ang. \textit{Forgot password?}) oraz do ekranu rejestracji przez kliknięcie w „Zarejestruj się” (ang. \textit{Register}).}
 
 \begin{figure}[H]
     \textbf{\caption{Ekran logowania}}
@@ -1029,7 +1029,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Rysunek 3.15 przedstawia panel odzyskiwania hasła, który to wykorzystywany jest przez użytkowników w celu odzyskania hasła. Użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (eng. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
+\forceindent{Rysunek 3.15 przedstawia panel odzyskiwania hasła, który to wykorzystywany jest przez użytkowników w celu odzyskania hasła. Użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (ang. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
 
 \begin{figure}[H]
     \textbf{\caption{Panel odzyskiwania hasła}}
@@ -1050,7 +1050,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Rysunek 3.17 przedstawia panel dodawnia punktów na mapie. Celem dodania nowego punktu na mapie, użytkownik powinien wybrać ikonę plusa w menu. Po otwarciu panelu, pierwszym krokiem jest dodanie zdjęcia. Zastosowany model uczenia maszynowego automatycznie rozpozna typ śmietnika. Jeśli rozpoznanie jest błędne, użytkownik ma możliwość ręcznej zmiany typu. Następnie, po weryfikacji typu śmietnika i lokalizacji, operację dodania punktu zatwierdza się przyciskiem „Zapisz” (eng. \textit{Save}).}
+\forceindent{Rysunek 3.17 przedstawia panel dodawnia punktów na mapie. Celem dodania nowego punktu na mapie, użytkownik powinien wybrać ikonę plusa w menu. Po otwarciu panelu, pierwszym krokiem jest dodanie zdjęcia. Zastosowany model uczenia maszynowego automatycznie rozpozna typ śmietnika. Jeśli rozpoznanie jest błędne, użytkownik ma możliwość ręcznej zmiany typu. Następnie, po weryfikacji typu śmietnika i lokalizacji, operację dodania punktu zatwierdza się przyciskiem „Zapisz” (ang. \textit{Save}).}
 
 \begin{figure}[H]
     \textbf{\caption{Panel dodawania punktów}}
@@ -1062,7 +1062,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 
 \newpage
 
-\forceindent{Panel użytkownika (rysunek 3.18) umożliwia edycję nazwy użytkownika oraz adresu email. Proces edycji rozpoczyna się od kliknięcia w przycisk „Edytuj” (eng. \textit{Edit}), co przekierowuje do odpowiedniego panelu edycyjnego. Funkcja „Ustawienia dostępu” (eng. \textit{Access settings}) pozwala na przeniesienie do sekcji ustawień, gdzie użytkownik może konfigurować uprawnienia aplikacji. Za pomocą suwaka trybu ciemnego (eng. \textit{dark mode}) istnieje możliwość zmiany wyglądu aplikacji z jasnego na ciemny i odwrotnie. Opcja „Wyloguj się” (eng. \textit{Sign out}) umożliwia bezpieczne wylogowanie się z konta.}
+\forceindent{Panel użytkownika (rysunek 3.18) umożliwia edycję nazwy użytkownika oraz adresu email. Proces edycji rozpoczyna się od kliknięcia w przycisk „Edytuj” (ang. \textit{Edit}), co przekierowuje do odpowiedniego panelu edycyjnego. Funkcja „Ustawienia dostępu” (ang. \textit{Access settings}) pozwala na przeniesienie do sekcji ustawień, gdzie użytkownik może konfigurować uprawnienia aplikacji. Za pomocą suwaka trybu ciemnego (ang. \textit{dark mode}) istnieje możliwość zmiany wyglądu aplikacji z jasnego na ciemny i odwrotnie. Opcja „Wyloguj się” (ang. \textit{Sign out}) umożliwia bezpieczne wylogowanie się z konta.}
 
 \begin{figure}[H]
     \textbf{\caption{Panel użytkownika}}
@@ -1072,7 +1072,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
-\forceindent{Panele edycji nazwy użytkownika i adresu email widoczne są odpowiednio na rysunkach 3.19 oraz 3.20. Celem edycji nazwy użytkownika, należy wpisać nową nazwę, a następnie zatwierdzić zmianę, klikając przycisk „Zapisz” (eng. \textit{Save}). Proces zmiany adresu email przebiega w identyczny sposób: użytkownik wpisuje nowy adres email i zatwierdza zmianę za pomocą tego samego przycisku „Zapisz” (eng. \textit{Save}).}
+\forceindent{Panele edycji nazwy użytkownika i adresu email widoczne są odpowiednio na rysunkach 3.19 oraz 3.20. Celem edycji nazwy użytkownika, należy wpisać nową nazwę, a następnie zatwierdzić zmianę, klikając przycisk „Zapisz” (ang. \textit{Save}). Proces zmiany adresu email przebiega w identyczny sposób: użytkownik wpisuje nowy adres email i zatwierdza zmianę za pomocą tego samego przycisku „Zapisz” (ang. \textit{Save}).}
 
 \begin{figure}[H]
     \textbf{\caption{Widok aktualizowania adresu email}}
@@ -1096,21 +1096,22 @@ Całość komunikacji pomiędzy bramką interfejsu aplikacji a mikroserwisami, o
 
 W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z komunikacją gRPC oraz paczką class-validator, która to powodowała ciche przerwanie operacji, bez żadnej informacji o błędzie.
 \subsection{Algorytmy i techniki wykorzystane do nauki modelu uczenia maszynowego}
-\subsection{Konwolucyjne sieci neuronowe}
-\forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (eng. \textit{Convolutional neural network -- CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
+
+\subsubsection{Konwolucyjne sieci neuronowe}
+\forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (ang. \textit{Convolutional neural network -- CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
 
 Image Feature Print V2 jest narzędziem w CreateML, które znacznie usprawnia proces ekstrakcji cech. Wykorzystując je wraz ze wstępnie wytrenowaną CNN, skutecznie dostosowaliśmy sieć do unikalnych cech naszego zbioru danych. Ta kombinacja pozwoliła na zniuansowaną analizę cech przestrzennych, kluczową dla identyfikacji określonych wzorców na naszych obrazach, takich jak rozróżnianie kolorów, oznaczeń, kształtów pojemników.
 
 Nasza metoda polegała na dostrojeniu wstępnie wytrenowanego modelu do naszego zbioru danych, co jest procesem zarówno efektywnym czasowo, jak i skutecznym. To dostrojenie było niezbędne do dostosowania możliwości modelu do konkretnych celów naszego projektu w zakresie rozpoznawania i klasyfikacji obrazów.
 
-\subsection{Uczenie nadzorowane}
+\subsubsection{Uczenie nadzorowane}
 \forceindent W ramach naszej pracy zastosowaliśmy uczenie nadzorowane, opierając się na oznaczonym zbiorze danych, aby skutecznie szkolić nasz model. Każdy obraz w tym zbiorze danych został precyzyjnie oznaczony etykietą identyfikującą konkretny typ kontenera. W trakcie treningu nasza konwolucyjna sieć neuronowa przeszła proces nauki, podczas którego zapoznawała się z charakterystycznymi cechami i wzorcami obrazów, a następnie łączyła je z odpowiadającymi etykietami. Ten proces umożliwił modelowi skuteczne przyswajanie cech definiujących każdy rodzaj kontenera.
 
 W celu oceny wydajności naszego modelu korzystaliśmy z różnych miar, takich jak dokładność, precyzja, przywołanie, czułość i miara F1. Te wskaźniki dostarczały nam istotnych informacji na temat zdolności modelu do poprawnego identyfikowania poszczególnych typów kontenerów. Praktyczne zastosowanie tych miar pozwoliło nam szczegółowo analizować skuteczność naszego modelu w kontekście naszego konkretnego zadania, co było kluczowe dla oceny jego przydatności i precyzji w identyfikacji różnorodnych kontenerów.
 
 \subsection{Proces szkolenia}
 \forceindent Proces szkoleniowy obejmował dostarczanie dużej liczby oznaczonych obrazów do sieci CNN. Sieć przetworzyła te obrazy przez swoje warstwy, dostosowując swoje wewnętrzne parametry (wagi i odchylenia) na podstawie błędu pomiędzy prognozami a rzeczywistymi etykietami (propagacja wsteczna).
-Ten iteracyjny proces trwa, dopóki model nie osiągnie zadowalającego poziomu dokładności, wskazującego na jego zdolność do dokładnej klasyfikacji nowych, niewidzianych obrazów.
+Ten iteracyjny proces trwał, dopóki model nie osiągnął zadowalającego poziomu dokładności, wskazującego na jego zdolność do dokładnej klasyfikacji nowych, niewidzianych obrazów.
 
 \subsection{Wyzwania i rozważania}
 \forceindent Kluczowym wyzwaniem w szkoleniu CNN do zadań klasyfikacji obrazów, takich jak to, jest zapewnienie wystarczająco dużego i zróżnicowanego zbioru danych, aby zapobiec nadmiernemu dopasowaniu i poprawić zdolność modelu do uogólniania.
@@ -1118,45 +1119,64 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
 
 \subsection{Analiza wydajności modelu klasyfikacji pojemników}
 
-\subsubsection{Pojemniki na plastik}
+Analiza wydajności modelu klasyfikacji pojemników na odpady przeprowadzona została poprzez ocenę trzech kluczowych wskaźników: precyzji, czułości oraz miary F1 dla różnych kategorii pojemników na odpady. W celu ułatwienia interpretacji wyników, wyniki te zostały odniesione do tabeli referencyjnej, która określa granice procentowe dla oceny skuteczności modelu.
 
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 55\% co oznacza, że nas model prawidłowo rozpoznaje 55\% pojemników plastikowych przez model, co wskazuje na rzadkie błędne klasyfikacje innych rodzajów pojemników jako plastikowych;
-    \item osiągnięta czułość to 70\%, a więc model efektywnie identyfikuje 70\% rzeczywistych plastikowych pojemników, co świadczy o jego zdolności do wykrywania plastikowych pojemników wśród różnorodnych danych;
-    \item miara F1 wyniosła 0,616 -- jest to wysoki wynik, który podkreśla równowagę między precyzją a czułością, minimalizując błędne klasyfikacje.
+\subsubsection{Punkt odniesienia: Tabela oceny wyników}
+Do oceny wyników modelu została wykorzystana poniższa tabela referencyjna, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
+
+\begin{table}[h]
+    \centering
+    \textbf{\caption{Tabela referencyjna do oceny wyników modelu klasyfikacji pojemników}}
+    \vspace{0.55em}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Ocena        & Precyzja (\%)      & Czułość (\%)       & Miara F1             \\ \hline
+        Niska        & < 50               & < 50               & < 0.5                \\ \hline
+        Umiarkowana  & 50 - 69            & 50 - 69            & 0.5 - 0.69           \\ \hline
+        Dobra        & 70 - 84            & 70 - 84            & 0.7 - 0.84           \\ \hline
+        Bardzo dobra & \textgreater{}= 85 & \textgreater{}= 85 & \textgreater{}= 0.85 \\ \hline
+    \end{tabular}
+    \label{tab:my-table}
+    \\
+    \vspace{0.55em}
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{table}
+
+\subsubsection{Pojemniki na plastik}
+\begin{itemize}
+    \item Uzyskana precyzja wyniosła 55\%, co klasyfikuje się jako umiarkowaną efektywność modelu w identyfikacji pojemników plastikowych.
+    \item Czułość osiągnięta na poziomie 70\% świadczy o zdolności modelu do efektywnego wykrywania plastikowych pojemników.
+    \item Miara F1, wynosząca 0,616, wskazuje na umiarkowaną równowagę między precyzją a czułością.
 \end{itemize}
 
 \subsubsection{Pojemniki na papier}
-
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 74\%, co oznacza że 74\% zidentyfikowanych przez model pojemników papierowych faktycznie takimi jest, świadcząc o wysokiej skuteczności modelu;
-    \item osiągnięta czułość to 64\%, a więc model identyfikuje 64\% wszystkich istniejących pojemników papierowych, co wskazuje na jego zdolność do wykrywania pojemników papierowych;
-    \item miara F1 wyniosła 0,686 -- jest to wynik sygnalizujący dobrą równowagę między precyzją a czułością, co jest kluczowe w dokładnej klasyfikacji pojemników papierowych.
+\begin{itemize}
+    \item Precyzja na poziomie 74\% świadczy o wysokiej skuteczności modelu w identyfikacji pojemników papierowych.
+    \item Czułość wynosząca 64\% wskazuje na dość dobre umiejętności modelu w wykrywaniu pojemników papierowych w zbiorze danych.
+    \item Miara F1, osiągając 0,686, potwierdza dobrą równowagę między precyzją a czułością.
 \end{itemize}
 
 \subsubsection{Pojemniki na odpady mieszane}
-
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 60\%, co oznacza że model wykazuje umiarkowaną zdolność do poprawnego identyfikowania pojemników na odpady mieszane;
-    \item osiągnięta czułość to 59\%, a więc model rozpoznaje 59\% rzeczywistych przypadków pojemników na odpady mieszane;
-    \item miara F1 wyniosła 0.595 -- jest to wynik umiarkowany, wskazujący na możliwości poprawy w precyzji oraz czułości.
+\begin{itemize}
+    \item Precyzja wynosząca 60\% wskazuje na umiarkowaną skuteczność modelu w tej kategorii.
+    \item Czułość na poziomie 59\% również świadczy o umiarkowanej zdolności do wykrywania pojemników na odpady mieszane.
+    \item Miara F1, wynosząca 0.595, odzwierciedla umiarkowaną równowagę między precyzją a czułością.
 \end{itemize}
 
 \subsubsection{Pojemniki na szkło}
-
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 72\%: co oznacza, że 72\% obrazów są efektywnie identyfikowane jako pojemniki szklane, z minimalną liczbą błędnych identyfikacji;
-    \item osiągnięta czułość to 55\% -- wskazuje to na istnienie ryzyka, że model może przeoczyć pewne obrazy pojemników szklanych;
-    \item miara F1 wyniosła 0,624 -- jest to wynik wskazujący umiarkowaną równowagę między precyzją a czułością w klasyfikacji pojemników szklanych.
+\begin{itemize}
+    \item Precyzja na poziomie 72\% wskazuje na dobrą skuteczność modelu w identyfikacji pojemników szklanych.
+    \item Czułość wynosząca 55\% wskazuje na umiarkowane ryzyko przeoczenia obrazów pojemników szklanych.
+    \item Miara F1 na poziomie 0,624 świadczy o umiarkowanej równowadze między precyzją a czułością.
 \end{itemize}
 
 \subsubsection{Pojemniki na odpady biodegradowalne}
-
-\begin{itemize}[label=--]
-    \item uzyskana precyzja wyniosła 65\% -- około dwóch trzecich obrazów sklasyfikowanych jako pojemniki na odpady biodegradowalne jest poprawnie zidentyfikowanych;
-    \item osiągnięta czułość to 65\% -- model efektywnie wykrywa 65\% rzeczywistych pojemników biodegradowalnych;
-    \item miara F1 wyniosła 0,65 -- model wykazuje dobrą równowagę między precyzją a czułością, co jest pozytywne dla klasyfikacji pojemników biodegradowalnych.
+\begin{itemize}
+    \item Precyzja wynosząca 65\% świadczy o dość dobrej skuteczności modelu w tej kategorii.
+    \item Czułość również na poziomie 65\% wskazuje na zdolność do efektywnego wykrywania pojemników biodegradowalnych.
+    \item Miara F1 wynosząca 0,65 pokazuje dobrą równowagę między precyzją a czułością.
 \end{itemize}
+
 
 \subsection{Wymagania sprzętowe i oprogramowania dla aplikacji mobilnej}
 \begin{itemize}[label=--]
@@ -1334,7 +1354,7 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Kod źródłowy aplikacji serwerowej;
     \item Kod źródłowy aplikacji mobilnej;
     \item Dokumentacja ścieżek żądań aplikacji serwerowej w postaci archiwum zip;
-    \item Prezentacja audio-wizualna aplikacji mobilnej w formacie mp4 -- link: \url{https://drive.google.com/file/d/1TcejX7UCXHLbCm9ELwwNFnNJALqdSroy/view}
+    \item Prezentacja audio-wizualna aplikacji mobilnej w formacie mp4 -- link: \url{https://drive.google.com/file/d/1jWMByQfgUFRtHGBQINqS_Q2EPJJz0Lk5/view?usp=sharing}
 \end{enumerate}
 
 \end{document}
