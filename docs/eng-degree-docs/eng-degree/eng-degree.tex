@@ -258,9 +258,9 @@ W tym języku zapytań wszystkie żądania są wysyłane do pojedynczego punktu 
 
 Składa się on z głównych trzech części:
 \begin{enumerate}
-    \item Zapytań (Queries): Służą do pobierania danych z serwera. Klient definiuje, jakie informacje potrzebuje, a serwer dostarcza tylko te dane. \footnote{Dane za stroną internetową: \url{https://graphql.org/learn/queries/}, Rozdział ,,Queries and Mutations`` (dostęp: 12.11.2023r.)}
-    \item Mutacji (Mutations): Pozwalają na modyfikację danych na serwerze, takie jak dodawanie, aktualizowanie lub usuwanie rekordów. \footnote{Dane za stroną internetową: \url{https://graphql.org/learn/queries/}, Rozdział ,,Queries and Mutations`` (dostęp: 12.11.2023r.)}
-    \item Typów (Types): GraphQL definiuje struktury typów danych i relacje między nimi, co umożliwia klientowi zrozumienie, jakie dane mogą być dostępne i jakie zapytania można wykonywać.\footnote{Dane za stroną internetową: \url{https://graphql.org/learn/schema/}, Rozdział ,,Schemas and Types`` (dostęp: 12.11.2023r.)}
+    \item Zapytań (ang. \textit{Queries}): Służą do pobierania danych z serwera. Klient definiuje, jakie informacje potrzebuje, a serwer dostarcza tylko te dane. \footnote{Dane za stroną internetową: \url{https://graphql.org/learn/queries/}, Rozdział ,,Queries and Mutations`` (dostęp: 12.11.2023r.)}
+    \item Mutacji (ang. \textit{Mutations}): Pozwalają na modyfikację danych na serwerze, takie jak dodawanie, aktualizowanie lub usuwanie rekordów. \footnote{Dane za stroną internetową: \url{https://graphql.org/learn/queries/}, Rozdział ,,Queries and Mutations`` (dostęp: 12.11.2023r.)}
+    \item Typów (ang. \textit{Types}): GraphQL definiuje struktury typów danych i relacje między nimi, co umożliwia klientowi zrozumienie, jakie dane mogą być dostępne i jakie zapytania można wykonywać.\footnote{Dane za stroną internetową: \url{https://graphql.org/learn/schema/}, Rozdział ,,Schemas and Types`` (dostęp: 12.11.2023r.)}
 \end{enumerate}
 
 \textbf{REST}\\
@@ -270,20 +270,20 @@ Składa się on z głównych trzech części:
 \subparagraph{Mapowanie obiektowo-relacyjne, mapowanie obiektowo-dokumentowe i budowniczy kwerend\\}
 \forceindent  Mapery obiektowo-relacyjne, obiektowo-dokumentowe czy budowniczy kwerend są niezbędnymi narzędziami do utrzymywania deklaratywnego podejścia do komunikacji z systemem bazodanowym.
 Na rynku dostępnych jest wiele bibliotek oferujących konkurujące rozwiązania.
-Zespół postanowił zbadać możliwość wykorzystania każdego z kategorii abstrakcji, celem wyłonienia najbardziej dopasowanego do potrzeb rozwiązania.
-Wybór ten determinuje ilość złożoności i kodu bazowego, a także wymagania techniczne dotyczące konfiguracji bazy danych.
+Zespół postanowił zbadać możliwość wykorzystania każdej z kategorii abstrakcji, celem wyłonienia najbardziej dopasowanego do potrzeb rozwiązania.
+Wybór ten determinuje ilość i złożoności kodu bazowego, a także wymagania techniczne dotyczące konfiguracji bazy danych.
 
 \textbf{Mapowanie obiektowo-relacyjne\\}
 \forceindent Wykorzystywanie mapowania obiektowo-relacyjnego (ang. \textit{Object Relational Mapping}) to powszechna praktyka w projektach programistycznych.
-Stanowi ono dodatkową warstwę abstrakcji nad sam język SQL, czy budowniczych kwerend, zapewniając automatyczną konwersję obiektów źródłowych na ich odpowiedniki zrozumiałe dla bazy danych oraz rekordów bazodanowych na obiekty.
+Stanowi ono dodatkową warstwę abstrakcji nad językiem SQL, czy budowniczym kwerend, zapewniając automatyczną konwersję obiektów źródłowych na ich odpowiedniki zrozumiałe dla bazy danych oraz rekordów bazodanowych na obiekty.
 W kontekście baz danych, mapowanie obiektowo-relacyjne można uznać za najwyższą formę abstrakcji dla komunikacji z bazą danych w środowisku serwerowym.\footnote{S. 1-4; Alexandre Torres [i inni] Twenty years of object-relational mapping: A survey on patterns, solutions, and their implications on application design, 28.09.2016r.}
 
 W środowisku node.js pojawiło się takowych wiele, między innymi:
 \begin{enumerate}[label=--]
-    \item TypeORM -- wykorzystujący eksperymentalne dekoratory w języku Typescript celem deklarowania schematu encji w bazie danych. Zdecydowana większość operacji jest w nim dostępna za ich pomocą.
-    \item Sequelize -- najstarszy na tej liście, pierwsze wzmianki na witrynie StackOverflow sięgają roku 2011. Jest on dojrzałym, pełnym funkcjonalności maperem, którego popularność odzwierciedlona jest w 1,5 miliona tygodniowych pobrań\footnote{Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}}.
+    \item TypeORM -- wykorzystujący eksperymentalne dekoratory w języku Typescript celem deklarowania schematu encji w bazie danych. Wszystkie operacje związane z językiem deklaracji danych są wykonywane przy ich użyciu.
+    \item Sequelize -- najstarszy na tej liście maper obiektowo-relacyjny, pierwsze wzmianki o nim na witrynie StackOverflow sięgają roku 2011. Jest on dojrzałym, pełnym funkcjonalności maperem, którego popularność odzwierciedlona jest w 1,5 miliona tygodniowych pobrań\footnote{Dane za stroną internetową (dostęp 16.11.2023r.) \url{https://www.npmjs.com/package/sequelize}}.
     \item Prisma -- kontrowersyjny maper, którego operacje łączenia (ang. \textit{join}) wykonywane są w sposób wirtualny, to znaczy poprzez wysłanie kilku kwerend do bazy danych i połączeniu ich wedle instrukcji użytkownika w ,,Prisma Engine``, który napisany został przy pomocy języka Rust, co zapewnia relatywne bezpieczeństwo oraz wysoką wydajność takiego rozwiązania\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.)\url{https://www.prisma.io/}}.
-    \item Drizzle -- maper obiecujący pełne typowanie, syntax podobny do tego znanego z SQLa oraz automatyczną generację schematów za pomocą biblioteki Zod.
+    \item Drizzle -- maper obiecujący pełne bezpieczeństwo typów ze składnią podobną do tej znanej z języka SQL oraz automatyczną generacją schematów za pomocą biblioteki Zod.
     \item Mikro-ORM -- oparty na domniemanych transakcjach, automatycznym grupowaniu kwerend za pomocą wzorca jednostki pracy (ang. \textit{Unit of Work}). Wzorowany jest na Hibernate, znanym z języka Java oraz Doctrine z PHP.\footnote{Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}}
 \end{enumerate}
 
@@ -295,7 +295,7 @@ Tak samo jak w przypadku mapowania obiektowo-relacyjnego, ma ono na celu uproszc
 W środowisku node.js na przestrzeni lat powstały między innymi następujące mapery obiektowo-dokumentowe:
 \begin{enumerate}[label=--]
     \item mongoose -- dedykowany dla bazy MongoDB mapper obiektowo-dokumentowy. Posiada wiele funkcjonalności związane z procesem wzbogacania POJO (ang. \textit{plain-old-javascript-object}), ktore zapewniają walidację obiektów, dodawanie pól wirtualnych i inne.
-    \item prisma -- wcześniej wymieniony ORM, który posiada wsparcie dla MongoDB i funkcjonuje w trybie wymuszonej transakcyjności danych na bazie tzw. zbiorów replik (ang. \textit{replica set}).
+    \item prisma -- maper obiektowo-relacyjny, posiadający wsparcie dla bazy MongoDB i funkcjonuje w trybie wymuszonej transakcyjności danych przy użyciu zbiorów replik (ang. \textit{replica set}).
 \end{enumerate}
 
 \textbf{Budowniczy kwerend\\}
@@ -311,27 +311,28 @@ Struktura organizacyjna różni się w zależności od typu nierelacyjnej bazy d
 Biorąc to pod uwagę, wszystkie mają na celu rozwiązanie problemów tradycyjnej, relacyjnej bazy danych, poprzez zaadresowanie kwestii elastyczności i skalowalności.
 Bazy danych SQL nie są idealne do przechowywania nieustrukturyzowanych formatów danych, takich jak tekst, wideo i obrazy, co adresują bazy NoSQL.
 Przedkładają one dostępność nad spójność.
-Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL (niektóre obsługują SQL), można go dokładnie podsumować jako ,,nie tylko SQL``.
+Termin NoSQL nie oznacza, że dana baza danych nie obsługuje poleceń SQL, można go przetłumaczyć jako ,,nie tylko SQL``.
+
 Rodzaje nierelacyjnych struktur baz danych to:
 \begin{enumerate}[label=--]
     \item Key-value store -- jest to model bez schematu, w którym dane są zorganizowane w słownik par klucz-wartość.
           Klucz może być podobny do tego, jaki znajduje się w relacyjnej bazie danych, np. identyfikator koszyka, podczas gdy wartości są tablicą danych, np. każdy pojedynczy element w koszyku użytkownika.
           Są one powszechnie stosowane w systemach o dużej objętości, które wymagają najszybszego możliwego czasu reakcji.
-          Ze względu na nieodłączną strukturę danych, nie są one idealne, gdy trzeba odzyskać wiele rekordów na raz.
+          Ze względu na nieodłączną strukturę danych, nie są one dobrym rozwiązaniem, gdy potrzebne jest odzyskiwanie wielu rekordów na raz.
           Przykładami takich baz danych są Redis, Memcached, KeyDB, czy DragonflyDB\footnote{S. 5 -- 19; Marc Seeger, Key-Value stores: a practical overview, Computer Science and Media Ultra-Large-Sites SS09, Stuttgart, Germany, 21.09.2009r.}.
     \item Document store -- jak sama nazwa wskazuje, są to bazy danych, w których przechowywane są obiekty podobne do dokumentów.
           Dane przechowywane w takiej bazie danych są zwykle zorganizowane w formacie częściowo ustrukturyzowanym, takim jak JSON, XML lub BSON.
           Daje to programistom większą elastyczność, ponieważ schematy danych nie muszą dokładnie odpowiadać wzorcom innych dokumentów przechowywanych w danej kolekcji.
           Złożone transakcje mogą być jednak problematyczne i prowadzić do uszkodzenia danych.
-          Popularne przypadki użycia baz danych dokumentów obejmują systemy zarządzania treścią i profile użytkowników.
+          Popularne przypadki użycia dokumentowych baz danych obejmują systemy zarządzania treścią.
           Przykładem bazy danych zorientowanej na dokumenty jest MongoDB\footnote{S. 337; Robin Hecht, Stefan Jablonski, NoSQL Evaluation A Use Case Oriented Survey, International Conference on Cloud and Service Computing, 2011r.}.
-    \item Wide-column store -- informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania, ograniczając alokację pamięci.
-          Ta baza danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale ponieważ może być bardziej złożonym systemem do zarządzania, nie jest zalecana do stosowania w nowszych zespołach i projektach.
+    \item Wide-column store -- informacje są przechowywane w kolumnach, co pozwala użytkownikom uniknąć nadmiernego i niedostatecznego pobierania danych, ograniczając alokację pamięci.
+          Ten typ bazy danych próbuje rozwiązać niedociągnięcia magazynów klucz-wartość i dokumentów, ale może być bardziej złożonym systemem do zarządzania, dlatego nie jest zalecana do stosowania w nowo powstałych projektach.
           Apache HBase i Apache Cassandra są przykładami baz danych o otwartym kodzie źródłowym i szerokim zakresie kolumn.
           Apache HBase jest zbudowany na bazie Hadoop Distributed Files System, który zapewnia sposób przechowywania rzadkich zestawów danych, co jest powszechnie stosowane w wielu aplikacjach big data.
           Z kolei Apache Cassandra została zaprojektowana do zarządzania dużymi ilościami danych na wielu serwerach i w klastrach obejmujących wiele centrów danych.
           Jest ona wykorzystywana w różnych przypadkach, takich jak serwisy społecznościowe i analiza danych w czasie rzeczywistym\footnote{S. 118 -- 122; K. T. Sridhar, Modern Column Stores for Big Data Processing, XtremeData Technologies, Bangalore, India, 25.11.2017 r.}.
-    \item Graph store -- zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są przechowywane jako węzły, krawędzie i właściwości.
+    \item Graph store -- zwykle używany do przechowywania grafu wiedzy, w którym elementy danych są interpretowane jako węzły, krawędzie i właściwości.
           Węzłem może być dowolny obiekt, miejsce lub osoba.
           Krawędź definiuje relację między węzłami.
           Grafowe bazy danych służą do przechowywania i zarządzania siecią połączeń między elementami w ramach grafu.
@@ -344,25 +345,26 @@ Rodzaje nierelacyjnych struktur baz danych to:
 \textbf{SQL\\}
 \forceindent SQL jest ustandaryzowanym językiem programowania służącym do interakcji z systemami zarządzania relacyjnymi bazami danych. Stworzony został przez Dona Chamberlina i Raya Boyce'a w IBM \footnote{S. 79; Donald D. Chamberlin, Early History of SQL, IEEE, 21.11.2012r}.
 Pierwotnie znany jako SEQUEL, został później uproszczony do SQL, ze względu na kwestię znaku towarowego.
-Jest to de facto standard relacyjnych systemów baz danych.
+Jest on de facto standardem służącym do wykonywania interakcji z relacyjnymi systemami baz danych.
 Jak sama nazwa wskazuje, jest to język zapytań, który służy jako pomost między bazą danych a użytkownikami.
-Niezależnie od tego, czy jest to programista stojący za danym systemem, czy zwykły użytkownik, wszyscy ludzie zaznajomieni z nowoczesną technologią, nawet jeśli nieświadomie, używali SQL.
+Niezależnie od tego, czy jest to programista stojący za danym systemem, czy zwykły użytkownik, wszyscy ludzie zaznajomieni z nowoczesną technologią, nawet jeśli nieświadomie, używali SQL`a.
 Biorąc pod uwagę, jak blisko relacyjne bazy danych są powiązane z SQL, są one powszechnie nazywane ,,bazami danych SQL``.
 
 \subparagraph{Relacyjne bazy danych\\}
 \forceindent Relacyjna baza danych to, jak sama nazwa wskazuje, magazyn danych, który przechowuje je w sposób relacyjny.
-Ten typ pamięci masowej rozumie i przechowuje dane w formacie tabelarycznym, tj. wierszy i kolumn.
+Ten typ pamięci masowej rozumie i przechowuje dane w formacie tabelarycznym, tj. w postaci wierszy i kolumn.
 Relacje są deklarowane za pomocą kluczy podstawowych i obcych, które służą jako identyfikatory danej relacji.
 Relacje te są zwykle ilustrowane za pomocą różnych typów modeli danych.
-Kolumny są traktowane jako pola przechowujące nazwę danej zmiennej (na przykład identyfikatorUżytkownika) i typ SQL, podczas gdy wiersze przechowują rzeczywiste wartości.
+Kolumny są traktowane jako pola przechowujące nazwę danej zmiennej (na przykład identyfikatorUżytkownika) i identyfikator rodzaju danych, podczas gdy wiersze przechowują rzeczywiste wartości.
 Relacyjne bazy danych są również zwykle powiązane z transakcyjnymi bazami danych, które uruchamiają polecenia w sekwencji znanej jako transakcja.
-Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym kroku procesu\footnote{S. 1079-1112; Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.}.\\
+Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w dowolnym momencie procesu\footnote{S. 1079-1112; Paris C. Kanellakis, Departament Informatyki, Uniwerystet Brown, Stany Zjednoczone Ameryki, Providence, 1990r.}.\\
+\newpage
 \forceindent Transakcje mają specyficzne właściwości, które są reprezentowane przez akronim ACID\footnote{S. 1; Nishta Jatana, A Survey and Comparison of Relational and Non-Relational Database, International Journal of Engineering Research \& Technology, 06.08.2012r.}:
 \begin{enumerate}[label=--]
     \item Atomiczność (ang. \textit{Atomicity}) -- wszystkie zmiany danych są wykonywane tak, jakby były pojedynczą operacją. Oznacza to, że wszystkie zmiany są wykonywane lub żadna z nich nie jest wykonywana.
-    \item Spójność (ang. \textit{Consistency}) -- dane pozostają w spójnym stanie od stanu do końca, wzmacniając integralność danych.
-    \item Izolacja (ang. \textit{Isolation}) -- stan pośredni tranzakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
-    \item Trwałość (ang. \textit{Durability}) -- po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są cofane, nawet w przypadku awarii systemu.
+    \item Spójność (ang. \textit{Consistency}) -- dane pozostają w spójnym stanie od początku do końca, zapewniając integralność danych.
+    \item Izolacja (ang. \textit{Isolation}) -- stan pośredni transakcji nie jest widoczny dla innych transakcji, w wyniku czego transakcje, które działają jednocześnie, wydają się być serializowane.
+    \item Trwałość (ang. \textit{Durability}) -- po pomyślnym zakończeniu transakcji zmiany w danych utrzymują się i nie są wycofywane, nawet w przypadku awarii systemu.
 \end{enumerate}
 
 
@@ -374,25 +376,26 @@ Wspomniana transakcja pozwala na przywrócenie zmian, gdy wystąpił błąd w do
 \subsubsection{Aplikacja mobilna}
 
 \forceindent \textbf{Javascript -- Ionic 6\\}
-\indent Ionic 6 to framework typu open-source do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty UI oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji. \footnote{S. 3181 -- 3182; Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018}
+\indent Ionic 6 to framework otwartoźródłowy służący do tworzenia aplikacji mobilnych i desktopowych przy użyciu języków programowania sieciowego, takich jak HTML, CSS i JavaScript. Bazuje on na platformie Angular i wykorzystuje komponenty interfejsu graficznego oparte na bibliotece Ionic, pozwalając na tworzenie atrakcyjnych i responsywnych aplikacji. Ionic 6 oferuje wiele wbudowanych funkcjonalności i narzędzi, które ułatwiają proces tworzenia i wdrażania aplikacji. \footnote{S. 3181 -- 3182; Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018}
+
 Zalety:
 \begin{enumerate}[label=--]
     \item łatwość i szybkość tworzenia aplikacji dzięki wykorzystaniu języków programowania webowego, takich jak HTML, CSS i JavaScript;
     \item możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji desktopowych;
     \item wbudowane narzędzia do testowania i debugowania kodu, co ułatwia proces tworzenia i utrzymywania aplikacji;
-    \item duża społeczność deweloperów i rozwijająca się platforma, co oznacza, że istnieje wiele narzędzi, wtyczek i bibliotek, które ułatwiają proces tworzenia aplikacji; \footnote{Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/@ionic/cli}}
-    \item dostęp do wielu wbudowanych komponentów UI opartych na bibliotece Ionic, co pozwala na tworzenie atrakcyjnych i responsywnych aplikacji.
+    \item duża społeczność deweloperów i rozwijająca się platforma oznaczają, że istnieje wiele narzędzi, wtyczek i bibliotek, które ułatwiają proces tworzenia aplikacji przy użyciu tego frameworka; \footnote{Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/@ionic/cli}}
+    \item dostęp do wielu wbudowanych komponentów interfejsu graficznego opartych na bibliotece Ionic, co pozwala na tworzenie atrakcyjnych i responsywnych aplikacji.
 \end{enumerate}
 
 Wady:
 \begin{enumerate}[label=--]
     \item w porównaniu do innych popularnych frameworków, takich jak React Native czy Flutter, aplikacje Ionic 6 mogą cechować się gorszą wydajnością ze względu na wykorzystanie technologii webowych;
-    \item brak w pełni natywnej wydajności, co może wpływać na szybkość działania aplikacji, szczególnie w przypadku bardziej złożonych aplikacji;
-    \item możliwe trudności w dostosowaniu aplikacji do różnych platform, co może wymagać dodatkowych prac programistycznych.
+    \item gorsza wydajność w porównaniu do frameworków bazujących na natywnym języku dla danej platformy, może negatywnie wpływać na szybkość działania aplikacji, szczególnie w przypadku większej złożoności operacji;
+    \item możliwość zaistnienia trudności w dostosowaniu aplikacji do różnych platform, co może wymagać dodatkowych nakładów pracy.
 \end{enumerate}
 
 \textbf{Javascript -- React Native\\}
-\indent React Native to oparty na JavaScript framework do tworzenia aplikacji mobilnych, który umożliwia programistom tworzenie natywnych aplikacji mobilnych na platformy iOS i Android przy użyciu jednej bazy kodu.
+\indent React Native to oparty na języku JavaScript framework do tworzenia aplikacji mobilnych, który umożliwia programistom tworzenie natywnych aplikacji mobilnych na platformy iOS i Android przy użyciu jednej bazy kodu.
 Opiera się on na bibliotece ReactJS i wykorzystuje kombinację JavaScript i natywnego kodu do tworzenia wysokowydajnych aplikacji mobilnych.
 React Native pozwala programistom na ponowne wykorzystanie kodu na różnych platformach, co pomaga zaoszczędzić czas i zasoby. \footnote{S. 10 -- 11; William Danielsson, React Native application development –- A comparison between native Android and React Native, Szwecja, Linköpings universitet, 2016}
 
@@ -400,10 +403,10 @@ Zalety:
 \begin{enumerate}[label=--]
     \item szybkie tworzenie aplikacji dzięki wykorzystaniu JavaScript i popularnej biblioteki React;
     \item możliwość tworzenia natywnych aplikacji mobilnych z jedną bazą kodu dla różnych systemów operacyjnych;
-    \item łatwa konserwacja i skalowalność aplikacji dzięki wykorzystaniu komponentów UI wielokrotnego użytku, które mogą być używane w różnych systemach operacyjnych;
+    \item łatwa konserwacja i skalowalność aplikacji dzięki wykorzystaniu komponentów interfejsu graficznego wielokrotnego użytku, które mogą być używane w różnych systemach operacyjnych;
     \item dostęp do natywnych funkcji systemu operacyjnego poprzez architekturę ,,bridge``; \footnote{S. 154; Sreekanth Dekkati, Karu Lal, Harshith Desamsetti, React Native for Android: Cross-Platform Mobile Application Development, Global Disclosure of Economics and Business, 12.2019}
-    \item łatwe wdrażanie aktualizacji i zmian aplikacji bez konieczności weryfikacji w sklepie z aplikacjami, która jest wymagana w przypadku aplikacji natywnych; \footnote{S. 42; Hugo Hutri, COMPARISON OF REACT NATIVE AND EXPO, Finlandia, Lappeenranta–Lahti University of Technology LUT, 2023}
-    \item duża społeczność deweloperów i liczne zasoby online, które ułatwiają rozwiązywanie problemów i znajdowanie gotowych rozwiązań. \footnote{Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/react-native}}
+    \item łatwe wdrażanie aktualizacji i zmian aplikacji bez konieczności ich weryfikacji w sklepie z aplikacjami, która jest wymagana w przypadku aplikacji natywnych; \footnote{S. 42; Hugo Hutri, COMPARISON OF REACT NATIVE AND EXPO, Finlandia, Lappeenranta–Lahti University of Technology LUT, 2023}
+    \item duża społeczność programistów i liczne zasoby w sieci internetowej, ułatwiają rozwiązywanie problemów i znajdowanie gotowych rozwiązań w tym frameworku. \footnote{Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/react-native}}
 \end{enumerate}
 
 Wady:
@@ -414,12 +417,12 @@ Wady:
 \end{enumerate}
 
 \textbf{Flutter\\}
-\indent Flutter to otwartoźródłowy framework do tworzenia aplikacji mobilnych opracowany przez Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe. \footnote{S. 6; Wenhao Wu, React Native vs Flutter, cross-platform mobile application frameworks, Finlandia, Metropolia University of Applied Sciences, 01.03.2018}
+\indent Flutter to otwartoźródłowy framework do tworzenia aplikacji mobilnych opracowany przez firmę Google. Wykorzystuje on język programowania Dart, który zapewnia szybkość i wydajność, a także zaawansowane narzędzia deweloperskie i obsługę wielu platform. Flutter pozwala na tworzenie aplikacji mobilnych z eleganckimi i atrakcyjnymi interfejsami użytkownika oraz oferuje wiele wbudowanych funkcjonalności i bibliotek, które sprawiają, że tworzenie aplikacji jest szybkie i łatwe. \footnote{S. 6; Wenhao Wu, React Native vs Flutter, cross-platform mobile application frameworks, Finlandia, Metropolia University of Applied Sciences, 01.03.2018}
 
 Zalety:
 \begin{enumerate}[label=--]
     \item możliwość tworzenia natywnych aplikacji mobilnych na różne platformy, w tym iOS i Android, a także aplikacji webowych i desktopowych;
-    \item możliwość tworzenia pięknych i atrakcyjnych interfejsów użytkownika z wykorzystaniem biblioteki Material Design oraz narzędzi do tworzenia animacji i efektów wizualnych;
+    \item możliwość tworzenia atrakcyjnych interfejsów użytkownika z wykorzystaniem biblioteki Material Design oraz narzędzi do tworzenia animacji i efektów wizualnych;
     \item szybkie wdrażanie zmian i aktualizacji dzięki narzędziom Hot Reload, które pozwalają na szybkie testowanie i modyfikowanie kodu bez ponownego uruchamiania aplikacji;
     \item wbudowane narzędzia do testowania i debugowania kodu, co ułatwia proces tworzenia i utrzymania aplikacji.
 \end{enumerate}
@@ -432,22 +435,22 @@ Wady:
 \end{enumerate}
 
 \textbf{Języki natywne\\}
-\indent Programowanie aplikacji mobilnych przy użyciu języków natywnych odnosi się do tworzenia aplikacji przy użyciu języków i narzędzi dostarczanych przez platformę, dla której aplikacja jest tworzona. Na przykład aplikacje na iOS mogą być pisane w języku Swift lub Objective-C, podczas gdy aplikacje na Androida mogą być pisane w języku Kotlin lub Java.
+\indent Tworzenie aplikacji mobilnych przy użyciu języków natywnych odnosi się do wykorzystywania języków i narzędzi dostarczanych przez platformę, dla której aplikacja jest tworzona. Na przykład aplikacje na system iOS mogą być pisane w języku Swift lub Objective-C, podczas gdy aplikacje na Androida mogą być pisane w języku Kotlin lub Java.
 
 Zalety:
 \begin{enumerate}[label=--]
-    \item wysoka wydajność: Aplikacje natywne mają dostęp do pełnych możliwości platformy, co może skutkować szybszym i płynniejszym działaniem w porównaniu do aplikacji zbudowanych przy użyciu wieloplatformowych frameworków; \footnote{S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020}
-    \item lepsze doświadczenie użytkownika: Aplikacje natywne mogą wykorzystywać komponenty interfejsu użytkownika specyficzne dla platformy, co zapewnia bardziej dopracowane i płynne wrażenia użytkownika;
-    \item dostęp do funkcji urządzenia: Twórcy aplikacji natywnych mają dostęp do funkcji i możliwości specyficznych dla urządzenia, takich jak GPS, kamera i mikrofon, co pozwala im tworzyć aplikacje z zaawansowanymi funkcjami; \footnote{S. 16; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
-    \item solidne narzędzia deweloperskie: Zarówno iOS, jak i Android zapewniają kompleksowe narzędzia programistyczne, w tym zintegrowane środowiska programistyczne (ang. \textit{IDE}), narzędzia do debugowania i struktury do testowania aplikacji;
-    \item wykorzystanie zaawansowanych możliwości uczenia maszynowego dzięki integracji z Core ML oraz optymalizacja dla Neural Engine w urządzeniach Apple, co pozwala na wydajne i efektywne wykonywanie zadań związanych z AI, takich jak rozpoznawanie obrazu, przetwarzanie języka naturalnego czy analiza danych. \footnote{ Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml} }
+    \item dostęp do pełnych możliwości platformy, co może skutkować szybszym i płynniejszym działaniem w porównaniu do aplikacji zbudowanych przy użyciu wieloplatformowych frameworków; \footnote{S. 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020}
+    \item aplikacje natywne mogą wykorzystywać komponenty interfejsu użytkownika specyficzne dla platformy, co zapewnia bardziej dopracowane i płynne wrażenia użytkownika;
+    \item twórcy aplikacji natywnych mają dostęp do funkcji i możliwości specyficznych dla urządzenia, takich jak GPS, kamera i mikrofon, co pozwala im tworzyć aplikacje z zaawansowanymi funkcjami; \footnote{S. 16; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
+    \item zarówno w środowisku iOS, jak i Android zapewnione są kompleksowe narzędzia, w tym zintegrowane środowiska programistyczne (ang. \textit{IDE}), narzędzia do debugowania i struktury do testowania aplikacji;
+    \item wykorzystanie zaawansowanych możliwości uczenia maszynowego dzięki integracji z Core ML oraz optymalizacja dla Neural Engine w urządzeniach Apple, co pozwala na wydajne i efektywne wykonywanie zadań związanych z uczeniem maszynowym, takich jak rozpoznawanie obrazu, przetwarzanie języka naturalnego czy analiza danych. \footnote{ Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml} }
 \end{enumerate}
 
 Wady:
 \begin{enumerate}[label=--]
-    \item dłuższy czas programowania: Tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy; \footnote{S. 26 -- 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
-    \item ograniczona przenośność: Aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy;
-    \item stroma krzywa uczenia się: Nauka natywnych języków i narzędzi programistycznych może być trudnym i czasochłonnym procesem, szczególnie dla programistów, którzy są nowicjuszami w tworzeniu aplikacji mobilnych.
+    \item tworzenie aplikacji przy użyciu języków natywnych może być czasochłonnym procesem, ponieważ programiści muszą pisać oddzielne bazy kodu dla każdej platformy; \footnote{S. 26 -- 27; Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications}
+    \item aplikacje natywne są powiązane z konkretną platformą, co może ograniczać możliwość ich przenoszenia na inne platformy;
+    \item nauka natywnych języków i narzędzi programistycznych może być trudnym i czasochłonnym procesem, szczególnie dla programistów, którzy są nowicjuszami w tworzeniu aplikacji mobilnych.
 \end{enumerate}
 
 \subsubsection{Model uczenia maszynowego}
@@ -628,11 +631,6 @@ po stronie aplikacji serwerowej.
 Aplikacja serwerowa uruchamiana jest w środowisku uruchomieniowym Node.js, które bazowane jest na
 silniku V8 stworzonym przez firmę Google LLC.
 
-\paragraph{Dobór frameworka aplikacji serwerowej\\}
-\forceindent Zespół stanął przed wyborem frameworka serwerowego, będącego głównym narzędziem do tworzenia aplikacji serwerowej.
-W przestrzeni środowiska Node.js na przestrzeni lat pojawiło się ich wiele, bardziej i
-mniej znanych.
-
 \paragraph{Architektura interfejsu programistycznego aplikacji\\}
 \forceindent Zaprojektowanie interfejsu API, który będzie responsywny zarówno na urządzeniach mobilnych, jak i w sieci, jest wyzwaniem ze względu na nadmierne oraz niedostateczne pobieranie danych i potencjalne wykonywanie wielu żądań do serwera na urządzeniu mobilnym.
 W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL zamiast tradycyjnego RESTful API.
@@ -642,7 +640,6 @@ W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL
 Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności)\footnote{S. 1 -- 4; Jiantao Pan, Software Testing, Carnegie Mellon University, Stany Zjednoczone Ameryki, Wiosna 1999}.
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
-\newpage
 \paragraph{Aplikacja mobilna\\}
 \forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 \subsection{Opis sytuacji faktycznej}
@@ -819,7 +816,8 @@ Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników o
 
 \begin{figure}[htbp]
     \textbf{\caption{Diagram relacji encji w bazie danych mikroserwisu pojemników na śmieci}}
-    \centering \includegraphics[width=12cm, height={\imgth}, keepaspectratio]{static/diagrams/erd-baza-danych-śmietników.png}
+    \vspace{0.55em}
+    \centering \includegraphics[width=12cm, height={\imgth}, keepaspectratio]{static/diagrams/trash-erd.png}
     \\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -1122,7 +1120,7 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
 Analiza wydajności modelu klasyfikacji pojemników na odpady przeprowadzona została poprzez ocenę trzech kluczowych wskaźników: precyzji, czułości oraz miary F1 dla różnych kategorii pojemników na odpady. W celu ułatwienia interpretacji wyników, wyniki te zostały odniesione do tabeli referencyjnej, która określa granice procentowe dla oceny skuteczności modelu.
 
 \subsubsection{Punkt odniesienia: Tabela oceny wyników}
-Do oceny wyników modelu została wykorzystana poniższa tabela referencyjna, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
+Do oceny wyników modelu została wykorzystana tabela referencyjna 3.2, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
 
 \begin{table}[h]
     \centering
