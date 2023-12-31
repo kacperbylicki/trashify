@@ -631,11 +631,6 @@ po stronie aplikacji serwerowej.
 Aplikacja serwerowa uruchamiana jest w środowisku uruchomieniowym Node.js, które bazowane jest na
 silniku V8 stworzonym przez firmę Google LLC.
 
-\paragraph{Dobór frameworka aplikacji serwerowej\\}
-\forceindent Zespół stanął przed wyborem frameworka serwerowego, będącego głównym narzędziem do tworzenia aplikacji serwerowej.
-W przestrzeni środowiska Node.js na przestrzeni lat pojawiło się ich wiele, bardziej i
-mniej znanych.
-
 \paragraph{Architektura interfejsu programistycznego aplikacji\\}
 \forceindent Zaprojektowanie interfejsu API, który będzie responsywny zarówno na urządzeniach mobilnych, jak i w sieci, jest wyzwaniem ze względu na nadmierne oraz niedostateczne pobieranie danych i potencjalne wykonywanie wielu żądań do serwera na urządzeniu mobilnym.
 W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL zamiast tradycyjnego RESTful API.
@@ -645,7 +640,6 @@ W związku z tym zespół postanowił zbadać możliwość wykorzystania GraphQL
 Chociaż początkowo może być uważane za stratę czasu, umożliwia ono pewniejsze rozwijanie kodu, uniknianie błędów i łatwiejsze zrozumienie kodu źródłowego (z testami będącymi rodzajem dokumentacji w kodzie opisującej zachowanie danej funkcjonalności)\footnote{S. 1 -- 4; Jiantao Pan, Software Testing, Carnegie Mellon University, Stany Zjednoczone Ameryki, Wiosna 1999}.
 Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpopularniejsze: Jest oraz Mocha + Chai.
 
-\newpage
 \paragraph{Aplikacja mobilna\\}
 \forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
 \subsection{Opis sytuacji faktycznej}
@@ -822,7 +816,8 @@ Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników o
 
 \begin{figure}[htbp]
     \textbf{\caption{Diagram relacji encji w bazie danych mikroserwisu pojemników na śmieci}}
-    \centering \includegraphics[width=12cm, height={\imgth}, keepaspectratio]{static/diagrams/erd-baza-danych-śmietników.png}
+    \vspace{0.55em}
+    \centering \includegraphics[width=12cm, height={\imgth}, keepaspectratio]{static/diagrams/trash-erd.png}
     \\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
@@ -1125,7 +1120,7 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
 Analiza wydajności modelu klasyfikacji pojemników na odpady przeprowadzona została poprzez ocenę trzech kluczowych wskaźników: precyzji, czułości oraz miary F1 dla różnych kategorii pojemników na odpady. W celu ułatwienia interpretacji wyników, wyniki te zostały odniesione do tabeli referencyjnej, która określa granice procentowe dla oceny skuteczności modelu.
 
 \subsubsection{Punkt odniesienia: Tabela oceny wyników}
-Do oceny wyników modelu została wykorzystana poniższa tabela referencyjna, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
+Do oceny wyników modelu została wykorzystana tabela referencyjna 3.2, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
 
 \begin{table}[h]
     \centering
