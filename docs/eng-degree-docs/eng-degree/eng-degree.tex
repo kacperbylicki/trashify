@@ -762,7 +762,6 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     & Zadanie 3: Dobranie algorytmów uczenia maszynowego & {1. Kacper Bylicki\\2. Jakub Barczewski} \\
     & Zadanie 4: Zaimplementowanie algorytmów uczenia maszynowego & 1. Kacper Bylicki \\
     & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Kacper Bylicki} \\
-    \pagebreak
     \SetCell[r=4]{h} Cel 2: Przygotowanie aplikacji serwerowej sterującej algorytmami uczenia maszynowego
     & Zadanie 1: Stworzenie diagramu architektury aplikacji & {1. Jakub Barczewski\\2. Kacper Bylicki} \\
     & Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją serwerową a aplikacją mobilną &{1. Jakub Barczewski} \\
@@ -774,7 +773,6 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     & Zadanie 3: Stworzenie prototypu aplikacji & {1. Marek Gerszendorf}\\
     & Zadanie 4: Zaimplementowanie kanałów komunikacji między aplikacją a aplikacją serwerową & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
     & Zadanie 5: Przeprowadzenie testów i poprawek & {1. Marek Gerszendorf}\\
-    \pagebreak
     \SetCell[r=5]{h} Cel 4: Przygotowanie dokumentacji technicznej projektu
     & Zadanie 1: Stworzenie diagramu architektury projektu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
     & Zadanie 2: Rozrysowanie wzorca relacji w bazie danych (diagram ERD)&{1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
@@ -926,7 +924,6 @@ Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co
 
 Mikroserwis kont użytkownika posiada łącznie 8 testów jednostkowych oraz 43 testy integracyjne.
 Przetestowane zostały ścieżki związane z logowaniem, rejestracją oraz zmianami w danych konta użytkowika.
-Jest to zdecydowanie część pracy najbogatsza w ścieżki decyzyjne.
 
 \begin{figure}[htbp]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu konta użytkownika}}
@@ -999,94 +996,99 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
 
 \forceindent{Na rysunku 3.12 widoczny jest ekran startowy aplikacji mobilnej. Umożliwia on przejście do procesu rejestracji poprzez przycisk „Dołącz teraz” (ang. \textit{Join Now}) oraz do ekranu logowania przez kliknięcie w przycisk „Zaloguj się” (ang. \textit{Login}). }
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \textbf{\caption{Ekran startowy aplikacji mobilnej}}
     \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm, height=12cm, keepaspectratio]{./static/mobile/start-page.jpg}\\
+    \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/start-page.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
+\newpage
 \forceindent{Rysunek 3.13 przedstawia widok rejestracji, dzięki któremu użytkownik może założyć konto, podając nazwę użytkownika, adres e-mail oraz hasło. W celu dodatkowej walidacji, hasło należy wprowadzić dwa razy. Po prawidłowym wpisaniu danych, należy kliknąć przycisk „Zarejestruj się” (ang. \textit{Register}). Z ekranu rejestracji istnieje możliwość łatwego przejścia do ekranu logowania poprzez kliknięcie w napis „Zaloguj się” (ang. \textit{Login}).}
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \textbf{\caption{Widok rejestracji}}
     \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/register.jpg}\\
+    \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/register.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
+\newpage
 \forceindent{Aby zalogować się do aplikacji, użytkownik musi podać swój adres email oraz hasło, co widoczne jest na rysunku 3.14. Proces logowania zatwierdza się, klikając przycisk „Zaloguj się” (ang. \textit{Login}). Z ekranu logowania istnieje również możliwość przejścia do panelu odzyskiwania hasła poprzez kliknięcie w napis „Zapomniałeś hasła?” (ang. \textit{Forgot password?}) oraz do ekranu rejestracji przez kliknięcie w „Zarejestruj się” (ang. \textit{Register}).}
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \textbf{\caption{Ekran logowania}}
     \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/login.jpg}\\
+    \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/login.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
+\newpage
 \forceindent{Rysunek 3.15 przedstawia panel odzyskiwania hasła, który to wykorzystywany jest przez użytkowników w celu odzyskania hasła. Użytkownik powinien podać adres email powiązany z kontem, a następnie zatwierdzić operację za pomocą przycisku „Resetuj Hasło” (ang. \textit{Reset Password}). Po prawidłowym wykonaniu tej operacji, na podany adres email zostanie wysłana wiadomość z linkiem umożliwiającym odzyskanie hasła.}
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \textbf{\caption{Panel odzyskiwania hasła}}
     \vspace{0.55em}
     \centering
-    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/forgot-password.jpg}\\
+    \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/forgot-password.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
 \forceindent{Strona główna (rysunek 3.16) prezentuje mapę z oznaczonymi lokalizacjami śmietników. Każdy typ śmietnika jest reprezentowany przez unikalny kolor i ikonę. Kliknięcie na tag śmietnika wyświetla dodatkowe informacje o danym punkcie. Na górze strony znajduje się pole tekstowe umożliwiające wyszukiwanie określonych lokalizacji. Po wpisaniu początku nazwy miasta, automatycznie pojawia się lista sugerowanych pasujących miejsc. Użytkownik może wybrać interesującą go lokalizację z tej listy. Na dole strony umieszczono menu nawigacyjne, dzięki któremu można łatwo poruszać się po aplikacji.}
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \textbf{\caption{Strona główna}}
     \vspace{0.55em}
     \centering
-    \includegraphics[width=7cm, keepaspectratio]{./static/mobile/home-page.jpg}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
-\end{figure}
-
-\forceindent{Rysunek 3.17 przedstawia panel dodawnia punktów na mapie. Celem dodania nowego punktu na mapie, użytkownik powinien wybrać ikonę plusa w menu. Po otwarciu panelu, pierwszym krokiem jest dodanie zdjęcia. Zastosowany model uczenia maszynowego automatycznie rozpozna typ śmietnika. Jeśli rozpoznanie jest błędne, użytkownik ma możliwość ręcznej zmiany typu. Następnie, po weryfikacji typu śmietnika i lokalizacji, operację dodania punktu zatwierdza się przyciskiem „Zapisz” (ang. \textit{Save}).}
-
-\begin{figure}[H]
-    \textbf{\caption{Panel dodawania punktów}}
-    \vspace{0.55em}
-    \centering
-    \includegraphics[width=7cm,keepaspectratio]{./static/mobile/add-trash.jpg}\\
+    \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/home-page.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
+\forceindent{Rysunek 3.17 przedstawia panel dodawnia punktów na mapie. Celem dodania nowego punktu na mapie, użytkownik powinien wybrać ikonę plusa w menu. Po otwarciu panelu, pierwszym krokiem jest dodanie zdjęcia. Zastosowany model uczenia maszynowego automatycznie rozpozna typ śmietnika. Jeśli rozpoznanie jest błędne, użytkownik ma możliwość ręcznej zmiany typu. Następnie, po weryfikacji typu śmietnika i lokalizacji, operację dodania punktu zatwierdza się przyciskiem „Zapisz” (ang. \textit{Save}).}
 
+\begin{figure}[htb]
+    \textbf{\caption{Panel dodawania punktów}}
+    \vspace{0.55em}
+    \centering
+    \includegraphics[width=8cm, height=14cm, keepaspectratio]{./static/mobile/add-trash.jpg}\\
+    \raggedright\scriptsize{Źródło: Opracowanie własne}
+\end{figure}
+
+\newpage
 \forceindent{Panel użytkownika (rysunek 3.18) umożliwia edycję nazwy użytkownika oraz adresu email. Proces edycji rozpoczyna się od kliknięcia w przycisk „Edytuj” (ang. \textit{Edit}), co przekierowuje do odpowiedniego panelu edycyjnego. Funkcja „Ustawienia dostępu” (ang. \textit{Access settings}) pozwala na przeniesienie do sekcji ustawień, gdzie użytkownik może konfigurować uprawnienia aplikacji. Za pomocą suwaka trybu ciemnego (ang. \textit{dark mode}) istnieje możliwość zmiany wyglądu aplikacji z jasnego na ciemny i odwrotnie. Opcja „Wyloguj się” (ang. \textit{Sign out}) umożliwia bezpieczne wylogowanie się z konta.}
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \textbf{\caption{Panel użytkownika}}
     \vspace{0.55em}
     \centering
-    \includegraphics[width=7cm, keepaspectratio]{./static/mobile/panel-użytkownika.png}\\
+    \includegraphics[width=8cm, height=14cm, keepaspectratio]{./static/mobile/panel-użytkownika.png}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
+\newpage
 \forceindent{Panele edycji nazwy użytkownika i adresu email widoczne są odpowiednio na rysunkach 3.19 oraz 3.20. Celem edycji nazwy użytkownika, należy wpisać nową nazwę, a następnie zatwierdzić zmianę, klikając przycisk „Zapisz” (ang. \textit{Save}). Proces zmiany adresu email przebiega w identyczny sposób: użytkownik wpisuje nowy adres email i zatwierdza zmianę za pomocą tego samego przycisku „Zapisz” (ang. \textit{Save}).}
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \textbf{\caption{Widok aktualizowania adresu email}}
     \centering
     \vspace{0.55em}
-    \includegraphics[width=8cm, keepaspectratio]{./static/mobile/update-email.jpg}\\
+    \includegraphics[width=8cm, height=12cm, keepaspectratio]{./static/mobile/update-email.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
-\begin{figure}[h]
+\begin{figure}[htb]
     \textbf{\caption{Widok aktualizowania hasła użytkownika}}
     \centering
     \vspace{0.55em}
-    \includegraphics[width=6cm, keepaspectratio]{./static/mobile/update-password.jpg}\\
+    \includegraphics[width=8cm, height=12cm, keepaspectratio]{./static/mobile/update-password.jpg}\\
     \raggedright\scriptsize{Źródło: Opracowanie własne}
 \end{figure}
 
+\newpage
 \subsection{Problemy z realizacją aplikacji mobilnej}
 \forceindent{W trakcie pracy nad projektem aplikacji mobilnej, który był realizowany w grupie, napotkaliśmy kilka istotnych problemów. Pierwszym z nich był problem z wyświetlaniem punktów na mapie, gdzie główną trudnością było skomunikowanie aplikacji z danymi geolokacyjnymi, które były aktualizowane w czasie rzeczywistym w modelu. To spowodowało wyzwania związane z odpowiednim pobieraniem i wyświetlaniem tych danych na interfejsie użytkownika. Kolejnym problemem była efektywność wyszukiwania punktów na mapie, które miało być dynamiczne i responsywne. Jednak napotkaliśmy trudności związane z aktualizacją koordynatów punktów w modelu oraz ich odwzorowaniem na mapie. To wymagało starannej synchronizacji między danymi w modelu a ich reprezentacją na mapie.}
 
@@ -1117,10 +1119,10 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
 
 \subsection{Analiza wydajności modelu klasyfikacji pojemników}
 
-Analiza wydajności modelu klasyfikacji pojemników na odpady przeprowadzona została poprzez ocenę trzech kluczowych wskaźników: precyzji, czułości oraz miary F1 dla różnych kategorii pojemników na odpady. W celu ułatwienia interpretacji wyników, wyniki te zostały odniesione do tabeli referencyjnej, która określa granice procentowe dla oceny skuteczności modelu.
+\forceindent Analiza wydajności modelu klasyfikacji pojemników na odpady przeprowadzona została poprzez ocenę trzech kluczowych wskaźników: precyzji, czułości oraz miary F1 dla różnych kategorii pojemników na odpady. W celu ułatwienia interpretacji wyników, wyniki te zostały odniesione do tabeli referencyjnej, która określa granice procentowe dla oceny skuteczności modelu.
 
 \subsubsection{Punkt odniesienia: Tabela oceny wyników}
-Do oceny wyników modelu została wykorzystana tabela referencyjna 3.2, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
+\forceindent Do oceny wyników modelu została wykorzystana tabela referencyjna 3.2, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
 
 \begin{table}[h]
     \centering
@@ -1130,8 +1132,8 @@ Do oceny wyników modelu została wykorzystana tabela referencyjna 3.2, która d
         \hline
         Ocena        & Precyzja (\%)      & Czułość (\%)       & Miara F1             \\ \hline
         Niska        & < 50               & < 50               & < 0.5                \\ \hline
-        Umiarkowana  & 50 - 69            & 50 - 69            & 0.5 - 0.69           \\ \hline
-        Dobra        & 70 - 84            & 70 - 84            & 0.7 - 0.84           \\ \hline
+        Umiarkowana  & 50 -- 69            & 50 -- 69            & 0.5 -- 0.69           \\ \hline
+        Dobra        & 70 -- 84            & 70 -- 84            & 0.7 -- 0.84           \\ \hline
         Bardzo dobra & \textgreater{}= 85 & \textgreater{}= 85 & \textgreater{}= 0.85 \\ \hline
     \end{tabular}
     \label{tab:my-table}
@@ -1361,7 +1363,7 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Thanh Tran, Flutter Native Performance and Expressive UI/UX, Finlandia, Metropolia University of Applied Sciences, 04.04.2023
     \item Matilda Olsson, A Comparison of Performance and Looks Between Flutter and Native Applications, Szwecja, Blekinge Institute of Technology, 13.06.2020
     \item Dane za stroną internetową (dostęp 20.11.2023) \url{https://developer.apple.com/documentation/coreml}
-    \item Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry - Paris-Saclay University, Jan 2020, Cancún, Mexico
+    \item Mateus Araújo [i inni]. Performance analysis of computational offloading on embedded platforms using the gRPC framework. 8th International Workshop on ADVANCEs in ICT Infrastructures and Services (ADVANCE 2020), Candy E. Sansores, Universidad del Caribe, Mexico, Nazim Agoulmine, IBISC Lab, University of Evry -- Paris-Saclay University, Jan 2020, Cancún, Mexico
     \item Leiyu Chen, Shaobo Li, Q. Bai, Jing Yang, Sanlong Jiang, Yanming Miao, Review of Image Classification Algorithms Based on Convolutional Neural Networks, College of Mechanical Engineering, Guiyang 550025, Chiny, 21.11.2021
     \item Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering, University of Utah, 14.06.2016
     \item F. Agostini, S. Campese, R. Vianello, M. Pizzi, A. Cipriani, M. Zanetti, A post processing pipeline to prepare raw data for machine learning algorithms in cardiac magnetic resonance imaging, University of Padua, Włochy, 2022
@@ -1375,13 +1377,13 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Nick Haber, Catalin Voss, Azar Fazel, Terry Winograd, Dennis P. Wall, A Practical Approach to Real-Time Neutral Feature Subtraction for Facial Expression Recognition, Stanford University, 2016
     \item Xianjun Wu, Heming Chen, Xiaoli Wu, Shunjun Wu, Jinbo Huang, Burn Image Recognition of Medical Images Based on Deep Learning: From CNNs to Advanced Networks, Guangdong University of Petrochemical Technology, Guangdong, Chiny, 19.02.2021
     \item Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, IEEE Transactions on Medical Imaging, 02.02.2010
-    \item Karthik B., Ramkumar G., Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, ECS - The Electrochemical Society, 2022
+    \item Karthik B., Ramkumar G., Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, ECS -- The Electrochemical Society, 2022
     \item Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
     \item Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID ‑- 19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
     \item Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Ceredigion, Anglia, 12.2015
 \end{enumerate}
 
-\subsection{Załączniki}
+\section{Załączniki}
 
 \begin{enumerate}
     \item Kod źródłowy aplikacji serwerowej;
