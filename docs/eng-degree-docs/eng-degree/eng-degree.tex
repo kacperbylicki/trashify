@@ -1270,7 +1270,7 @@ Zarządzanie klientami i serwisami w technologii gRPC okazało się być wyzwani
 Napotkane problemy wymagały od niego głębokiego zrozumienia tej implementacji remote procedure call.
 Celem dalszego pogłębiania wiedzy z zakresu sieci komputerowych i mikroserwisów, planuje on przygotowanie wzorca kodu bazowego do aplikacji opartych o te technologie w innych, bardziej dopasowanych pod niego narzędziach.
 
-Projekt ten był również pierwszą stycznością Jakuba z tworzeniem aplikacji mobilnych oraz dostosowywaniem interfejsu RESTfull API do potrzeb urządzeń mobilnych.
+Projekt ten był również pierwszą stycznością Jakuba z tworzeniem aplikacji mobilnych oraz dostosowywaniem interfejsu RESTful API do potrzeb urządzeń mobilnych.
 Doświadczenie to pogłębiłego jego rozumienie problemów z jakimi spotykają się programiści zajmujący się środowiskami klienckimi, zarówno w kontekście aplikacji webowych jak i mobilnych.
 
 Tworzenie dokumentacji projektu oraz pisanie pracy inżynierskiej przy użyciu środowiska LaTeX było jego pomysłem. Pomimo optymistycznych założeń, tworzenie dokumentacji w tym środowisku okazało się trudniejsze w praktyce. Przeszkodą była niewystarczająca znajomość narzędzi w nim dostępnych, których nauka okazała się czasochłonna i zwiększyła ilość pracy.
@@ -1287,7 +1287,19 @@ Doświadczenie to pozwoliło mu na poszerzenie swoich horyzontów technologiczny
 
 Projekt ten nie tylko wzbogacił go w umiejętności techniczne, ale także nauczył pracy w zespole. Rozwinięcie aplikacji od etapu pomysłu po gotowy produkt wymagało efektywnej współpracy, co zdecydowanie poszerzyło jego umiejętności komunikacyjne i zdolność do efektywnej koordynacji działań zespołowych. To doświadczenie dostarczyło mu nie tylko konkretnych umiejętności programistycznych, ale także cennego kontekstu zespołowego w procesie tworzenia oprogramowania.
 
-Kacper Bylicki -- Specjalizował się w architekturze chmury i algorytmach uczenia maszynowego. Odegrał kluczową rolę we wdrażaniu rozwiązań do rozpoznawania obrazów i przetwarzania danych. Jest również twórcą prezentacji audio-wizualnej aplikacji końcowej.
+Kacper Bylicki -- Specjalizował się w architekturze chmury, algorytmach uczenia maszynowego oraz tworzeniu aplikacji serwerowej. Odegrał kluczową rolę we wdrażaniu rozwiązań do rozpoznawania obrazów i przetwarzania danych. Jest również twórcą prezentacji audio-wizualnej aplikacji końcowej.
+
+Głównym problemem, przed którym stanął Kacper, było zaprojektowanie systemu zdolnego do obsługi dużej liczby zapytań w czasie rzeczywistym oraz przetwarzania dużych wolumenów danych. Wymagało to skonstruowania modularnej architektury, która mogłaby się łatwo dostosować do rosnących potrzeb bez dodatkowych kosztów. Wyzwaniem było również zapewnienie ciągłości działania systemu i jego niezawodności, co miało kluczowe znaczenie dla zapewnienia ciągłej dostępności usług dla użytkowników.
+
+Projekt Trashify, przetwarza wrażliwe dane użytkowników, przez co ich bezpieczeństwo jest priorytetem. Kacper musiał zaimplementować rozwiązania, które chroniłyby dane użytkowników przed nieuwierzytelnionym dostępem i atakami. Wyzwanie polegało na zrównoważeniu wydajności systemu z jego bezpieczeństwem. Użycie JWT (ang. \textit{JSON Web Tokens}) i algorytmu szyfrowania Argon2 było odpowiedzią na te wyzwania, zapewniając silne uwierzytelnianie i ochronę danych.
+
+Praca Kacpra nad infrastrukturą chmurową skupiała się na stworzeniu rozwiązania, które mogłoby dynamicznie reagować na zmieniające się obciążenia systemu. Użycie narzędzia Terraform umożliwiło Kacprowi deklaratywne podejście do zarządzania infrastrukturą, co pozwoliło na szybkie i efektywne skalowanie zasobów w odpowiedzi na bieżące wymagania, a także łatwość w odtworzeniu infrastruktury w razie awarii.
+
+Wykorzystanie usług chmurowych Microsoft Azure było podyktowane potrzebą znalezienia rozwiązania, które oferowałoby odpowiednią równowagę między wydajnością, skalowalnością, i kosztownością. Optymalizacja wykorzystania zasobów przy jednoczesnym zapewnieniu wysokiej dostępności oraz wydajności aplikacji była kluczowa dla sukcesu tego projektu oraz jego dalszego rozwoju. Rozwiązaniem było użycie usług Azure App Service oraz Azure Container Registry, dzięki którym Kacper przygotował mikroserwisy aplikacji serwerowej ulokowane w pojedynczej instancji Azure App Service, co znacznie obniżyło koszty.
+
+Kacper musiał zaprojektować i wdrożyć serie zautomatyzowanych procesów dostarczania nowego oprogramowania znanych jako pipeline`y, które umożliwiłyby ciągłą integrację i dostarczanie kodu. Było to kluczowe dla utrzymania wysokiej jakości oprogramowania i szybkiego wprowadzania zmian. Wyzwaniem było zapewnienie, że każda aktualizacja kodu będzie szybko i skutecznie testowana oraz wdrażana bez zakłóceń dla potencjalnych użytkowników. Użycie narzędzia Github Actions pozwoliło Kacprowi na automatyzację procesów analizy, testowania, transpilacji oraz aktualizacji oprogramowania, co znacznie przyspieszyło proces wdrażania nowych funkcji i poprawek.
+
+Praca Kacpra nad projektem inżynierskim umożliwiła mu nie tylko rozwój zawodowy w nowych dziedzinach, takich jak architektura chmurowa i devops, ale także pozwoliła na rozwinięcie umiejętności rozwiązywania złożonych problemów inżynieryjnych.
 
 \subsection{Wyzwania i rozwiązania}
 
