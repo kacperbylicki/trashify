@@ -266,7 +266,7 @@ Składa się on z głównych trzech części:
 \textbf{REST}\\
 \forceindent REST to akronim REpresentational State Transfer\footnote{Rozdział 5; Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000r.} i styl architektoniczny dla rozproszonych systemów hipermedialnych. Sam w sobie jest wzorcem architektonicznym, który zakłada rozdzielenie odpowiedzialności między zapytaniami (GET), mutacjami (POST, PATCH, PUT) i metodami usuwania (DELETE). Został on przetestowany w boju od 2000 roku i szeroko przyjęty w społeczności programistów.
 
-\paragraph{Warstwa komunikacji z bazą danych}
+\subsubsection{Warstwa komunikacji z bazą danych}
 \subparagraph{Mapowanie obiektowo-relacyjne, mapowanie obiektowo-dokumentowe i budowniczy kwerend\\}
 \forceindent  Mapery obiektowo-relacyjne, obiektowo-dokumentowe czy budowniczy kwerend są niezbędnymi narzędziami do utrzymywania deklaratywnego podejścia do komunikacji z systemem bazodanowym.
 Na rynku dostępnych jest wiele bibliotek oferujących konkurujące rozwiązania.
@@ -301,7 +301,7 @@ W środowisku node.js na przestrzeni lat powstały między innymi następujące 
 \textbf{Budowniczy kwerend\\}
 \forceindent  Budowniczy kwerend stanowią abstrakcję na język SQL w wybranym języku programowania.
 Pozwalają one na deklaratywne tworzenie kwerend za pomocą operacji takich jak: select, insert, join, delete, update, with, where, not, etc.
-Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne wsparcie intellisense w danym języku programowania oraz rozwiązują popularne problemy związane z cyberbezpieczeństwem przeprowadzania operacji na bazie danych, czego najpopularniejszym przykładem są operacje wstrzykiwania SQL`a (ang. \textit{SQL Injection})\footnote{Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}}.
+Zabezpieczają programistę przed niebezpieczeństwem literówek poprzez pełne wsparcie intellisense w danym języku programowania oraz rozwiązują popularne problemy związane z cyberbezpieczeństwem przeprowadzania operacji na bazie danych, czego najpopularniejszym przykładem są operacje wstrzykiwania SQL`a (ang. \textit{SQL Injection})\footnote{Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r}.
 
 \subsection{Typy baz danych}
 
@@ -551,7 +551,7 @@ Skoncentrowano się na identyfikacji cech o różnym stopniu skomplikowania, zac
 %3. Selekcja Istotnych Regionów:
 Dobór kluczowych cech obejmował także selekcję istotnych regionów na obrazach.
 Zidentyfikowano obszary, które są szczególnie ważne dla rozpoznawania określonych klas obiektów.
-To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu. \footnote{ S. 2 -- 3; A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, Samara National Research University, Rosja, 2018}
+To podejście pozwalało na skupienie się na kluczowych detalach, co przyspieszało proces uczenia i poprawiało skuteczność modelu. \footnote{ S. 2 -- 3; A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, N. Yu Ilyasova [i inni], Samara National Research University, Rosja, 2018}
 
 %4. Redukcja Wymiarowości:
 W celu efektywnego przetwarzania danych, zastosowano techniki redukcji wymiarowości, takie jak PCA (Principal Component Analysis).
@@ -602,7 +602,7 @@ Oceniano ich zdolność do radzenia sobie z danymi treningowymi i walidacyjnymi 
 
 %7. Rozważanie Wersji Ensemble:
 Rozważono również użycie technik Ensemble, takich jak połączenie wielu modeli w celu poprawy ogólnej skuteczności.
-Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów. \footnote{ S. 2 -- 3; Classifying chest CT images as COVID‑19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, Yao‑Mei Chen,Yenming J. Chen, Wen‑Hsien Ho, Jinn‑Tsong Tsai, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019}
+Możliwe było zastosowanie kombinacji modeli konwolucyjnych i innych algorytmów. \footnote{ S. 2 -- 3; Classifying chest CT images as COVID‑19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, Chen Yao‑Mei [i inni], International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019}
 
 %8. Analiza Wydajności na Platformie Apple:
 Ponieważ model miał być implementowany na platformie Apple, uwzględniono specyfiki tego środowiska.
@@ -652,6 +652,9 @@ Zespół postanowił rozejrzeć się za opcjami i na myśl przyszły dwie najpop
 
 \paragraph{Aplikacja mobilna\\}
 \forceindent Zespół stanął przed wyborem odpowiedniej technologii do stworzenia aplikacji mobilnej. Przy podejmowaniu decyzji należy wziąć pod uwagę umiejętności zespołu, okres w którym projekt musi zostać stworzony oraz możliwość wdrożenia niezbędnych funkcjonalności.
+
+\newpage
+
 \subsection{Opis sytuacji faktycznej}
 
 \subsubsection{Proces nauczania modelu}
@@ -687,6 +690,8 @@ To pozwalało na ocenę, czy model generalizuje się dobrze na nowe dane.
 Po zakończeniu procesu nauczania, model został oceniony na zbiorze testowym. Analizowano wyniki, identyfikując obszary poprawy.
 Możliwe było także dalsze dostosowywanie hiperparametrów w celu optymalizacji modelu.
 
+\newpage
+
 \subsubsection{Decyzje architektoniczne}
 
 \paragraph{Baza danych\\}
@@ -701,7 +706,8 @@ Plusy oraz minusy takiej decyzji są następujące:
 \end{enumerate}
 
 \paragraph{Maper obiektowo-dokumentowy\\}
-\forceindent Wraz z wyborem bazy danych, zespół zdecydował się użyć mapera obiektowo-dokumentowego Mongoose.
+
+\forceindent Wraz z wyborem nierelacyjnej bazy danych, zespół zdecydował się na wykorzystanie mapera obiektowo-dokumentowego Mongoose.
 
 Plusy oraz minusy takiej decyzji są następujące:
 \begin{enumerate}[label=--]
@@ -1116,7 +1122,7 @@ W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z
 Zastosowana metoda polegała na dostrojeniu wstępnie wytrenowanego modelu do analizowanego zbioru danych, co jest procesem zarówno efektywnym czasowo, jak i skutecznym. To dostrojenie było niezbędne do dostosowania możliwości modelu do konkretnych celów projektowych w zakresie rozpoznawania i klasyfikacji obrazów.
 
 \subsubsection{Uczenie nadzorowane}
-\forceindent W ramach pracy zastosowano uczenie nadzorowane, opierając się na oznaczonym zbiorze danych, aby skutecznie szkolić rozpatrywany model. Każdy obraz w tym zbiorze danych został precyzyjnie oznaczony etykietą identyfikującą konkretny typ kontenera. W trakcie treningu wykorzystywana konwolucyjna sieć neuronowa przeszła proces nauki, podczas którego zapoznawała się z charakterystycznymi cechami i wzorcami obrazów, a następnie łączyła je z odpowiadającymi etykietami. Ten proces umożliwił modelowi skuteczne przyswajanie cech definiujących każdy rodzaj kontenera.
+\forceindent W ramach pracy zastosowano uczenie nadzorowane, opierając się na oznaczonym zbiorze danych. Każdy obraz w tym zbiorze danych został precyzyjnie oznaczony etykietą identyfikującą konkretny typ kontenera. W trakcie treningu wykorzystywana konwolucyjna sieć neuronowa przeszła proces nauki, podczas którego zapoznawała się z charakterystycznymi cechami i wzorcami obrazów, a następnie łączyła je z odpowiadającymi etykietami. Ten proces umożliwił modelowi skuteczne przyswajanie cech definiujących każdy rodzaj kontenera.
 
 W celu oceny wydajności rozważanego modelu korzystano z różnych miar, takich jak dokładność, precyzja, przywołanie, czułość i miara F1. Te wskaźniki dostarczały istotnych informacji na temat zdolności modelu do poprawnego identyfikowania poszczególnych typów kontenerów. Praktyczne zastosowanie tych miar pozwoliło na szczegółową analizę skuteczność rozpatrywanego modelu w analizowanego zadania, co było kluczowe dla oceny jego przydatności i precyzji w identyfikacji różnorodnych kontenerów.
 
@@ -1125,7 +1131,7 @@ W celu oceny wydajności rozważanego modelu korzystano z różnych miar, takich
 Ten iteracyjny proces trwał, dopóki model nie osiągnął zadowalającego poziomu dokładności, wskazującego na jego zdolność do dokładnej klasyfikacji nowych, niewidzianych obrazów.
 
 \subsection{Wyzwania i rozważania}
-\forceindent Kluczowym wyzwaniem w szkoleniu CNN do zadań klasyfikacji obrazów, takich jak to, jest zapewnienie wystarczająco dużego i zróżnicowanego zbioru danych, aby zapobiec nadmiernemu dopasowaniu i poprawić zdolność modelu do uogólniania.
+\forceindent Kluczowym wyzwaniem w szkoleniu CNN do zadań klasyfikacji obrazów, jest zapewnienie wystarczająco dużego i zróżnicowanego zbioru danych, aby zapobiec nadmiernemu dopasowaniu i poprawić zdolność modelu do uogólniania.
 Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięcia nierównowagi klas, która mogłaby skłaniać model w kierunku częściej występujących klas. Zespół projektowy zwrócił na to szczególną uwagę, aby zapewnić, że model będzie w stanie rozpoznawać wszystkie typy kontenerów z wysoką dokładnością.
 
 \subsection{Analiza wydajności modelu klasyfikacji pojemników}
@@ -1256,6 +1262,7 @@ Kod źródłowy mikroserwisów znajduje się w folderze apps, podzielony na posz
     \item trash-service -- mikroserwis pojemników na śmieci.
 \end{itemize}
 
+
 \section{Użyteczność projektu}
 
 \forceindent Projekt \topic bazowany jest na zaawansowanych narzędziach programistycznych, dostarczając intuincyjny interfejs użytkownika, co pozwala na szybkie zrozumienie dostępnych funkcjonalności przez nowych użytkowników.
@@ -1318,8 +1325,6 @@ Było to kluczowe dla utrzymania wysokiej jakości oprogramowania i szybkiego wp
 
 Praca Kacpra nad projektem inżynierskim umożliwiła mu nie tylko rozwój zawodowy w nowych dziedzinach, takich jak architektura chmurowa i DevOps, ale także pozwoliła na rozwinięcie umiejętności rozwiązywania złożonych problemów inżynieryjnych.
 
-\newpage
-
 \subsection{Wyzwania i rozwiązania}
 
 \forceindent W trakcie trwania pracy projektowej, zespół napotkał problemy związane z komunikacją i terminowością zadań. Problemy te występowały okresowo i wpływały na realizację harmonogramu prac. Zespół zdecydował się na ustrukturyzowanie harmonogramu spotkań i wykorzystanie narzędzia Jira do współpracy oraz zarządzania zadaniami. Doprowadziło to do poprawy przepływu informacji i śledzenia postępów prac, jak również terminowego wywiązywania się ze zobowiązań projektowych.
@@ -1337,11 +1342,13 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item poprawa umiejętności interpersonalnych -- pokonanie wyzwań komunikacyjnych oraz organizacyjnych pozwoliło członkom zespołu na usprawnienie procesów pracy w grupie oraz poprawę indywidualnych umiejętności efektywnej komunikacji.
 \end{itemize}
 
+\newpage
+
 \section{Wykorzystane materiały i bibliografia związana z realizacją projektu}
 
 \begin{enumerate}[label={[}\arabic*{]}]
     \item Główny Urząd Statystyczny Ochrona środowiska 2022, Warszawa, 2022r.
-    \item Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling?size=n_10_n&filters%5B0%5D%5Bfield%5D=readingTime&filters%5B0%5D%5Btype%5D=any&filters%5B0%5D%5Bvalues%5D%5B0%5D%5Bname%5D=All&filters%5B0%5D%5Bvalues%5D%5B0%5D%5BrangeType%5D=fixed&filters%5B1%5D%5Bfield%5D=issued.date&filters%5B1%5D%5Btype%5D=any&filters%5B1%5D%5Bvalues%5D%5B0%5D=Last%205%20years&filters%5B2%5D%5Bfield%5D=language&filters%5B2%5D%5Btype%5D=any&filters%5B2%5D%5Bvalues%5D%5B0%5D=en}
+    \item Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/en/topics/in-depth/waste-and-recycling}
     \item Dane za stroną internetową (dostęp: 03.11.2023r.) \url{https://www.eea.europa.eu/data-and-maps/daviz/municipal-waste-recycled-and-composted-6#tab-chart_7}
     \item Markdown Architectural Decision Records: Format and Tool Support; Oliver Kopp, Anita Armbruster, Olaf Zimmermann, Institute for Parallel and Distributed Systems, University of Stuttgart, 2018r.
     \item Roy Thomas Fielding, Architectural Styles and the Design of Network-based Software Architectures, 2000
@@ -1367,7 +1374,7 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Dane za stroną internetową (dostęp: 16.11.2023r.) \url{https://mikro-orm.io/}
     \item Alberto Hernandez Chillion [i inni], A Model-Driven Approach to Generate Schemas for Object-Document Mappers, IEEE Access, Murcja, Hiszpania
     \item Alexandre Torres [i inni] Twenty years of object-relational mapping: A survey on patterns, solutions, and their implications on application design, 28.09.2016r.
-    \item Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r. \url{https://quod.lib.umich.edu/w/weave/12535642.0003.102?view=text;rgn=main}
+    \item Tony Russell-Rose, Farhad Shokraneh, Designing the Structured Search Experience: Rethinking the Query-Builder Paradigm, Uniwersytet w Londynie, 2020r
     \item Priyanka Chaudhary, IONIC FRAMEWORK, International Research Journal of Engineering and Technology (IRJET), 05.2018
     \item Dane za stroną internetową (dostęp 21.11.2023r.) \url{https://www.npmjs.com/package/@ionic/cli}
     \item William Danielsson, React Native application development – A comparison between native Android and React Native, Szwecja, Linköpings universitet, 2016
@@ -1385,7 +1392,7 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Qing Lv, Suzhen Zhang, Yuechun Wang, Deep Learning Model of Image Classification Using Machine Learning, Shijiazhuang Posts and Telecommunications Technical College, Shijiazhuang 050021, Chiny, 2022
     \item Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022
     \item Dane za stroną internetową (dostęp 06.12.2023) \url{https://developer.apple.com/videos/play/wwdc2019/222}
-    \item Varad Deshmukh, Srinivas Baskar, Elizabeth Bradley, Thomas Berger, James D. Meiss, Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Department of Computer Science, University of Colorado, Stany Zjednoczone, 18.02.2022
+    \item Varad Deshmukh [i inni], Machine Learning Approaches to Solar-Flare Forecasting: Is Complex Better?, Department of Computer Science, University of Colorado, Stany Zjednoczone, 18.02.2022
     \item N. Yu Ilyasova, A. S. Shirokanev, R. A. Paringer, A. V. Kupriyanov, A. V. Zolotarev, A modified technique for smart textural feature selection to extract retinal regions of interest using image pre-processing, Samara National Research University, Rosja, 2018
     \item Keshun You, Guangqi Qiu, Yingkui Gu, Rolling Bearing Fault Diagnosis Using Hybrid Neural Network with Principal Component Analysis, School of Mechanical and Electrical Engineering, Jiangxi University of Science and Technology, Chiny, 17.11.2022
     \item Sana Gul, Rizwan Bin Faiz, Mohammad Aljaidi, Ghassan Samara, Ayoub Alsarhan, Ahmad al-Qerem, Impact Evaluation of Significant Feature Set in Cross Project for Defect Prediction through Hybrid Feature Selection in Multiclass, Faculty of Computing, Riphah International University Islamabad, Pakistan, 20.07.2023
@@ -1394,8 +1401,8 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Weijie Chen, Charles E. Metz, Maryellen L. Giger, Karen Drukker, A Novel Hybrid Linear/Nonlinear Classifier for Two-Class Classification: Theory, Algorithm, and Applications, IEEE Transactions on Medical Imaging, 02.02.2010
     \item Karthik B., Ramkumar G., Comparison of Feature Extraction Technique for Segmentation in Human Iris Recognition Under Uncontrolled Environment Using CNN Algorithm with SVM Classifier, ECS -- The Electrochemical Society, 2022
     \item Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
-    \item Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID ‑- 19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
-    \item Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Ceredigion, Anglia, 12.2015
+    \item Chen Yao-Mei [i inni], Classifying chest CT images as COVID ‑- 19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
+    \item Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Anglia, 12.2015
     \item Jianxin Wu, Introduction to Convolutional Neural Networks, LAMBDA Group, National Key Lab for Novel Software Technology, Nanjing University, Chiny, 01.05.2017
     \item Ioffe S, Szegedy C. Batch normalization: Accelerating deep network training by reducing internal covariate shift, International conference on machine learning, 01.06.2015
     \item Rezoana Bente Arif [i inni] Study and Observation of the Variations of Accuracies for Handwritten Digits Recognition, with Various Hidden Layers and Epochs using Convolutional Neural Network 09.2018 Mississippi State University, Stany Zjednoczone Ameryki
@@ -1407,7 +1414,7 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Kod źródłowy aplikacji serwerowej;
     \item Kod źródłowy aplikacji mobilnej;
     \item Dokumentacja ścieżek żądań aplikacji serwerowej w postaci archiwum zip;
-    \item Prezentacja audio-wizualna aplikacji mobilnej w formacie mp4 -- link: \url{https://drive.google.com/file/d/1jWMByQfgUFRtHGBQINqS_Q2EPJJz0Lk5/view?usp=sharing}
+    \item Prezentacja audio-wizualna aplikacji mobilnej -- link: \url{https://drive.google.com/file/d/1jWMByQfgUFRtHGBQINqS_Q2EPJJz0Lk5/view?usp=sharing}
 \end{enumerate}
 
 \end{document}
