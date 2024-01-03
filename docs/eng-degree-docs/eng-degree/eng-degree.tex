@@ -751,6 +751,7 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
                 X[0.4,l]
                 X[0.3,l]
             },
+        cells   = {font = \fontsize{10pt}{12pt}\selectfont},
         hlines,
         vlines,
         colsep=1em,
@@ -767,6 +768,7 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
     & Zadanie 2: Zaimplementowanie kanałów komunikacji między aplikacją serwerową a aplikacją mobilną &{1. Jakub Barczewski} \\
     & Zadanie 3: Przeprowadzenie testów i poprawek & {1. Jakub Barczewski\\2. Kacper Bylicki\\3. Marek Gerszendorf} \\
     & Zadanie 4: Dokonanie optymalizacji aplikacji & {1. Jakub Barczewski} \\
+    \pagebreak
     \SetCell[r=5]{h} Cel 3: Przygotowanie aplikacji mobilnej
     & Zadanie 1: Stworzenie diagramu architektury aplikacji&{1. Marek Gerszendorf}\\
     & Zadanie 2: Zaprojektowanie warstwy wizualnej na bazie diagramu & {1. Marek Gerszendorf\\2. Kacper Bylicki\\3. Jakub Barczewski}\\
@@ -785,7 +787,7 @@ Ze względu na wybór RESTful API, zespół będzie musiał zmierzyć się z nas
 
 \subsection{Aplikacja serwerowa}
 
-\forceindent Aplikacja serwerowa oparta jest na frameworku NestJS, który to zapewnia dużą ilość gotowych rozwiązań. Niestety, nie są one w pełni intuicyjne, ani pozbawione błędów.
+\forceindent Aplikacja serwerowa oparta jest na frameworku NestJS, który zapewnia dużą ilość gotowych rozwiązań. Niestety, nie są one w pełni intuicyjne, ani pozbawione błędów.
 W trakcie prac projektowych, zespół zetknął się z wieloma problemami wywołanymi przez architekturę oraz wbudowane rozwiązania frameworka.
 
 Finalnie, aplikacja serwerowa podzielona jest na cztery mikroserwisy, odpowiednio:
@@ -809,7 +811,7 @@ Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników o
     \vspace{0.55em}
     \centering \includegraphics[width=12cm,height={\imgth}, keepaspectratio]{static/diagrams/erd-baza-danych-użytkownika.png}
     \\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -817,7 +819,7 @@ Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników o
     \vspace{0.55em}
     \centering \includegraphics[width=12cm, height={\imgth}, keepaspectratio]{static/diagrams/trash-erd.png}
     \\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \subsection{Diagramy sekwencji}
@@ -827,7 +829,7 @@ Podział ten podyktowany jest względami bezpieczeństwa danych użytkowników o
 \begin{figure}[htbp]
     \textbf{\caption{Diagram logowania użytkownika}}
     \centering{\includegraphics[width=15cm, height={\imgth}, keepaspectratio]{./static/diagrams/diagram-logowania.png}}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 Rysunek 3.3 przedstawia diagram procesu logowania użykownika wraz z drzewami decyzyjnymi.
@@ -841,7 +843,7 @@ Można owy proces podzielić na następujące odnogi:
 \begin{figure}[htbp]
     \textbf{\caption{Diagram zmiany adresu email}}
     \includegraphics[width=15cm,height={\imgth}, keepaspectratio]{./static/diagrams/diagram-zmiany-adresu-email.png}\\
-    \scriptsize{Źródło: Opracowanie własne}
+    \small{Źródło: Opracowanie własne}
 \end{figure}
 
 Rysunek 3.4 przedstawia diagram zmiany adresu email.
@@ -858,7 +860,7 @@ Odnogi decyzyjne w tym procesie można podzielić na następujące:
     \textbf{\caption{Diagram pobierania danych śmietników}}
     \vspace{0.55em}
     \centering\includegraphics[width=15cm,height={\imgth}, keepaspectratio]{./static/diagrams/diagram-pobierania-danych-smietniczkow.png}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 Rysunek 3.5 przedstawia diagram pobierania danych śmietników.
@@ -868,7 +870,7 @@ Jego proces posiada jedno drzewko decyzyjne, którego wymogiem jest uwierzytelni
     \textbf{\caption{Diagram rejestracji użytkownika}}
     \vspace{0.55em}
     \centering\includegraphics[width=15cm,height={\imgth}, keepaspectratio]{./static/diagrams/naprawiony-diagram-rejestracji.png}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 Rysunek 3.6 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formularzu rejestracji użytkownik otrzymuje wiadomość email pod wskazanym adresem wraz z linkiem do potwierdzenia rejestracji. Po wejściu na witrynę, do której prowadzi link, konto użytkownika zostaje potwierdzone i może rozpocząć on korzystanie z aplikacji.
@@ -877,7 +879,7 @@ Rysunek 3.6 przedstawia diagram rejestracji użytkownika. Po wypełnieniu formul
 %     \textbf{\caption{Diagram resetu hasła użytkownika}}
 %     \vspace{0.55em}
 %     \centering\includegraphics[width=12cm,height={\imgth}, keepaspectratio]{./static/diagrams/diagram-resetu-hasła.png}\\
-%     \raggedright\scriptsize{Źródło: Opracowanie własne}
+%     \raggedright\small{Źródło: Opracowanie własne}
 % \end{figure}
 
 \subsection{Diagram komunikacji między aplikacją serwerową i mobilną}
@@ -896,7 +898,7 @@ Sekwencja interakcji jest asynchroniczna i opiera się na modelu żądanie-odpow
     \vspace{3.5em}
     \centering\includegraphics[width=\fittingimage, keepaspectratio]{static/diagrams/diagram-komunikacji.jpg}
     \\
-    \raggedright\scriptsize{Źródło: opracowanie własne}
+    \raggedright\small{Źródło: opracowanie własne}
 \end{sidewaysfigure}
 
 \subsection{Testy automatyczne aplikacji serwerowej}
@@ -909,17 +911,17 @@ Mikroserwis pojemników na śmieci posiada łącznie 6 testów jednostkowych, co
 \begin{figure}[htbp]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu pojemników na śmieci}}
     \vspace{0.55em}
-    \centering\includegraphics[width=10cm,height={\imgth}, keepaspectratio]{./static/trash-unit.png}
+    \centering\includegraphics[width=12.5cm,height={\imgth}, keepaspectratio]{./static/trash-unit.png}
     \\
-    \raggedright \scriptsize{Źródło: Opracowanie własne}
+    \raggedright \small{Źródło: Opracowanie własne}
 \end{figure}
 
 \begin{figure}[htbp]
     \textbf{\caption{Wyniki testów integracyjnych mikroserwisu pojemników na śmieci}}
     \vspace{0.55em}
-    \centering\includegraphics[width=10cm,height={\imgth}, keepaspectratio]{./static/trash-integration-tests.png}
+    \centering\includegraphics[width=12.5cm,height={\imgth}, keepaspectratio]{./static/trash-integration-tests.png}
     \\
-    \raggedright \scriptsize{Źródło: Opracowanie własne}
+    \raggedright \small{Źródło: Opracowanie własne}
 \end{figure}
 
 Mikroserwis kont użytkownika posiada łącznie 8 testów jednostkowych oraz 43 testy integracyjne.
@@ -928,17 +930,17 @@ Przetestowane zostały ścieżki związane z logowaniem, rejestracją oraz zmian
 \begin{figure}[htbp]
     \textbf{\caption{Wyniki testów jednostkowych mikroserwisu konta użytkownika}}
     \vspace{0.55em}
-    \centering\includegraphics[width=10cm,height={\imgth}, keepaspectratio]{./static/accounts-unit.png}
+    \centering\includegraphics[width=12.5cm,height={\imgth}, keepaspectratio]{./static/accounts-unit.png}
     \\
-    \raggedright \scriptsize{Źródło: Opracowanie własne}
+    \raggedright \small{Źródło: Opracowanie własne}
 \end{figure}
 
 \begin{figure}[htbp]
     \textbf{\caption{Wyniki testów integracyjnych mikroserwisu kont użytkownika}}
     \vspace{0.55em}
-    \centering\includegraphics[width=10cm,height={\imgth}, keepaspectratio]{./static/accounts-integration-tests.png}
+    \centering\includegraphics[width=12.5cm,height={\imgth}, keepaspectratio]{./static/accounts-integration-tests.png}
     \\
-    \raggedright \scriptsize{Źródło: Opracowanie własne}
+    \raggedright \small{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
@@ -1001,7 +1003,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \vspace{0.55em}
     \centering
     \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/start-page.jpg}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
@@ -1012,7 +1014,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \vspace{0.55em}
     \centering
     \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/register.jpg}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
@@ -1023,7 +1025,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \vspace{0.55em}
     \centering
     \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/login.jpg}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
@@ -1034,7 +1036,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \vspace{0.55em}
     \centering
     \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/forgot-password.jpg}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
@@ -1045,7 +1047,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \vspace{0.55em}
     \centering
     \includegraphics[width=9cm, height=14cm, keepaspectratio]{./static/mobile/home-page.jpg}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
@@ -1056,7 +1058,7 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \vspace{0.55em}
     \centering
     \includegraphics[width=8cm, height=14cm, keepaspectratio]{./static/mobile/add-trash.jpg}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
@@ -1067,25 +1069,25 @@ Dodatkowo, aplikacja wykorzystuje dostępne narzędzia do tworzenia spersonalizo
     \vspace{0.55em}
     \centering
     \includegraphics[width=8cm, height=14cm, keepaspectratio]{./static/mobile/panel-użytkownika.png}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
 \forceindent{Panele edycji nazwy użytkownika i adresu email widoczne są odpowiednio na rysunkach 3.19 oraz 3.20. Celem edycji nazwy użytkownika, należy wpisać nową nazwę, a następnie zatwierdzić zmianę, klikając przycisk „Zapisz” (ang. \textit{Save}). Proces zmiany adresu email przebiega w identyczny sposób: użytkownik wpisuje nowy adres email i zatwierdza zmianę za pomocą tego samego przycisku „Zapisz” (ang. \textit{Save}).}
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
     \textbf{\caption{Widok aktualizowania adresu email}}
     \centering
     \vspace{0.55em}
-    \includegraphics[width=8cm, height=12cm, keepaspectratio]{./static/mobile/update-email.jpg}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \includegraphics[width=8cm, height=9cm, keepaspectratio]{./static/mobile/update-email.jpg}\\
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
-\begin{figure}[htb]
+\begin{figure}[htbp]
     \textbf{\caption{Widok aktualizowania hasła użytkownika}}
     \centering
     \vspace{0.55em}
-    \includegraphics[width=8cm, height=12cm, keepaspectratio]{./static/mobile/update-password.jpg}\\
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \includegraphics[width=8cm, height=9cm, keepaspectratio]{./static/mobile/update-password.jpg}\\
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{figure}
 
 \newpage
@@ -1125,6 +1127,7 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
 \forceindent Do oceny wyników modelu została wykorzystana tabela referencyjna 3.2, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
 
 \begin{table}[h]
+    \small
     \centering
     \textbf{\caption{Tabela referencyjna do oceny wyników modelu klasyfikacji pojemników}}
     \vspace{0.55em}
@@ -1139,7 +1142,7 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
     \label{tab:my-table}
     \\
     \vspace{0.55em}
-    \raggedright\scriptsize{Źródło: Opracowanie własne}
+    \raggedright\small{Źródło: Opracowanie własne}
 \end{table}
 
 \subsubsection{Pojemniki na plastik}
@@ -1291,17 +1294,18 @@ Projekt ten nie tylko wzbogacił go w umiejętności techniczne, ale także nauc
 
 Kacper Bylicki -- Specjalizował się w architekturze chmury, algorytmach uczenia maszynowego oraz tworzeniu aplikacji serwerowej. Odegrał kluczową rolę we wdrażaniu rozwiązań do rozpoznawania obrazów i przetwarzania danych. Jest również twórcą prezentacji audio-wizualnej aplikacji końcowej.
 
-Głównym problemem, przed którym stanął Kacper, było zaprojektowanie systemu zdolnego do obsługi dużej liczby zapytań w czasie rzeczywistym oraz przetwarzania dużych wolumenów danych. Wymagało to skonstruowania modularnej architektury, która mogłaby się łatwo dostosować do rosnących potrzeb bez dodatkowych kosztów. Wyzwaniem było również zapewnienie ciągłości działania systemu i jego niezawodności, co miało kluczowe znaczenie dla zapewnienia ciągłej dostępności usług dla użytkowników.
+Głównym problemem, przed którym stanął Kacper, było zaprojektowanie systemu zdolnego do obsługi dużej liczby żądań w czasie rzeczywistym oraz przetwarzania dużych wolumenów danych. Wymagało to skonstruowania modularnej architektury, którą łatwo dostosować do rosnących potrzeb bez dodatkowych kosztów.
 
-Projekt Trashify, przetwarza wrażliwe dane użytkowników, przez co ich bezpieczeństwo jest priorytetem. Kacper musiał zaimplementować rozwiązania, które chroniłyby dane użytkowników przed nieuwierzytelnionym dostępem i atakami. Wyzwanie polegało na zrównoważeniu wydajności systemu z jego bezpieczeństwem. Użycie JWT (ang. \textit{JSON Web Tokens}) i algorytmu szyfrowania Argon2 było odpowiedzią na te wyzwania, zapewniając silne uwierzytelnianie i ochronę danych.
+Projekt Trashify, przetwarza wrażliwe dane użytkowników, przez co ich bezpieczeństwo jest priorytetem. Kacper musiał zaimplementować rozwiązania, które chroniłyby dane użytkowników przed nieautoryzowanym dostępem. Wyzwanie polegało na zrównoważeniu wydajności systemu z jego bezpieczeństwem. Użycie JWT (ang. \textit{JSON Web Tokens}) i algorytmu szyfrowania Argon2 było odpowiedzią na te wyzwania, zapewniając silne uwierzytelnianie, ochronę danych oraz wysoką wydajność.
 
-Praca Kacpra nad infrastrukturą chmurową skupiała się na stworzeniu rozwiązania, które mogłoby dynamicznie reagować na zmieniające się obciążenia systemu. Użycie narzędzia Terraform umożliwiło Kacprowi deklaratywne podejście do zarządzania infrastrukturą, co pozwoliło na szybkie i efektywne skalowanie zasobów w odpowiedzi na bieżące wymagania, a także łatwość w odtworzeniu infrastruktury w razie awarii.
+Praca Kacpra nad infrastrukturą chmurową skupiała się na stworzeniu rozwiązania, które mogłoby dynamicznie reagować na zmieniające się obciążenia systemu. Użycie narzędzia Terraform umożliwiło Kacprowi deklaratywne zarządzanie infrastrukturą z poziomu języka konfiguracyjnego HCL (ang. \textit{Hashicorp Configuration Language}), co pozwoliło na szybkie i efektywne skalowanie zasobów w odpowiedzi na bieżące wymagania. Sprawiło to również, że odtworzenie infrastruktury w razie awarii sprowadza się do wprowadzenia kilku poleceń w terminalu.
 
-Wykorzystanie usług chmurowych Microsoft Azure było podyktowane potrzebą znalezienia rozwiązania, które oferowałoby odpowiednią równowagę między wydajnością, skalowalnością, i kosztownością. Optymalizacja wykorzystania zasobów przy jednoczesnym zapewnieniu wysokiej dostępności oraz wydajności aplikacji była kluczowa dla sukcesu tego projektu oraz jego dalszego rozwoju. Rozwiązaniem było użycie usług Azure App Service oraz Azure Container Registry, dzięki którym Kacper przygotował mikroserwisy aplikacji serwerowej ulokowane w pojedynczej instancji Azure App Service, co znacznie obniżyło koszty.
+Wykorzystanie usług chmurowych Microsoft Azure było podyktowane potrzebą znalezienia rozwiązania, które oferowałoby odpowiednią równowagę między wydajnością, skalowalnością, i kosztoefektywnością. Rozwiązaniem było użycie usług Azure App Service oraz Azure Container Registry, dzięki którym Kacper przygotował infrastrukturę dla mikroserwisów aplikacji serwerowej. Ulokowane zostały w pojedynczej instancji Azure App Service, co znacznie obniżyło koszty.
 
-Kacper musiał zaprojektować i wdrożyć serie zautomatyzowanych procesów dostarczania nowego oprogramowania znanych jako pipeline`y, które umożliwiłyby ciągłą integrację i dostarczanie kodu. Było to kluczowe dla utrzymania wysokiej jakości oprogramowania i szybkiego wprowadzania zmian. Wyzwaniem było zapewnienie, że każda aktualizacja kodu będzie szybko i skutecznie testowana oraz wdrażana bez zakłóceń dla potencjalnych użytkowników. Użycie narzędzia Github Actions pozwoliło Kacprowi na automatyzację procesów analizy, testowania, transpilacji oraz aktualizacji oprogramowania, co znacznie przyspieszyło proces wdrażania nowych funkcji i poprawek.
+Kacper musiał zaprojektować i wdrożyć serie zautomatyzowanych procesów dostarczania nowego oprogramowania znanych jako pipeline`y, które umożliwiłyby ciągłą integrację i aktualizację aplikacji. 
+Było to kluczowe dla utrzymania wysokiej jakości oprogramowania i szybkiego wprowadzania zmian.
 
-Praca Kacpra nad projektem inżynierskim umożliwiła mu nie tylko rozwój zawodowy w nowych dziedzinach, takich jak architektura chmurowa i devops, ale także pozwoliła na rozwinięcie umiejętności rozwiązywania złożonych problemów inżynieryjnych.
+Praca Kacpra nad projektem inżynierskim umożliwiła mu nie tylko rozwój zawodowy w nowych dziedzinach, takich jak architektura chmurowa i DevOps, ale także pozwoliła na rozwinięcie umiejętności rozwiązywania złożonych problemów inżynieryjnych.
 
 \subsection{Wyzwania i rozwiązania}
 
