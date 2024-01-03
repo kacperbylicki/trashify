@@ -480,7 +480,7 @@ Ważnymi metrykami dla tej architektury uczenia maszynowego są:
 
  Znaczenie poszczególnych parametrów:
 \begin{itemize}[label=--]
-    \item warstwa konwolucyjna -- na tej warstwie obraz wejściowy dzielony jest na matryce o określonych wymiarach. Wynik każdej z tych macierzy jest obliczany za pomocą filtrów konwolucyjnych. Jądro jest przesuwane po całym obrazie, a wynik każdej macierzy jest zapisywany w macierzy wyjściowej \footnote{S. 12; Jianxin Wu, Introduction to Convolutional Neural Networks, LAMBDA Group, National Key Lab for Novel Software Technology, Nanjing University, Chiny, 01.05.2017};
+    \item warstwa konwolucyjna -- na tej warstwie obraz wejściowy dzielony jest na matryce o zadanych wymiarach. Wynik każdej z tych macierzy jest obliczany za pomocą filtrów konwolucyjnych. Jądro matrycy przesuwane jest po całym obrazie, a wynik każdej macierzy jest zapisywany w macierzy wyjściowej \footnote{S. 12; Jianxin Wu, Introduction to Convolutional Neural Networks, LAMBDA Group, National Key Lab for Novel Software Technology, Nanjing University, Chiny, 01.05.2017};
     \item warstwa gęsta -- składają się z jednej bądź kilku warstw, w których każdy neuron powiązany jest z niewielkim obszarem poprzedniej warstwy, co określane jest polem recepcyjnym. Wykonują one operacje iloczynku kropkowego jądra splotu z macierzą wejściową warstwy. To dzięki nim sieć neuronowa jest w stanie wyodrębnić cechy z obrazu wejściowego; \footnote{S. 112 -- 115; Rezoana Bente Arif [i inni] Study and Observation of the Variations of Accuracies for Handwritten Digits Recognition, with Various Hidden Layers and Epochs using Convolutional Neural Network 09.2018 Mississippi State University, Stany Zjednoczone Ameryki} 
     \item rozmiar filtrów konwolucyjnych -- filtry konwolucyjne to macierze wag, które są przesuwane po obrazie wejściowym, aby wyodrębnić cechy. Rozmiar filtra określa wymiary macierzy wag. Im większy rozmiar filtra, tym więcej cech jest wyodrębnianych, ale zwiększa to również złożoność obliczeniową; \footnote{S. 1 -- 2; Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering University of Utah, 14.06.2016}
     \item rozmiar batcha -- określa wielkość partii danych, która przetwarzana jest w jednej iteracji \footnote{S. 1 -- 2; Ioffe S, Szegedy C. Batch normalization: Accelerating deep network training by reducing internal covariate shift, International conference on machine learning, 01.06.2015}.
@@ -537,6 +537,7 @@ Etykiety były integralną częścią zbioru danych treningowych.
 %6. Augmentacja Danych:
 W celu zwiększenia zróżnicowania danych treningowych i poprawy zdolności generalizacji modelu, zastosowano techniki augmentacji danych, takie jak obracanie, odbijanie lustrzane czy zmiana jasności. \footnote{ S. 1 -- 2, S. 4 -- 5; Zihao Wang, Sen Yang, Mengji Shi, Kaiyu Qin, An Image Augmentation Method Based on Limited Samples for Object Tracking Based on Mobile Platform, School of Aeronautics and Astronautics, University of Electronic Science and Technology of China, Chengdu 611731, Chiny, 02.03.2022 }
 
+\newpage
 \paragraph{Dobór kluczowych cech szczególnych\\}
 %1. Wykorzystanie Ekstraktora Cech "Image Feature Print V2":
 \forceindent \textbf{ Ekstraktor cech\\}
@@ -1135,7 +1136,7 @@ Dodatkowo, kluczowe znaczenie ma zrównoważenie zbioru danych w celu uniknięci
 \subsubsection{Punkt odniesienia: Tabela oceny wyników}
 \forceindent Do oceny wyników modelu została wykorzystana tabela referencyjna 3.2, która definiuje granice procentowe dla różnych poziomów skuteczności modelu.
 
-\begin{table}[h]
+\begin{table}[ht]
     \small
     \centering
     \textbf{\caption{Tabela referencyjna do oceny wyników modelu klasyfikacji pojemników}}
