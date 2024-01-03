@@ -122,7 +122,7 @@
 \section{Dane Promotora}
 
 \noindent
-\begin{tabular}{ |p{5cm}|p{7cm}|}
+\begin{tabular}{ |p{5cm}|p{9cm}|}
     \hline
     Imię i nazwisko         & Izabela Janicka-Lipska \\
     \hline
@@ -485,7 +485,7 @@ Ważnymi metrykami dla tej architektury uczenia maszynowego są:
 Proces nauczania obejmował 1000 iteracji.
 Użyto algorytmu optymalizacyjnego SGD (ang. \textit{Stochastic Gradient Descent}), w celu minimalizacji funkcji kosztu.
 Wybór SGD jest zgodny z możliwościami optymalizacyjnymi dostępnymi w Create ML i CoreML, które wspierają różnorodne algorytmy optymalizacji dla efektywnego treningu.
-W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, {co jest krytycznym elementem w zapobieganiu przetrenowaniu modelu, szczególnie w kontekście złożonych architektur sieciowych. \footnote{
+W trakcie treningu zastosowano techniki regularyzacji, takie jak dropout, {co jest krytycznym elementem w zapobieganiu przetrenowania modelu, szczególnie w kontekście złożonych architektur sieciowych. \footnote{
     S. 1 -- 2; Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering University of Utah, 14.06.2016
 }
 
@@ -497,7 +497,7 @@ Ewaluacja obejmowała także analizę miar precyzji, czułości, specyficzności
 
 %5. Użyte Technologie:
 \textbf{Użyte technologie\\}
-\forceindent Do implementacji modelu wykorzystano technologie takie jak CoreML i Create ML, a jako ekstraktor cech użyto ,,Image Feature Print V2. Wybór tych technologii umożliwia efektywną implementację modelu na platformach Apple, dzięki ich natywnej integracji z systemem operacyjnym iOS oraz zoptymalizowanemu wykorzystaniu zasobów sprzętowych urządzeń Apple. ,,Image Feature Print V2 jako ekstraktor cech jest zgodny z najnowszymi standardami przetwarzania obrazu i uczenia maszynowego, oferując zaawansowane możliwości w automatycznym wydobywaniu cech z obrazów. (Rozwinięte w punkcie C3.10.)
+\forceindent Do implementacji modelu wykorzystano technologie takie jak CoreML i Create ML, a jako ekstraktor cech użyto ,,Image Feature Print V2``. Wybór tych technologii umożliwia efektywną implementację modelu na platformach Apple, dzięki ich natywnej integracji z systemem operacyjnym iOS oraz zoptymalizowanemu wykorzystaniu zasobów sprzętowych urządzeń Apple. ,,Image Feature Print V2`` jako ekstraktor cech jest zgodny z najnowszymi standardami przetwarzania obrazu i uczenia maszynowego, oferując zaawansowane możliwości w automatycznym wydobywaniu cech z obrazów. (Rozwinięte w punkcie C3.10.)
 
 \paragraph{Preprocesowanie danych\\}
 %1. Normalizacja Danych:
@@ -1100,16 +1100,16 @@ W trakcie pracy z aplikacją serwerową, zespół napotkał problemy związane z
 \subsection{Algorytmy i techniki wykorzystane do nauki modelu uczenia maszynowego}
 
 \subsubsection{Konwolucyjne sieci neuronowe}
-\forceindent W naszym projekcie wykorzystaliśmy wstępnie wytrenowaną konwolucyjną sieć neuronową (ang. \textit{Convolutional neural network -- CNN}) z ekstraktorem funkcji Image Feature Print V2 w CreateML, usprawniając proces analizy danych obrazu dla naszego konkretnego zbioru danych.
+\forceindent W projekcie Trashify wykorzystano wstępnie wytrenowaną konwolucyjną sieć neuronową (ang. \textit{Convolutional neural network -- CNN}) z ekstraktorem funkcji ,,Image Feature Print V2`` w CreateML, usprawniając proces analizy danych obrazu dla roważanego zbioru danych.
 
-Image Feature Print V2 jest narzędziem w CreateML, które znacznie usprawnia proces ekstrakcji cech. Wykorzystując je wraz ze wstępnie wytrenowaną CNN, skutecznie dostosowaliśmy sieć do unikalnych cech naszego zbioru danych. Ta kombinacja pozwoliła na zniuansowaną analizę cech przestrzennych, kluczową dla identyfikacji określonych wzorców na naszych obrazach, takich jak rozróżnianie kolorów, oznaczeń, kształtów pojemników.
+,,Image Feature Print V2`` jest narzędziem w CreateML, które znacznie usprawnia proces ekstrakcji cech. Wykorzystując je wraz ze wstępnie wytrenowaną CNN, skutecznie dostosowano sieć do unikalnych cech roważanego zbioru danych. Ta kombinacja pozwoliła na zniuansowaną analizę cech przestrzennych, kluczową dla identyfikacji określonych wzorców na rozpatrywanych obrazach, takich jak rozróżnianie kolorów, oznaczeń, kształtów pojemników.
 
-Nasza metoda polegała na dostrojeniu wstępnie wytrenowanego modelu do naszego zbioru danych, co jest procesem zarówno efektywnym czasowo, jak i skutecznym. To dostrojenie było niezbędne do dostosowania możliwości modelu do konkretnych celów naszego projektu w zakresie rozpoznawania i klasyfikacji obrazów.
+Zastosowana metoda polegała na dostrojeniu wstępnie wytrenowanego modelu do analizowanego zbioru danych, co jest procesem zarówno efektywnym czasowo, jak i skutecznym. To dostrojenie było niezbędne do dostosowania możliwości modelu do konkretnych celów projektowych w zakresie rozpoznawania i klasyfikacji obrazów.
 
 \subsubsection{Uczenie nadzorowane}
-\forceindent W ramach naszej pracy zastosowaliśmy uczenie nadzorowane, opierając się na oznaczonym zbiorze danych, aby skutecznie szkolić nasz model. Każdy obraz w tym zbiorze danych został precyzyjnie oznaczony etykietą identyfikującą konkretny typ kontenera. W trakcie treningu nasza konwolucyjna sieć neuronowa przeszła proces nauki, podczas którego zapoznawała się z charakterystycznymi cechami i wzorcami obrazów, a następnie łączyła je z odpowiadającymi etykietami. Ten proces umożliwił modelowi skuteczne przyswajanie cech definiujących każdy rodzaj kontenera.
+\forceindent W ramach pracy zastosowano uczenie nadzorowane, opierając się na oznaczonym zbiorze danych, aby skutecznie szkolić rozpatrywany model. Każdy obraz w tym zbiorze danych został precyzyjnie oznaczony etykietą identyfikującą konkretny typ kontenera. W trakcie treningu wykorzystywana konwolucyjna sieć neuronowa przeszła proces nauki, podczas którego zapoznawała się z charakterystycznymi cechami i wzorcami obrazów, a następnie łączyła je z odpowiadającymi etykietami. Ten proces umożliwił modelowi skuteczne przyswajanie cech definiujących każdy rodzaj kontenera.
 
-W celu oceny wydajności naszego modelu korzystaliśmy z różnych miar, takich jak dokładność, precyzja, przywołanie, czułość i miara F1. Te wskaźniki dostarczały nam istotnych informacji na temat zdolności modelu do poprawnego identyfikowania poszczególnych typów kontenerów. Praktyczne zastosowanie tych miar pozwoliło nam szczegółowo analizować skuteczność naszego modelu w kontekście naszego konkretnego zadania, co było kluczowe dla oceny jego przydatności i precyzji w identyfikacji różnorodnych kontenerów.
+W celu oceny wydajności rozważanego modelu korzystano z różnych miar, takich jak dokładność, precyzja, przywołanie, czułość i miara F1. Te wskaźniki dostarczały istotnych informacji na temat zdolności modelu do poprawnego identyfikowania poszczególnych typów kontenerów. Praktyczne zastosowanie tych miar pozwoliło na szczegółową analizę skuteczność rozpatrywanego modelu w analizowanego zadania, co było kluczowe dla oceny jego przydatności i precyzji w identyfikacji różnorodnych kontenerów.
 
 \subsection{Proces szkolenia}
 \forceindent Proces szkoleniowy obejmował dostarczanie dużej liczby oznaczonych obrazów do sieci CNN. Sieć przetworzyła te obrazy przez swoje warstwy, dostosowując swoje wewnętrzne parametry (wagi i odchylenia) na podstawie błędu pomiędzy prognozami a rzeczywistymi etykietami (propagacja wsteczna).
@@ -1264,7 +1264,7 @@ Aplikacja jest dostępna na urządzenia z systemem iOS, sprawia, że jest łatwo
 \forceindent Projekt prowadzony był przez cały 2023 rok, wykorzystywał różne dyscypliny technologiczne, a aplikacja mobilna będąca wynikiem prowadzonych prac demonstruje zaangażowanie zespołu projektowego w wykorzystanie technologii na rzecz zrównoważonego rozwoju środowiska.
 
 \subsection{Zespół projektowy}
-\forceindent Jakub Barczewski -- Pełnił funkcję lidera zespołu, koncentrował się na rozwoju aplikacji serwerowej i przygotowywaniu dokumentacji inżynierskiej przy użyciu środowiska LaTeX. Koordynował działania projektowe i pilnował zgodności ze standardami akademickimi.
+\forceindent Jakub Barczewski -- pełnił funkcję lidera zespołu, koncentrował się na rozwoju aplikacji serwerowej i przygotowywaniu dokumentacji inżynierskiej przy użyciu środowiska LaTeX. Koordynował działania projektowe i pilnował zgodności ze standardami akademickimi.
 
 W trakcie trwania projektu, miał on pierwszy raz okazję do zarządzania zespołem programistów. 
 Było to sporym wyzwaniem, ze względu na charakterystykę pracy programistycznej oraz czynniki losowe powodujące opóźnienia w pracy.
@@ -1276,13 +1276,13 @@ Napotkane problemy wymagały od niego głębokiego zrozumienia tej implementacji
 Celem dalszego pogłębiania wiedzy z zakresu sieci komputerowych i mikroserwisów, planuje on przygotowanie wzorca kodu bazowego do aplikacji opartych o te technologie w innych, bardziej dopasowanych pod niego narzędziach.
 
 Projekt ten był również pierwszą stycznością Jakuba z tworzeniem aplikacji mobilnych oraz dostosowywaniem interfejsu RESTful API do potrzeb urządzeń mobilnych.
-Doświadczenie to pogłębiłego jego rozumienie problemów z jakimi spotykają się programiści zajmujący się środowiskami klienckimi, zarówno w kontekście aplikacji webowych jak i mobilnych.
+Doświadczenie to pogłębiło jego rozumienie problemów, z jakimi spotykają się programiści zajmujący się środowiskami klienckimi, zarówno w kontekście aplikacji webowych jak i mobilnych.
 
 Tworzenie dokumentacji projektu oraz pisanie pracy inżynierskiej przy użyciu środowiska LaTeX było jego pomysłem. Pomimo optymistycznych założeń, tworzenie dokumentacji w tym środowisku okazało się trudniejsze w praktyce. Przeszkodą była niewystarczająca znajomość narzędzi w nim dostępnych, których nauka okazała się czasochłonna i zwiększyła ilość pracy.
 Niemniej, doświadczenie to jest dla niego źródłem lepszego zrozumienia algorytmów zarządzających renderowaniem plików tekstowych.
 W przyszłości planuje on wykorzystywać środowisko LaTeX w pracy zawodowej, celem tworzenia dokumentacji technicznych projektów oraz instrukcji użytkownika.
 
-Marek Gerszendorf -- Zaangażował się w rozwój aplikacji mobilnej, korzystając z języka Swift. Jego bogate doświadczenie w dziedzinie projektowania interfejsu użytkownika (UI/UX) odegrało kluczową rolę w tworzeniu aplikacji, która umożliwia intuicyjną kategoryzację obrazów w czasie rzeczywistym.
+Marek Gerszendorf -- zaangażował się w rozwój aplikacji mobilnej, korzystając z języka Swift. Jego bogate doświadczenie w dziedzinie projektowania interfejsu użytkownika (UI/UX) odegrało kluczową rolę w tworzeniu aplikacji, która umożliwia intuicyjną kategoryzację obrazów w czasie rzeczywistym.
 
 Projektowanie interfejsu użytkownika w środowisku iOS było dla niego nowym doświadczeniem, pomimo że na co dzień zajmuje się głównie programowaniem w technologii React. Podjęcie się tego wyzwania stało się fascynującym etapem w jego rozwoju zawodowym, pozwalając mu zgłębić tajniki projektowania interfejsów w specyficznym kontekście mobilnych aplikacji na platformie iOS.
 
@@ -1292,7 +1292,7 @@ Doświadczenie to pozwoliło mu na poszerzenie swoich horyzontów technologiczny
 
 Projekt ten nie tylko wzbogacił go w umiejętności techniczne, ale także nauczył pracy w zespole. Rozwinięcie aplikacji od etapu pomysłu po gotowy produkt wymagało efektywnej współpracy, co zdecydowanie poszerzyło jego umiejętności komunikacyjne i zdolność do efektywnej koordynacji działań zespołowych. To doświadczenie dostarczyło mu nie tylko konkretnych umiejętności programistycznych, ale także cennego kontekstu zespołowego w procesie tworzenia oprogramowania.
 
-Kacper Bylicki -- Specjalizował się w architekturze chmury, algorytmach uczenia maszynowego oraz tworzeniu aplikacji serwerowej. Odegrał kluczową rolę we wdrażaniu rozwiązań do rozpoznawania obrazów i przetwarzania danych. Jest również twórcą prezentacji audio-wizualnej aplikacji końcowej.
+Kacper Bylicki -- specjalizował się w architekturze chmury, algorytmach uczenia maszynowego oraz tworzeniu aplikacji serwerowej. Odegrał kluczową rolę we wdrażaniu rozwiązań do rozpoznawania obrazów i przetwarzania danych. Jest również twórcą prezentacji audio-wizualnej aplikacji końcowej.
 
 Głównym problemem, przed którym stanął Kacper, było zaprojektowanie systemu zdolnego do obsługi dużej liczby żądań w czasie rzeczywistym oraz przetwarzania dużych wolumenów danych. Wymagało to skonstruowania modularnej architektury, którą łatwo dostosować do rosnących potrzeb bez dodatkowych kosztów.
 
@@ -1300,7 +1300,7 @@ Projekt Trashify, przetwarza wrażliwe dane użytkowników, przez co ich bezpiec
 
 Praca Kacpra nad infrastrukturą chmurową skupiała się na stworzeniu rozwiązania, które mogłoby dynamicznie reagować na zmieniające się obciążenia systemu. Użycie narzędzia Terraform umożliwiło Kacprowi deklaratywne zarządzanie infrastrukturą z poziomu języka konfiguracyjnego HCL (ang. \textit{Hashicorp Configuration Language}), co pozwoliło na szybkie i efektywne skalowanie zasobów w odpowiedzi na bieżące wymagania. Sprawiło to również, że odtworzenie infrastruktury w razie awarii sprowadza się do wprowadzenia kilku poleceń w terminalu.
 
-Wykorzystanie usług chmurowych Microsoft Azure było podyktowane potrzebą znalezienia rozwiązania, które oferowałoby odpowiednią równowagę między wydajnością, skalowalnością, i kosztoefektywnością. Rozwiązaniem było użycie usług Azure App Service oraz Azure Container Registry, dzięki którym Kacper przygotował infrastrukturę dla mikroserwisów aplikacji serwerowej. Ulokowane zostały w pojedynczej instancji Azure App Service, co znacznie obniżyło koszty.
+Wykorzystanie usług chmurowych Microsoft Azure było podyktowane potrzebą znalezienia rozwiązania, które oferowałoby odpowiednią równowagę między wydajnością, skalowalnością i kosztoefektywnością. Rozwiązaniem było użycie usług Azure App Service oraz Azure Container Registry, dzięki którym Kacper przygotował infrastrukturę dla mikroserwisów aplikacji serwerowej. Ulokowane zostały w pojedynczej instancji Azure App Service, co znacznie obniżyło koszty.
 
 Kacper musiał zaprojektować i wdrożyć serie zautomatyzowanych procesów dostarczania nowego oprogramowania znanych jako pipeline`y, które umożliwiłyby ciągłą integrację i aktualizację aplikacji. 
 Było to kluczowe dla utrzymania wysokiej jakości oprogramowania i szybkiego wprowadzania zmian.
@@ -1325,8 +1325,6 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
 \end{itemize}
 
 \section{Wykorzystane materiały i bibliografia związana z realizacją projektu}
-
-\subsection{Bibliografia}
 
 \begin{enumerate}[label={[}\arabic*{]}]
     \item Główny Urząd Statystyczny Ochrona środowiska 2022, Warszawa, 2022r.
