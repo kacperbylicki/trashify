@@ -477,6 +477,15 @@ Ważnymi metrykami dla tej architektury uczenia maszynowego są:
     \item rozmiar filtrów konwolucyjnych: 3 x 3;
     \item rozmiar batcha: 32.
 \end{enumerate}
+
+ Znaczenie poszczególnych parametrów:
+\begin{itemize}[label=--]
+    \item warstwa konwolucyjna -- na tej warstwie obraz wejściowy dzielony jest na matryce o określonych wymiarach. Wynik każdej z tych macierzy jest obliczany za pomocą filtrów konwolucyjnych. Jądro jest przesuwane po całym obrazie, a wynik każdej macierzy jest zapisywany w macierzy wyjściowej \footnote{S. 12; Jianxin Wu, Introduction to Convolutional Neural Networks, LAMBDA Group, National Key Lab for Novel Software Technology, Nanjing University, Chiny, 01.05.2017};
+    \item warstwa gęsta -- składają się z jednej bądź kilku warstw, w których każdy neuron powiązany jest z niewielkim obszarem poprzedniej warstwy, co określane jest polem recepcyjnym. Wykonują one operacje iloczynku kropkowego jądra splotu z macierzą wejściową warstwy. To dzięki nim sieć neuronowa jest w stanie wyodrębnić cechy z obrazu wejściowego; \footnote{S. 112 -- 115; Rezoana Bente Arif [i inni] Study and Observation of the Variations of Accuracies for Handwritten Digits Recognition, with Various Hidden Layers and Epochs using Convolutional Neural Network 09.2018 Mississippi State University, Stany Zjednoczone Ameryki} 
+    \item rozmiar filtrów konwolucyjnych -- filtry konwolucyjne to macierze wag, które są przesuwane po obrazie wejściowym, aby wyodrębnić cechy. Rozmiar filtra określa wymiary macierzy wag. Im większy rozmiar filtra, tym więcej cech jest wyodrębnianych, ale zwiększa to również złożoność obliczeniową; \footnote{S. 1 -- 2; Mehdi Sajjadi, Mehran Javanmardi, Tolga Tasdizen, Regularization With Stochastic Transformations and Perturbations for Deep Semi-Supervised Learning, Department of Electrical and Computer Engineering University of Utah, 14.06.2016}
+    \item rozmiar batcha -- określa wielkość partii danych, która przetwarzana jest w jednej iteracji \footnote{S. 1 -- 2; Ioffe S, Szegedy C. Batch normalization: Accelerating deep network training by reducing internal covariate shift, International conference on machine learning, 01.06.2015}.
+\end{itemize}
+
 \forceindent Uwzględnienie tych parametrów jest zgodne z zaawansowanymi możliwościami konfiguracji sieci neuronowych dostępnymi w CoreML, które pozwalają na szczegółowe dostosowanie architektury modelu do specyfikacji zadania.
 
 %3. Proces Nauczania Modelu:
@@ -1383,6 +1392,9 @@ Następnym wyzwaniem okazały się trudności z poprawnym formatowaniem dokument
     \item Xie Wenzhuo, Li Shiping, Xu Wei, Deng Haotian, Liao Weihan, Duan Xianbao, Wang Xuehua, Study on the CNN model optimization for household garbage classification based on machine learning, School of Materials Science and Engineering, Wuhan Institute of Technology, Wuhan, Chiny, 29.11.2022
     \item Chen Yao-Mei, Chen Yenming J., Ho Wen-Hsien, Tsai Jinn-Tsong, Classifying chest CT images as COVID ‑- 19 positive/negative using a convolutional neural network ensemble model and uniform experimental design method, International Conference on Biomedical Engineering Innovation 2019, Kaohsiung, Tajwan, 11.2019
     \item Keiron O'Shea and Ryan Nash, An Introduction to Convolutional Neural Networks, Department of Computer Science, Aberystwyth University, Ceredigion, Anglia, 12.2015
+    \item Jianxin Wu, Introduction to Convolutional Neural Networks, LAMBDA Group, National Key Lab for Novel Software Technology, Nanjing University, Chiny, 01.05.2017
+    \item Ioffe S, Szegedy C. Batch normalization: Accelerating deep network training by reducing internal covariate shift, International conference on machine learning, 01.06.2015
+    \item Rezoana Bente Arif [i inni] Study and Observation of the Variations of Accuracies for Handwritten Digits Recognition, with Various Hidden Layers and Epochs using Convolutional Neural Network 09.2018 Mississippi State University, Stany Zjednoczone Ameryki
 \end{enumerate}
 
 \section{Załączniki}
